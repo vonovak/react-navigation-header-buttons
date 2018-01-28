@@ -8,7 +8,7 @@ import Touchable from 'react-native-platform-touchable';
 
 type Props = {
   onPress: () => void,
-  ButtonElement: ?React.Node,
+  ButtonElement: React.Node,
   buttonWrapperStyle?: Object,
 };
 

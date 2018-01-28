@@ -69,29 +69,33 @@ export class NavHeader extends React.Component<NavHeaderProps> {
   }
 
   renderVisibleButtons(visibleButtons: Array<React.Element<*>>) {
-    const { IconComponent, size, color } = this.props;
-
     return visibleButtons.map(btn => {
-      const { props: { iconName, label, buttonStyle } } = btn;
-      const renderedLabel =
-        Platform.OS === 'ios'
-          ? label.charAt(0).toUpperCase() + label.substr(1)
-          : label.toUpperCase();
+      const { props: { label, IconElement } } = btn;
 
-      const ButtonElement =
-        IconComponent && iconName ? (
-          <IconComponent
-            name={iconName}
-            color={color}
-            size={size}
-            style={[styles.button, buttonStyle]}
-          />
-        ) : (
-          <Text style={[styles.text, { color }, buttonStyle]}>{renderedLabel}</Text>
-        );
+      const ButtonElement = IconElement ? IconElement : this.renderVisibleButton(btn.props);
 
       return <NavButton key={label} ButtonElement={ButtonElement} {...btn.props} />;
     });
+  }
+
+  renderVisibleButton(itemProps: ItemProps) {
+    const { IconComponent, size, color } = this.props;
+    const { iconName, label, buttonStyle } = itemProps;
+
+    return IconComponent && iconName ? (
+      <IconComponent
+        name={iconName}
+        color={color}
+        size={size}
+        style={[styles.button, buttonStyle]}
+      />
+    ) : (
+      <Text style={[styles.text, { color }, buttonStyle]}>
+        {Platform.OS === 'ios'
+          ? label.charAt(0).toUpperCase() + label.substr(1)
+          : label.toUpperCase()}
+      </Text>
+    );
   }
 }
 
