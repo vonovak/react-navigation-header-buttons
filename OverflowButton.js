@@ -12,7 +12,10 @@ import {
 } from 'react-native';
 // TODO import based on global.Expo?
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Touchable from 'react-native-platform-touchable';
+import { NavButton } from './NavButton';
+
+export const textTransformer = (label: string) =>
+  Platform.OS === 'ios' ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
 
 type Props = {
   hiddenButtons: Array<React.Element<*>>,
@@ -32,20 +35,15 @@ export class OverflowButton extends React.Component<Props> {
 
   render() {
     const { OverflowIcon } = this.props;
+    const ButtonElement = OverflowIcon ? (
+      OverflowIcon
+    ) : (
+      <Icon name="more-vert" size={23} color={this.props.color} style={styles.icon} />
+    );
     return (
       <View>
         <View ref={this.setOverflowRef} style={styles.overflowMenuView} />
-        <Touchable
-          background={Touchable.SelectableBackgroundBorderless()}
-          style={styles.touchable}
-          onPress={this.showOverflowPopup}
-        >
-          {OverflowIcon ? (
-            OverflowIcon
-          ) : (
-            <Icon name="more-vert" size={23} color={this.props.color} style={styles.icon} />
-          )}
-        </Touchable>
+        <NavButton onPress={this.showOverflowPopup} ButtonElement={ButtonElement} />
       </View>
     );
   }
@@ -71,8 +69,8 @@ export class OverflowButton extends React.Component<Props> {
   };
 
   showPopupIos = () => {
-    const actionLabels = this.props.hiddenButtons.map(it => it.props.label);
-    // todo prop for cancel label
+    const actionLabels = this.props.hiddenButtons.map(btn => btn.props.label);
+    // TODO prop for cancel label
     actionLabels.push('Cancel');
 
     ActionSheetIOS.showActionSheetWithOptions(
@@ -99,11 +97,13 @@ const styles = StyleSheet.create({
     width: 1,
     height: 1,
   },
-  touchable: {
-    marginRight: 10,
-    marginLeft: 7,
-  },
   icon: {
     marginTop: 2,
+    ...Platform.select({
+      android: {
+        marginRight: 10,
+        marginLeft: 7,
+      },
+    }),
   },
 });

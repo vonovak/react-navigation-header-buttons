@@ -4,7 +4,7 @@
 import * as React from 'react';
 import { NavButton } from './NavButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
-import { OverflowButton } from './OverflowButton';
+import { OverflowButton, textTransformer } from './OverflowButton';
 const OS_IOS = Platform.OS === 'ios';
 
 type ItemProps = {
@@ -90,11 +90,7 @@ export class NavHeader extends React.Component<NavHeaderProps> {
         style={[styles.button, buttonStyle]}
       />
     ) : (
-      <Text style={[styles.text, { color }, buttonStyle]}>
-        {Platform.OS === 'ios'
-          ? label.charAt(0).toUpperCase() + label.substr(1)
-          : label.toUpperCase()}
-      </Text>
+      <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(label)}</Text>
     );
   }
 }
