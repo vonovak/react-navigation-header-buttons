@@ -10,11 +10,10 @@
     "type": "git",
     "url": "git+https://github.com/vonovak/react-navigation-header-buttons.git"
   },
-  "keywords": [
-    "react-navigation",
-    "header",
-    "navbar"
-  ],
+  "dependencies": {
+    "react-native-platform-touchable": "^1.1.1"
+  },
+  "keywords": ["react-navigation", "header", "navbar"],
   "author": "Vojtech Novak",
   "license": "MIT",
   "bugs": {
