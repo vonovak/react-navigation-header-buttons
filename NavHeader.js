@@ -61,11 +61,7 @@ export class NavHeader extends React.Component<NavHeaderProps> {
   }
 
   getEdgeMargin() {
-    if (OS_IOS) {
-      return this.props.left ? styles.extraEdgeMarginOnLeft : styles.extraEdgeMarginOnRight;
-    } else {
-      return null;
-    }
+    return this.props.left ? styles.extraEdgeMarginOnLeft : styles.extraEdgeMarginOnRight;
   }
 
   renderVisibleButtons(visibleButtons: Array<React.Element<*>>) {
@@ -126,23 +122,37 @@ function getVisibleAndHiddenButtons(props) {
 }
 
 const styles = StyleSheet.create({
+  row: { flexDirection: 'row' },
   extraEdgeMarginOnLeft: {
-    marginLeft: 9,
+    ...Platform.select({
+      android: {
+        marginLeft: 5,
+      },
+      ios: {
+        marginLeft: 4,
+      },
+    }),
   },
   extraEdgeMarginOnRight: {
-    marginRight: 9,
+    ...Platform.select({
+      android: {
+        marginRight: 4,
+      },
+      ios: {
+        marginRight: 5,
+      },
+    }),
   },
-  row: { flexDirection: 'row' },
   text: {
     ...Platform.select({
       android: {
         fontFamily: 'sans-serif-medium',
-        marginHorizontal: 11,
         fontSize: 14,
+        marginHorizontal: 11,
       },
       ios: {
         fontSize: 17,
-        marginHorizontal: 8,
+        marginHorizontal: 10,
       },
     }),
   },
