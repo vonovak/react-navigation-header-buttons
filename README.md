@@ -2,7 +2,7 @@
 
 This package will help you render buttons in the navigation bar and handle the styling so you don't have to.
 
-This package tries to mimic the appearance of native navbar buttons. The outcome may not always be the same as in a native app but should be close. `NavHeader.Item` accepts `buttonWrapperStyle` prop which you may use to modify item alignment in case the default outcome does not fit your needs.
+This package tries to mimic the appearance of native navbar buttons. `NavHeader.Item` accepts `buttonWrapperStyle` prop which you may use to modify item alignment in case the default outcome does not fit your needs.
 
 #### Demo app with code samples
 
