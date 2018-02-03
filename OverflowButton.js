@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 // TODO import based on global.Expo?
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { HeaderButon } from './HeaderButon';
+import { HeaderButton } from './HeaderButton';
 
 export const textTransformer = (label: string) =>
   Platform.OS === 'ios' ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
@@ -45,7 +45,7 @@ export class OverflowButton extends React.Component<Props> {
     return (
       <View>
         <View ref={this.setOverflowRef} style={styles.overflowMenuView} />
-        <HeaderButon onPress={this.showOverflowPopup} ButtonElement={ButtonElement} />
+        <HeaderButton onPress={this.showOverflowPopup} ButtonElement={ButtonElement} />
       </View>
     );
   }
