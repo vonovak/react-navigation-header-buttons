@@ -2,46 +2,46 @@ import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import NavHeader from 'react-navigation-header-buttons';
+import HeaderButtons from 'react-navigation-header-buttons';
 
 @withNavigation
 export class UsageCustom extends React.Component {
   static navigationOptions = {
     title: 'Custom Usage',
     headerRight: (
-      <NavHeader>
-        <NavHeader.Item
-          label="add"
+      <HeaderButtons>
+        <HeaderButtons.Item
+          title="add"
           buttonWrapperStyle={{ marginTop: 10 }}
           IconElement={<Ionicons name="ios-add" size={23} />}
           onPress={() => console.warn('add')}
         />
-        <NavHeader.Item
-          label="edit"
+        <HeaderButtons.Item
+          title="edit"
           buttonWrapperStyle={{ marginTop: -10 }}
           onPress={() => console.warn('edit')}
         />
-      </NavHeader>
+      </HeaderButtons>
     ),
   };
 
   render() {
     const text = `
     headerRight: (
-      <NavHeader>
-        <NavHeader.Item
-          label="add"
+      <HeaderButtons>
+        <HeaderButtons.Item
+          title="add"
           buttonWrapperStyle={{ marginTop: 10 }}
           IconElement={<Ionicons name="ios-add" size={23} />}
           onPress={() => console.warn('add')}
         />
-        <NavHeader.Item
-          label="edit"
+        <HeaderButtons.Item
+          title="edit"
           buttonWrapperStyle={{ marginTop: -10 }}
           onPress={() => console.warn('edit')}
         />
-      </NavHeader>
-    ),
+      </HeaderButtons>
+    )
     `;
 
     return (

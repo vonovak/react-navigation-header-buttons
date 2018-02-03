@@ -1,3 +1,3 @@
-import { NavHeader } from './NavHeader';
+import { HeaderButtons } from './HeaderButtons';
 
-export default NavHeader;
+export default HeaderButtons;

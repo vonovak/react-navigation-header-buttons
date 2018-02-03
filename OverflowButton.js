@@ -21,12 +21,14 @@ type Props = {
   hiddenButtons: Array<React.Element<*>>,
   color: string,
   OverflowIcon?: React.Node,
+  cancelButtonLabel: string,
 };
 
 export class OverflowButton extends React.Component<Props> {
   overflowRef: ?View;
   static defaultProps = {
     color: 'grey',
+    cancelButtonLabel: 'Cancel',
   };
 
   setOverflowRef = (ref: ?View) => {
@@ -52,10 +54,10 @@ export class OverflowButton extends React.Component<Props> {
     Platform.OS === 'android' ? this.showPopupAndroid() : this.showPopupIos();
   };
 
-  showPopupAndroid = () => {
+  showPopupAndroid() {
     UIManager.showPopupMenu(
       findNodeHandle(this.overflowRef),
-      this.props.hiddenButtons.map(btn => btn.props.label),
+      this.props.hiddenButtons.map(btn => btn.props.title),
       err => {
         console.debug(`popup error ${err}`);
       },
@@ -68,18 +70,17 @@ export class OverflowButton extends React.Component<Props> {
     this.props.hiddenButtons[index].props.onPress();
   };
 
-  showPopupIos = () => {
-    const actionLabels = this.props.hiddenButtons.map(btn => btn.props.label);
-    // TODO prop for cancel label
-    actionLabels.push('Cancel');
+  showPopupIos() {
+    const actionTitles = this.props.hiddenButtons.map(btn => btn.props.title);
+    actionTitles.push(this.props.cancelButtonLabel);
 
     ActionSheetIOS.showActionSheetWithOptions(
       {
-        options: actionLabels,
-        cancelButtonIndex: actionLabels.length - 1,
+        options: actionTitles,
+        cancelButtonIndex: actionTitles.length - 1,
       },
       (buttonIndex: number) => {
-        if (buttonIndex !== actionLabels.length - 1) {
+        if (buttonIndex !== actionTitles.length - 1) {
           this.onHiddenItemPress('itemSelected', buttonIndex);
         }
       }

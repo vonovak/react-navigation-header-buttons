@@ -1,7 +1,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import NavHeader from 'react-navigation-header-buttons';
+import HeaderButtons from 'react-navigation-header-buttons';
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
@@ -10,21 +10,21 @@ export class UsageWithIcons extends React.Component {
   static navigationOptions = {
     title: 'Usage With Icons',
     headerRight: (
-      <NavHeader IconComponent={Ionicons} size={23} color="blue">
-        <NavHeader.Item label="add" iconName="ios-search" onPress={() => console.warn('add')} />
-        <NavHeader.Item label="select" onPress={() => console.warn('edit')} />
-      </NavHeader>
+      <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
+        <HeaderButtons.Item title="add" iconName="ios-search" onPress={() => console.warn('add')} />
+        <HeaderButtons.Item title="select" onPress={() => console.warn('edit')} />
+      </HeaderButtons>
     ),
   };
 
   render() {
     const text = `
     headerRight: (
-      <NavHeader IconComponent={Ionicons} size={23} color="blue">
-        <NavHeader.Item label="add" iconName="ios-add" onPress={() => console.warn('add')} />
-        <NavHeader.Item label="edit" onPress={() => console.warn('edit')} />
-      </NavHeader>
-    )
+      <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
+        <HeaderButtons.Item title="add" iconName="ios-search" onPress={() => console.warn('add')} />
+        <HeaderButtons.Item title="select" onPress={() => console.warn('edit')} />
+      </HeaderButtons>
+    ),
     `;
     return (
       <View>
