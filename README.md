@@ -4,7 +4,7 @@ This package will help you render buttons in the navigation bar and handle the s
 
 This package tries to mimic the appearance of native navbar buttons. `HeaderButtons.Item` accepts `buttonWrapperStyle` prop which you may use to modify item alignment in case the default outcome does not fit your needs.
 
-#### Demo app with code samples
+#### Demo App with Code Samples
 
 Available via expo [here](https://expo.io/@vonovak/navbar-buttons-demo)
 
@@ -12,7 +12,7 @@ Available via expo [here](https://expo.io/@vonovak/navbar-buttons-demo)
 
 `yarn add react-navigation-header-buttons`
 
-#### Quick example
+#### Quick Example
 
 ```
 import HeaderButtons from 'react-navigation-header-buttons
