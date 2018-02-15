@@ -15,7 +15,7 @@ Available via expo [here](https://expo.io/@vonovak/navbar-buttons-demo)
 #### Quick Example
 
 ```
-import HeaderButtons from 'react-navigation-header-buttons
+import HeaderButtons from 'react-navigation-header-buttons'
 import Icon from 'react-native-vector-icons/Ionicons';
 
 static navigationOptions = {
