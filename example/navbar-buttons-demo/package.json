@@ -7,6 +7,6 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
     "react-native-platform-touchable": "^1.1.1",
     "react-navigation": "^1.0.0-beta.27",
-    "react-navigation-header-buttons": "^0.0.2"
+    "react-navigation-header-buttons": "^0.0.4"
   }
 }

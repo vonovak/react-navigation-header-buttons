@@ -22,6 +22,7 @@ type Props = {
   color: string,
   OverflowIcon?: React.Node,
   cancelButtonLabel: string,
+  buttonWrapperStyle?: Object,
 };
 
 export class OverflowButton extends React.Component<Props> {
@@ -36,16 +37,20 @@ export class OverflowButton extends React.Component<Props> {
   };
 
   render() {
-    const { OverflowIcon } = this.props;
+    const { OverflowIcon, buttonWrapperStyle } = this.props;
     const ButtonElement = OverflowIcon ? (
       OverflowIcon
     ) : (
-      <Icon name="more-vert" size={23} color={this.props.color} style={styles.icon} />
+      <Icon name="more-vert" size={23} color={this.props.color} />
     );
     return (
       <View>
         <View ref={this.setOverflowRef} style={styles.overflowMenuView} />
-        <HeaderButton onPress={this.showOverflowPopup} ButtonElement={ButtonElement} />
+        <HeaderButton
+          onPress={this.showOverflowPopup}
+          ButtonElement={ButtonElement}
+          buttonWrapperStyle={[styles.icon, buttonWrapperStyle]}
+        />
       </View>
     );
   }
@@ -63,7 +68,7 @@ export class OverflowButton extends React.Component<Props> {
       },
       this.onHiddenItemPress
     );
-  };
+  }
 
   onHiddenItemPress = (eventName: string, index: number) => {
     if (eventName !== 'itemSelected') return;
@@ -85,7 +90,7 @@ export class OverflowButton extends React.Component<Props> {
         }
       }
     );
-  };
+  }
 }
 
 const styles = StyleSheet.create({
@@ -102,7 +107,7 @@ const styles = StyleSheet.create({
     marginTop: 2,
     ...Platform.select({
       android: {
-        marginRight: 10,
+        marginRight: 9,
         marginLeft: 7,
       },
     }),

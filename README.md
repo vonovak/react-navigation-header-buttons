@@ -31,30 +31,26 @@ static navigationOptions = {
 
 `HeaderButtons` accepts:
 
- 
-|prop and type | description | note |
-|--|--|--|
-| left: boolean | whether this HeaderButtons are on the left from header title   | false by default |
-| IconComponent?: React.ComponentType<*> | component to use for the icons |   |
-|iconSize?: number| iconSize |  |
-|color?: string| color of icons and buttons |  |
-|OverflowIcon?: React.Node| React element for the overflow icon | will render android-styled overflow icon by default |
-|cancelButtonLabel?: string | ios only, the cancel button label for overflow menu actions | 'Cancel' by default |
-
-
+| prop and type                           | description                                                  | note                                                              |
+| --------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
+| left: boolean                           | whether this HeaderButtons are on the left from header title | false by default                                                  |
+| IconComponent?: React.ComponentType<\*> | component to use for the icons                               |                                                                   |
+| iconSize?: number                       | iconSize                                                     |                                                                   |
+| color?: string                          | color of icons and buttons                                   |                                                                   |
+| OverflowIcon?: React.Node               | React element for the overflow icon                          | will render android-styled overflow icon by default               |
+| overflowButtonWrapperStyle?: Object     | optional styles for overflow button                          | there are some default styles set, as seen in `OverflowButton.js` |
+| cancelButtonLabel?: string              | ios only, the cancel button label for overflow menu actions  | 'Cancel' by default                                               |
 
 `HeaderButtons.Item` accepts:
 
-|prop and type | description | note |
-|--|--|--|
-| onPress: () => void | function to call on press ||
-| title: string | title for the button, required |  |
-| show: "always" or "never" |  string specifying if the icon should be shown or hidden in overflow menu | "always" by default |
-| IconElement?: React.Node | optional React element to show as icon. This will override the `IconComponent` if you specified it | if neither `IconComponent` nor this is defined, will render text with the `title`|
-|  iconName?: string | icon name, used together with the `IconComponent` prop |  |
-| buttonStyle?: Object | style to apply to the button | you may use this to eg. change the button alignment |
-
-
+| prop and type             | description                                                                                        | note                                                                              |
+| ------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| onPress: () => void       | function to call on press                                                                          |                                                                                   |
+| title: string             | title for the button, required                                                                     |                                                                                   |
+| show: "always" or "never" | string specifying if the icon should be shown or hidden in overflow menu                           | "always" by default                                                               |
+| IconElement?: React.Node  | optional React element to show as icon. This will override the `IconComponent` if you specified it | if neither `IconComponent` nor this is defined, will render text with the `title` |
+| iconName?: string         | icon name, used together with the `IconComponent` prop                                             |                                                                                   |
+| buttonStyle?: Object      | style to apply to the button                                                                       | you may use this to eg. change the button alignment                               |
 
 #### Custom Usage
 
@@ -78,4 +74,3 @@ static navigationOptions = {
   ),
 };
 ```
-

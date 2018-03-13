@@ -38,6 +38,7 @@ type HeaderButtonsProps = {
   iconSize?: number,
   color?: string,
   OverflowIcon?: React.Node,
+  overflowButtonWrapperStyle?: Object,
   cancelButtonLabel?: string,
 };
 
@@ -49,13 +50,19 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
 
   render() {
     const { visibleButtons, hiddenButtons } = getVisibleAndHiddenButtons(this.props);
-    const { color, OverflowIcon, cancelButtonLabel } = this.props;
+    const { color, OverflowIcon, cancelButtonLabel, overflowButtonWrapperStyle } = this.props;
 
     return (
       <View style={[styles.row, this.getEdgeMargin()]}>
         {visibleButtons.length > 0 && this.renderVisibleButtons(visibleButtons)}
         {hiddenButtons.length > 0 && (
-          <OverflowButton color={color} hiddenButtons={hiddenButtons} OverflowIcon={OverflowIcon} cancelButtonLabel={cancelButtonLabel} />
+          <OverflowButton
+            color={color}
+            hiddenButtons={hiddenButtons}
+            OverflowIcon={OverflowIcon}
+            cancelButtonLabel={cancelButtonLabel}
+            buttonWrapperStyle={overflowButtonWrapperStyle}
+          />
         )}
       </View>
     );
