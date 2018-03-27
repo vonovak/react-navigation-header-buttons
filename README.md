@@ -43,14 +43,14 @@ static navigationOptions = {
 
 `HeaderButtons.Item` accepts:
 
-| prop and type             | description                                                                                        | note                                                                              |
-| ------------------------- | -------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
-| onPress: () => void       | function to call on press                                                                          |                                                                                   |
-| title: string             | title for the button, required                                                                     |                                                                                   |
-| show: "always" or "never" | string specifying if the icon should be shown or hidden in overflow menu                           | "always" by default                                                               |
-| IconElement?: React.Node  | optional React element to show as icon. This will override the `IconComponent` if you specified it | if neither `IconComponent` nor this is defined, will render text with the `title` |
-| iconName?: string         | icon name, used together with the `IconComponent` prop                                             |                                                                                   |
-| buttonStyle?: Object      | style to apply to the button                                                                       | you may use this to eg. change the button alignment                               |
+| prop and type             | description                                                                                        | note                                                                               |
+| ------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| onPress: () => void       | function to call on press                                                                          |                                                                                    |
+| title: string             | title for the button, required                                                                     |                                                                                    |
+| show: "always" or "never" | string specifying if the icon should be shown or hidden in overflow menu                           | "always" by default                                                                |
+| IconElement?: React.Node  | optional React element to show as icon. This will override the `IconComponent` if you specified it | if neither `IconComponent` nor this is defined, will render text with the `title`  |
+| iconName?: string         | icon name, used together with the `IconComponent` prop                                             |                                                                                    |
+| buttonStyle?: Object      | style to apply to the button                                                                       | applies to both icon and text; you may use this to eg. change the button alignment |
 
 #### Custom Usage
 
