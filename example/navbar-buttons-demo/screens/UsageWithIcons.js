@@ -11,8 +11,12 @@ export class UsageWithIcons extends React.Component {
     title: 'Usage With Icons',
     headerRight: (
       <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
-        <HeaderButtons.Item title="add" iconName="ios-search" onPress={() => console.warn('add')} />
-        <HeaderButtons.Item title="select" onPress={() => console.warn('edit')} />
+        <HeaderButtons.Item
+          title="search"
+          iconName="ios-search"
+          onPress={() => console.warn('search')}
+        />
+        <HeaderButtons.Item title="select" onPress={() => console.warn('select')} />
       </HeaderButtons>
     ),
   };
@@ -21,8 +25,8 @@ export class UsageWithIcons extends React.Component {
     const text = `
     headerRight: (
       <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
-        <HeaderButtons.Item title="add" iconName="ios-search" onPress={() => console.warn('add')} />
-        <HeaderButtons.Item title="select" onPress={() => console.warn('edit')} />
+        <HeaderButtons.Item title="search" iconName="ios-search" onPress={() => console.warn('search')} />
+        <HeaderButtons.Item title="select" onPress={() => console.warn('select')} />
       </HeaderButtons>
     ),
     `;

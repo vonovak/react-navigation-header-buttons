@@ -10,7 +10,11 @@ export class UsageWithOverflow extends React.Component {
     title: 'Usage With Overflow',
     headerRight: (
       <HeaderButtons IconComponent={MaterialIcons} iconSize={23} color="blue">
-        <HeaderButtons.Item title="person" iconName="person" onPress={() => console.warn('add')} />
+        <HeaderButtons.Item
+          title="person"
+          iconName="person"
+          onPress={() => console.warn('person')}
+        />
         <HeaderButtons.Item title="edit" show="never" onPress={() => console.warn('edit')} />
       </HeaderButtons>
     ),
@@ -20,7 +24,7 @@ export class UsageWithOverflow extends React.Component {
     const text = `
     headerRight: (
       <HeaderButtons IconComponent={MaterialIcons} iconSize={23} color="blue">
-        <HeaderButtons.Item title="person" iconName="person" onPress={() => console.warn('add')} />
+        <HeaderButtons.Item title="person" iconName="person" onPress={() => console.warn('person')} />
         <HeaderButtons.Item title="edit" show="never" onPress={() => console.warn('edit')} />
       </HeaderButtons>
     ),
