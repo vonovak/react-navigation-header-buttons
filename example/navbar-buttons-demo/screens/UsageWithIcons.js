@@ -1,12 +1,14 @@
+//@flow
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import HeaderButtons from 'react-navigation-header-buttons';
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import type ScreenProps from './index';
 
 @withNavigation
-export class UsageWithIcons extends React.Component {
+export class UsageWithIcons extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Usage With Icons',
     headerRight: (

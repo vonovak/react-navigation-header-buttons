@@ -1,11 +1,13 @@
+//@flow
 import React from 'react';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import HeaderButtons from 'react-navigation-header-buttons';
 import { withNavigation } from 'react-navigation';
+import type ScreenProps from './index';
 
 @withNavigation
-export class UsageLeft extends React.Component {
+export class UsageLeft extends React.Component<ScreenProps> {
   static navigationOptions = ({ navigation, navigation: { state } }) => ({
     title: 'Usage Left',
     headerLeft: (

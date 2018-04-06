@@ -1,11 +1,13 @@
+//@flow
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import HeaderButtons from 'react-navigation-header-buttons';
 import { withNavigation } from 'react-navigation';
+import type ScreenProps from './index';
 
 @withNavigation
-export class UsageWithOverflow extends React.Component {
+export class UsageWithOverflow extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Usage With Overflow',
     headerRight: (
