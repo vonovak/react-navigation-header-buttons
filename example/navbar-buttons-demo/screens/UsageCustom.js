@@ -11,15 +11,15 @@ export class UsageCustom extends React.Component {
     headerRight: (
       <HeaderButtons>
         <HeaderButtons.Item
-          title="add"
-          buttonWrapperStyle={{ marginTop: 10 }}
-          IconElement={<Ionicons name="ios-add" size={23} />}
-          onPress={() => console.warn('add')}
+          title="disabled"
+          buttonWrapperStyle={{ marginTop: 10, opacity: 0.5 }}
+          onPress={undefined}
         />
         <HeaderButtons.Item
-          title="edit"
+          title="add"
+          IconElement={<Ionicons name="ios-add" size={23} />}
           buttonWrapperStyle={{ marginTop: -10 }}
-          onPress={() => console.warn('edit')}
+          onPress={() => console.warn('add')}
         />
       </HeaderButtons>
     ),
@@ -30,18 +30,18 @@ export class UsageCustom extends React.Component {
     headerRight: (
       <HeaderButtons>
         <HeaderButtons.Item
-          title="add"
-          buttonWrapperStyle={{ marginTop: 10 }}
-          IconElement={<Ionicons name="ios-add" size={23} />}
-          onPress={() => console.warn('add')}
+          title="disabled"
+          buttonWrapperStyle={{ marginTop: 10, opacity: 0.5 }}
+          onPress={undefined}
         />
         <HeaderButtons.Item
-          title="edit"
+          title="add"
+          IconElement={<Ionicons name="ios-add" size={23} />}
           buttonWrapperStyle={{ marginTop: -10 }}
-          onPress={() => console.warn('edit')}
+          onPress={() => console.warn('add')}
         />
       </HeaderButtons>
-    )
+    ),
     `;
 
     return (

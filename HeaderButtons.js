@@ -5,17 +5,19 @@ import * as React from 'react';
 import { HeaderButton } from './HeaderButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
 import { OverflowButton, textTransformer } from './OverflowButton';
+import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+
 const OS_IOS = Platform.OS === 'ios';
 
 type ItemProps = {
-  onPress: () => void,
+  onPress: ?() => void,
   title: string,
   show: string,
   IconElement?: React.Node,
   iconName?: string,
   color?: string,
   iconSize?: number,
-  buttonStyle?: Object,
+  buttonStyle?: StyleObj,
 };
 
 // TODO check RTL
@@ -38,7 +40,7 @@ type HeaderButtonsProps = {
   iconSize?: number,
   color?: string,
   OverflowIcon?: React.Node,
-  overflowButtonWrapperStyle?: Object,
+  overflowButtonWrapperStyle?: StyleObj,
   cancelButtonLabel?: string,
 };
 
