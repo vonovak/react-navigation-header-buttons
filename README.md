@@ -45,7 +45,7 @@ static navigationOptions = {
 
 | prop and type             | description                                                                                        | note                                                                               |
 | ------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| onPress: () => void       | function to call on press                                                                          |                                                                                    |
+| onPress: ?() => void      | function to call on press                                                                          | if not defined, the button won't react to touches                                  |
 | title: string             | title for the button, required                                                                     |                                                                                    |
 | show: "always" or "never" | string specifying if the icon should be shown or hidden in overflow menu                           | "always" by default                                                                |
 | IconElement?: React.Node  | optional React element to show as icon. This will override the `IconComponent` if you specified it | if neither `IconComponent` nor this is defined, will render text with the `title`  |
