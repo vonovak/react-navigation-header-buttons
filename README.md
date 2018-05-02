@@ -10,6 +10,10 @@ Available via expo [here](https://expo.io/@vonovak/navbar-buttons-demo)
 
 `yarn add react-navigation-header-buttons`
 
+##### Tip
+
+If you don't want to install & use vector icons in OverflowIcon, you can use [babel-plugin-optional-require](https://github.com/satya164/babel-plugin-optional-require) to opt-out.
+
 #### Quick Example
 
 ```
