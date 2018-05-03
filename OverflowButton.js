@@ -10,9 +10,8 @@ import {
   ActionSheetIOS,
   Platform,
 } from 'react-native';
-// TODO import based on global.Expo?
-import Icon from 'react-native-vector-icons/MaterialIcons';
 import { HeaderButton } from './HeaderButton';
+import Icon from './Icon';
 
 export const textTransformer = (label: string) =>
   Platform.OS === 'ios' ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
