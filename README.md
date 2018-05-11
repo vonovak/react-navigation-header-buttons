@@ -2,6 +2,8 @@
 
 This package will help you render buttons in the navigation bar and handle the styling so you don't have to. It tries to mimic the appearance of native navbar buttons. `HeaderButtons.Item` accepts `buttonWrapperStyle` prop which you may use to modify item alignment in case the default outcome does not fit your needs.
 
+This package depends on `react-native-vector-icons` and is a simple wrapper around [`react-navigation-header-buttons-base`](https://github.com/vonovak/react-navigation-header-buttons-base), which you can use if you do not want to depend on the icons package.
+
 #### Demo App with Code Samples
 
 Available via expo [here](https://expo.io/@vonovak/navbar-buttons-demo)
@@ -27,6 +29,22 @@ static navigationOptions = {
 };
 ```
 
+Alernatively, you can use the icon-family-based exports:
+
+```
+import { IoniconHeaderButtons, Item } from 'react-navigation-header-buttons'
+
+static navigationOptions = {
+  title: 'Usage With Icons',
+  headerRight: (
+    <IoniconHeaderButtons color="blue">
+      <Item title="add" iconName="ios-search" onPress={() => console.warn('add')} />
+      <Item title="select" onPress={() => console.warn('edit')} />
+    </IoniconHeaderButtons>
+  ),
+};
+```
+
 #### Props of HeaderButtons
 
 `HeaderButtons` accepts:
@@ -37,7 +55,7 @@ static navigationOptions = {
 | IconComponent?: React.ComponentType<\*> | component to use for the icons                               |                                                                   |
 | iconSize?: number                       | iconSize                                                     |                                                                   |
 | color?: string                          | color of icons and buttons                                   |                                                                   |
-| OverflowIcon?: React.Node               | React element for the overflow icon                          | will render android-styled overflow icon by default               |
+| OverflowIcon?: React.ComponentType<\*>  | React element for the overflow icon                          | will render android-styled overflow icon by default               |
 | overflowButtonWrapperStyle?: Object     | optional styles for overflow button                          | there are some default styles set, as seen in `OverflowButton.js` |
 | cancelButtonLabel?: string              | ios only, the cancel button label for overflow menu actions  | 'Cancel' by default                                               |
 

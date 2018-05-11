@@ -21,7 +21,7 @@ export class UsageCustom extends React.Component<ScreenProps> {
           title="add"
           IconElement={<Ionicons name="ios-add" size={23} />}
           buttonWrapperStyle={{ marginTop: -10 }}
-          onPress={() => console.warn('add')}
+          onPress={() => alert('add')}
         />
       </HeaderButtons>
     ),
@@ -40,10 +40,10 @@ export class UsageCustom extends React.Component<ScreenProps> {
           title="add"
           IconElement={<Ionicons name="ios-add" size={23} />}
           buttonWrapperStyle={{ marginTop: -10 }}
-          onPress={() => console.warn('add')}
+          onPress={() => alert('add')}
         />
       </HeaderButtons>
-    ),
+    )
     `;
 
     return (

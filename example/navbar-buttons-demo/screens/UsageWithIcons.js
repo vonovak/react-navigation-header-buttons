@@ -2,7 +2,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import HeaderButtons from 'react-navigation-header-buttons';
+import { IoniconHeaderButtons, Item } from 'react-navigation-header-buttons';
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import type ScreenProps from './index';
@@ -12,25 +12,21 @@ export class UsageWithIcons extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Usage With Icons',
     headerRight: (
-      <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
-        <HeaderButtons.Item
-          title="search"
-          iconName="ios-search"
-          onPress={() => console.warn('search')}
-        />
-        <HeaderButtons.Item title="select" onPress={() => console.warn('select')} />
-      </HeaderButtons>
+      <IoniconHeaderButtons iconSize={23} color="blue">
+        <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+        <Item title="select" onPress={() => alert('select')} />
+      </IoniconHeaderButtons>
     ),
   };
 
   render() {
     const text = `
     headerRight: (
-      <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
-        <HeaderButtons.Item title="search" iconName="ios-search" onPress={() => console.warn('search')} />
-        <HeaderButtons.Item title="select" onPress={() => console.warn('select')} />
-      </HeaderButtons>
-    ),
+      <IoniconHeaderButtons iconSize={23} color="blue">
+        <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+        <Item title="select" onPress={() => alert('select')} />
+      </IoniconHeaderButtons>
+    )
     `;
     return (
       <View>

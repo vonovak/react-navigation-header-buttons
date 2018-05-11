@@ -11,13 +11,12 @@
     "url": "git+https://github.com/vonovak/react-navigation-header-buttons.git"
   },
   "dependencies": {
-    "react-native-platform-touchable": "^1.1.1"
+    "react-navigation-header-buttons-base": "^0.0.2"
   },
-  "keywords": [
-    "react-navigation",
-    "header",
-    "navbar"
-  ],
+  "peerDependencies": {
+    "react-native-vector-icons": "^4.0.0"
+  },
+  "keywords": ["react-navigation", "header", "navbar"],
   "author": "Vojtech Novak",
   "license": "MIT",
   "bugs": {

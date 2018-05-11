@@ -15,7 +15,7 @@ export class UsageLeft extends React.Component<ScreenProps> {
         <HeaderButtons.Item
           title="Test"
           iconName={state.params && state.params.showIcon ? 'arrow-back' : undefined}
-          onPress={() => console.warn('Test')}
+          onPress={() => alert('Test')}
         />
       </HeaderButtons>
     ),
@@ -27,14 +27,16 @@ export class UsageLeft extends React.Component<ScreenProps> {
   });
 
   render() {
-    const { navigation: { state } } = this.props;
+    const {
+      navigation: { state },
+    } = this.props;
     const text = `
     headerLeft: (
       <HeaderButtons left IconComponent={MaterialIcons} iconSize={23} color="blue">
         <HeaderButtons.Item
           title="Test"
           iconName={state.params && state.params.showIcon ? 'arrow-back' : undefined}
-          onPress={() => console.warn('Test')}
+          onPress={() => alert('Test')}
         />
       </HeaderButtons>
     ),
@@ -42,7 +44,7 @@ export class UsageLeft extends React.Component<ScreenProps> {
       <HeaderButtons IconComponent={Ionicons} iconSize={25} color="blue">
         <HeaderButtons.Item title="back" onPress={() => navigation.goBack()} />
       </HeaderButtons>
-    ),
+    )
     `;
     return (
       <View>
