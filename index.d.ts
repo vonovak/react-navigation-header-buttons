@@ -1,8 +1,8 @@
-import { Component, ComponentType, ReactElement } from 'react'
+import { Component, ComponentType, ReactNode } from 'react'
 import { ViewStyle } from 'react-native'
 
 interface HeaderItemProps {
-  IconElement?: ReactElement<any>
+  IconElement?: ReactNode
   buttonStyle?: ViewStyle
   buttonWrapperStyle?: ViewStyle
   color?: string
@@ -15,9 +15,9 @@ interface HeaderItemProps {
 
 interface HeaderButtonsProps {
   IconComponent?: ComponentType<any>
-  OverflowIcon?: ReactElement<any>
+  OverflowIcon?: ReactNode
   cancelButtonLabel?: string
-  children: ReactElement<any>
+  children: ReactNode
   color?: string
   iconSize?: number
   left?: boolean
