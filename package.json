@@ -1,6 +1,6 @@
 {
   "name": "react-navigation-header-buttons",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "Easily render header buttons for react-navigation.",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,11 @@
   "peerDependencies": {
     "react-native-vector-icons": "^4.0.0"
   },
-  "keywords": ["react-navigation", "header", "navbar"],
+  "keywords": [
+    "react-navigation",
+    "header",
+    "navbar"
+  ],
   "author": "Vojtech Novak",
   "license": "MIT",
   "bugs": {
