@@ -2,8 +2,6 @@
 
 This package will help you render buttons in the navigation bar and handle the styling so you don't have to. It tries to mimic the appearance of native navbar buttons. `HeaderButtons.Item` accepts `buttonWrapperStyle` prop which you may use to modify item alignment in case the default outcome does not fit your needs.
 
-This package depends on `react-native-vector-icons` and is a simple wrapper around [`react-navigation-header-buttons-base`](https://github.com/vonovak/react-navigation-header-buttons-base), which you can use if you do not want to depend on the icons package.
-
 #### Demo App with Code Samples
 
 Available via expo [here](https://expo.io/@vonovak/navbar-buttons-demo)
@@ -21,26 +19,10 @@ import Icon from 'react-native-vector-icons/Ionicons';
 static navigationOptions = {
   title: 'Usage With Icons',
   headerRight: (
-    <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
+    <HeaderButtons IconComponent={Ionicons} OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />} iconSize={23} color="blue">
       <HeaderButtons.Item title="add" iconName="ios-search" onPress={() => console.warn('add')} />
       <HeaderButtons.Item title="select" onPress={() => console.warn('edit')} />
     </HeaderButtons>
-  ),
-};
-```
-
-Alernatively, you can use the icon-family-based exports:
-
-```
-import { IoniconHeaderButtons, Item } from 'react-navigation-header-buttons'
-
-static navigationOptions = {
-  title: 'Usage With Icons',
-  headerRight: (
-    <IoniconHeaderButtons color="blue">
-      <Item title="add" iconName="ios-search" onPress={() => console.warn('add')} />
-      <Item title="select" onPress={() => console.warn('edit')} />
-    </IoniconHeaderButtons>
   ),
 };
 ```
@@ -69,6 +51,43 @@ static navigationOptions = {
 | IconElement?: React.Node  | optional React element to show as icon. This will override the `IconComponent` if you specified it | if neither `IconComponent` nor this is defined, will render text with the `title`  |
 | iconName?: string         | icon name, used together with the `IconComponent` prop                                             |                                                                                    |
 | buttonStyle?: Object      | style to apply to the button                                                                       | applies to both icon and text; you may use this to eg. change the button alignment |
+
+#### How to integrate in your project
+
+1 . Define one file where the styling of header buttons is taken care of.
+
+```
+// MyHeaderButtons.js
+
+import * as React from 'react';
+import OrigHeaderButtons from 'react-navigation-header-buttons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+
+// define IconComponent, color, sizes and OverflowIcon in one place
+
+export const MaterialHeaderButtons = (props) => {
+  return <OrigHeaderButtons IconComponent={MaterialIcons} color="white" iconSize={23} OverflowIcon={<MaterialIcons name="more-vert" size={23} color="white" />} {...props} />;
+};
+export const Item = OrigHeaderButtons.Item;
+```
+
+2 . Import header buttons from the file defined previously.
+
+```
+// SomeScreen.js
+import { MaterialHeaderButtons, Item } from './MyHeaderButtons'
+
+static navigationOptions = {
+  title: 'Screen with header buttons',
+  // use MaterialHeaderButtons with consistent styling across your app
+  headerRight: (
+    <MaterialHeaderButtons>
+      <Item title="add" iconName="ios-search" onPress={() => console.warn('add')} />
+      <Item title="select" onPress={() => console.warn('edit')} />
+    </MaterialHeaderButtons>
+  ),
+};
+```
 
 #### Custom Usage
 
