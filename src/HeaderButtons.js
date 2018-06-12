@@ -10,7 +10,7 @@ import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes
 const OS_IOS = Platform.OS === 'ios';
 
 type ItemProps = {
-  onPress: ?() => void,
+  onPress: ?() => any,
   title: string,
   show: string,
   IconElement?: React.Node,

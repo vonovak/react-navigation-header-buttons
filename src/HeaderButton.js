@@ -8,14 +8,15 @@ import Touchable from 'react-native-platform-touchable';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 type Props = {
-  onPress: ?() => void,
+  onPress: ?() => any,
   ButtonElement: React.Node,
   buttonWrapperStyle?: StyleObj,
+  testID?: string,
 };
 
 export class HeaderButton extends React.PureComponent<Props> {
   render() {
-    const { ButtonElement, onPress, buttonWrapperStyle } = this.props;
+    const { ButtonElement, onPress, buttonWrapperStyle, testID } = this.props;
     const RenderedComponent = !onPress ? View : Touchable;
 
     return (
@@ -24,6 +25,7 @@ export class HeaderButton extends React.PureComponent<Props> {
         onPress={onPress}
         hitSlop={BUTTON_HIT_SLOP}
         style={[styles.buttonContainer, buttonWrapperStyle]}
+        testID={testID}
       >
         <View>{ButtonElement}</View>
       </RenderedComponent>

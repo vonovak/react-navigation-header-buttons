@@ -43,6 +43,7 @@ export class OverflowButton extends React.Component<Props> {
           onPress={this.showOverflowPopup}
           ButtonElement={OverflowIcon}
           buttonWrapperStyle={[styles.icon, buttonWrapperStyle]}
+          testID="headerOverflowButton"
         />
       </View>
     );
