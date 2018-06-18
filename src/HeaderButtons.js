@@ -39,7 +39,7 @@ type HeaderButtonsProps = {
   IconComponent?: React.ComponentType<*>,
   iconSize?: number,
   color?: string,
-  OverflowIcon?: React.ComponentType<*>,
+  OverflowIcon?: React.Element<*>,
   overflowButtonWrapperStyle?: StyleObj,
   cancelButtonLabel?: string,
 };

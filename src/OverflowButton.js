@@ -11,6 +11,7 @@ import {
   Platform,
 } from 'react-native';
 import { HeaderButton } from './HeaderButton';
+import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 export const textTransformer = (label: string) =>
   Platform.OS === 'ios' ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
@@ -20,7 +21,7 @@ type Props = {
   color: string,
   OverflowIcon?: React.Element<*>,
   cancelButtonLabel: string,
-  buttonWrapperStyle?: Object,
+  buttonWrapperStyle?: StyleObj,
 };
 
 export class OverflowButton extends React.Component<Props> {
