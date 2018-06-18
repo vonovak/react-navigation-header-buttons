@@ -1,9 +1,9 @@
 import { Component, ComponentType, ReactNode } from 'react'
-import { ViewStyle } from 'react-native'
+import { TextStyle, ViewStyle } from 'react-native'
 
 interface HeaderItemProps {
   IconElement?: ReactNode
-  buttonStyle?: ViewStyle
+  buttonStyle?: TextStyle | ViewStyle
   buttonWrapperStyle?: ViewStyle
   color?: string
   iconName?: string
