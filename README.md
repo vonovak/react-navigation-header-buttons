@@ -37,8 +37,8 @@ static navigationOptions = {
 | IconComponent?: React.ComponentType<\*> | component to use for the icons                               |                                                                   |
 | iconSize?: number                       | iconSize                                                     |                                                                   |
 | color?: string                          | color of icons and buttons                                   |                                                                   |
-| OverflowIcon?: React.ComponentType<\*>  | React element for the overflow icon                          | you need to provide this only if you need overflow icon           |
-| overflowButtonWrapperStyle?: Object     | optional styles for overflow button                          | there are some default styles set, as seen in `OverflowButton.js` |
+| OverflowIcon?: React.Element<\*>        | React element for the overflow icon                          | you need to provide this only if you need overflow icon           |
+| overflowButtonWrapperStyle?: StyleObj   | optional styles for overflow button                          | there are some default styles set, as seen in `OverflowButton.js` |
 | cancelButtonLabel?: string              | ios only, the cancel button label for overflow menu actions  | 'Cancel' by default                                               |
 
 `HeaderButtons.Item` accepts:
