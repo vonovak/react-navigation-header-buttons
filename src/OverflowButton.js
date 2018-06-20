@@ -15,9 +15,6 @@ import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes
 
 const IS_IOS = Platform.OS === 'ios';
 
-export const textTransformer = (label: string) =>
-  IS_IOS ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
-
 export type OverflowButtonProps = {
   OverflowIcon?: React.Element<*>,
   cancelButtonLabel: string,

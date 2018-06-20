@@ -4,8 +4,11 @@
 import * as React from 'react';
 import { HeaderButton, type HeaderButtonProps } from './HeaderButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
-import { OverflowButton, textTransformer, type OverflowButtonProps } from './OverflowButton';
+import { OverflowButton, type OverflowButtonProps } from './OverflowButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+
+const textTransformer = (label: string) =>
+  IS_IOS ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
 
 type ItemProps = {
   title: string,
