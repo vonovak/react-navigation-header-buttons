@@ -13,15 +13,22 @@ import {
 import { HeaderButton } from './HeaderButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
+const IS_IOS = Platform.OS === 'ios';
+
 export const textTransformer = (label: string) =>
-  Platform.OS === 'ios' ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
+  IS_IOS ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
+
+export type OverflowButtonProps = {
+  OverflowIcon?: React.Element<*>,
+  cancelButtonLabel: string,
+  onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<*>> }) => any,
+};
 
 type Props = {
   hiddenButtons: Array<React.Element<*>>,
   color: string,
-  OverflowIcon?: React.Element<*>,
-  cancelButtonLabel: string,
   buttonWrapperStyle?: StyleObj,
+  ...$Exact<OverflowButtonProps>,
 };
 
 export class OverflowButton extends React.Component<Props> {
@@ -51,7 +58,12 @@ export class OverflowButton extends React.Component<Props> {
   }
 
   showOverflowPopup = () => {
-    Platform.OS === 'android' ? this.showPopupAndroid() : this.showPopupIos();
+    const { onOverflowMenuPress, hiddenButtons } = this.props;
+    if (onOverflowMenuPress) {
+      onOverflowMenuPress({ hiddenButtons });
+    } else {
+      IS_IOS ? this.showPopupIos() : this.showPopupAndroid();
+    }
   };
 
   showPopupAndroid() {
@@ -71,7 +83,7 @@ export class OverflowButton extends React.Component<Props> {
   };
 
   showPopupIos() {
-    const actionTitles = this.props.hiddenButtons.map(btn => btn.props.title);
+    let actionTitles = this.props.hiddenButtons.map(btn => btn.props.title);
     actionTitles.push(this.props.cancelButtonLabel);
 
     ActionSheetIOS.showActionSheetWithOptions(
