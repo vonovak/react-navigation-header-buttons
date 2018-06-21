@@ -13,7 +13,7 @@ import {
 import { HeaderButton } from './HeaderButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
-const IS_IOS = Platform.OS === 'ios';
+export const IS_IOS = Platform.OS === 'ios';
 
 export type OverflowButtonProps = {
   OverflowIcon?: React.Element<*>,
