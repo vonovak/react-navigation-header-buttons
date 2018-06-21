@@ -31,15 +31,16 @@ static navigationOptions = {
 
 `HeaderButtons` accepts:
 
-| prop and type                           | description                                                  | note                                                              |
-| --------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
-| left: boolean                           | whether this HeaderButtons are on the left from header title | false by default                                                  |
-| IconComponent?: React.ComponentType<\*> | component to use for the icons                               |                                                                   |
-| iconSize?: number                       | iconSize                                                     |                                                                   |
-| color?: string                          | color of icons and buttons                                   |                                                                   |
-| OverflowIcon?: React.Element<\*>        | React element for the overflow icon                          | you need to provide this only if you need overflow icon           |
-| overflowButtonWrapperStyle?: StyleObj   | optional styles for overflow button                          | there are some default styles set, as seen in `OverflowButton.js` |
-| cancelButtonLabel?: string              | ios only, the cancel button label for overflow menu actions  | 'Cancel' by default                                               |
+| prop and type                                                            | description                                                  | note                                                              |
+| ------------------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------------- |
+| left: boolean                                                            | whether this HeaderButtons are on the left from header title | false by default                                                  |
+| IconComponent?: React.ComponentType<\*>                                  | component to use for the icons                               |                                                                   |
+| iconSize?: number                                                        | iconSize                                                     |                                                                   |
+| color?: string                                                           | color of icons and buttons                                   |                                                                   |
+| OverflowIcon?: React.Element<\*>                                         | React element for the overflow icon                          | you need to provide this only if you need overflow icon           |
+| overflowButtonWrapperStyle?: StyleObj                                    | optional styles for overflow button                          | there are some default styles set, as seen in `OverflowButton.js` |
+| cancelButtonLabel?: string                                               | ios only, the cancel button label for overflow menu actions  | 'Cancel' by default                                               |
+| onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<\*>> })=>any | function that is called when overflow menu is pressed.       | this will override the default handler                            |
 
 `HeaderButtons.Item` accepts:
 

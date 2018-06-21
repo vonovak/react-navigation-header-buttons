@@ -2,15 +2,15 @@
 * @flow
 */
 import * as React from 'react';
-import { HeaderButton } from './HeaderButton';
+import { HeaderButton, type HeaderButtonProps } from './HeaderButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
-import { OverflowButton, textTransformer } from './OverflowButton';
+import { OverflowButton, type OverflowButtonProps } from './OverflowButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
-const OS_IOS = Platform.OS === 'ios';
+const textTransformer = (label: string) =>
+  IS_IOS ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
 
 type ItemProps = {
-  onPress: ?() => any,
   title: string,
   show: string,
   IconElement?: React.Node,
@@ -18,6 +18,7 @@ type ItemProps = {
   color?: string,
   iconSize?: number,
   buttonStyle?: StyleObj,
+  ...$Exact<HeaderButtonProps>,
 };
 
 // TODO check RTL
@@ -39,9 +40,8 @@ type HeaderButtonsProps = {
   IconComponent?: React.ComponentType<*>,
   iconSize?: number,
   color?: string,
-  OverflowIcon?: React.Element<*>,
   overflowButtonWrapperStyle?: StyleObj,
-  cancelButtonLabel?: string,
+  ...$Exact<OverflowButtonProps>,
 };
 
 export class HeaderButtons extends React.Component<HeaderButtonsProps> {
@@ -52,7 +52,13 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
 
   render() {
     const { visibleButtons, hiddenButtons } = getVisibleAndHiddenButtons(this.props);
-    const { color, OverflowIcon, cancelButtonLabel, overflowButtonWrapperStyle } = this.props;
+    const {
+      color,
+      OverflowIcon,
+      cancelButtonLabel,
+      overflowButtonWrapperStyle,
+      onOverflowMenuPress,
+    } = this.props;
 
     return (
       <View style={[styles.row, this.getEdgeMargin()]}>
@@ -64,6 +70,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
             OverflowIcon={OverflowIcon}
             cancelButtonLabel={cancelButtonLabel}
             buttonWrapperStyle={overflowButtonWrapperStyle}
+            onOverflowMenuPress={onOverflowMenuPress}
           />
         )}
       </View>

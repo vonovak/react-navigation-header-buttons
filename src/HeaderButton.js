@@ -7,14 +7,15 @@ import { StyleSheet, View } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
-type Props = {
+export type HeaderButtonProps = {
   onPress: ?() => any,
-  ButtonElement: React.Node,
   buttonWrapperStyle?: StyleObj,
   testID?: string,
 };
 
-export class HeaderButton extends React.PureComponent<Props> {
+export class HeaderButton extends React.PureComponent<
+  HeaderButtonProps & { ButtonElement: React.Node }
+> {
   render() {
     const { ButtonElement, onPress, buttonWrapperStyle, testID } = this.props;
     const RenderedComponent = !onPress ? View : Touchable;
