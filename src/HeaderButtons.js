@@ -4,7 +4,7 @@
 import * as React from 'react';
 import { HeaderButton, type HeaderButtonProps } from './HeaderButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
-import { OverflowButton, type OverflowButtonProps } from './OverflowButton';
+import { OverflowButton, type OverflowButtonProps, IS_IOS } from './OverflowButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
 const textTransformer = (label: string) =>
