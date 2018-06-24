@@ -53,6 +53,8 @@ static navigationOptions = {
 | iconName?: string         | icon name, used together with the `IconComponent` prop                                             |                                                                                    |
 | buttonStyle?: StyleObj    | style to apply to the button                                                                       | applies to both icon and text; you may use this to eg. change the button alignment |
 | testID?: string           | ID to locate the view in e2e tests                                                                 | `headerOverflowButton` is the testID of the overflow button                        |
+| disabled?: bool           | If the button is disabled. Will not have press animation                                           |                                                                                    |
+| disabledColor?: bool      | The color of the text when the button is disabled                                                 |                                                                                    |
 
 #### How to integrate in your project
 
