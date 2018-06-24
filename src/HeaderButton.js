@@ -7,22 +7,38 @@ import { StyleSheet, View } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
+export type RippleOptions = {
+  pressColor: string;
+  borderless?: boolean;
+  useForeground?: boolean;
+};
+
 export type HeaderButtonProps = {
   onPress: ?() => any,
   buttonWrapperStyle?: StyleObj,
   testID?: string,
+  ripple?: RippleOptions,
 };
 
 export class HeaderButton extends React.PureComponent<
   HeaderButtonProps & { ButtonElement: React.Node }
 > {
+  static defaultProps = {
+    ripple: {
+      pressColor: 'rgba(0, 0, 0, .32)',
+      borderless: false,
+      useForeground: false,
+    },
+  };
+
   render() {
-    const { ButtonElement, onPress, buttonWrapperStyle, testID } = this.props;
+    const { ButtonElement, onPress, buttonWrapperStyle, testID, ripple } = this.props;
     const RenderedComponent = !onPress ? View : Touchable;
 
     return (
       <RenderedComponent
-        background={Touchable.SelectableBackgroundBorderless()}
+        useForeground={ripple.useForeground}
+        background={Touchable.Ripple(ripple.pressColor, ripple.borderless)}
         onPress={onPress}
         hitSlop={BUTTON_HIT_SLOP}
         style={[styles.buttonContainer, buttonWrapperStyle]}
