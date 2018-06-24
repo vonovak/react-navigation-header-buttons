@@ -11,14 +11,15 @@ export type HeaderButtonProps = {
   onPress: ?() => any,
   buttonWrapperStyle?: StyleObj,
   testID?: string,
+  disabled?: bool,
 };
 
 export class HeaderButton extends React.PureComponent<
   HeaderButtonProps & { ButtonElement: React.Node }
 > {
   render() {
-    const { ButtonElement, onPress, buttonWrapperStyle, testID } = this.props;
-    const RenderedComponent = !onPress ? View : Touchable;
+    const { ButtonElement, onPress, buttonWrapperStyle, testID, disabled } = this.props;
+    const RenderedComponent = !onPress || disabled ? View : Touchable;
 
     return (
       <RenderedComponent
