@@ -95,7 +95,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
 
   renderVisibleButton(itemProps: ItemProps) {
     const { IconComponent, iconSize, color } = this.props;
-    const { iconName, title, buttonStyle } = itemProps;
+    const { iconName, title, buttonStyle, disabled, disabledColor = 'rgb(191, 192, 192)' } = itemProps;
 
     return IconComponent && iconName ? (
       <IconComponent
@@ -105,7 +105,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
         style={[styles.button, buttonStyle]}
       />
     ) : (
-      <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>
+      <Text style={[styles.text, { color: disabled ? disabledColor : color }, buttonStyle]}>{textTransformer(title)}</Text>
     );
   }
 }
