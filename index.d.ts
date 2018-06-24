@@ -1,6 +1,12 @@
 import { Component, ComponentType, ReactNode } from 'react'
 import { TextStyle, ViewStyle } from 'react-native'
 
+interface RippleOptions {
+  pressColor: string;
+  borderless?: boolean;
+  useForeground?: boolean;
+}
+
 interface HeaderItemProps {
   IconElement?: ReactNode
   buttonStyle?: TextStyle | ViewStyle
@@ -11,6 +17,7 @@ interface HeaderItemProps {
   onPress?: () => void
   show?: string
   title: string
+  ripple?: RippleOptions
 }
 
 interface HeaderButtonsProps {
@@ -22,6 +29,7 @@ interface HeaderButtonsProps {
   iconSize?: number
   left?: boolean
   overflowButtonWrapperStyle?: ViewStyle
+  ripple?: RippleOptions
 }
 
 declare class HeaderButtons extends Component<HeaderButtonsProps> {

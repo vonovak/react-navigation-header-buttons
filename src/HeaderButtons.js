@@ -2,7 +2,7 @@
 * @flow
 */
 import * as React from 'react';
-import { HeaderButton, type HeaderButtonProps } from './HeaderButton';
+import { HeaderButton, type HeaderButtonProps, type RippleOptions } from './HeaderButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
 import { OverflowButton, type OverflowButtonProps, IS_IOS } from './OverflowButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
@@ -16,6 +16,7 @@ type ItemProps = {
   IconElement?: React.Node,
   iconName?: string,
   color?: string,
+  ripple?: RippleOptions,
   iconSize?: number,
   buttonStyle?: StyleObj,
   ...$Exact<HeaderButtonProps>,
@@ -40,6 +41,7 @@ type HeaderButtonsProps = {
   IconComponent?: React.ComponentType<*>,
   iconSize?: number,
   color?: string,
+  ripple?: RippleOptions,
   overflowButtonWrapperStyle?: StyleObj,
   ...$Exact<OverflowButtonProps>,
 };
@@ -89,7 +91,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
 
       const ButtonElement = IconElement ? IconElement : this.renderVisibleButton(btn.props);
 
-      return <HeaderButton key={title} ButtonElement={ButtonElement} {...btn.props} />;
+      return <HeaderButton key={title} ButtonElement={ButtonElement} ripple={this.props.ripple} {...btn.props} />;
     });
   }
 
