@@ -51,7 +51,7 @@ export class UsageLeft extends React.Component<ScreenProps> {
         <Text>{text}</Text>
         <Button
           onPress={() => this.props.navigation.navigate('UsageCustom')}
-          title="Custom Usage"
+          title="Custom button alignment"
         />
         <Button
           onPress={() =>

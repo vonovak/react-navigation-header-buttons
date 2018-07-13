@@ -58,7 +58,7 @@ export class UsageDisabled extends React.Component<ScreenProps> {
         <Text>{text}</Text>
         <Button
           onPress={() => this.props.navigation.navigate('CustomRipple')}
-          title="CustomRipple"
+          title="Custom Ripple (Android only)"
         />
       </View>
     );

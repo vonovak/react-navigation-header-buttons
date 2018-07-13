@@ -51,7 +51,7 @@ export class UsageCustom extends React.Component<ScreenProps> {
         <Text>{text}</Text>
         <Button
           onPress={() => this.props.navigation.navigate('UsageDisabled')}
-          title="UsageDisabled"
+          title="Usage with disabled state"
         />
       </View>
     );

@@ -56,10 +56,6 @@ export class CustomRipple extends React.Component<ScreenProps> {
           ]}
         /> */}
         <Text>{text}</Text>
-        <Button
-          onPress={() => this.props.navigation.navigate('UsageWithOverflow')}
-          title="Usage with overflow"
-        />
       </View>
     );
   }

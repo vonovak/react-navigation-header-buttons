@@ -23,7 +23,7 @@ type ItemProps = {
 };
 
 // TODO check RTL
-class Item extends React.Component<ItemProps> {
+export class Item extends React.Component<ItemProps> {
   static SHOW_ALWAYS = 'always';
   static SHOW_NEVER = 'never';
 

@@ -42,7 +42,10 @@ export class UsageWithOverflow extends React.Component<ScreenProps> {
     return (
       <View>
         <Text>{text}</Text>
-        <Button onPress={() => this.props.navigation.navigate('UsageLeft')} title="Usage Left" />
+        <Button
+          onPress={() => this.props.navigation.navigate('UsageLeft')}
+          title="Usage with Left Button"
+        />
       </View>
     );
   }
