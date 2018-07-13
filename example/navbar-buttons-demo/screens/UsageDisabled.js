@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, Button } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import type ScreenProps from './index';
-import HeaderButtons, { HeaderButton } from 'react-navigation-header-buttons';
+import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
 
 const DisableableHeaderButton = props => (
   <HeaderButton
@@ -24,26 +24,13 @@ export class UsageDisabled extends React.Component<ScreenProps> {
     title: 'Disableable',
     headerRight: (
       <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
-        <HeaderButtons.Item
-          title="search"
-          iconName="ios-search"
-          onPress={() => alert('search')}
-          disabled
-        />
-        <HeaderButtons.Item title="select" onPress={() => alert('select')} />
+        <Item title="search" iconName="ios-search" onPress={() => alert('search')} disabled />
+        <Item title="select" onPress={() => alert('select')} />
       </HeaderButtons>
     ),
   };
 
   render() {
-    const text = `
-    headerRight: (
-      <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
-        <HeaderButtons.Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-        <HeaderButtons.Item title="select" onPress={() => alert('select')} />
-      </HeaderButtons>
-    )
-    `;
     return (
       <View>
         {/* <Icon.ToolbarAndroid
@@ -55,9 +42,8 @@ export class UsageDisabled extends React.Component<ScreenProps> {
             // { title: 'Two', show: 'never',  },
           ]}
         /> */}
-        <Text>{text}</Text>
         <Button
-          onPress={() => this.props.navigation.navigate('CustomRipple')}
+          onPress={() => this.props.navigation.navigate('UsageCustomRipple')}
           title="Custom Ripple (Android only)"
         />
       </View>

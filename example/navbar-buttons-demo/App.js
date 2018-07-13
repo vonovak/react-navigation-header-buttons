@@ -4,7 +4,7 @@ import {
   UsageWithOverflow,
   UsageLeft,
   UsageDisabled,
-  CustomRipple,
+  UsageCustomRipple,
 } from './screens';
 import { StackNavigator } from 'react-navigation';
 
@@ -21,8 +21,8 @@ export default StackNavigator({
   UsageDisabled: {
     screen: UsageDisabled,
   },
-  CustomRipple: {
-    screen: CustomRipple,
+  UsageCustomRipple: {
+    screen: UsageCustomRipple,
   },
   UsageWithOverflow: {
     screen: UsageWithOverflow,
