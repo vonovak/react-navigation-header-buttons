@@ -18,6 +18,7 @@ type ItemProps = {
   color?: string,
   iconSize?: number,
   buttonStyle?: StyleObj,
+  IconComponent?: React.ComponentType<*>,
   ...$Exact<HeaderButtonProps>,
 };
 
@@ -37,10 +38,8 @@ class Item extends React.Component<ItemProps> {
 type HeaderButtonsProps = {
   children: React.Node,
   left: boolean,
-  IconComponent?: React.ComponentType<*>,
-  iconSize?: number,
-  color?: string,
   overflowButtonWrapperStyle?: StyleObj,
+  HeaderButtonComponent: React.ComponentType<*>,
   ...$Exact<OverflowButtonProps>,
 };
 
@@ -48,17 +47,12 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
   static Item = Item;
   static defaultProps = {
     left: false,
+    HeaderButtonComponent: HeaderButton,
   };
 
   render() {
     const { visibleButtons, hiddenButtons } = getVisibleAndHiddenButtons(this.props);
-    const {
-      color,
-      OverflowIcon,
-      cancelButtonLabel,
-      overflowButtonWrapperStyle,
-      onOverflowMenuPress,
-    } = this.props;
+    const { color, OverflowIcon, overflowButtonWrapperStyle, onOverflowMenuPress } = this.props;
 
     return (
       <View style={[styles.row, this.getEdgeMargin()]}>
@@ -68,7 +62,6 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
             color={color}
             hiddenButtons={hiddenButtons}
             OverflowIcon={OverflowIcon}
-            cancelButtonLabel={cancelButtonLabel}
             buttonWrapperStyle={overflowButtonWrapperStyle}
             onOverflowMenuPress={onOverflowMenuPress}
           />
@@ -84,29 +77,15 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
   renderVisibleButtons(visibleButtons: Array<React.Element<*>>) {
     return visibleButtons.map(btn => {
       const {
-        props: { title, IconElement },
+        props: { title },
       } = btn;
 
-      const ButtonElement = IconElement ? IconElement : this.renderVisibleButton(btn.props);
+      const RenderedHeaderButton = this.props.HeaderButtonComponent;
 
-      return <HeaderButton key={title} ButtonElement={ButtonElement} {...btn.props} />;
+      return (
+        <RenderedHeaderButton key={title} {...btn.props} getButtonElement={renderVisibleButton} />
+      );
     });
-  }
-
-  renderVisibleButton(itemProps: ItemProps) {
-    const { IconComponent, iconSize, color } = this.props;
-    const { iconName, title, buttonStyle } = itemProps;
-
-    return IconComponent && iconName ? (
-      <IconComponent
-        name={iconName}
-        color={color}
-        size={iconSize}
-        style={[styles.button, buttonStyle]}
-      />
-    ) : (
-      <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>
-    );
   }
 }
 
@@ -129,6 +108,21 @@ function getVisibleAndHiddenButtons(props) {
     visibleButtons,
     hiddenButtons,
   };
+}
+
+function renderVisibleButton(allProps) {
+  const { IconComponent, iconSize, color, iconName, title, buttonStyle } = allProps;
+
+  return IconComponent && iconName ? (
+    <IconComponent
+      name={iconName}
+      color={color}
+      size={iconSize}
+      style={[styles.button, buttonStyle]}
+    />
+  ) : (
+    <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>
+  );
 }
 
 const styles = StyleSheet.create({

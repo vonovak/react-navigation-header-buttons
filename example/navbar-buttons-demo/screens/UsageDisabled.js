@@ -7,17 +7,29 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import type ScreenProps from './index';
 import HeaderButtons, { HeaderButton } from 'react-navigation-header-buttons';
 
-const IoniconsHeaderButton = props => (
-  <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
+const DisableableHeaderButton = props => (
+  <HeaderButton
+    {...props}
+    onPress={props.disabled ? undefined : props.onPress}
+    buttonStyle={props.disabled ? { color: 'grey' } : undefined}
+    IconComponent={Ionicons}
+    iconSize={23}
+    color="blue"
+  />
 );
 
 @withNavigation
-export class UsageWithIcons extends React.Component<ScreenProps> {
+export class UsageDisabled extends React.Component<ScreenProps> {
   static navigationOptions = {
-    title: 'Usage With Icons',
+    title: 'Disableable',
     headerRight: (
-      <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-        <HeaderButtons.Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+      <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
+        <HeaderButtons.Item
+          title="search"
+          iconName="ios-search"
+          onPress={() => alert('search')}
+          disabled
+        />
         <HeaderButtons.Item title="select" onPress={() => alert('select')} />
       </HeaderButtons>
     ),
@@ -45,8 +57,8 @@ export class UsageWithIcons extends React.Component<ScreenProps> {
         /> */}
         <Text>{text}</Text>
         <Button
-          onPress={() => this.props.navigation.navigate('UsageWithOverflow')}
-          title="Usage with overflow"
+          onPress={() => this.props.navigation.navigate('CustomRipple')}
+          title="CustomRipple"
         />
       </View>
     );

@@ -13,13 +13,13 @@ export class UsageCustom extends React.Component<ScreenProps> {
     headerRight: (
       <HeaderButtons>
         <HeaderButtons.Item
-          title="disabled"
-          buttonWrapperStyle={{ marginTop: 10, opacity: 0.5 }}
-          onPress={undefined}
+          title="shifted"
+          buttonWrapperStyle={{ marginTop: 10 }}
+          onPress={() => alert('misaligned')}
         />
         <HeaderButtons.Item
           title="add"
-          IconElement={<Ionicons name="ios-add" size={23} />}
+          ButtonElement={<Ionicons name="ios-add" size={23} />}
           buttonWrapperStyle={{ marginTop: -10 }}
           onPress={() => alert('add')}
         />
@@ -49,7 +49,10 @@ export class UsageCustom extends React.Component<ScreenProps> {
     return (
       <View>
         <Text>{text}</Text>
-        <Button onPress={() => this.props.navigation.goBack()} title="Go Back" />
+        <Button
+          onPress={() => this.props.navigation.navigate('UsageDisabled')}
+          title="UsageDisabled"
+        />
       </View>
     );
   }

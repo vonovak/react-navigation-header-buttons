@@ -12,12 +12,12 @@ import {
 } from 'react-native';
 import { HeaderButton } from './HeaderButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+export const OVERFLOW_BUTTON_TEST_ID = 'headerOverflowButton';
 
 export const IS_IOS = Platform.OS === 'ios';
 
 export type OverflowButtonProps = {
   OverflowIcon?: React.Element<*>,
-  cancelButtonLabel: string,
   onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<*>> }) => any,
 };
 
@@ -32,7 +32,6 @@ export class OverflowButton extends React.Component<Props> {
   overflowRef: ?View;
   static defaultProps = {
     color: 'grey',
-    cancelButtonLabel: 'Cancel',
   };
 
   setOverflowRef = (ref: ?View) => {
@@ -48,7 +47,7 @@ export class OverflowButton extends React.Component<Props> {
           onPress={this.showOverflowPopup}
           ButtonElement={OverflowIcon}
           buttonWrapperStyle={[styles.icon, buttonWrapperStyle]}
-          testID="headerOverflowButton"
+          testID={OVERFLOW_BUTTON_TEST_ID}
         />
       </View>
     );
@@ -57,7 +56,7 @@ export class OverflowButton extends React.Component<Props> {
   showOverflowPopup = () => {
     const { onOverflowMenuPress, hiddenButtons } = this.props;
     if (onOverflowMenuPress) {
-      onOverflowMenuPress({ hiddenButtons });
+      onOverflowMenuPress({ hiddenButtons, overflowButtonRef: this.overflowRef });
     } else {
       IS_IOS ? this.showPopupIos() : this.showPopupAndroid();
     }
@@ -81,7 +80,7 @@ export class OverflowButton extends React.Component<Props> {
 
   showPopupIos() {
     let actionTitles = this.props.hiddenButtons.map(btn => btn.props.title);
-    actionTitles.push(this.props.cancelButtonLabel);
+    actionTitles.push('cancel');
 
     ActionSheetIOS.showActionSheetWithOptions(
       {

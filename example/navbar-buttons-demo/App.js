@@ -1,4 +1,11 @@
-import { UsageCustom, UsageWithIcons, UsageWithOverflow, UsageLeft } from './screens';
+import {
+  UsageCustom,
+  UsageWithIcons,
+  UsageWithOverflow,
+  UsageLeft,
+  UsageDisabled,
+  CustomRipple,
+} from './screens';
 import { StackNavigator } from 'react-navigation';
 
 export default StackNavigator({
@@ -10,6 +17,12 @@ export default StackNavigator({
   },
   UsageCustom: {
     screen: UsageCustom,
+  },
+  UsageDisabled: {
+    screen: UsageDisabled,
+  },
+  CustomRipple: {
+    screen: CustomRipple,
   },
   UsageWithOverflow: {
     screen: UsageWithOverflow,

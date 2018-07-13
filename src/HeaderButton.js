@@ -11,18 +11,33 @@ export type HeaderButtonProps = {
   onPress: ?() => any,
   buttonWrapperStyle?: StyleObj,
   testID?: string,
+  touchableBackground: any,
 };
 
-export class HeaderButton extends React.PureComponent<
-  HeaderButtonProps & { ButtonElement: React.Node }
-> {
+export class HeaderButton extends React.PureComponent<HeaderButtonProps> {
+  static defaultProps = {
+    touchableBackground: Touchable.SelectableBackgroundBorderless(),
+  };
   render() {
-    const { ButtonElement, onPress, buttonWrapperStyle, testID } = this.props;
-    const RenderedComponent = !onPress ? View : Touchable;
+    const {
+      onPress,
+      buttonWrapperStyle,
+      testID,
+      getButtonElement,
+      ButtonElement: ButtonElementOverride,
+      touchableBackground,
+    } = this.props;
 
+    const { iconName, title, buttonStyle, IconComponent, iconSize, color } = this.props;
+
+    const ButtonElement =
+      ButtonElementOverride ||
+      getButtonElement({ iconName, title, buttonStyle, IconComponent, iconSize, color });
+
+    const RenderedComponent = !onPress ? View : Touchable;
     return (
       <RenderedComponent
-        background={Touchable.SelectableBackgroundBorderless()}
+        background={touchableBackground}
         onPress={onPress}
         hitSlop={BUTTON_HIT_SLOP}
         style={[styles.buttonContainer, buttonWrapperStyle]}
