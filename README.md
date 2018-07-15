@@ -1,6 +1,6 @@
 ## react-navigation-header-buttons
 
-This package will help you render buttons in the navigation bar and handle the styling so you don't have to. It tries to mimic the appearance of native navbar buttons. `HeaderButtons.Item` accepts `buttonWrapperStyle` prop which you may use to modify item alignment in case the default outcome does not fit your needs.
+This package will help you render buttons in the navigation bar and handle the styling so you don't have to. It tries to mimic the appearance of native navbar buttons. `Item` accepts `buttonWrapperStyle` prop which you may use to modify item alignment in case the default outcome does not fit your needs.
 
 #### Demo App with Code Samples
 
@@ -13,15 +13,19 @@ Available via expo [here](https://expo.io/@vonovak/navbar-buttons-demo)
 #### Quick Example
 
 ```
-import HeaderButtons from 'react-navigation-header-buttons'
 import Icon from 'react-native-vector-icons/Ionicons';
+import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
+
+const IoniconsHeaderButton = props => (
+  <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
+);
 
 static navigationOptions = {
   title: 'Usage With Icons',
   headerRight: (
-    <HeaderButtons IconComponent={Ionicons} OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />} iconSize={23} color="blue">
-      <HeaderButtons.Item title="add" iconName="ios-search" onPress={() => console.warn('add')} />
-      <HeaderButtons.Item title="select" onPress={() => console.warn('edit')} />
+    <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+      <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+      <Item title="select" onPress={() => alert('select')} />
     </HeaderButtons>
   ),
 };
@@ -31,18 +35,17 @@ static navigationOptions = {
 
 `HeaderButtons` accepts:
 
-| prop and type                                                            | description                                                  | note                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------ | ----------------------------------------------------------------- |
-| left: boolean                                                            | whether this HeaderButtons are on the left from header title | false by default                                                  |
-| IconComponent?: React.ComponentType<\*>                                  | component to use for the icons                               |                                                                   |
-| iconSize?: number                                                        | iconSize                                                     |                                                                   |
-| color?: string                                                           | color of icons and buttons                                   |                                                                   |
-| OverflowIcon?: React.Element<\*>                                         | React element for the overflow icon                          | you need to provide this only if you need overflow icon           |
-| overflowButtonWrapperStyle?: StyleObj                                    | optional styles for overflow button                          | there are some default styles set, as seen in `OverflowButton.js` |
-| cancelButtonLabel?: string                                               | ios only, the cancel button label for overflow menu actions  | 'Cancel' by default                                               |
-| onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<\*>> })=>any | function that is called when overflow menu is pressed.       | this will override the default handler                            |
+| prop and type                                                                                        | description                                                  | note                                                              |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------ | ----------------------------------------------------------------- |
+| left: boolean                                                                                        | whether this HeaderButtons are on the left from header title | false by default                                                  |
+| IconComponent?: React.ComponentType<\*>                                                              | component to use for the icons                               |                                                                   |
+| iconSize?: number                                                                                    | iconSize                                                     |                                                                   |
+| color?: string                                                                                       | color of icons and buttons                                   |                                                                   |
+| OverflowIcon?: React.Element<\*>                                                                     | React element for the overflow icon                          | you need to provide this only if you need overflow icon           |
+| overflowButtonWrapperStyle?: StyleObj                                                                | optional styles for overflow button                          | there are some default styles set, as seen in `OverflowButton.js` |
+| onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<\*>>, overflowButtonRef: ?View }) => any | function that is called when overflow menu is pressed.       | this will override the default handler                            |
 
-`HeaderButtons.Item` accepts:
+`Item` accepts:
 
 | prop and type             | description                                                                                        | note                                                                               |
 | ------------------------- | -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |

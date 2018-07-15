@@ -10,11 +10,26 @@ import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes
 export type HeaderButtonProps = {
   onPress: ?() => any,
   buttonWrapperStyle?: StyleObj,
+  ButtonElement?: React.Element<any>,
   testID?: string,
-  touchableBackground: any,
 };
 
-export class HeaderButton extends React.PureComponent<HeaderButtonProps> {
+export type VisibleButtonProps = {
+  iconName?: string,
+  title: string,
+  buttonStyle?: StyleObj,
+  IconComponent?: React.ComponentType<*>,
+  iconSize?: number,
+  color?: string,
+};
+
+type OptionalProps = {
+  touchableBackground: any,
+  getButtonElement: VisibleButtonProps => React.Element<any>,
+  ...$Exact<VisibleButtonProps>,
+};
+
+export class HeaderButton extends React.PureComponent<HeaderButtonProps & OptionalProps> {
   static defaultProps = {
     touchableBackground: Touchable.SelectableBackgroundBorderless(),
   };

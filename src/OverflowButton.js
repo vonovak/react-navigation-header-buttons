@@ -10,48 +10,48 @@ import {
   ActionSheetIOS,
   Platform,
 } from 'react-native';
-import { HeaderButton } from './HeaderButton';
+import { HeaderButton, type VisibleButtonProps } from './HeaderButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 export const OVERFLOW_BUTTON_TEST_ID = 'headerOverflowButton';
 
 export const IS_IOS = Platform.OS === 'ios';
 
 export type OverflowButtonProps = {
-  OverflowIcon?: React.Element<*>,
+  OverflowIcon: React.Element<*>,
   onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<*>> }) => any,
 };
 
 type Props = {
   hiddenButtons: Array<React.Element<*>>,
-  color: string,
   buttonWrapperStyle?: StyleObj,
   ...$Exact<OverflowButtonProps>,
 };
 
 export class OverflowButton extends React.Component<Props> {
   overflowRef: ?View;
-  static defaultProps = {
-    color: 'grey',
-  };
 
   setOverflowRef = (ref: ?View) => {
     this.overflowRef = ref;
   };
 
   render() {
-    const { OverflowIcon, buttonWrapperStyle } = this.props;
+    const { buttonWrapperStyle } = this.props;
+
     return (
       <View>
         <View ref={this.setOverflowRef} style={styles.overflowMenuView} />
         <HeaderButton
+          title={OVERFLOW_BUTTON_TEST_ID}
+          getButtonElement={this.getOverflowButtonElement}
           onPress={this.showOverflowPopup}
-          ButtonElement={OverflowIcon}
           buttonWrapperStyle={[styles.icon, buttonWrapperStyle]}
           testID={OVERFLOW_BUTTON_TEST_ID}
         />
       </View>
     );
   }
+
+  getOverflowButtonElement = () => this.props.OverflowIcon;
 
   showOverflowPopup = () => {
     const { onOverflowMenuPress, hiddenButtons } = this.props;
@@ -67,7 +67,7 @@ export class OverflowButton extends React.Component<Props> {
       findNodeHandle(this.overflowRef),
       this.props.hiddenButtons.map(btn => btn.props.title),
       err => {
-        console.debug(`popup error ${err}`);
+        console.debug(`overflowBtn error ${err}`);
       },
       this.onHiddenItemPress
     );

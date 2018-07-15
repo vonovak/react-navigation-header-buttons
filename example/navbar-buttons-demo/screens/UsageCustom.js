@@ -9,7 +9,7 @@ import type ScreenProps from './index';
 @withNavigation
 export class UsageCustom extends React.Component<ScreenProps> {
   static navigationOptions = {
-    title: 'Alignment',
+    title: 'Custom',
     headerRight: (
       <HeaderButtons>
         <Item
@@ -19,9 +19,9 @@ export class UsageCustom extends React.Component<ScreenProps> {
         />
         <Item
           title="add"
-          ButtonElement={<Ionicons name="ios-add" size={23} />}
+          ButtonElement={<View style={{ height: 25, width: 25, backgroundColor: 'green' }} />}
           buttonWrapperStyle={{ marginTop: -10 }}
-          onPress={() => alert('add')}
+          onPress={() => alert('green square')}
         />
       </HeaderButtons>
     ),

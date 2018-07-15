@@ -2,7 +2,7 @@
 * @flow
 */
 import * as React from 'react';
-import { HeaderButton, type HeaderButtonProps } from './HeaderButton';
+import { HeaderButton, type HeaderButtonProps, type VisibleButtonProps } from './HeaderButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
 import { OverflowButton, type OverflowButtonProps, IS_IOS } from './OverflowButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
@@ -13,12 +13,6 @@ const textTransformer = (label: string) =>
 type ItemProps = {
   title: string,
   show: string,
-  IconElement?: React.Node,
-  iconName?: string,
-  color?: string,
-  iconSize?: number,
-  buttonStyle?: StyleObj,
-  IconComponent?: React.ComponentType<*>,
   ...$Exact<HeaderButtonProps>,
 };
 
@@ -48,18 +42,18 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
   static defaultProps = {
     left: false,
     HeaderButtonComponent: HeaderButton,
+    OverflowIcon: <View />,
   };
 
   render() {
     const { visibleButtons, hiddenButtons } = getVisibleAndHiddenButtons(this.props);
-    const { color, OverflowIcon, overflowButtonWrapperStyle, onOverflowMenuPress } = this.props;
+    const { OverflowIcon, overflowButtonWrapperStyle, onOverflowMenuPress } = this.props;
 
     return (
       <View style={[styles.row, this.getEdgeMargin()]}>
         {visibleButtons.length > 0 && this.renderVisibleButtons(visibleButtons)}
         {hiddenButtons.length > 0 && (
           <OverflowButton
-            color={color}
             hiddenButtons={hiddenButtons}
             OverflowIcon={OverflowIcon}
             buttonWrapperStyle={overflowButtonWrapperStyle}
@@ -110,8 +104,8 @@ function getVisibleAndHiddenButtons(props) {
   };
 }
 
-function renderVisibleButton(allProps) {
-  const { IconComponent, iconSize, color, iconName, title, buttonStyle } = allProps;
+function renderVisibleButton(visibleButtonProps: VisibleButtonProps): React.Element<any> {
+  const { IconComponent, iconSize, color, iconName, title, buttonStyle } = visibleButtonProps;
 
   return IconComponent && iconName ? (
     <IconComponent
