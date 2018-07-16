@@ -12,13 +12,16 @@ Contains many examples and is [available via expo](https://expo.io/@vonovak/navb
 
 #### Quick Example
 
+Please see also [how to integrate in your project](#how-to-integrate-in-your-project).
+
 ```js
 import Icon from 'react-native-vector-icons/Ionicons';
 import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
 
 const IoniconsHeaderButton = passMeFurther => (
-  // the `passMeFurther` variable here contains props from <Item .../> as well as <HeaderButtons ... /> and it is important to pass those props to `HeaderButton`
-  // and add some information like icon size or color (if you use icons)
+  // the `passMeFurther` variable here contains props from <Item .../> as well as <HeaderButtons ... />
+  // and it is important to pass those props to `HeaderButton`
+  // then you may add some information like icon size or color (if you use icons)
   <HeaderButton {...passMeFurther} IconComponent={Ionicons} iconSize={23} color="blue" />
 );
 
@@ -38,13 +41,13 @@ static navigationOptions = {
 
 `HeaderButtons` accepts:
 
-| prop and type                                                                                        | description                                                   | note                                                                                                                                                                                                               |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| left: boolean                                                                                        | whether the `HeaderButtons` are on the left from header title | false by default                                                                                                                                                                                                   |
-| HeaderButtonComponent: React.ComponentType<\*>                                                       | component that renders the buttons                            | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the examples. However, you're free to use your own component. Check the `HeaderButton` for reference. |
-| OverflowIcon?: React.Element<\*>                                                                     | React element for the overflow icon                           | you need to provide this only if you need a overflow icon                                                                                                                                                          |
-| overflowButtonWrapperStyle?: StyleObj                                                                | optional styles for overflow button                           | there are some default styles set, as seen in `OverflowButton.js`                                                                                                                                                  |
-| onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<\*>>, overflowButtonRef: ?View }) => any | function that is called when overflow menu is pressed.        | this will override the default handler                                                                                                                                                                             |
+| prop and type                                                                                        | description                                                   | note                                                                                                                                                                                                                                 |
+| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| left: boolean                                                                                        | whether the `HeaderButtons` are on the left from header title | false by default                                                                                                                                                                                                                     |
+| HeaderButtonComponent: React.ComponentType<\*>                                                       | component that renders the buttons                            | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). However, you're free to use your own component (see `HeaderButton` for reference). |
+| OverflowIcon?: React.Element<\*>                                                                     | React element for the overflow icon                           | you need to provide this only if you need an overflow icon                                                                                                                                                                           |
+| overflowButtonWrapperStyle?: StyleObj                                                                | optional styles for overflow button                           | there are some default styles set, as seen in `OverflowButton.js`                                                                                                                                                                    |
+| onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<\*>>, overflowButtonRef: ?View }) => any | function that is called when overflow menu is pressed.        | this will override the default handler                                                                                                                                                                                               |
 
 `Item` accepts:
 
@@ -61,10 +64,12 @@ static navigationOptions = {
 
 `HeaderButton` accepts:
 
-| IconComponent?: React.ComponentType<\*> | component to use for the icons, foe example from `react-native-vector-icons` | |
-| iconSize?: number | iconSize | |
-| color?: string | color of icons and buttons | |
-| touchableBackground?: any | the project internally uses `react-native-platform-touchable` for rendering touchables. You may use this prop to specify the android ripple effect. Valid values are [here](https://github.com/react-community/react-native-platform-touchable#statics). | |
+| prop and type                           | description                                                                                                                                                                                                                                              | note |
+| --------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| IconComponent?: React.ComponentType<\*> | component to use for the icons, foe example from `react-native-vector-icons`                                                                                                                                                                             |      |
+| iconSize?: number                       | iconSize                                                                                                                                                                                                                                                 |      |
+| color?: string                          | color of icons and buttons                                                                                                                                                                                                                               |      |
+| touchableBackground?: any               | the project internally uses `react-native-platform-touchable` for rendering touchables. You may use this prop to specify the android ripple effect. Valid values are [here](https://github.com/react-community/react-native-platform-touchable#statics). |      |
 
 Please note that `HeaderButton` also requires other props to function correctly. Some of these props are passed from `<Item .. />` (such as `iconName`) and also `<HeaderButtons ... />`. When wrapping `HeaderButton` it is thus important to not forget to pass down all props the wrapping component receives (this is easy using the spread operator), as documented in the [quick example](#quick-example).
 
