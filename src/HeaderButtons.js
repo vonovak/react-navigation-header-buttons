@@ -2,7 +2,7 @@
 * @flow
 */
 import * as React from 'react';
-import { HeaderButton, type HeaderButtonProps } from './HeaderButton';
+import { HeaderButton, type HeaderButtonProps, type VisibleButtonProps } from './HeaderButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
 import { OverflowButton, type OverflowButtonProps, IS_IOS } from './OverflowButton';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
@@ -13,16 +13,11 @@ const textTransformer = (label: string) =>
 type ItemProps = {
   title: string,
   show: string,
-  IconElement?: React.Node,
-  iconName?: string,
-  color?: string,
-  iconSize?: number,
-  buttonStyle?: StyleObj,
   ...$Exact<HeaderButtonProps>,
 };
 
 // TODO check RTL
-class Item extends React.Component<ItemProps> {
+export class Item extends React.Component<ItemProps> {
   static SHOW_ALWAYS = 'always';
   static SHOW_NEVER = 'never';
 
@@ -37,10 +32,8 @@ class Item extends React.Component<ItemProps> {
 type HeaderButtonsProps = {
   children: React.Node,
   left: boolean,
-  IconComponent?: React.ComponentType<*>,
-  iconSize?: number,
-  color?: string,
   overflowButtonWrapperStyle?: StyleObj,
+  HeaderButtonComponent: React.ComponentType<*>,
   ...$Exact<OverflowButtonProps>,
 };
 
@@ -48,27 +41,21 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
   static Item = Item;
   static defaultProps = {
     left: false,
+    HeaderButtonComponent: HeaderButton,
+    OverflowIcon: <View />,
   };
 
   render() {
     const { visibleButtons, hiddenButtons } = getVisibleAndHiddenButtons(this.props);
-    const {
-      color,
-      OverflowIcon,
-      cancelButtonLabel,
-      overflowButtonWrapperStyle,
-      onOverflowMenuPress,
-    } = this.props;
+    const { OverflowIcon, overflowButtonWrapperStyle, onOverflowMenuPress } = this.props;
 
     return (
       <View style={[styles.row, this.getEdgeMargin()]}>
         {visibleButtons.length > 0 && this.renderVisibleButtons(visibleButtons)}
         {hiddenButtons.length > 0 && (
           <OverflowButton
-            color={color}
             hiddenButtons={hiddenButtons}
             OverflowIcon={OverflowIcon}
-            cancelButtonLabel={cancelButtonLabel}
             buttonWrapperStyle={overflowButtonWrapperStyle}
             onOverflowMenuPress={onOverflowMenuPress}
           />
@@ -84,29 +71,15 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
   renderVisibleButtons(visibleButtons: Array<React.Element<*>>) {
     return visibleButtons.map(btn => {
       const {
-        props: { title, IconElement },
+        props: { title },
       } = btn;
 
-      const ButtonElement = IconElement ? IconElement : this.renderVisibleButton(btn.props);
+      const RenderedHeaderButton = this.props.HeaderButtonComponent;
 
-      return <HeaderButton key={title} ButtonElement={ButtonElement} {...btn.props} />;
+      return (
+        <RenderedHeaderButton key={title} {...btn.props} getButtonElement={renderVisibleButton} />
+      );
     });
-  }
-
-  renderVisibleButton(itemProps: ItemProps) {
-    const { IconComponent, iconSize, color } = this.props;
-    const { iconName, title, buttonStyle } = itemProps;
-
-    return IconComponent && iconName ? (
-      <IconComponent
-        name={iconName}
-        color={color}
-        size={iconSize}
-        style={[styles.button, buttonStyle]}
-      />
-    ) : (
-      <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>
-    );
   }
 }
 
@@ -129,6 +102,21 @@ function getVisibleAndHiddenButtons(props) {
     visibleButtons,
     hiddenButtons,
   };
+}
+
+function renderVisibleButton(visibleButtonProps: VisibleButtonProps): React.Element<any> {
+  const { IconComponent, iconSize, color, iconName, title, buttonStyle } = visibleButtonProps;
+
+  return IconComponent && iconName ? (
+    <IconComponent
+      name={iconName}
+      color={color}
+      size={iconSize}
+      style={[styles.button, buttonStyle]}
+    />
+  ) : (
+    <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>
+  );
 }
 
 const styles = StyleSheet.create({

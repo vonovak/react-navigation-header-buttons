@@ -2,32 +2,29 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import HeaderButtons from 'react-navigation-header-buttons';
-import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import type ScreenProps from './index';
+import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
 
-@withNavigation
+const IoniconsHeaderButton = props => (
+  // the `props` here come from <Item .../>
+  // you may access them and pass something else to `HeaderButton` if you like
+  <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
+);
+
 export class UsageWithIcons extends React.Component<ScreenProps> {
   static navigationOptions = {
-    title: 'Usage With Icons',
+    title: 'Vector Icons',
     headerRight: (
-      <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
-        <HeaderButtons.Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+      <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+        {/* use Item or HeaderButtons.Item */}
+        <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
         <HeaderButtons.Item title="select" onPress={() => alert('select')} />
       </HeaderButtons>
     ),
   };
 
   render() {
-    const text = `
-    headerRight: (
-      <HeaderButtons IconComponent={Ionicons} iconSize={23} color="blue">
-        <HeaderButtons.Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-        <HeaderButtons.Item title="select" onPress={() => alert('select')} />
-      </HeaderButtons>
-    )
-    `;
     return (
       <View>
         {/* <Icon.ToolbarAndroid
@@ -39,11 +36,6 @@ export class UsageWithIcons extends React.Component<ScreenProps> {
             // { title: 'Two', show: 'never',  },
           ]}
         /> */}
-        <Text>{text}</Text>
-        <Button
-          onPress={() => this.props.navigation.navigate('UsageWithOverflow')}
-          title="Usage with overflow"
-        />
       </View>
     );
   }

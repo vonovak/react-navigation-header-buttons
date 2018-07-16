@@ -7,22 +7,57 @@ import { StyleSheet, View } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
+// from <Item />
 export type HeaderButtonProps = {
   onPress: ?() => any,
   buttonWrapperStyle?: StyleObj,
+  ButtonElement?: React.Element<any>,
   testID?: string,
 };
 
-export class HeaderButton extends React.PureComponent<
-  HeaderButtonProps & { ButtonElement: React.Node }
-> {
-  render() {
-    const { ButtonElement, onPress, buttonWrapperStyle, testID } = this.props;
-    const RenderedComponent = !onPress ? View : Touchable;
+// props that pertain to styling of visible buttons
+// these are partially passed from <Item /> and partially supplied by you, the developer when you wrap <HeaderButton />
+export type VisibleButtonProps = $Exact<{
+  iconName?: string,
+  title: string,
+  buttonStyle?: StyleObj,
 
+  IconComponent?: React.ComponentType<*>,
+  iconSize?: number,
+  color?: string,
+}>;
+
+type OtherProps = {
+  touchableBackground: any,
+  getButtonElement: VisibleButtonProps => React.Element<any>,
+};
+
+export class HeaderButton extends React.PureComponent<
+  HeaderButtonProps & VisibleButtonProps & OtherProps
+> {
+  static defaultProps = {
+    touchableBackground: Touchable.SelectableBackgroundBorderless(),
+  };
+  render() {
+    const {
+      onPress,
+      buttonWrapperStyle,
+      testID,
+      getButtonElement,
+      ButtonElement: ButtonElementOverride,
+      touchableBackground,
+    } = this.props;
+
+    const { iconName, title, buttonStyle, IconComponent, iconSize, color } = this.props;
+
+    const ButtonElement =
+      ButtonElementOverride ||
+      getButtonElement({ iconName, title, buttonStyle, IconComponent, iconSize, color });
+
+    const RenderedComponent = !onPress ? View : Touchable;
     return (
       <RenderedComponent
-        background={Touchable.SelectableBackgroundBorderless()}
+        background={touchableBackground}
         onPress={onPress}
         hitSlop={BUTTON_HIT_SLOP}
         style={[styles.buttonContainer, buttonWrapperStyle]}
