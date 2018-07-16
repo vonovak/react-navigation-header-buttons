@@ -2,7 +2,6 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import type ScreenProps from './index';
 import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
@@ -11,10 +10,9 @@ const IoniconsHeaderButton = props => (
   <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
 );
 
-@withNavigation
 export class UsageWithIcons extends React.Component<ScreenProps> {
   static navigationOptions = {
-    title: 'Usage With Icons',
+    title: 'Vector Icons',
     headerRight: (
       <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
         <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
@@ -35,10 +33,6 @@ export class UsageWithIcons extends React.Component<ScreenProps> {
             // { title: 'Two', show: 'never',  },
           ]}
         /> */}
-        <Button
-          onPress={() => this.props.navigation.navigate('UsageWithOverflow')}
-          title="Usage with overflow"
-        />
       </View>
     );
   }

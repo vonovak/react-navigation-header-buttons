@@ -2,11 +2,9 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import HeaderButtons, { Item } from 'react-navigation-header-buttons';
 import type ScreenProps from './index';
 
-@withNavigation
 export class UsageCustom extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Custom',
@@ -28,13 +26,6 @@ export class UsageCustom extends React.Component<ScreenProps> {
   };
 
   render() {
-    return (
-      <View>
-        <Button
-          onPress={() => this.props.navigation.navigate('UsageDisabled')}
-          title="Usage with disabled state"
-        />
-      </View>
-    );
+    return <View />;
   }
 }
