@@ -10,7 +10,7 @@ import Touchable from 'react-native-platform-touchable';
 const DisableableHeaderButton = props => (
   <HeaderButton
     {...props}
-    touchableBackground={Touchable.Ripple('red', true)}
+    background={Touchable.Ripple('red', true)}
     IconComponent={Ionicons}
     iconSize={23}
     color="blue"

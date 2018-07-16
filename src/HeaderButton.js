@@ -28,8 +28,7 @@ export type VisibleButtonProps = $Exact<{
 }>;
 
 type OtherProps = {
-  touchableBackground: any,
-  touchableForeground: any,
+  background: any,
   getButtonElement: VisibleButtonProps => React.Element<any>,
 };
 
@@ -37,7 +36,7 @@ export class HeaderButton extends React.PureComponent<
   HeaderButtonProps & VisibleButtonProps & OtherProps
 > {
   static defaultProps = {
-    touchableBackground: Touchable.SelectableBackgroundBorderless(),
+    background: Touchable.SelectableBackgroundBorderless(),
   };
   render() {
     const {
@@ -46,11 +45,15 @@ export class HeaderButton extends React.PureComponent<
       testID,
       getButtonElement,
       ButtonElement: ButtonElementOverride,
-      touchableBackground,
-      touchableForeground,
+      background,
+      iconName,
+      title,
+      buttonStyle,
+      IconComponent,
+      iconSize,
+      color,
+      other,
     } = this.props;
-
-    const { iconName, title, buttonStyle, IconComponent, iconSize, color } = this.props;
 
     const ButtonElement =
       ButtonElementOverride ||
@@ -58,16 +61,16 @@ export class HeaderButton extends React.PureComponent<
 
     return (
       <Touchable
-        background={touchableBackground}
-        foreground={touchableForeground}
+        background={background}
         disabled={!onPress}
         onPress={onPress}
         hitSlop={BUTTON_HIT_SLOP}
         style={[styles.buttonContainer, buttonWrapperStyle]}
         testID={testID}
+        {...other}
       >
         <View>{ButtonElement}</View>
-      </RenderedComponent>
+      </Touchable>
     );
   }
 }

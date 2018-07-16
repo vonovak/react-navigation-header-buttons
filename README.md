@@ -64,13 +64,13 @@ static navigationOptions = {
 
 `HeaderButton` accepts:
 
-| prop and type                           | description                                                                                                                                     | note                                                                                                                                                           |
-| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| IconComponent?: React.ComponentType<\*> | component to use for the icons, foe example from `react-native-vector-icons`                                                                    |                                                                                                                                                                |
-| iconSize?: number                       | iconSize                                                                                                                                        |                                                                                                                                                                |
-| color?: string                          | color of icons and buttons                                                                                                                      |                                                                                                                                                                |
-| touchableBackground?: any               | the lib internally uses `react-native-platform-touchable` for rendering touchables. You may use this prop to specify the android ripple effect. | Defaults to `Touchable.SelectableBackgroundBorderless()`, valid values are [here](https://github.com/react-community/react-native-platform-touchable#statics). |
-| touchableForeground?: any               | the lib internally uses `react-native-platform-touchable` for rendering touchables. You may use this prop to specify the android ripple effect. | Not defined by default, valid values are [here](https://github.com/react-community/react-native-platform-touchable#statics).                                   |
+| prop and type                           | description                                                                  | note |
+| --------------------------------------- | ---------------------------------------------------------------------------- | ---- |
+| IconComponent?: React.ComponentType<\*> | component to use for the icons, foe example from `react-native-vector-icons` |      |
+| iconSize?: number                       | iconSize                                                                     |      |
+| color?: string                          | color of icons and buttons                                                   |      |
+
+You may also pass other props that will be passed to the underlying `react-native-platform-touchable`. For example, pass [`background`](https://github.com/react-community/react-native-platform-touchable#additional-props-used-by-touchablenativefeedback--default-android) prop for different ripple effects.
 
 Please note that `HeaderButton` also requires other props to function correctly. Some of these props are passed from `<Item .. />` (such as `iconName`) and also `<HeaderButtons ... />`. When wrapping `HeaderButton` it is thus important to not forget to pass down all props the wrapping component receives (this is easy using the spread operator), as documented in the [quick example](#quick-example).
 
