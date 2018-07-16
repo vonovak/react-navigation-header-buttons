@@ -17,7 +17,7 @@ export const OVERFLOW_BUTTON_TEST_ID = 'headerOverflowButton';
 export const IS_IOS = Platform.OS === 'ios';
 
 export type OverflowButtonProps = {
-  OverflowIcon: React.Element<*>,
+  OverflowIcon: React.Node,
   onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<*>> }) => any,
 };
 

@@ -7,6 +7,7 @@ import { StyleSheet, View } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
 
+// from <Item />
 export type HeaderButtonProps = {
   onPress: ?() => any,
   buttonWrapperStyle?: StyleObj,
@@ -14,22 +15,26 @@ export type HeaderButtonProps = {
   testID?: string,
 };
 
-export type VisibleButtonProps = {
+// props that pertain to styling of visible buttons
+// these are partially passed from <Item /> and partially supplied by you, the developer when you wrap <HeaderButton />
+export type VisibleButtonProps = $Exact<{
   iconName?: string,
   title: string,
   buttonStyle?: StyleObj,
+
   IconComponent?: React.ComponentType<*>,
   iconSize?: number,
   color?: string,
-};
+}>;
 
-type OptionalProps = {
+type OtherProps = {
   touchableBackground: any,
   getButtonElement: VisibleButtonProps => React.Element<any>,
-  ...$Exact<VisibleButtonProps>,
 };
 
-export class HeaderButton extends React.PureComponent<HeaderButtonProps & OptionalProps> {
+export class HeaderButton extends React.PureComponent<
+  HeaderButtonProps & VisibleButtonProps & OtherProps
+> {
   static defaultProps = {
     touchableBackground: Touchable.SelectableBackgroundBorderless(),
   };

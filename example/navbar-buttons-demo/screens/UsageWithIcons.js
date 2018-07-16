@@ -7,6 +7,8 @@ import type ScreenProps from './index';
 import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
 
 const IoniconsHeaderButton = props => (
+  // the `props` here come from <Item .../>
+  // you may access them and pass something else to `HeaderButton` if you like
   <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
 );
 
@@ -15,8 +17,9 @@ export class UsageWithIcons extends React.Component<ScreenProps> {
     title: 'Vector Icons',
     headerRight: (
       <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+        {/* use Item or HeaderButtons.Item */}
         <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-        <Item title="select" onPress={() => alert('select')} />
+        <HeaderButtons.Item title="select" onPress={() => alert('select')} />
       </HeaderButtons>
     ),
   };
