@@ -66,7 +66,7 @@ static navigationOptions = {
 
 | prop and type                           | description                                                                  | note |
 | --------------------------------------- | ---------------------------------------------------------------------------- | ---- |
-| IconComponent?: React.ComponentType<\*> | component to use for the icons, foe example from `react-native-vector-icons` |      |
+| IconComponent?: React.ComponentType<\*> | component to use for the icons, for example from `react-native-vector-icons` |      |
 | iconSize?: number                       | iconSize                                                                     |      |
 | color?: string                          | color of icons and buttons                                                   |      |
 
