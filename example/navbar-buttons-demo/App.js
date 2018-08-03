@@ -9,13 +9,13 @@ import {
   HomeScreen,
   UsageWithCustomOverflow,
 } from './screens';
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 import React from 'react';
 
 // just for custom overflow menu onPress action
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 
-const RootStack = StackNavigator({
+const RootStack = createStackNavigator({
   HomeScreen: {
     screen: HomeScreen,
   },
