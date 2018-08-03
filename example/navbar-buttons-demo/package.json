@@ -1,16 +1,23 @@
 {
+  "name": "empty-project-template",
   "main": "node_modules/expo/AppEntry.js",
   "private": true,
+  "scripts": {
+    "start": "expo start",
+    "android": "expo start --android",
+    "ios": "expo start --ios",
+    "eject": "expo eject"
+  },
   "dependencies": {
     "@expo/react-native-action-sheet": "^1.0.2",
-    "expo": "^25.0.0",
-    "react": "16.2.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "expo": "^29.0.0",
+    "react": "16.3.1",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-29.0.0.tar.gz",
     "react-native-platform-touchable": "^1.1.1",
-    "react-navigation": "^1.0.0-beta.27",
+    "react-navigation": "^2.9.3",
     "react-navigation-header-buttons": "file:../.."
   },
   "devDependencies": {
-    "flow-bin": "0.56"
+    "flow-bin": "^0.67.1"
   }
 }
