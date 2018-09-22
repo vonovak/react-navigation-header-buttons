@@ -29,9 +29,8 @@ static navigationOptions = {
   title: 'Vector Icons',
   headerRight: (
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-      {/* use Item or HeaderButtons.Item */}
       <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-      <HeaderButtons.Item title="select" onPress={() => alert('select')} />
+      <Item title="select" onPress={() => alert('select')} />
     </HeaderButtons>
   ),
 };
