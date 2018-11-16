@@ -1,11 +1,11 @@
 /*
-* @flow
-*/
+ * @flow
+ */
 import * as React from 'react';
 import { HeaderButton, type HeaderButtonProps, type VisibleButtonProps } from './HeaderButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
 import { OverflowButton, type OverflowButtonProps, IS_IOS } from './OverflowButton';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 const textTransformer = (label: string) =>
   IS_IOS ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
@@ -32,7 +32,7 @@ export class Item extends React.Component<ItemProps> {
 type HeaderButtonsProps = {
   children: React.Node,
   left: boolean,
-  overflowButtonWrapperStyle?: StyleObj,
+  overflowButtonWrapperStyle?: ViewStyleProp,
   HeaderButtonComponent: React.ComponentType<*>,
   ...$Exact<OverflowButtonProps>,
 };

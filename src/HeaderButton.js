@@ -5,12 +5,12 @@ import * as React from 'react';
 const BUTTON_HIT_SLOP = { top: 5, bottom: 5, left: 5, right: 5 };
 import { StyleSheet, View } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 // from <Item />
 export type HeaderButtonProps = {
   onPress: ?() => any,
-  buttonWrapperStyle?: StyleObj,
+  buttonWrapperStyle?: ViewStyleProp,
   ButtonElement?: React.Element<any>,
   testID?: string,
 };
@@ -20,7 +20,7 @@ export type HeaderButtonProps = {
 export type VisibleButtonProps = $Exact<{
   iconName?: string,
   title: string,
-  buttonStyle?: StyleObj,
+  buttonStyle?: ViewStyleProp,
 
   IconComponent?: React.ComponentType<*>,
   iconSize?: number,
@@ -32,9 +32,13 @@ type OtherProps = {
   getButtonElement: VisibleButtonProps => React.Element<any>,
 };
 
-export class HeaderButton extends React.PureComponent<
-  HeaderButtonProps & VisibleButtonProps & OtherProps
-> {
+type Props = $Exact<{
+  ...$Exact<HeaderButtonProps>,
+  ...$Exact<VisibleButtonProps>,
+  ...$Exact<OtherProps>,
+}>;
+
+export class HeaderButton extends React.PureComponent<Props> {
   static defaultProps = {
     background: Touchable.SelectableBackgroundBorderless(),
   };
@@ -52,7 +56,7 @@ export class HeaderButton extends React.PureComponent<
       IconComponent,
       iconSize,
       color,
-      other,
+      ...other
     } = this.props;
 
     const ButtonElement =

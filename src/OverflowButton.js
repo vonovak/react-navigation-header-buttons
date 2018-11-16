@@ -1,6 +1,6 @@
 /*
-* @flow
-*/
+ * @flow
+ */
 import * as React from 'react';
 import {
   View,
@@ -11,19 +11,19 @@ import {
   Platform,
 } from 'react-native';
 import { HeaderButton, type VisibleButtonProps } from './HeaderButton';
-import type { StyleObj } from 'react-native/Libraries/StyleSheet/StyleSheetTypes';
+import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 export const OVERFLOW_BUTTON_TEST_ID = 'headerOverflowButton';
 
 export const IS_IOS = Platform.OS === 'ios';
 
 export type OverflowButtonProps = {
-  OverflowIcon: React.Node,
+  OverflowIcon: React.Element<*>,
   onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<*>> }) => any,
 };
 
 type Props = {
   hiddenButtons: Array<React.Element<*>>,
-  buttonWrapperStyle?: StyleObj,
+  buttonWrapperStyle?: ViewStyleProp,
   ...$Exact<OverflowButtonProps>,
 };
 
