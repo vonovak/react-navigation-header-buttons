@@ -84,7 +84,7 @@ This sections covers how you should use the library in your project. Please note
 
 import * as React from 'react';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
+import { HeaderButtons, HeaderButton } from 'react-navigation-header-buttons';
 
 // define IconComponent, color, sizes and OverflowIcon in one place
 const MaterialHeaderButton = props => (
