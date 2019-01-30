@@ -68,7 +68,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
     return this.props.left ? styles.extraEdgeMarginOnLeft : styles.extraEdgeMarginOnRight;
   }
 
-  renderVisibleButtons(visibleButtons: Array<React.Element<*>>) {
+  renderVisibleButtons(visibleButtons: Array<React.Element<*>>): Array<React.Element<*>> {
     return visibleButtons.map(btn => {
       const {
         props: { title },
