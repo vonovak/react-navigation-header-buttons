@@ -19,6 +19,7 @@ export const IS_IOS = Platform.OS === 'ios';
 export type OverflowButtonProps = {
   OverflowIcon: React.Element<*>,
   onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<*>> }) => any,
+  overflowCancelLabel?: string
 };
 
 type Props = {
@@ -80,7 +81,7 @@ export class OverflowButton extends React.Component<Props> {
 
   showPopupIos() {
     let actionTitles = this.props.hiddenButtons.map(btn => btn.props.title);
-    actionTitles.push('cancel');
+    actionTitles.push(this.props.overflowCancelLabel || 'cancel');
 
     ActionSheetIOS.showActionSheetWithOptions(
       {

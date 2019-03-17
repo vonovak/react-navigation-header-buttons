@@ -111,6 +111,12 @@ interface HeaderButtonsProps {
    * This will override the default handler.
    */
   onOverflowMenuPress?: (options: onOverflowMenuPressParams) => any;
+  /**
+   * Optional label to show for cancel action on iOS
+   *
+   * Defaults to 'cancel'
+   */
+  overflowCancelLabel?: string;
 }
 
 declare class HeaderButtons extends Component<HeaderButtonsProps> {
