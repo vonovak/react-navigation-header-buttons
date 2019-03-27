@@ -129,6 +129,9 @@ const styles = StyleSheet.create({
       ios: {
         marginLeft: 4,
       },
+      web: {
+        marginLeft: 4,
+      },
     }),
   },
   extraEdgeMarginOnRight: {
@@ -137,6 +140,9 @@ const styles = StyleSheet.create({
         marginRight: 4,
       },
       ios: {
+        marginRight: 5,
+      },
+      web: {
         marginRight: 5,
       },
     }),
@@ -152,6 +158,10 @@ const styles = StyleSheet.create({
         fontSize: 17,
         marginHorizontal: 10,
       },
+      web: {
+        fontSize: 17,
+        marginHorizontal: 10,
+      },
     }),
   },
   button: {
@@ -160,6 +170,9 @@ const styles = StyleSheet.create({
         marginHorizontal: 11,
       },
       ios: {
+        marginHorizontal: 11,
+      },
+      web: {
         marginHorizontal: 11,
       },
     }),
