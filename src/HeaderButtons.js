@@ -33,6 +33,7 @@ type HeaderButtonsProps = {
   children: React.Node,
   left: boolean,
   overflowButtonWrapperStyle?: ViewStyleProp,
+  overflowCancelButtonTitle?: string,
   HeaderButtonComponent: React.ComponentType<*>,
   ...$Exact<OverflowButtonProps>,
 };
@@ -47,7 +48,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
 
   render() {
     const { visibleButtons, hiddenButtons } = getVisibleAndHiddenButtons(this.props);
-    const { OverflowIcon, overflowButtonWrapperStyle, onOverflowMenuPress } = this.props;
+    const { OverflowIcon, overflowButtonWrapperStyle, onOverflowMenuPress, overflowCancelButtonTitle } = this.props;
 
     return (
       <View style={[styles.row, this.getEdgeMargin()]}>
@@ -58,6 +59,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
             OverflowIcon={OverflowIcon}
             buttonWrapperStyle={overflowButtonWrapperStyle}
             onOverflowMenuPress={onOverflowMenuPress}
+            overflowCancelButtonTitle={overflowCancelButtonTitle}
           />
         )}
       </View>

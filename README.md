@@ -47,6 +47,7 @@ static navigationOptions = {
 | OverflowIcon?: React.Element<\*>                                                                     | React element for the overflow icon                           | you need to provide this only if you need an overflow icon                                                                                                                                                                                 |
 | overflowButtonWrapperStyle?: ViewStyleProp                                                           | optional styles for overflow button                           | there are some default styles set, as seen in `OverflowButton.js`                                                                                                                                                                          |
 | onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<\*>>, overflowButtonRef: ?View }) => any | function that is called when overflow menu is pressed.        | This will override the default handler. Use this prop if you want to customize your overflow button behavior - I will likely not merge PRs that add props for the overflow menu since I prefer these customizations to happen in userland. |
+| overflowCancelButtonTitle?: string                                                                   | title for the cancel button shown in overflow menus on iOS    | This will override the default title 'cancel'.
 
 `Item` accepts:
 

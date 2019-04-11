@@ -75,6 +75,7 @@ interface HeaderItemProps extends CommonHeaderButtonProps {
 }
 
 export interface onOverflowMenuPressParams {
+  overflowCancelButtonTitle: string,
   hiddenButtons: Array<ReactNode>,
   overflowButtonRef?: View,
 }
@@ -111,6 +112,12 @@ interface HeaderButtonsProps {
    * This will override the default handler.
    */
   onOverflowMenuPress?: (options: onOverflowMenuPressParams) => any;
+  /**
+   * Title for the cancel button shown in overflow menus on iOS.
+   *
+   * This will override the default title 'cancel'.
+   */
+  overflowCancelButtonTitle?: string;
 }
 
 declare class HeaderButtons extends Component<HeaderButtonsProps> {

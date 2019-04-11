@@ -17,6 +17,7 @@ export const OVERFLOW_BUTTON_TEST_ID = 'headerOverflowButton';
 export const IS_IOS = Platform.OS === 'ios';
 
 export type OverflowButtonProps = {
+  overflowCancelButtonTitle?: string,
   OverflowIcon: React.Element<*>,
   onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<*>> }) => any,
 };
@@ -80,7 +81,7 @@ export class OverflowButton extends React.Component<Props> {
 
   showPopupIos() {
     let actionTitles = this.props.hiddenButtons.map(btn => btn.props.title);
-    actionTitles.push('cancel');
+    actionTitles.push(this.props.overflowCancelButtonTitle || 'cancel');
 
     ActionSheetIOS.showActionSheetWithOptions(
       {
