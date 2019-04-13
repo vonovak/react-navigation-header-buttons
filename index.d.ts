@@ -1,7 +1,7 @@
 import { Component, ComponentType, ReactNode } from 'react';
 import { TextStyle, ViewStyle, View } from 'react-native';
 
-interface CommonHeaderButtonProps {
+export interface CommonHeaderButtonProps {
   /**
    * Function to call on press.
    *
@@ -43,7 +43,7 @@ interface CommonHeaderButtonProps {
 }
 
 // From HeaderButton.js
-interface HeaderButtonProps extends CommonHeaderButtonProps {
+export interface HeaderButtonProps extends CommonHeaderButtonProps {
   /**
    * Component to use for the icons, for example from `react-native-vector-icons`.
    */
@@ -66,7 +66,7 @@ export class HeaderButton extends Component<HeaderButtonProps> {
 }
 
 // From HeaderButtons.js as ItemProps
-interface HeaderItemProps extends CommonHeaderButtonProps {
+export interface HeaderItemProps extends CommonHeaderButtonProps {
   /**
    * String specifying if the icon should be shown or hidden in overflow menu.
    * @default "always"
@@ -79,7 +79,7 @@ export interface onOverflowMenuPressParams {
   overflowButtonRef?: View,
 }
 
-interface HeaderButtonsProps {
+export interface HeaderButtonsProps {
   /**
    * Whether the `HeaderButtons` are on the left from header title.
    * @default false
