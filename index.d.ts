@@ -75,7 +75,6 @@ interface HeaderItemProps extends CommonHeaderButtonProps {
 }
 
 export interface onOverflowMenuPressParams {
-  overflowCancelButtonTitle: string,
   hiddenButtons: Array<ReactNode>,
   overflowButtonRef?: View,
 }
