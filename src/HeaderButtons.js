@@ -126,10 +126,7 @@ const styles = StyleSheet.create({
       android: {
         marginLeft: 5,
       },
-      ios: {
-        marginLeft: 4,
-      },
-      web: {
+      default: {
         marginLeft: 4,
       },
     }),
@@ -139,10 +136,7 @@ const styles = StyleSheet.create({
       android: {
         marginRight: 4,
       },
-      ios: {
-        marginRight: 5,
-      },
-      web: {
+      default: {
         marginRight: 5,
       },
     }),
@@ -154,27 +148,13 @@ const styles = StyleSheet.create({
         fontSize: 14,
         marginHorizontal: 11,
       },
-      ios: {
-        fontSize: 17,
-        marginHorizontal: 10,
-      },
-      web: {
+      default: {
         fontSize: 17,
         marginHorizontal: 10,
       },
     }),
   },
   button: {
-    ...Platform.select({
-      android: {
-        marginHorizontal: 11,
-      },
-      ios: {
-        marginHorizontal: 11,
-      },
-      web: {
-        marginHorizontal: 11,
-      },
-    }),
+    marginHorizontal: 11,
   },
 });
