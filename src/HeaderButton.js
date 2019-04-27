@@ -32,16 +32,17 @@ type OtherProps = {
   getButtonElement: VisibleButtonProps => React.Element<any>,
 };
 
-type Props = $Exact<{
+type Props = {
   ...$Exact<HeaderButtonProps>,
   ...$Exact<VisibleButtonProps>,
   ...$Exact<OtherProps>,
-}>;
+};
 
 export class HeaderButton extends React.PureComponent<Props> {
   static defaultProps = {
-    background: Touchable.SelectableBackgroundBorderless(),
+    background: Touchable.Ripple('rgba(0, 0, 0, .32)', true),
   };
+
   render() {
     const {
       onPress,
