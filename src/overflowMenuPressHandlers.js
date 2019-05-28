@@ -18,13 +18,11 @@ const overflowMenuPressHandlerIOS = ({ hiddenButtons, cancelButtonLabel = 'cance
   );
 };
 
-const logError = err => console.debug(`overflowBtn error`, err);
-
 const overflowMenuPressHandlerAndroid = ({ hiddenButtons, overflowButtonRef }) => {
   UIManager.showPopupMenu(
     findNodeHandle(overflowButtonRef),
     hiddenButtons.map(btn => btn.props.title),
-    logError,
+    err => console.debug(`overflowBtn error`, err),
     (eventName: string, index: number) => {
       if (eventName !== 'itemSelected') return;
       hiddenButtons[index].props.onPress();
