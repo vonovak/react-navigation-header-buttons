@@ -5,7 +5,7 @@ import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import { Button } from './PaddedButton';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import type ScreenProps from './index';
-import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
+import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
 
 const MultiFontFamilyHeaderButton = props => (
   <HeaderButton {...props} IconComponent={props.MyIconComponent} iconSize={23} color="blue" />

@@ -2,7 +2,7 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
-import HeaderButtons, { Item } from 'react-navigation-header-buttons';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import type ScreenProps from './index';
 
 export class UsageCustom extends React.Component<ScreenProps> {

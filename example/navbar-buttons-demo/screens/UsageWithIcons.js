@@ -4,7 +4,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { StyleSheet, Text, View, Button } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import type ScreenProps from './index';
-import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
+import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
 
 const IoniconsHeaderButton = props => (
   // the `props` here come from <Item .../>

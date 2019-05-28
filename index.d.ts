@@ -33,7 +33,6 @@ export interface CommonHeaderButtonProps {
   /**
    * ID to locate the view in e2e tests.
    *
-   * `testID` of the overflow button is exported under `OVERFLOW_BUTTON_TEST_ID`.
    */
   testID?: string;
   /**
@@ -62,8 +61,7 @@ export interface HeaderButtonProps extends CommonHeaderButtonProps {
   background?: any;
 }
 
-export class HeaderButton extends Component<HeaderButtonProps> {
-}
+export class HeaderButton extends Component<HeaderButtonProps> {}
 
 // From HeaderButtons.js as ItemProps
 export interface HeaderItemProps extends CommonHeaderButtonProps {
@@ -75,8 +73,8 @@ export interface HeaderItemProps extends CommonHeaderButtonProps {
 }
 
 export interface onOverflowMenuPressParams {
-  hiddenButtons: Array<ReactNode>,
-  overflowButtonRef?: View,
+  hiddenButtons: Array<ReactNode>;
+  overflowButtonRef: View;
 }
 
 export interface HeaderButtonsProps {
@@ -111,10 +109,15 @@ export interface HeaderButtonsProps {
    * This will override the default handler.
    */
   onOverflowMenuPress?: (options: onOverflowMenuPressParams) => any;
+
+  /**
+   * ID to locate the overflow button in e2e tests.
+   *
+   * default `testID` of the overflow button is exported from `e2e.js`.
+   */
+  overflowButtonTestID?: string;
 }
 
 declare class HeaderButtons extends Component<HeaderButtonsProps> {
   static Item: ComponentType<HeaderItemProps>;
 }
-
-export default HeaderButtons;
