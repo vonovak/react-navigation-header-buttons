@@ -24,6 +24,7 @@ export type OverflowButtonProps = {
 type Props = {
   hiddenButtons: Array<React.Element<*>>,
   buttonWrapperStyle?: ViewStyleProp,
+  testID?: string,
   ...$Exact<OverflowButtonProps>,
 };
 
@@ -35,7 +36,7 @@ export class OverflowButton extends React.Component<Props> {
   };
 
   render() {
-    const { buttonWrapperStyle } = this.props;
+    const { buttonWrapperStyle, testID } = this.props;
 
     return (
       <View>
@@ -45,7 +46,7 @@ export class OverflowButton extends React.Component<Props> {
           getButtonElement={this.getOverflowButtonElement}
           onPress={this.showOverflowPopup}
           buttonWrapperStyle={[styles.icon, buttonWrapperStyle]}
-          testID={OVERFLOW_BUTTON_TEST_ID}
+          testID={testID || OVERFLOW_BUTTON_TEST_ID}
         />
       </View>
     );
