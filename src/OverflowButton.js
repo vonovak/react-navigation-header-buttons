@@ -19,12 +19,12 @@ export const IS_IOS = Platform.OS === 'ios';
 export type OverflowButtonProps = {
   OverflowIcon: React.Element<*>,
   onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<*>> }) => any,
-  testID?: string,
 };
 
 type Props = {
   hiddenButtons: Array<React.Element<*>>,
   buttonWrapperStyle?: ViewStyleProp,
+  testID?: string,
   ...$Exact<OverflowButtonProps>,
 };
 
