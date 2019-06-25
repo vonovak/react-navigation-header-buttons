@@ -32,7 +32,6 @@ export interface CommonHeaderButtonProps {
   buttonWrapperStyle?: ViewStyle;
   /**
    * ID to locate the view in e2e tests.
-   *
    */
   testID?: string;
   /**
@@ -74,7 +73,7 @@ export interface HeaderItemProps extends CommonHeaderButtonProps {
 
 export interface onOverflowMenuPressParams {
   hiddenButtons: Array<ReactNode>;
-  overflowButtonRef: View;
+  overflowButtonRef: ?View;
 }
 
 export interface HeaderButtonsProps {

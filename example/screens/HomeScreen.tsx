@@ -22,10 +22,10 @@ export class HomeScreen extends React.Component<ScreenProps> {
             onPress={() => this._navigateTo('UsageWithCustomOverflow')}
             title="Custom overflow menu action"
           />
-          <Button
+          {/* <Button
             onPress={() => this._navigateTo('UsageWithCustomOverflow2')}
             title="Overflow menu from react-native-paper"
-          />
+          /> */}
           <Button
             onPress={() => this._navigateTo('UsageCustomRipple')}
             title="Custom ripple (android only)"

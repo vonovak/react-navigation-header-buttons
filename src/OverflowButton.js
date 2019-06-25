@@ -31,7 +31,7 @@ export class OverflowButton extends React.Component<Props> {
     onOverflowMenuPress: defaultOnOverflowMenuPress,
   };
 
-  setOverflowRef = (ref: View) => {
+  setOverflowRef = (ref: ?View) => {
     this.overflowRef = ref;
   };
 

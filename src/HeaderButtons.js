@@ -16,7 +16,7 @@ type HeaderButtonsProps = {
   left: boolean,
   overflowButtonWrapperStyle?: ViewStyleProp,
   overflowButtonTestID?: string,
-  HeaderButtonComponent: React.ComponentType<*>,
+  HeaderButtonComponent: React.ComponentType<any>,
   ...$Exact<OverflowButtonProps>,
 };
 
@@ -57,7 +57,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
     return this.props.left ? styles.extraEdgeMarginOnLeft : styles.extraEdgeMarginOnRight;
   }
 
-  renderVisibleButtons(visibleButtons: Array<React.Element<*>>): Array<React.Element<*>> {
+  renderVisibleButtons(visibleButtons: Array<React.Element<any>>): Array<React.Element<any>> {
     return visibleButtons.map(btn => {
       const {
         props: { title },
