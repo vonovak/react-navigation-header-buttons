@@ -1,12 +1,12 @@
-//@flow
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import type ScreenProps from './index';
+import { View } from 'react-native';
+import ScreenProps from './index';
 import {
   HeaderButtons,
   HeaderButton,
   Item,
+  HiddenItem,
   defaultOnOverflowMenuPress,
 } from 'react-navigation-header-buttons';
 
@@ -31,6 +31,8 @@ export class UsageWithOverflow extends React.Component<ScreenProps> {
       >
         <Item title="person" iconName="person" onPress={() => alert('person')} />
         <Item title="edit" show="never" onPress={() => alert('edit')} />
+        {/* HiddenItem is the same as  show="never" for Item */}
+        <HiddenItem title="hidden" onPress={() => alert('hidden shortcut')} />
       </HeaderButtons>
     ),
   };

@@ -1,8 +1,7 @@
-//@flow
 import React from 'react';
-import { MaterialIcons, MaterialCommunityIcons, Entypo } from '@expo/vector-icons';
-import { StyleSheet, Text, View, Button } from 'react-native';
-import type ScreenProps from './index';
+import { MaterialIcons } from '@expo/vector-icons';
+import { View } from 'react-native';
+import ScreenProps from './index';
 import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
 import { connectActionSheet } from '@expo/react-native-action-sheet';
 

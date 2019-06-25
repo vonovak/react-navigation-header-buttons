@@ -7,7 +7,8 @@ export { UsageCustomRipple } from './UsageCustomRipple';
 export { UsageDifferentFontFamilies } from './UsageDifferentFontFamilies';
 export { HomeScreen } from './HomeScreen';
 export { UsageWithCustomOverflow } from './UsageCustomOverflow';
+export { UsageWithCustomOverflow2 } from './UsageCustomOverflow2';
 
-export type ScreenProps = {
-  navigation: any,
-};
+export default interface ScreenProps {
+  navigation: any;
+}

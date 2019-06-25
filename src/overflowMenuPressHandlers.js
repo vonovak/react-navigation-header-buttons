@@ -1,7 +1,13 @@
 // @flow
-import { Platform, ActionSheetIOS, UIManager, findNodeHandle } from 'react-native';
+import { Platform, ActionSheetIOS, UIManager, findNodeHandle, type View } from 'react-native';
+import * as React from 'react';
 
-const overflowMenuPressHandlerIOS = ({ hiddenButtons, cancelButtonLabel = 'cancel' }) => {
+type HiddenButtonsType = {| hiddenButtons: Array<React.Element<any>> |};
+
+const overflowMenuPressHandlerIOS = ({
+  hiddenButtons,
+  cancelButtonLabel = 'cancel',
+}: HiddenButtonsType & { cancelButtonLabel: string }) => {
   let actionTitles = hiddenButtons.map(btn => btn.props.title);
   actionTitles.push(cancelButtonLabel);
 
@@ -12,13 +18,16 @@ const overflowMenuPressHandlerIOS = ({ hiddenButtons, cancelButtonLabel = 'cance
     },
     (buttonIndex: number) => {
       if (buttonIndex !== actionTitles.length - 1) {
-        hiddenButtons[index].props.onPress();
+        hiddenButtons[buttonIndex].props.onPress();
       }
     }
   );
 };
 
-const overflowMenuPressHandlerAndroid = ({ hiddenButtons, overflowButtonRef }) => {
+const overflowMenuPressHandlerAndroid = ({
+  hiddenButtons,
+  overflowButtonRef,
+}: HiddenButtonsType & { overflowButtonRef: ?View }) => {
   UIManager.showPopupMenu(
     findNodeHandle(overflowButtonRef),
     hiddenButtons.map(btn => btn.props.title),

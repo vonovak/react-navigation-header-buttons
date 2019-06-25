@@ -6,28 +6,10 @@ import { HeaderButton, type HeaderButtonProps, type VisibleButtonProps } from '.
 import { StyleSheet, Platform, View, Text } from 'react-native';
 import { OverflowButton, type OverflowButtonProps } from './OverflowButton';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { Item } from './HeaderItems';
 
 const textTransformer = (label: string) =>
   Platform.OS === 'ios' ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
-
-type ItemProps = {
-  title: string,
-  show: string,
-  ...$Exact<HeaderButtonProps>,
-};
-
-// TODO check RTL
-export class Item extends React.Component<ItemProps> {
-  static SHOW_ALWAYS = 'always';
-  static SHOW_NEVER = 'never';
-
-  static defaultProps = {
-    show: 'always',
-  };
-  render() {
-    return null;
-  }
-}
 
 type HeaderButtonsProps = {
   children: React.Node,
