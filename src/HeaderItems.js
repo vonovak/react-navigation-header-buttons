@@ -32,12 +32,6 @@ export class HiddenItem extends React.Component<ItemProps> {
     show: SHOW_NEVER,
   };
 
-  static getDerivedStateFromProps(props: ItemProps) {
-    if (__DEV__ && props.show !== SHOW_NEVER) {
-      throw new Error('HiddenItem does not support "show" prop other than "SHOW_NEVER"');
-    }
-  }
-
   render() {
     return null;
   }
