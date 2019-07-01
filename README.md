@@ -4,7 +4,7 @@ This package will help you render buttons in the navigation bar and handle the s
 
 #### Demo App
 
-Contains many examples and is [available via expo](https://expo.io/@vonovak/navbar-buttons-demo). Sources are in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/navbar-buttons-demo).
+Contains many examples and is [available via expo](https://expo.io/@vonovak/navbar-buttons-demo). Sources are in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example).
 
 #### Install
 
@@ -83,7 +83,7 @@ The default handler for overflow menu is exported as `defaultOnOverflowMenuPress
 
 #### How to integrate in your project
 
-This sections covers how you should use the library in your project. Please note that there are numerous [example screens](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/navbar-buttons-demo/screens).
+This sections covers how you should use the library in your project. Please note that there are numerous [example screens](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/screens).
 
 1 . Define one file where the styling of header buttons is taken care of.
 
