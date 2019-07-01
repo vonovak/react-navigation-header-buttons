@@ -20,7 +20,7 @@ export class UsageCustomRipple extends React.Component<ScreenProps> {
     title: 'Ripple',
     headerRight: (
       <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
-        <Item title="search" iconName="ios-search" onPress={() => alert('search')} disabled />
+        <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
         <Item title="select" onPress={() => alert('select')} />
       </HeaderButtons>
     ),
