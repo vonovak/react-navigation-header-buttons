@@ -2,34 +2,34 @@
  * @flow
  */
 import * as React from 'react';
-import {
-  View,
-  UIManager,
-  findNodeHandle,
-  StyleSheet,
-  ActionSheetIOS,
-  Platform,
-} from 'react-native';
+import { View, StyleSheet, Platform } from 'react-native';
 import { HeaderButton, type VisibleButtonProps } from './HeaderButton';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
-export const OVERFLOW_BUTTON_TEST_ID = 'headerOverflowButton';
-
-export const IS_IOS = Platform.OS === 'ios';
+import { OVERFLOW_BUTTON_TEST_ID } from './e2e';
+import {
+  defaultOnOverflowMenuPress,
+  type OnOverflowMenuPressParams,
+} from './overflowMenuPressHandlers';
 
 export type OverflowButtonProps = {
-  OverflowIcon: React.Element<*>,
-  onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<*>> }) => any,
+  onOverflowMenuPress: OnOverflowMenuPressParams => any,
+  OverflowIcon: React.Element<any>,
 };
 
 type Props = {
-  hiddenButtons: Array<React.Element<*>>,
+  hiddenButtons: Array<React.Element<any>>,
   buttonWrapperStyle?: ViewStyleProp,
-  testID?: string,
+  testID: string,
   ...$Exact<OverflowButtonProps>,
 };
 
 export class OverflowButton extends React.Component<Props> {
   overflowRef: ?View;
+
+  static defaultProps = {
+    testID: OVERFLOW_BUTTON_TEST_ID,
+    onOverflowMenuPress: defaultOnOverflowMenuPress,
+  };
 
   setOverflowRef = (ref: ?View) => {
     this.overflowRef = ref;
@@ -46,7 +46,7 @@ export class OverflowButton extends React.Component<Props> {
           getButtonElement={this.getOverflowButtonElement}
           onPress={this.showOverflowPopup}
           buttonWrapperStyle={[styles.icon, buttonWrapperStyle]}
-          testID={testID || OVERFLOW_BUTTON_TEST_ID}
+          testID={testID}
         />
       </View>
     );
@@ -56,45 +56,8 @@ export class OverflowButton extends React.Component<Props> {
 
   showOverflowPopup = () => {
     const { onOverflowMenuPress, hiddenButtons } = this.props;
-    if (onOverflowMenuPress) {
-      onOverflowMenuPress({ hiddenButtons, overflowButtonRef: this.overflowRef });
-    } else {
-      IS_IOS ? this.showPopupIos() : this.showPopupAndroid();
-    }
+    onOverflowMenuPress({ hiddenButtons, overflowButtonRef: this.overflowRef });
   };
-
-  showPopupAndroid() {
-    UIManager.showPopupMenu(
-      findNodeHandle(this.overflowRef),
-      this.props.hiddenButtons.map(btn => btn.props.title),
-      err => {
-        console.debug(`overflowBtn error ${err}`);
-      },
-      this.onHiddenItemPress
-    );
-  }
-
-  onHiddenItemPress = (eventName: string, index: number) => {
-    if (eventName !== 'itemSelected') return;
-    this.props.hiddenButtons[index].props.onPress();
-  };
-
-  showPopupIos() {
-    let actionTitles = this.props.hiddenButtons.map(btn => btn.props.title);
-    actionTitles.push('cancel');
-
-    ActionSheetIOS.showActionSheetWithOptions(
-      {
-        options: actionTitles,
-        cancelButtonIndex: actionTitles.length - 1,
-      },
-      (buttonIndex: number) => {
-        if (buttonIndex !== actionTitles.length - 1) {
-          this.onHiddenItemPress('itemSelected', buttonIndex);
-        }
-      }
-    );
-  }
 }
 
 const styles = StyleSheet.create({

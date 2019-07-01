@@ -22,7 +22,7 @@ export type VisibleButtonProps = $Exact<{
   title: string,
   buttonStyle?: ViewStyleProp,
 
-  IconComponent?: React.ComponentType<*>,
+  IconComponent?: React.ComponentType<any>,
   iconSize?: number,
   color?: string,
 }>;

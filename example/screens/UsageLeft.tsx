@@ -1,9 +1,8 @@
-//@flow
 import React from 'react';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import { StyleSheet, Text, View } from 'react-native';
-import type ScreenProps from './index';
-import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
+import { MaterialIcons } from '@expo/vector-icons';
+import { View } from 'react-native';
+import ScreenProps from './index';
+import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
 import { Button } from './PaddedButton';
 
 const MaterialHeaderButton = props => (

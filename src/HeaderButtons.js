@@ -4,37 +4,19 @@
 import * as React from 'react';
 import { HeaderButton, type HeaderButtonProps, type VisibleButtonProps } from './HeaderButton';
 import { StyleSheet, Platform, View, Text } from 'react-native';
-import { OverflowButton, type OverflowButtonProps, IS_IOS } from './OverflowButton';
+import { OverflowButton, type OverflowButtonProps } from './OverflowButton';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { Item } from './HeaderItems';
 
 const textTransformer = (label: string) =>
-  IS_IOS ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
-
-type ItemProps = {
-  title: string,
-  show: string,
-  ...$Exact<HeaderButtonProps>,
-};
-
-// TODO check RTL
-export class Item extends React.Component<ItemProps> {
-  static SHOW_ALWAYS = 'always';
-  static SHOW_NEVER = 'never';
-
-  static defaultProps = {
-    show: 'always',
-  };
-  render() {
-    return null;
-  }
-}
+  Platform.OS === 'ios' ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
 
 type HeaderButtonsProps = {
   children: React.Node,
   left: boolean,
   overflowButtonWrapperStyle?: ViewStyleProp,
   overflowButtonTestID?: string,
-  HeaderButtonComponent: React.ComponentType<*>,
+  HeaderButtonComponent: React.ComponentType<any>,
   ...$Exact<OverflowButtonProps>,
 };
 
@@ -75,7 +57,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
     return this.props.left ? styles.extraEdgeMarginOnLeft : styles.extraEdgeMarginOnRight;
   }
 
-  renderVisibleButtons(visibleButtons: Array<React.Element<*>>): Array<React.Element<*>> {
+  renderVisibleButtons(visibleButtons: Array<React.Element<any>>): Array<React.Element<any>> {
     return visibleButtons.map(btn => {
       const {
         props: { title },

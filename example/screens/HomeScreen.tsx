@@ -1,15 +1,7 @@
-//@flow
 import React from 'react';
-import { Ionicons, MaterialIcons } from '@expo/vector-icons';
-import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
 import { Button } from './PaddedButton';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import type ScreenProps from './index';
-import HeaderButtons, { HeaderButton, Item } from 'react-navigation-header-buttons';
-
-const MultiFontFamilyHeaderButton = props => (
-  <HeaderButton {...props} IconComponent={props.MyIconComponent} iconSize={23} color="blue" />
-);
+import { ScreenProps } from 'react-navigation';
 
 export class HomeScreen extends React.Component<ScreenProps> {
   static navigationOptions = {
@@ -30,6 +22,10 @@ export class HomeScreen extends React.Component<ScreenProps> {
             onPress={() => this._navigateTo('UsageWithCustomOverflow')}
             title="Custom overflow menu action"
           />
+          {/* <Button
+            onPress={() => this._navigateTo('UsageWithCustomOverflow2')}
+            title="Overflow menu from react-native-paper"
+          /> */}
           <Button
             onPress={() => this._navigateTo('UsageCustomRipple')}
             title="Custom ripple (android only)"
@@ -49,7 +45,7 @@ export class HomeScreen extends React.Component<ScreenProps> {
     );
   }
 
-  _navigateTo = destinationScreen => {
+  _navigateTo = (destinationScreen: string) => {
     this.props.navigation.navigate(destinationScreen);
   };
 }
