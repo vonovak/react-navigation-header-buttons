@@ -2,12 +2,12 @@
 import * as React from 'react';
 import { type HeaderButtonProps } from './HeaderButton';
 
-const SHOW_ALWAYS = 'always';
-const SHOW_NEVER = 'never';
+const SHOW_ALWAYS: 'always' = 'always';
+const SHOW_NEVER: 'never' = 'never';
 
 export type ItemProps = {
   title: string,
-  show: SHOW_ALWAYS | SHOW_NEVER,
+  show: typeof SHOW_ALWAYS | typeof SHOW_NEVER,
   ...$Exact<HeaderButtonProps>,
 };
 

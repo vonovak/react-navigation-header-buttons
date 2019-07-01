@@ -6,18 +6,18 @@ import { View, StyleSheet, Platform } from 'react-native';
 import { HeaderButton, type VisibleButtonProps } from './HeaderButton';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { OVERFLOW_BUTTON_TEST_ID } from './e2e';
-import { defaultOnOverflowMenuPress } from './overflowMenuPressHandlers';
+import {
+  defaultOnOverflowMenuPress,
+  type OnOverflowMenuPressParams,
+} from './overflowMenuPressHandlers';
 
 export type OverflowButtonProps = {
-  OverflowIcon: React.Element<*>,
-  onOverflowMenuPress?: ({
-    hiddenButtons: Array<React.Element<*>>,
-    overflowButtonRef: View,
-  }) => any,
+  onOverflowMenuPress: OnOverflowMenuPressParams => any,
+  OverflowIcon: React.Element<any>,
 };
 
 type Props = {
-  hiddenButtons: Array<React.Element<*>>,
+  hiddenButtons: Array<React.Element<any>>,
   buttonWrapperStyle?: ViewStyleProp,
   testID: string,
   ...$Exact<OverflowButtonProps>,
