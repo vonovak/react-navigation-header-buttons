@@ -1,5 +1,5 @@
 import { Component, ComponentType, ReactNode } from 'react';
-import { TextStyle, ViewStyle, View } from 'react-native';
+import { TextStyle, ViewStyle, View, StyleProp } from 'react-native';
 
 export interface CommonHeaderButtonProps {
   /**
@@ -25,11 +25,11 @@ export interface CommonHeaderButtonProps {
   /**
    * Style to apply to the button (icon and text).
    */
-  buttonStyle?: TextStyle | ViewStyle;
+  buttonStyle?: StyleProp<TextStyle | ViewStyle>;
   /**
    * Style to apply to the touchable element that wraps the button.
    */
-  buttonWrapperStyle?: ViewStyle;
+  buttonWrapperStyle?: StyleProp<ViewStyle>;
   /**
    * ID to locate the view in e2e tests.
    */
@@ -73,8 +73,8 @@ export interface HeaderItemProps extends CommonHeaderButtonProps {
 
 export interface onOverflowMenuPressParams {
   hiddenButtons: Array<ReactNode>;
-  overflowButtonRef: ?View;
-  cancelButtonLabel: ?string;
+  overflowButtonRef?: View;
+  cancelButtonLabel?: string;
 }
 
 export interface HeaderButtonsProps {
@@ -102,7 +102,7 @@ export interface HeaderButtonsProps {
    *
    * There are some default styles set, as seen in `OverflowButton.js`
    */
-  overflowButtonWrapperStyle?: ViewStyle;
+  overflowButtonWrapperStyle?: StyleProp<ViewStyle>;
   /**
    * Function that is called when overflow menu is pressed.
    *
