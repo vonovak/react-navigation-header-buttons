@@ -121,3 +121,5 @@ export interface HeaderButtonsProps {
 declare class HeaderButtons extends Component<HeaderButtonsProps> {
   static Item: ComponentType<HeaderItemProps>;
 }
+
+declare class Item extends Component<HeaderItemProps> {}
