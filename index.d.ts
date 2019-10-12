@@ -124,4 +124,4 @@ declare class HeaderButtons extends Component<HeaderButtonsProps> {
 
 declare class Item extends Component<HeaderItemProps> {}
 
-declare class HiddenItem extends Item {}
+declare class HiddenItem extends Component<HeaderItemProps> {}
