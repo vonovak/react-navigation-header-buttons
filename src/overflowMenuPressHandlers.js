@@ -13,11 +13,13 @@ const overflowMenuPressHandlerIOS = ({
   cancelButtonLabel = 'cancel',
 }: OnOverflowMenuPressParams) => {
   let actionTitles = hiddenButtons.map(btn => btn.props.title);
+  let destructiveButtonIndex = hiddenButtons.findIndex(btn => btn.props.destructive)
   actionTitles.push(cancelButtonLabel);
 
   ActionSheetIOS.showActionSheetWithOptions(
     {
       options: actionTitles,
+      destructiveButtonIndex: destructiveButtonIndex,
       cancelButtonIndex: actionTitles.length - 1,
     },
     (buttonIndex: number) => {

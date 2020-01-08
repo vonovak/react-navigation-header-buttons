@@ -62,6 +62,7 @@ static navigationOptions = {
 | buttonStyle?: ViewStyleProp        | style to apply to the button                                                      | applies to both icon and text                                                                  |
 | buttonWrapperStyle?: ViewStyleProp | style to apply to the touchable element that wraps the button                     |                                                                                                |
 | testID?: string                    | ID to locate the view in e2e tests                                                |                                                                                                |
+| destructive?: boolean              | boolean specifying if this item is destructive (ios only)                         |                                                                                                |
 
 Note - as an alternative to `<Item title="edit" show={Item.SHOW_NEVER} onPress={...} />` you can also use `<HiddenItem title="edit" onPress={...} />`
 
