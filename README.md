@@ -77,9 +77,11 @@ You may also pass other props that will be passed to the underlying `react-nativ
 
 Please note that `HeaderButton` also requires other props to function correctly. Some of these props are passed from `<Item .. />` (such as `iconName`) and also `<HeaderButtons ... />`. When wrapping `HeaderButton` it is thus important to not forget to pass down all props the wrapping component receives (this is easy using the spread operator), as documented in the [quick example](#quick-example).
 
-#### Customize the cancel button label of overflow menu on iOS
+#### Customizing the overflow menu
 
-The default handler for overflow menu is exported as `defaultOnOverflowMenuPress`. On iOS, it uses `ActionSheetIOS` and on Android, it uses `UIManager.showPopupMenu`. One of the usual things you may want to do is override the cancel button label on iOS - see [example](example/screens/UsageWithOverflow.tsx).
+The default handler for overflow menu is exported as `defaultOnOverflowMenuPress`. On iOS, it uses `ActionSheetIOS` and on Android, it uses `UIManager.showPopupMenu`, see the [implementation](https://github.com/vonovak/react-navigation-header-buttons/blob/master/src/overflowMenuPressHandlers.js).
+
+One of the usual things you may want to do is override the cancel button label on iOS, or providing a `destructiveButtonIndex` - see [example](example/screens/UsageWithOverflow.tsx). Any prop you passed to `Item` is accessible in `onOverflowMenuPress` through the provided `hiddenButtons` parameter.
 
 #### How to integrate in your project
 
