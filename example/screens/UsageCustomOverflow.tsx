@@ -44,7 +44,7 @@ class RightHeaderButtons extends React.Component {
 export class UsageWithCustomOverflow extends React.Component<ScreenProps> {
   static navigationOptions = ({ navigation }) => ({
     title: 'Custom Overflow',
-    headerRight: <RightHeaderButtons />,
+    headerRight: () => <RightHeaderButtons />,
   });
 
   render() {

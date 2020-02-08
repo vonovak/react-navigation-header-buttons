@@ -11,7 +11,7 @@ const MultiFontFamilyHeaderButton = props => (
 export class UsageDifferentFontFamilies extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Font families',
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={MultiFontFamilyHeaderButton}>
         <Item
           title="settings-ion"

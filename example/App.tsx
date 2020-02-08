@@ -10,8 +10,10 @@ import {
   UsageWithCustomOverflow,
   UsageWithCustomOverflow2,
 } from './screens';
-import { createStackNavigator, createAppContainer } from 'react-navigation';
 import React from 'react';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
+
 
 // just for custom overflow menu onPress action
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';

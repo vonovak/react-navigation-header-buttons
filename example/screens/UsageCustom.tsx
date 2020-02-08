@@ -6,7 +6,7 @@ import ScreenProps from './index';
 export class UsageCustom extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Custom',
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons>
         <Item
           title="shifted"

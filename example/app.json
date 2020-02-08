@@ -1,13 +1,14 @@
 {
   "expo": {
-    "name": "navbar-buttons-demo",
-    "slug": "navbar-buttons-demo",
+    "name": "example",
+    "slug": "example",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
-    "packagerOpts": {
-      "config": "./metro.config.js"
-    },
-    "platforms": ["ios", "android", "web"],
+    "sdkVersion": "36.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -19,7 +20,9 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": ["**/*"],
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
       "supportsTablet": true
     }

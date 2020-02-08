@@ -18,7 +18,7 @@ const DisableableHeaderButton = props => (
 export class UsageCustomRipple extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Ripple',
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
         <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
         <Item title="select" onPress={() => alert('select')} />
