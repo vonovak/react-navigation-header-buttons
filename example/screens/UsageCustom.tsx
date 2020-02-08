@@ -1,29 +1,24 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, TouchableWithoutFeedback } from 'react-native';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import ScreenProps from './index';
 
-export class UsageCustom extends React.Component<ScreenProps> {
-  static navigationOptions = {
-    title: 'Custom',
-    headerRight: () => (
-      <HeaderButtons>
-        <Item
-          title="shifted"
-          buttonWrapperStyle={{ marginTop: 10 }}
-          onPress={() => alert('misaligned')}
-        />
-        <Item
-          title="add"
-          ButtonElement={<View style={{ height: 25, width: 25, backgroundColor: 'green' }} />}
-          buttonWrapperStyle={{ marginTop: -10 }}
-          onPress={() => alert('green square')}
-        />
-      </HeaderButtons>
-    ),
-  };
+export function UsageCustom({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons>
+          <Item
+            title="shifted"
+            buttonWrapperStyle={{ marginTop: 20 }}
+            onPress={() => alert('misaligned')}
+          />
+          <TouchableWithoutFeedback onPress={() => alert('green square')}>
+            <View style={{ height: 25, width: 25, backgroundColor: 'green' }} />
+          </TouchableWithoutFeedback>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
 
-  render() {
-    return <View />;
-  }
+  return <View style={{ flex: 1 }}></View>;
 }

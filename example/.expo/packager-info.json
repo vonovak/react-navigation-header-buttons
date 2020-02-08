@@ -1,9 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 5200,
-  "expoServerNgrokUrl": "https://up-n7i.cedule.example.exp.direct",
-  "packagerNgrokUrl": "https://packager.up-n7i.cedule.example.exp.direct",
-  "ngrokPid": 5238
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
+  "webpackServerPort": null
 }

@@ -1,23 +1,15 @@
-import { Component, ComponentType, ReactNode } from 'react';
+import { Component, ComponentType, ReactNode, ReactChild } from 'react';
 import { TextStyle, ViewStyle, View, StyleProp } from 'react-native';
 
 export interface CommonHeaderButtonProps {
   /**
    * Function to call on press.
-   *
-   * If this is a falsy value, the button won't react to touches.
    */
   onPress?: () => void;
   /**
    * Title for the button.
    */
   title: string;
-  /**
-   * Optional React element to show as button. Use this for completely custom buttons.
-   *
-   * If neither `IconComponent` nor this is defined, will render text with the `title`.
-   */
-  ButtonElement?: ReactNode;
   /**
    * Icon name, used together with the `IconComponent` property.
    */
@@ -34,6 +26,7 @@ export interface CommonHeaderButtonProps {
    * ID to locate the view in e2e tests.
    */
   testID?: string;
+  disabled?: boolean;
   /**
    * Support additional properties, but loses type checking.
    */
@@ -63,13 +56,7 @@ export interface HeaderButtonProps extends CommonHeaderButtonProps {
 export class HeaderButton extends Component<HeaderButtonProps> {}
 
 // From HeaderButtons.js as ItemProps
-export interface HeaderItemProps extends CommonHeaderButtonProps {
-  /**
-   * String specifying if the icon should be shown or hidden in overflow menu.
-   * @default "always"
-   */
-  show?: 'always' | 'never';
-}
+export interface HeaderItemProps extends CommonHeaderButtonProps {}
 
 export interface onOverflowMenuPressParams {
   hiddenButtons: Array<ReactNode>;
@@ -91,39 +78,39 @@ export interface HeaderButtonsProps {
    * However, you're free to use your own component (see `HeaderButton` for reference).
    */
   HeaderButtonComponent?: ComponentType<any>;
-  /**
-   * React element for the overflow icon.
-   *
-   * You need to provide this only if you need an overflow icon.
-   */
-  OverflowIcon?: ReactNode;
-  /**
-   * Optional styles for overflow button.
-   *
-   * There are some default styles set, as seen in `OverflowButton.js`
-   */
-  overflowButtonWrapperStyle?: StyleProp<ViewStyle>;
-  /**
-   * Function that is called when overflow menu is pressed.
-   *
-   * This will override the default handler.
-   */
-  onOverflowMenuPress?: (options: onOverflowMenuPressParams) => any;
-
-  /**
-   * ID to locate the overflow button in e2e tests.
-   *
-   * default `testID` of the overflow button is exported from `e2e.js`.
-   */
-  overflowButtonTestID?: string;
 }
 
-declare class HeaderButtons extends Component<HeaderButtonsProps> {
-  static Item: ComponentType<HeaderItemProps>;
-}
+declare class HeaderButtons extends Component<HeaderButtonsProps> {}
 
 declare class Item extends Component<HeaderItemProps> {}
 
 declare class HiddenItem extends Component<HeaderItemProps> {}
 
+declare class Divider extends Component<{
+  inset?: boolean;
+  style?: StyleProp<ViewStyle>;
+}> {}
+
+declare class OverflowMenu extends Component<{
+  children: ReactChild | Array<ReactNode>;
+  mode?: any;
+  onOverflowMenuPress?: (OnOverflowMenuPressParams) => any;
+  OverflowIcon: ReactNode;
+  buttonWrapperStyle?: StyleProp<ViewStyle>;
+  testID?: string;
+  accessibilityLabel?: string;
+}> {}
+
+declare class OverflowMenuProvider extends Component<{
+  children: ReactChild;
+  //children: JSX.Element;
+}> {}
+
 export function defaultOnOverflowMenuPress(parameter: onOverflowMenuPressParams): void;
+
+export enum modes {
+  DEFAULT = 'DEFAULT', // ios: action sheet, android & web: material dropdown menu
+  ALTERNATIVE = 'ALTERNATIVE', // ios: action sheet, android: native popup menu, web: dropdown menu
+  DROPDOWN_MENU = 'DROPDOWN_MENU', // material dropdown menu,
+  CUSTOM = 'CUSTOM', // developer can render whatever they want and need to provide onPress callback
+}

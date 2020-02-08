@@ -1,53 +1,60 @@
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
-import ScreenProps from './index';
-import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
+import {
+  HeaderButtons,
+  HeaderButton,
+  Item,
+  HiddenItem,
+  OverflowMenu,
+  modes,
+} from 'react-navigation-header-buttons';
 import { connectActionSheet } from '@expo/react-native-action-sheet';
 
-const MaterialHeaderButton = props => (
+const MaterialHeaderButton = (props) => (
   <HeaderButton {...props} IconComponent={MaterialIcons} iconSize={23} color="blue" />
 );
 
-@connectActionSheet
-class RightHeaderButtons extends React.Component {
-  render() {
-    return (
-      <HeaderButtons
-        HeaderButtonComponent={MaterialHeaderButton}
-        OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
-        onOverflowMenuPress={this._onOpenActionSheet}
-      >
-        <Item title="person" iconName="person" onPress={() => alert('person')} />
-        <Item title="edit" show="never" onPress={() => alert('edit')} />
-        <Item title="delete" show="never" onPress={() => alert('delete')} />
-      </HeaderButtons>
-    );
-  }
-  _onOpenActionSheet = ({ hiddenButtons }) => {
+function RightHeaderButtons(props) {
+  const _onOpenActionSheet = ({ hiddenButtons }) => {
     // Same interface as https://facebook.github.io/react-native/docs/actionsheetios.html
-    let options = hiddenButtons.map(it => it.props.title);
-    let destructiveButtonIndex = 1;
+    const options = hiddenButtons.map((it) => it.title);
+    const destructiveButtonIndex = 1;
 
-    this.props.showActionSheetWithOptions(
+    props.showActionSheetWithOptions(
       {
         options,
         destructiveButtonIndex,
       },
-      buttonIndex => {
-        hiddenButtons[buttonIndex].props.onPress();
+      (buttonIndex) => {
+        hiddenButtons[buttonIndex].onPress();
       }
     );
   };
+  return (
+    <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+      <Item title="person" iconName="person" onPress={() => alert('person')} />
+      <Item title="edit" show="never" onPress={() => alert('edit')} />
+      <OverflowMenu
+        OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
+        onOverflowMenuPress={_onOpenActionSheet}
+        mode={modes.CUSTOM}
+      >
+        <HiddenItem title="edit" onPress={() => alert('edit')} />
+        <HiddenItem title="delete" onPress={() => alert('delete')} />
+      </OverflowMenu>
+    </HeaderButtons>
+  );
 }
 
-export class UsageWithCustomOverflow extends React.Component<ScreenProps> {
-  static navigationOptions = ({ navigation }) => ({
-    title: 'Custom Overflow',
-    headerRight: () => <RightHeaderButtons />,
-  });
+const Connected = connectActionSheet(RightHeaderButtons);
 
-  render() {
-    return <View />;
-  }
+export function UsageWithCustomOverflow({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => <Connected />,
+    });
+  }, [navigation]);
+
+  return <View style={{ flex: 1 }}></View>;
 }

@@ -18,11 +18,10 @@ Please see also [how to integrate in your project](#how-to-integrate-in-your-pro
 import Icon from 'react-native-vector-icons/Ionicons';
 import { HeaderButtons, HeaderButton, Item, HiddenItem } from 'react-navigation-header-buttons';
 
-const IoniconsHeaderButton = passMeFurther => (
-  // the `passMeFurther` variable here contains props from <Item .../> as well as <HeaderButtons ... />
-  // and it is important to pass those props to `HeaderButton`
+const IoniconsHeaderButton = props => (
+  // it is important to pass `props` to `HeaderButton`
   // then you may add some information like icon size or color (if you use icons)
-  <HeaderButton {...passMeFurther} IconComponent={Ionicons} iconSize={23} color="blue" />
+  <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
 );
 
 static navigationOptions = {
@@ -31,7 +30,9 @@ static navigationOptions = {
     <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
       <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
       <Item title="select" onPress={() => alert('select')} />
-      <HiddenItem title="hidden in overflow menu" onPress={() => alert('hidden in overflow')} />
+      <HiddenItems>
+        <HiddenItem title="hidden in overflow menu" onPress={() => alert('hidden in overflow')} />
+      </HiddenItems>
     </HeaderButtons>
   ),
 };
@@ -52,16 +53,15 @@ static navigationOptions = {
 
 `Item` accepts:
 
-| prop and type                      | description                                                                       | note                                                                                           |
-| ---------------------------------- | --------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| onPress: ?() => any                | function to call on press                                                         | if this is a falsy value, the button won't react to touches (will be disabled)                 |
-| title: string                      | title for the button, required                                                    |                                                                                                |
-| show: "always" or "never"          | string specifying if the icon should be shown or hidden in overflow menu          | the strings are accessible under `Item.SHOW_ALWAYS` and `Item.SHOW_NEVER`. "always" by default |
-| ButtonElement?: React.Node         | optional React element to show as button. Use this for completely custom buttons. | if neither `IconComponent` nor `ButtonElement` is defined, will render text with the `title`   |
-| iconName?: string                  | icon name, used together with the `IconComponent` prop                            |                                                                                                |
-| buttonStyle?: ViewStyleProp        | style to apply to the button                                                      | applies to both icon and text                                                                  |
-| buttonWrapperStyle?: ViewStyleProp | style to apply to the touchable element that wraps the button                     |                                                                                                |
-| testID?: string                    | ID to locate the view in e2e tests                                                |                                                                                                |
+| prop and type                      | description                                                              | note                                                                                           |
+| ---------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
+| onPress: ?() => any                | function to call on press                                                | if this is a falsy value, the button won't react to touches (will be disabled)                 |
+| title: string                      | title for the button, required                                           |                                                                                                |
+| show: "always" or "never"          | string specifying if the icon should be shown or hidden in overflow menu | the strings are accessible under `Item.SHOW_ALWAYS` and `Item.SHOW_NEVER`. "always" by default |
+| iconName?: string                  | icon name, used together with the `IconComponent` prop                   |                                                                                                |
+| buttonStyle?: ViewStyleProp        | style to apply to the button                                             | applies to both icon and text                                                                  |
+| buttonWrapperStyle?: ViewStyleProp | style to apply to the touchable element that wraps the button            |                                                                                                |
+| testID?: string                    | ID to locate the view in e2e tests                                       |                                                                                                |
 
 Note - as an alternative to `<Item title="edit" show={Item.SHOW_NEVER} onPress={...} />` you can also use `<HiddenItem title="edit" onPress={...} />`
 

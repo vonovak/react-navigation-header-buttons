@@ -2,91 +2,101 @@
  * @flow
  */
 import * as React from 'react';
-const BUTTON_HIT_SLOP = { top: 5, bottom: 5, left: 5, right: 5 };
-import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, View, Platform, TouchableWithoutFeedback } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
 
-// from <Item />
-export type HeaderButtonProps = {
-  onPress: ?() => any,
-  buttonWrapperStyle?: ViewStyleProp,
-  ButtonElement?: React.Element<any>,
-  testID?: string,
-};
+const BUTTON_HIT_SLOP = Object.freeze({ top: 5, bottom: 5, left: 5, right: 5 });
 
-const useForeground = TouchableNativeFeedback.canUseNativeForeground();
-
-// props that pertain to styling of visible buttons
-// these are partially passed from <Item /> and partially supplied by you, the developer when you wrap <HeaderButton />
-export type VisibleButtonProps = $Exact<{
-  iconName?: string,
-  title: string,
-  buttonStyle?: ViewStyleProp,
-
+// for renderVisibleButton() function
+export type VisibleButtonProps = {|
   IconComponent?: React.ComponentType<any>,
   iconSize?: number,
   color?: string,
-}>;
+  iconName?: string,
+  title: string,
+  buttonStyle?: ViewStyleProp,
+|};
 
-type OtherProps = {
-  background: any,
-  getButtonElement: VisibleButtonProps => React.Element<any>,
-};
+// from <Item />
+export type ItemProps = {|
+  ...ViewProps,
+  ...VisibleButtonProps,
+  onPress: ?() => any,
+  buttonWrapperStyle?: ViewStyleProp,
+|};
 
-type Props = {
-  ...$Exact<HeaderButtonProps>,
-  ...$Exact<VisibleButtonProps>,
-  ...$Exact<OtherProps>,
-};
+export type HiddenItemProps = {|
+  ...$Exact<React.ElementConfig<typeof TouchableWithoutFeedback>>,
+  onPress: ?() => any,
+  title: string,
+|};
 
-export class HeaderButton extends React.PureComponent<Props> {
-  static defaultProps = {
-    background: Touchable.Ripple('rgba(0, 0, 0, .32)', true),
-  };
+type OtherProps = {|
+  background?: any,
+  foreground?: any,
+  renderButtonElement: (VisibleButtonProps) => React.Element<any>,
+|};
 
-  render() {
-    const {
-      onPress,
-      buttonWrapperStyle,
-      testID,
-      getButtonElement,
-      ButtonElement: ButtonElementOverride,
-      background,
-      iconName,
-      title,
-      buttonStyle,
-      IconComponent,
-      iconSize,
-      color,
-      ...other
-    } = this.props;
+export type HeaderButtonProps = {|
+  ...ItemProps,
+  ...VisibleButtonProps,
+  ...OtherProps,
+|};
 
-    const ButtonElement =
-      ButtonElementOverride ||
-      getButtonElement({ iconName, title, buttonStyle, IconComponent, iconSize, color });
+const ANDROID_VERSION_PIE = 28;
+// A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
+// https://github.com/facebook/react-native/issues/6480
+const useForeground = Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
+// this is where all the onPress, title and Icon props meet to render actual result
 
-    return (
-      <Touchable
-        useForeground={useForeground}
-        background={useForeground ? undefined : background}
-        foreground={useForeground ? background : undefined}
-        disabled={!onPress}
-        onPress={onPress}
-        hitSlop={BUTTON_HIT_SLOP}
-        style={[styles.buttonContainer, buttonWrapperStyle]}
-        testID={testID}
-        {...other}
-      >
-        <View>{ButtonElement}</View>
-      </Touchable>
-    );
-  }
+export function HeaderButton(props: HeaderButtonProps) {
+  const {
+    onPress,
+    buttonWrapperStyle,
+    renderButtonElement,
+    background,
+    iconName,
+    title,
+    buttonStyle,
+    IconComponent,
+    iconSize,
+    color,
+    ...other
+  } = props;
+
+  const ButtonElement = renderButtonElement({
+    iconName,
+    title,
+    buttonStyle,
+    IconComponent,
+    iconSize,
+    color,
+  });
+  return (
+    <Touchable
+      background={useForeground ? undefined : background}
+      foreground={useForeground ? background : undefined}
+      onPress={onPress}
+      hitSlop={BUTTON_HIT_SLOP}
+      style={[styles.buttonContainer, buttonWrapperStyle]}
+      {...other}
+    >
+      <View>{ButtonElement}</View>
+    </Touchable>
+  );
 }
+
+HeaderButton.defaultProps = {
+  background: Touchable.Ripple('rgba(0, 0, 0, .32)', true),
+};
 
 const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginHorizontal: 11,
+    backgroundColor: 'lightblue',
   },
 });

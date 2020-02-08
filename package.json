@@ -4,24 +4,42 @@
   "description": "Easily render header buttons for react-navigation.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest",
+    "lint": "eslint ./src",
+    "flow": "flow check"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vonovak/react-navigation-header-buttons.git"
   },
   "dependencies": {
+    "invariant": "^2.2.4",
     "react-native-platform-touchable": "^1.1.1"
   },
   "keywords": [
     "react-navigation",
     "header",
-    "navbar"
+    "navbar",
+    "header buttons"
   ],
   "author": "Vojtech Novak",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/vonovak/react-navigation-header-buttons/issues"
   },
-  "homepage": "https://github.com/vonovak/react-navigation-header-buttons#readme"
+  "homepage": "https://github.com/vonovak/react-navigation-header-buttons#readme",
+  "devDependencies": {
+    "@react-native-community/eslint-config": "^1.0.0",
+    "eslint": "^6.8.0",
+    "eslint-plugin-prettier": "^3.1.2",
+    "flow-bin": "0.105.2",
+    "jest": "^25.3.0",
+    "metro-react-native-babel-preset": "^0.58.0",
+    "prettier": "^2.0.2",
+    "react": "16.9.0",
+    "react-native": "0.61.5",
+    "react-native-testing-library": "^1.12.0",
+    "react-test-renderer": "16.9.0",
+    "typescript": "^3.8.3"
+  }
 }
