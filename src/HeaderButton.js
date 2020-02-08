@@ -3,7 +3,7 @@
  */
 import * as React from 'react';
 const BUTTON_HIT_SLOP = { top: 5, bottom: 5, left: 5, right: 5 };
-import { StyleSheet, View, Platform, TouchableNativeFeedback } from 'react-native';
+import { StyleSheet, View, TouchableNativeFeedback } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
@@ -15,7 +15,7 @@ export type HeaderButtonProps = {
   testID?: string,
 };
 
-const useForeground = Platform.OS === 'android' && TouchableNativeFeedback.canUseNativeForeground();
+const useForeground = TouchableNativeFeedback.canUseNativeForeground();
 
 // props that pertain to styling of visible buttons
 // these are partially passed from <Item /> and partially supplied by you, the developer when you wrap <HeaderButton />
