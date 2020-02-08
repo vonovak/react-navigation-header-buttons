@@ -3,10 +3,7 @@
     "name": "navbar-buttons-demo",
     "slug": "navbar-buttons-demo",
     "privacy": "public",
-    "sdkVersion": "33.0.0",
-    "packagerOpts": {
-      "config": "./metro.config.js"
-    },
+    "sdkVersion": "36.0.0",
     "platforms": ["ios", "android", "web"],
     "version": "1.0.0",
     "orientation": "portrait",

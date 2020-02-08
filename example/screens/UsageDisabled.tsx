@@ -18,7 +18,7 @@ const DisableableHeaderButton = props => (
 export class UsageDisabled extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Disableable',
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
         <Item title="search" iconName="ios-search" onPress={() => alert('search')} disabled />
         <Item title="select" onPress={() => alert('select')} />

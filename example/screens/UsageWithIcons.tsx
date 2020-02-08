@@ -13,7 +13,7 @@ const IoniconsHeaderButton = props => (
 export class UsageWithIcons extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Vector Icons',
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
         {/* use Item or HeaderButtons.Item */}
         <Item title="search" iconName="ios-search" onPress={() => alert('search')} />

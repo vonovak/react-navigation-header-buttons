@@ -12,7 +12,7 @@ const MaterialHeaderButton = props => (
 export class UsageLeft extends React.Component<ScreenProps> {
   static navigationOptions = ({ navigation, navigation: { state } }) => ({
     title: 'Usage Left',
-    headerLeft: (
+    headerLeft: () => (
       <HeaderButtons left HeaderButtonComponent={MaterialHeaderButton}>
         <Item
           title="Test"
@@ -21,7 +21,7 @@ export class UsageLeft extends React.Component<ScreenProps> {
         />
       </HeaderButtons>
     ),
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
         <Item title="back" onPress={() => navigation.goBack()} />
       </HeaderButtons>

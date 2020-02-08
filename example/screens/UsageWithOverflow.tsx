@@ -17,7 +17,7 @@ const MaterialHeaderButton = props => (
 export class UsageWithOverflow extends React.Component<ScreenProps> {
   static navigationOptions = {
     title: 'Usage With Overflow',
-    headerRight: (
+    headerRight: () => (
       <HeaderButtons
         HeaderButtonComponent={MaterialHeaderButton}
         OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
