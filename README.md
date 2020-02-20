@@ -49,6 +49,7 @@ static navigationOptions = {
 | overflowButtonWrapperStyle?: ViewStyleProp                                                           | optional styles for overflow button                           | there are some default styles set, as seen in `OverflowButton.js`                                                                                                                                                                    |
 | onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<any>>, overflowButtonRef: View }) => any | function that is called when overflow menu is pressed.        | This will override the default handler. Note the default handler offers (limited) customization. See more below.                                                                                                                     |
 | overflowButtonTestID?: string                                                                        | testID to locate the overflow button in e2e tests             | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`                                                                                                                       |
+| keyExtractor?: (item: HeaderButtonProps, index: number) => string | function that is called to determine the key of the children of HeaderButtons. | The default function uses the title prop as the key. `(item) => item.title,`
 
 `Item` accepts:
 
