@@ -16,6 +16,7 @@ type HeaderButtonsProps = {
   left: boolean,
   overflowButtonWrapperStyle?: ViewStyleProp,
   overflowButtonTestID?: string,
+  keyExtractor?: (item: any, index: number) => string,
   HeaderButtonComponent: React.ComponentType<any>,
   ...$Exact<OverflowButtonProps>,
 };
@@ -24,6 +25,7 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
   static Item = Item;
   static defaultProps = {
     left: false,
+    keyExtractor: (btn) => btn.title,
     HeaderButtonComponent: HeaderButton,
     OverflowIcon: <View />,
   };
@@ -58,15 +60,12 @@ export class HeaderButtons extends React.Component<HeaderButtonsProps> {
   }
 
   renderVisibleButtons(visibleButtons: Array<React.Element<any>>): Array<React.Element<any>> {
-    return visibleButtons.map(btn => {
-      const {
-        props: { title },
-      } = btn;
-
+    const { keyExtractor } = this.props;
+    return visibleButtons.map((btn, index) => {
       const RenderedHeaderButton = this.props.HeaderButtonComponent;
 
       return (
-        <RenderedHeaderButton key={title} {...btn.props} getButtonElement={renderVisibleButton} />
+        <RenderedHeaderButton key={keyExtractor(btn.props, index)} {...btn.props} getButtonElement={renderVisibleButton} />
       );
     });
   }
@@ -104,8 +103,8 @@ function renderVisibleButton(visibleButtonProps: VisibleButtonProps): React.Elem
       style={[styles.button, buttonStyle]}
     />
   ) : (
-    <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>
-  );
+      <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>
+    );
 }
 
 const styles = StyleSheet.create({
