@@ -16,7 +16,7 @@ Please see also [how to integrate in your project](#how-to-integrate-in-your-pro
 
 ```js
 import Icon from 'react-native-vector-icons/Ionicons';
-import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
+import { HeaderButtons, HeaderButton, Item, HiddenItem } from 'react-navigation-header-buttons';
 
 const IoniconsHeaderButton = passMeFurther => (
   // the `passMeFurther` variable here contains props from <Item .../> as well as <HeaderButtons ... />
