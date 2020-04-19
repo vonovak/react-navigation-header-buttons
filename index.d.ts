@@ -84,7 +84,14 @@ declare class HeaderButtons extends Component<HeaderButtonsProps> {}
 
 declare class Item extends Component<HeaderItemProps> {}
 
-declare class HiddenItem extends Component<HeaderItemProps> {}
+declare class HiddenItem extends Component<{
+  title: string;
+  icon?: ReactNode;
+  disabled?: boolean;
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<TextStyle>;
+}> {}
 
 declare class Divider extends Component<{
   inset?: boolean;

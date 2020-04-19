@@ -33,7 +33,11 @@ export function UsageWithOverflowComplex({ navigation }) {
           onPress={handlers[index]}
         >
           <View style={{ height: 10, width: 10, backgroundColor: 'orange' }} />
-          <ReusableItem title="hidden1" />
+          <HiddenItem
+            icon={<MaterialIcons name="search" size={23} />}
+            title="search"
+            onPress={() => alert('search')}
+          />
           <ReusableItem title="hidden2" disabled />
           <Divider />
           <ReusableItem title="hidden3" />

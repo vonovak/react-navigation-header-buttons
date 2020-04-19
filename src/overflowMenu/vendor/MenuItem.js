@@ -4,16 +4,16 @@ import { View, StyleSheet, Text, TouchableWithoutFeedback } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Touchable from 'react-native-platform-touchable';
 
-type Props = {|
+export type Props = {|
   ...$Exact<React.ElementConfig<typeof TouchableWithoutFeedback>>,
   /**
    * Title text for the `MenuItem`.
    */
-  title: React.Node | string,
+  title: string,
   /**
    * Icon to display for the `MenuItem`.
    */
-  icon?: React.Node,
+  icon?: ?React.Node,
   /**
    * Whether the 'item' is disabled. A disabled 'item' is greyed out and `onPress` is not called on touch.
    */
@@ -26,6 +26,7 @@ type Props = {|
    * @optional
    */
   style?: ViewStyleProp,
+  titleStyle?: ViewStyleProp,
 |};
 
 /**
@@ -35,7 +36,7 @@ const rippleConfig = Touchable.Ripple('rgba(0, 0, 0, .32)', false);
 
 export class MenuItem extends React.Component<Props> {
   render() {
-    const { icon, title, disabled, onPress, style } = this.props;
+    const { icon, title, disabled, onPress, style, titleStyle } = this.props;
 
     const titleColor = disabled ? styles.disabledColor : styles.normalColor;
 
@@ -53,10 +54,10 @@ export class MenuItem extends React.Component<Props> {
             </View>
           )}
           <View
-            style={[styles.item, styles.content, icon ? styles.widthWithIcon : null]}
+            style={[styles.item, styles.content, icon != null ? styles.widthWithIcon : undefined]}
             pointerEvents="none"
           >
-            <Text numberOfLines={1} style={[styles.title, titleColor]}>
+            <Text numberOfLines={1} style={[styles.title, titleColor, titleStyle]}>
               {title}
             </Text>
           </View>
@@ -68,13 +69,15 @@ export class MenuItem extends React.Component<Props> {
 
 const minWidth = 112;
 const maxWidth = 280;
-const iconWidth = 40;
+const iconWidth = 25;
 
 const styles = StyleSheet.create({
   container: {
-    padding: 8,
+    paddingHorizontal: 8,
     minWidth,
     maxWidth,
+    height: 48,
+    justifyContent: 'center',
   },
   row: {
     flexDirection: 'row',
@@ -86,7 +89,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   item: {
-    margin: 8,
+    marginHorizontal: 8,
   },
   content: {
     justifyContent: 'center',

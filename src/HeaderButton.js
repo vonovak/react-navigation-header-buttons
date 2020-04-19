@@ -2,10 +2,11 @@
  * @flow
  */
 import * as React from 'react';
-import { StyleSheet, View, Platform, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
+import { type Props as MenuItemProps } from './overflowMenu/vendor/MenuItem';
 
 const BUTTON_HIT_SLOP = Object.freeze({ top: 5, bottom: 5, left: 5, right: 5 });
 
@@ -27,11 +28,7 @@ export type ItemProps = {|
   buttonWrapperStyle?: ViewStyleProp,
 |};
 
-export type HiddenItemProps = {|
-  ...$Exact<React.ElementConfig<typeof TouchableWithoutFeedback>>,
-  onPress: ?() => any,
-  title: string,
-|};
+export type HiddenItemProps = MenuItemProps;
 
 type OtherProps = {|
   background?: any,
