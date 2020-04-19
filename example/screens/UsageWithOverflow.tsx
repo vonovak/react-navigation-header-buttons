@@ -20,7 +20,7 @@ const El = (
     <Item title="edit" show="never" onPress={() => alert('edit')} />
     <OverflowMenu
       OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
-      onOverflowMenuPress={(params) => {
+      onPress={(params) => {
         defaultOnOverflowMenuPress({
           ...params,
           cancelButtonLabel: 'cancel - custom iOS label!',

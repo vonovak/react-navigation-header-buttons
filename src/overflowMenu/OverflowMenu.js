@@ -14,11 +14,11 @@ import { OVERFLOW_BUTTON_TEST_ID } from '../e2e';
 
 export type OverflowMenuProps = {|
   children: React.Node,
-  onOverflowMenuPress: (OnOverflowMenuPressParams) => any,
   OverflowIcon: React.Element<any>,
   buttonWrapperStyle?: ViewStyleProp,
   testID: string,
   accessibilityLabel: string,
+  onPress: (OnOverflowMenuPressParams) => any,
 |};
 
 export const OverflowMenu = ({
@@ -27,24 +27,24 @@ export const OverflowMenu = ({
   accessibilityLabel,
   testID,
   buttonWrapperStyle,
-  onOverflowMenuPress,
+  onPress,
 }: OverflowMenuProps) => {
   const toggleMenu = React.useContext(OverflowMenuContext);
   const btnRef = React.useRef<View | null>(null);
   const renderButtonElement = React.useCallback(() => OverflowIcon, [OverflowIcon]);
 
-  const onPress = React.useCallback(() => {
+  const usedOnPress = React.useCallback(() => {
     const titlesAndOnPresses =
-      onOverflowMenuPress === overflowMenuPressHandlerDropdownMenu
+      onPress === overflowMenuPressHandlerDropdownMenu
         ? []
         : extractOverflowButtonData(React.Children.toArray(children));
-    onOverflowMenuPress({
+    onPress({
       children,
       hiddenButtons: titlesAndOnPresses,
       overflowButtonRef: btnRef.current,
       _private_toggleMenu: toggleMenu,
     });
-  }, [children, onOverflowMenuPress, toggleMenu]);
+  }, [children, onPress, toggleMenu]);
 
   return (
     <View ref={btnRef} collapsable={false}>
@@ -52,7 +52,7 @@ export const OverflowMenu = ({
         title="overflow menu"
         renderButtonElement={renderButtonElement}
         buttonWrapperStyle={[styles.icon, buttonWrapperStyle]}
-        onPress={onPress}
+        onPress={usedOnPress}
         accessibilityLabel={accessibilityLabel}
         testID={testID}
       />
@@ -63,7 +63,7 @@ export const OverflowMenu = ({
 OverflowMenu.defaultProps = {
   accessibilityLabel: 'More options',
   OverflowIcon: <View />,
-  onOverflowMenuPress: defaultOnOverflowMenuPress,
+  onPress: defaultOnOverflowMenuPress,
   testID: OVERFLOW_BUTTON_TEST_ID,
 };
 

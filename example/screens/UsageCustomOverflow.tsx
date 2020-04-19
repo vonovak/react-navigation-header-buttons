@@ -36,7 +36,7 @@ function RightHeaderButtons(props) {
       <Item title="edit" show="never" onPress={() => alert('edit')} />
       <OverflowMenu
         OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
-        onOverflowMenuPress={_onOpenActionSheet}
+        onPress={_onOpenActionSheet}
       >
         <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
         <HiddenItem title="delete" onPress={() => alert('delete')} />

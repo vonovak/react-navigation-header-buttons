@@ -30,7 +30,7 @@ export function UsageWithOverflowComplex({ navigation }) {
       headerRight: () => (
         <OverflowMenu
           OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
-          onOverflowMenuPress={handlers[index]}
+          onPress={handlers[index]}
         >
           <View style={{ height: 10, width: 10, backgroundColor: 'orange' }} />
           <ReusableItem title="hidden1" />

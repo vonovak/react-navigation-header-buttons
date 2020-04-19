@@ -93,7 +93,7 @@ declare class Divider extends Component<{
 
 declare class OverflowMenu extends Component<{
   children: ReactChild | Array<ReactNode>;
-  onOverflowMenuPress?: (OnOverflowMenuPressParams) => any;
+  onPress?: (OnOverflowMenuPressParams) => any;
   OverflowIcon: ReactNode;
   buttonWrapperStyle?: StyleProp<ViewStyle>;
   testID?: string;
