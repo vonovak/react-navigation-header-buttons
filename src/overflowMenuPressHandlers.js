@@ -2,12 +2,12 @@
 import * as React from 'react';
 import { Platform, ActionSheetIOS, UIManager, findNodeHandle, type View } from 'react-native';
 import { HiddenItem } from './HeaderItems';
+import invariant from 'invariant';
 
-type OverflowButtonDescriptors = Array<{
+type OverflowButtonDescriptors = $ReadOnlyArray<{|
   title: string,
   onPress: () => void | Promise<void>,
-  ...
-}>;
+|}>;
 
 export const extractOverflowButtonData = (
   hiddenButtons: Array<React.Element<any>>,
@@ -44,14 +44,21 @@ const extract = (element: React.Element<any>) => {
 
 export type OnOverflowMenuPressParams = {|
   hiddenButtons: OverflowButtonDescriptors,
+  _private_toggleMenu: ({ elements: React.ChildrenArray<any>, x: number, y: number }) => void,
   overflowButtonRef: null | View,
   cancelButtonLabel?: string,
+  children: React.Node,
 |};
+
+const checkParams = (hiddenButtons) => {
+  invariant(Array.isArray(hiddenButtons), 'hiddenButtons must be an array');
+};
 
 export const overflowMenuPressHandlerActionSheet = ({
   hiddenButtons,
   cancelButtonLabel = 'Cancel',
 }: OnOverflowMenuPressParams) => {
+  checkParams(hiddenButtons);
   let actionTitles = hiddenButtons.map((btn) => btn.title);
   actionTitles.unshift(cancelButtonLabel);
 
@@ -72,6 +79,8 @@ export const overflowMenuPressHandlerPopupMenu = ({
   hiddenButtons,
   overflowButtonRef,
 }: OnOverflowMenuPressParams) => {
+  checkParams(hiddenButtons);
+
   UIManager.showPopupMenu(
     findNodeHandle(overflowButtonRef),
     hiddenButtons.map((btn) => btn.title),
@@ -85,8 +94,21 @@ export const overflowMenuPressHandlerPopupMenu = ({
   );
 };
 
+export const overflowMenuPressHandlerDropdownMenu = ({
+  children,
+  overflowButtonRef,
+  _private_toggleMenu,
+}: OnOverflowMenuPressParams) => {
+  if (overflowButtonRef) {
+    overflowButtonRef.measureInWindow((x, y, width, height) => {
+      _private_toggleMenu({ elements: children, x: x + width, y: y + 24 });
+    });
+  } else {
+    // TODO ignore or show?
+  }
+};
+
 export const defaultOnOverflowMenuPress = Platform.select({
   ios: overflowMenuPressHandlerActionSheet,
-  android: overflowMenuPressHandlerPopupMenu,
-  default: (params: OnOverflowMenuPressParams) => {},
+  default: overflowMenuPressHandlerDropdownMenu,
 });

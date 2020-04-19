@@ -1,23 +1,36 @@
 import * as React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
 import { View, Text } from 'react-native';
-import { HiddenItem, OverflowMenu, Divider, modes } from 'react-navigation-header-buttons';
+import {
+  HiddenItem,
+  OverflowMenu,
+  Divider,
+  overflowMenuPressHandlerActionSheet,
+  overflowMenuPressHandlerPopupMenu,
+  overflowMenuPressHandlerDropdownMenu,
+} from 'react-navigation-header-buttons';
 import { Button } from './PaddedButton';
 
 const ReusableItem = ({ title, disabled = false }) => {
   return <HiddenItem title={title} disabled={disabled} onPress={() => alert(title)} />;
 };
 
+const handlers = [
+  overflowMenuPressHandlerActionSheet,
+  overflowMenuPressHandlerPopupMenu,
+  overflowMenuPressHandlerDropdownMenu,
+  console.warn,
+];
+
 export function UsageWithOverflowComplex({ navigation }) {
-  const [mode, setMode] = React.useState(modes.DEFAULT);
+  const [index, setIndex] = React.useState(0);
 
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
         <OverflowMenu
           OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
-          mode={mode}
-          onOverflowMenuPress={console.warn}
+          onOverflowMenuPress={handlers[index]}
         >
           <View style={{ height: 10, width: 10, backgroundColor: 'orange' }} />
           <ReusableItem title="hidden1" />
@@ -27,17 +40,15 @@ export function UsageWithOverflowComplex({ navigation }) {
         </OverflowMenu>
       ),
     });
-  }, [navigation, mode]);
+  }, [navigation, index]);
 
   return (
     <View style={{ flex: 1 }}>
-      <Text>mode behavior is platform-dependent</Text>
-      <Text>current mode: {mode}</Text>
+      <Text>behavior is platform-dependent</Text>
+      <Text>current mode: {handlers[index].name}</Text>
       <Button
         onPress={() => {
-          const valuesArray = Object.values(modes);
-          const index = valuesArray.indexOf(mode);
-          setMode(valuesArray[(index + 1) % valuesArray.length]);
+          setIndex((index + 1) % handlers.length);
         }}
         title="next overflow mode"
       />

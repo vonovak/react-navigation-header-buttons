@@ -1,13 +1,12 @@
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import {
   HeaderButtons,
   HeaderButton,
   Item,
   HiddenItem,
   OverflowMenu,
-  modes,
 } from 'react-navigation-header-buttons';
 import { connectActionSheet } from '@expo/react-native-action-sheet';
 
@@ -38,9 +37,8 @@ function RightHeaderButtons(props) {
       <OverflowMenu
         OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
         onOverflowMenuPress={_onOpenActionSheet}
-        mode={modes.CUSTOM}
       >
-        <HiddenItem title="edit" onPress={() => alert('edit')} />
+        <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
         <HiddenItem title="delete" onPress={() => alert('delete')} />
       </OverflowMenu>
     </HeaderButtons>
@@ -56,5 +54,9 @@ export function UsageWithCustomOverflow({ navigation }) {
     });
   }, [navigation]);
 
-  return <View style={{ flex: 1 }}></View>;
+  return (
+    <View style={{ flex: 1 }}>
+      <Text>custom sheet from @expo/react-native-action-sheet</Text>
+    </View>
+  );
 }

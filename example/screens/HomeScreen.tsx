@@ -24,7 +24,7 @@ export function HomeScreen({ navigation }) {
         />
         <Button
           onPress={() => _navigateTo('UsageWithOverflowComplex')}
-          title="Overflow menu complex"
+          title="Overflow menu - all handlers"
         />
         <Button
           onPress={() => _navigateTo('UsageCustomRipple')}

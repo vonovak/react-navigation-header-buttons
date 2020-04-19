@@ -93,7 +93,6 @@ declare class Divider extends Component<{
 
 declare class OverflowMenu extends Component<{
   children: ReactChild | Array<ReactNode>;
-  mode?: any;
   onOverflowMenuPress?: (OnOverflowMenuPressParams) => any;
   OverflowIcon: ReactNode;
   buttonWrapperStyle?: StyleProp<ViewStyle>;
@@ -107,10 +106,6 @@ declare class OverflowMenuProvider extends Component<{
 }> {}
 
 export function defaultOnOverflowMenuPress(parameter: onOverflowMenuPressParams): void;
-
-export enum modes {
-  DEFAULT = 'DEFAULT', // ios: action sheet, android & web: material dropdown menu
-  ALTERNATIVE = 'ALTERNATIVE', // ios: action sheet, android: native popup menu, web: dropdown menu
-  DROPDOWN_MENU = 'DROPDOWN_MENU', // material dropdown menu,
-  CUSTOM = 'CUSTOM', // developer can render whatever they want and need to provide onPress callback
-}
+export function overflowMenuPressHandlerActionSheet(parameter: onOverflowMenuPressParams): void;
+export function overflowMenuPressHandlerPopupMenu(parameter: onOverflowMenuPressParams): void;
+export function overflowMenuPressHandlerDropdownMenu(parameter: onOverflowMenuPressParams): void;

@@ -30,9 +30,8 @@ type Props = {|
 
 /**
  * A component to show a single list item inside a Menu.
- *
  */
-const rippleConfig = Touchable.Ripple('rgba(0, 0, 0, .32)', true);
+const rippleConfig = Touchable.Ripple('rgba(0, 0, 0, .32)', false);
 
 export class MenuItem extends React.Component<Props> {
   render() {
