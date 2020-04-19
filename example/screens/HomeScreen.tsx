@@ -6,6 +6,7 @@ export function HomeScreen({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Header Buttons demo',
+      headerLargeTitle: true,
     });
   }, [navigation]);
   const _navigateTo = (destinationScreen: string) => {

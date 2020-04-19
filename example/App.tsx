@@ -1,4 +1,7 @@
 import 'react-native-gesture-handler';
+import { enableScreens } from 'react-native-screens';
+
+enableScreens();
 import {
   UsageCustom,
   UsageWithIcons,
@@ -13,10 +16,12 @@ import {
 } from './screens';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
 import { OverflowMenuProvider } from 'react-navigation-header-buttons';
 // just for custom overflow menu onPress action
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+
+import { createStackNavigator } from '@react-navigation/stack';
+// import { createNativeStackNavigator as createStackNavigator } from 'react-native-screens/native-stack';
 
 const screens = {
   HomeScreen,
@@ -38,7 +43,13 @@ const Body = () => {
   return (
     <Stack.Navigator>
       {Object.values(screens).map((screen) => {
-        return <Stack.Screen name={screen.name} key={screen.name} component={screen} />;
+        return (
+          <Stack.Screen
+            name={screen.name}
+            key={screen.name}
+            component={screen}
+          />
+        );
       })}
     </Stack.Navigator>
   );

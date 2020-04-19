@@ -24,6 +24,7 @@ export function UsageWithIcons({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => El,
+      title: 'indeed a very, very, long title, and it actually does not stop here',
     });
   }, [navigation]);
 
