@@ -39,6 +39,7 @@ describe('OverflowMenuProvider renders', () => {
         <ButtonThatShowsMenu />
       </OverflowMenuProvider>
     );
+
     const beforeShown = toJSON();
     fireEvent.press(getByText(showMenuLabel));
     expect(toJSON()).toMatchSnapshot();

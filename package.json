@@ -13,7 +13,7 @@
     "url": "git+https://github.com/vonovak/react-navigation-header-buttons.git"
   },
   "dependencies": {
-    "invariant": "^2.2.4",
+    "invariant": ">=2",
     "react-native-platform-touchable": "^1.1.1"
   },
   "keywords": [

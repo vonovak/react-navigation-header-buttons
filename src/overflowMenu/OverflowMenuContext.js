@@ -11,8 +11,7 @@ type ToggleMenuParam = ?{|
 |};
 
 type Props = {|
-  // children: React.Element<any>,
-  childrn: React.Element<any>,
+  children: React.Element<any>,
 |};
 
 export const OverflowMenuProvider = ({ children }: Props) => {

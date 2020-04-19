@@ -5,13 +5,13 @@ import { fireEvent, render, flushMicrotasksQueue } from 'react-native-testing-li
 import { Text } from 'react-native';
 import React from 'react';
 
-const showNativeMenu = jest.fn().mockName('showNativeMenu');
-const toggleDropdownMenu = jest.fn().mockName('toggleDropdownMenu');
-const customOnPress = jest.fn().mockName('customOnPress');
-
 const { DEFAULT, ALTERNATIVE, DROPDOWN_MENU, CUSTOM } = modes;
 
 describe('overflow menu tests', () => {
+  const showNativeMenu = jest.fn().mockName('showNativeMenu');
+  const toggleDropdownMenu = jest.fn().mockName('toggleDropdownMenu');
+  const customOnPress = jest.fn().mockName('customOnPress');
+
   describe('getOnPressForMode', () => {
     it.each([
       ['android', DEFAULT, toggleDropdownMenu],

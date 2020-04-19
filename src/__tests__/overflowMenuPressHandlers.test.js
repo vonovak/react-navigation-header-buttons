@@ -55,7 +55,7 @@ describe('extractOverflowButtonData', () => {
     [null],
     [undefined],
     [[<HiddenItem title="disabled" onPress={jest.fn()} disabled />]],
-    [[<NestedHiddenItem title="disabled" onPress={jest.fn()} disabled />]],
+    [[<NestedHiddenItem />]],
   ])('extractOverflowButtonData works for case %#', (input) => {
     expect(extractOverflowButtonData(input)).toEqual([]);
   });

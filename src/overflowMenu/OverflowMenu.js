@@ -69,7 +69,7 @@ export const OverflowMenu = ({
   accessibilityLabel,
   testID,
   buttonWrapperStyle,
-  onOverflowMenuPress, //TODO test
+  onOverflowMenuPress,
 }: OverflowMenuProps) => {
   const toggleMenu = React.useContext(OverflowMenuContext);
   const btnRef = React.useRef<View | null>(null);
@@ -79,7 +79,8 @@ export const OverflowMenu = ({
       btnRef.current.measureInWindow((x, y, width, height) => {
         toggleMenu({ elements: children, x: x + width, y: y + 24 });
       });
-      // TODO else
+    } else {
+      // TODO ignore or show?
     }
   }, [children, toggleMenu]);
 
