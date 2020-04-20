@@ -40,7 +40,8 @@ export function UsageWithOverflowComplex({ navigation }) {
           />
           <ReusableItem title="hidden2" disabled />
           <Divider />
-          <ReusableItem title="hidden3" />
+          {/*Arrays as children also work*/}
+          {[<HiddenItem key="hidden3" title="hidden3" onPress={() => alert('hidden3')} />]}
         </OverflowMenu>
       ),
     });
