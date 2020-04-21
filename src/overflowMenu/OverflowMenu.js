@@ -35,9 +35,7 @@ export const OverflowMenu = ({
 
   const usedOnPress = React.useCallback(() => {
     const titlesAndOnPresses =
-      onPress === overflowMenuPressHandlerDropdownMenu
-        ? []
-        : extractOverflowButtonData(React.Children.toArray(children));
+      onPress === overflowMenuPressHandlerDropdownMenu ? [] : extractOverflowButtonData(children);
     onPress({
       children,
       hiddenButtons: titlesAndOnPresses,

@@ -78,9 +78,14 @@ describe('overflowMenuPressHandlers', () => {
     });
 
     it('ignores invalid / non-element values', () => {
-      // $FlowExpectedError
       const titlesAndOnPresses = extractOverflowButtonData([null, false, 'hello', 123]);
       expect(titlesAndOnPresses).toHaveLength(0);
+    });
+
+    it('works for single child element', () => {
+      const props = { title: 'one', onPress: jest.fn() };
+      expect(extractOverflowButtonData(<HiddenItem {...props} />)).toEqual([props]);
+      expect(extractOverflowButtonData(null)).toEqual([]);
     });
   });
 
