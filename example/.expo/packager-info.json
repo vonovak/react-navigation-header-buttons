@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": null,
-  "packagerPort": null,
-  "packagerPid": null,
-  "expoServerNgrokUrl": null,
-  "packagerNgrokUrl": null,
-  "ngrokPid": null,
+  "expoServerPort": 19000,
+  "packagerPort": 19001,
+  "packagerPid": 26855,
+  "expoServerNgrokUrl": "https://kw-ze9.anonymous.example.exp.direct",
+  "packagerNgrokUrl": "https://packager.kw-ze9.anonymous.example.exp.direct",
+  "ngrokPid": 26980,
   "webpackServerPort": null
 }

@@ -12,8 +12,7 @@ export function HiddenItem(props: HiddenItemProps) {
     <OverflowMenuContext.Consumer>
       {(toggleMenu) => {
         // when rendering dropdown menu (eg android default) the return value is actually rendered
-        // when we show action sheet, we do not use the returned value
-        debugger;
+        // when we show action sheet, we do not render the returned value, just extract title and onPress
         const onPressSafe = props.onPress || noop;
         const onPress = toggleMenu
           ? () => {
@@ -32,6 +31,7 @@ export function HiddenItem(props: HiddenItemProps) {
 export function Item(props: ItemProps) {
   const HeaderButtonComponent = React.useContext(HeaderButtonsContext);
   // HeaderButtonComponent knows iconSize, icon color and etc.
+  // Item itself will likely only have title and onPress
   return <HeaderButtonComponent {...props} renderButtonElement={renderVisibleButton} />;
 }
 
