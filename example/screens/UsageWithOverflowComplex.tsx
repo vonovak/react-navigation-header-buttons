@@ -38,10 +38,11 @@ export function UsageWithOverflowComplex({ navigation }) {
             title="search"
             onPress={() => alert('search')}
           />
-          <ReusableItem title="hidden2" disabled />
+          <ReusableItem title="hidden2" />
+          <ReusableItem title="hidden3" disabled />
           <Divider />
           {/*Arrays as children also work*/}
-          {[<HiddenItem key="hidden3" title="hidden3" onPress={() => alert('hidden3')} />]}
+          {[<HiddenItem key="hidden4" title="hidden4" onPress={() => alert('hidden4')} />]}
         </OverflowMenu>
       ),
     });

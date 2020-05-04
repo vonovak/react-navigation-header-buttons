@@ -6,25 +6,18 @@ import { Text, StyleSheet, Platform } from 'react-native';
 import { OverflowMenuContext } from './overflowMenu/OverflowMenuContext';
 import { MenuItem } from './overflowMenu/vendor/MenuItem';
 
-const noop = () => {};
 export function HiddenItem(props: HiddenItemProps) {
-  return (
-    <OverflowMenuContext.Consumer>
-      {(toggleMenu) => {
-        // when rendering dropdown menu (eg android default) the return value is actually rendered
-        // when we show action sheet, we do not render the returned value, just extract title and onPress
-        const onPressSafe = props.onPress || noop;
-        const onPress = toggleMenu
-          ? () => {
-              toggleMenu();
-              onPressSafe();
-            }
-          : onPressSafe;
+  const toggleMenu = React.useContext(OverflowMenuContext);
 
-        return <MenuItem {...props} onPress={onPress} />;
-      }}
-    </OverflowMenuContext.Consumer>
-  );
+  // when rendering dropdown menu (eg android default) the return value is actually rendered
+  // when we show action sheet, we do not render the returned value,
+  // but just extract title and onPress passed to HiddenItem. HiddenItem() is not called
+  const onPress = () => {
+    toggleMenu();
+    props.onPress && props.onPress();
+  };
+
+  return <MenuItem {...props} onPress={onPress} />;
 }
 
 // TODO check RTL
