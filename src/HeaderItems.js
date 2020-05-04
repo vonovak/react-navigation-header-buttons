@@ -32,7 +32,12 @@ export function renderVisibleButton(visibleButtonProps: VisibleButtonProps): Rea
   const { IconComponent, iconSize, color, iconName, title, buttonStyle } = visibleButtonProps;
 
   return IconComponent && iconName ? (
-    <IconComponent name={iconName} color={color} size={iconSize} style={buttonStyle} />
+    <IconComponent
+      name={iconName}
+      color={color}
+      size={iconSize}
+      style={[styles.button, buttonStyle]}
+    />
   ) : (
     <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>
   );
@@ -47,10 +52,15 @@ const styles = StyleSheet.create({
       android: {
         fontFamily: 'sans-serif-medium',
         fontSize: 14,
+        marginHorizontal: 11,
       },
       default: {
         fontSize: 17,
+        marginHorizontal: 10,
       },
     }),
+  },
+  button: {
+    marginHorizontal: 11,
   },
 });

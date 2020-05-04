@@ -93,7 +93,5 @@ const styles = StyleSheet.create({
   buttonContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginHorizontal: 11,
-    // backgroundColor: 'lightblue',
   },
 });
