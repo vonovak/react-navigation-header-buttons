@@ -6,6 +6,7 @@ import React from 'react';
 import { OverflowMenu } from '../OverflowMenu';
 import { overflowMenuPressHandlerDropdownMenu } from '../../overflowMenuPressHandlers';
 import { OverflowMenuProvider } from '../OverflowMenuContext';
+import { ButtonsWrapper } from '../../ButtonsWrapper';
 
 describe('overflowMenu', () => {
   it('onPress is given correct params when HiddenItem is a direct or indirect child', () => {
@@ -41,7 +42,7 @@ describe('overflowMenu', () => {
 
     const WrappedItem = () => <HiddenItem title="delete" onPress={deleteOnPress} />;
 
-    const { queryAllByText, getByA11yLabel, UNSAFE_getByProps } = render(
+    const { queryAllByText, getByA11yLabel, UNSAFE_getByType } = render(
       <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={overflowMenuPressHandlerDropdownMenu}>
         <HiddenItem icon={<Text>O</Text>} title="search" onPress={searchOnPress} />
         <HiddenItem title="search2" onPress={searchOnPress} disabled />
@@ -51,8 +52,8 @@ describe('overflowMenu', () => {
     );
     expect(queryAllByText('Search')).toHaveLength(0);
 
-    const menuAnchor = UNSAFE_getByProps({ collapsable: false });
-    menuAnchor.instance.measureInWindow = (callback) => {
+    const menuAnchor = UNSAFE_getByType(ButtonsWrapper);
+    menuAnchor.children[0].instance.measureInWindow = (callback) => {
       callback(0, 0, 100);
     };
     fireEvent.press(getByA11yLabel('More options'));

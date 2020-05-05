@@ -11,6 +11,7 @@ import { View, StyleSheet, Platform } from 'react-native';
 import { HeaderButton } from '../HeaderButton';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import { OVERFLOW_BUTTON_TEST_ID } from '../e2e';
+import { ButtonsWrapper } from '../ButtonsWrapper';
 
 export type OverflowMenuProps = {|
   children: React.Node,
@@ -19,6 +20,11 @@ export type OverflowMenuProps = {|
   testID: string,
   accessibilityLabel: string,
   onPress: (OnOverflowMenuPressParams) => any,
+  // boolean can be passed by user when OverflowMenu is rendered by itself
+  // and will render extra margins on the chosen side
+  // null is passed when OverflowMenu is rendered inside of HeaderButtons and means no extra margin
+  // this might be more complicated than needed but it's 1 am now :)
+  left: boolean | null,
 |};
 
 export const OverflowMenu = ({
@@ -28,6 +34,7 @@ export const OverflowMenu = ({
   testID,
   buttonWrapperStyle,
   onPress,
+  left,
 }: OverflowMenuProps) => {
   const toggleMenu = React.useContext(OverflowMenuContext);
   const btnRef = React.useRef<View | null>(null);
@@ -45,7 +52,7 @@ export const OverflowMenu = ({
   }, [children, onPress, toggleMenu]);
 
   return (
-    <View ref={btnRef} collapsable={false}>
+    <ButtonsWrapper ref={btnRef} collapsable={false} left={left}>
       <HeaderButton
         title="overflow menu"
         renderButtonElement={renderButtonElement}
@@ -54,7 +61,7 @@ export const OverflowMenu = ({
         accessibilityLabel={accessibilityLabel}
         testID={testID}
       />
-    </View>
+    </ButtonsWrapper>
   );
 };
 
@@ -63,11 +70,11 @@ OverflowMenu.defaultProps = {
   OverflowIcon: <View />,
   onPress: defaultOnOverflowMenuPress,
   testID: OVERFLOW_BUTTON_TEST_ID,
+  left: false, // this is needed for when OverflowMenu is rendered without HeaderButtons
 };
 
 const styles = StyleSheet.create({
   icon: {
-    marginTop: 2,
     ...Platform.select({
       android: {
         marginRight: 9,
