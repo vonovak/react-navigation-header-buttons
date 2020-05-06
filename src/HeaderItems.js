@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
-import { type ItemProps, type VisibleButtonProps, type HiddenItemProps } from './HeaderButton';
+import { type ItemProps, type VisibleButtonProps } from './HeaderButton';
+import { type Props as HiddenItemProps } from './overflowMenu/vendor/MenuItem';
 import { HeaderButtonsContext } from './HeaderButtonsContext';
 import { Text, StyleSheet, Platform } from 'react-native';
 import { OverflowMenuContext } from './overflowMenu/OverflowMenuContext';
@@ -36,7 +37,7 @@ export function renderVisibleButton(visibleButtonProps: VisibleButtonProps): Rea
       name={iconName}
       color={color}
       size={iconSize}
-      style={[styles.button, buttonStyle]}
+      style={StyleSheet.compose(styles.button, buttonStyle)}
     />
   ) : (
     <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>

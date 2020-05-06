@@ -1,11 +1,10 @@
 // @flow
 import * as React from 'react';
-import { View, StyleSheet, Text, TouchableWithoutFeedback } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import Touchable from 'react-native-platform-touchable';
 
 export type Props = {|
-  ...$Exact<React.ElementConfig<typeof TouchableWithoutFeedback>>,
   /**
    * Title text for the `MenuItem`.
    */
@@ -27,6 +26,10 @@ export type Props = {|
    */
   style?: ViewStyleProp,
   titleStyle?: ViewStyleProp,
+  /**
+   * TestID used for testing purposes
+   */
+  testID?: string,
 |};
 
 /**
@@ -36,7 +39,7 @@ const rippleConfig = Touchable.Ripple('rgba(0, 0, 0, .32)', false);
 
 export class MenuItem extends React.Component<Props> {
   render() {
-    const { icon, title, disabled, onPress, style, titleStyle } = this.props;
+    const { icon, title, disabled, onPress, style, titleStyle, testID } = this.props;
 
     const titleColor = disabled ? styles.disabledColor : styles.normalColor;
 
@@ -46,6 +49,7 @@ export class MenuItem extends React.Component<Props> {
         style={[styles.container, style]}
         onPress={onPress}
         disabled={disabled}
+        testID={testID}
       >
         <View style={styles.row}>
           {React.isValidElement(icon) && (

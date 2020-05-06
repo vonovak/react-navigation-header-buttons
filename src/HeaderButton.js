@@ -2,11 +2,9 @@
  * @flow
  */
 import * as React from 'react';
-import { StyleSheet, View, Platform } from 'react-native';
+import { StyleSheet, View, Platform, TouchableWithoutFeedback } from 'react-native';
 import Touchable from 'react-native-platform-touchable';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
-import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
-import { type Props as MenuItemProps } from './overflowMenu/vendor/MenuItem';
 
 const BUTTON_HIT_SLOP = Object.freeze({ top: 5, bottom: 5, left: 5, right: 5 });
 
@@ -22,13 +20,11 @@ export type VisibleButtonProps = {|
 
 // from <Item />
 export type ItemProps = {|
-  ...ViewProps,
+  ...$Exact<React.ElementConfig<typeof TouchableWithoutFeedback>>,
   ...VisibleButtonProps,
   onPress: ?() => any,
   style?: ViewStyleProp,
 |};
-
-export type HiddenItemProps = MenuItemProps;
 
 type OtherProps = {|
   background?: any,
@@ -38,14 +34,12 @@ type OtherProps = {|
 
 export type HeaderButtonProps = {|
   ...ItemProps,
-  ...VisibleButtonProps,
   ...OtherProps,
 |};
 
-const ANDROID_VERSION_PIE = 28;
 // A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
 // https://github.com/facebook/react-native/issues/6480
-const useForeground = Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_PIE;
+const useForeground = Platform.OS === 'android' && Platform.Version >= 28;
 // this is where all the onPress, title and Icon props meet to render actual result
 
 export function HeaderButton(props: HeaderButtonProps) {

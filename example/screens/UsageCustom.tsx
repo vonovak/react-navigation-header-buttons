@@ -7,11 +7,7 @@ export function UsageCustom({ navigation }) {
     navigation.setOptions({
       headerRight: () => (
         <HeaderButtons>
-          <Item
-            title="shifted"
-            buttonWrapperStyle={{ marginTop: 20 }}
-            onPress={() => alert('misaligned')}
-          />
+          <Item title="shifted" style={{ marginTop: 20 }} onPress={() => alert('misaligned')} />
           <TouchableWithoutFeedback onPress={() => alert('green square')}>
             <View style={{ height: 25, width: 25, backgroundColor: 'green' }} />
           </TouchableWithoutFeedback>

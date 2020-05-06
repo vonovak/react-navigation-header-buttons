@@ -12,46 +12,142 @@ Contains many examples and is [available via expo](https://expo.io/@vonovak/navb
 
 #### Quick Example
 
-<script src="https://gist.github.com/vonovak/9cff3c4eac029a0d10b252a75922fec5.js"></script>
+```js
+import React from 'react';
+import { Ionicons } from '@expo/vector-icons';
+import { Text } from 'react-native';
+import {
+  HeaderButtons,
+  HeaderButton,
+  Item,
+  HiddenItem,
+  OverflowMenu,
+} from 'react-navigation-header-buttons';
 
-### Props
+const IoniconsHeaderButton = (props) => (
+  // the `props` here come from <Item ... />
+  // you may access them and pass something else to `HeaderButton` if you like
+  <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
+);
+
+const ReusableSelectItem = () => <Item title="Edit" onPress={() => alert('Edit')} />;
+
+const ReusableHiddenItem = () => <HiddenItem title="hidden2" onPress={() => alert('hidden2')} />;
+
+export function UsageWithIcons({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      // in your app, extract the arrow function into a separate component
+      // to avoid creating a new one every time
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+          <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+          <ReusableSelectItem />
+          <OverflowMenu
+            style={{ marginHorizontal: 10 }}
+            OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
+          >
+            <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
+            <ReusableHiddenItem />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+
+  return <Text style={{ flex: 1 }}>body</Text>;
+}
+```
+
+### Usage
+
+#### `HeaderButtons`
+
+Is just a wrapper over all the visible header buttons (those can be text-buttons, icon-button, or any custom react elements).
+The only really interesting prop is `HeaderButtonComponent` that defines how all icons rendered in children will look.
+In particular, it allows setting their icon component, color, and size once so that you don't need to repeat it for each icon-button - but you can easily override those for each `Item` if you like.
 
 `HeaderButtons` accepts:
 
-| prop and type                                                                                        | description                                                   | note                                                                                                                                                                                                                                 |
-| ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| left: boolean                                                                                        | whether the `HeaderButtons` are on the left from header title | false by default, it just infulences styling                                                                                                                                                                                         |
-| HeaderButtonComponent: React.ComponentType<any>                                                      | component that renders the buttons                            | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). However, you're free to use your own component (see `HeaderButton` for reference). |
-| OverflowIcon?: React.Element<any>                                                                    | React element for the overflow icon                           | you need to provide this only if you need an overflow icon                                                                                                                                                                           |
-| overflowButtonWrapperStyle?: ViewStyleProp                                                           | optional styles for overflow button                           | there are some default styles set, as seen in `OverflowButton.js`                                                                                                                                                                    |
-| onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<any>>, overflowButtonRef: View }) => any | function that is called when overflow menu is pressed.        | This will override the default handler. Note the default handler offers (limited) customization. See more below.                                                                                                                     |
-| overflowButtonTestID?: string                                                                        | testID to locate the overflow button in e2e tests             | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`                                                                                                                       |
+| prop and type                                   | description                                                   | note                                                                                                                                                                                                                                 |
+| ----------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| HeaderButtonComponent: React.ComponentType<any> | component that renders the buttons                            | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). However, you're free to use your own component (see `HeaderButton` for reference). |
+| children: React.Node                            | whatever you want to render inside                            | typically `Item` or your component that renders `Item`, but it can be anything.                                                                                                                                                      |
+| left?: boolean                                  | whether the `HeaderButtons` are on the left from header title | false by default, it just influences styling                                                                                                                                                                                         |
+
+#### `Item`
+
+Simply renders text, or icon, and has an `onPress` handler. Take a look at the example to see how to use it.
 
 `Item` accepts:
 
-| prop and type                      | description                                                              | note                                                                                           |
-| ---------------------------------- | ------------------------------------------------------------------------ | ---------------------------------------------------------------------------------------------- |
-| onPress: ?() => any                | function to call on press                                                | if this is a falsy value, the button won't react to touches (will be disabled)                 |
-| title: string                      | title for the button, required                                           |                                                                                                |
-| show: "always" or "never"          | string specifying if the icon should be shown or hidden in overflow menu | the strings are accessible under `Item.SHOW_ALWAYS` and `Item.SHOW_NEVER`. "always" by default |
-| iconName?: string                  | icon name, used together with the `IconComponent` prop                   |                                                                                                |
-| buttonStyle?: ViewStyleProp        | style to apply to the button                                             | applies to both icon and text                                                                  |
-| buttonWrapperStyle?: ViewStyleProp | style to apply to the touchable element that wraps the button            |                                                                                                |
-| testID?: string                    | ID to locate the view in e2e tests                                       |                                                                                                |
+| prop and type               | description                                                                 | note                          |
+| --------------------------- | --------------------------------------------------------------------------- | ----------------------------- |
+| title: string               | title for the button, required                                              |                               |
+| onPress: ?() => any         | function to call on press                                                   |                               |
+| iconName?: string           | icon name, used together with the `IconComponent` prop                      |                               |
+| style?: ViewStyleProp       | style to apply to the touchable element that wraps the button               |                               |
+| buttonStyle?: ViewStyleProp | style to apply to the text / icon                                           | applies to both icon and text |
+| testID?: string             | testID to locate view in e2e tests                                          |                               |
+| ...TouchableProps           | whatever else you want to pass to the underlying touchable (eg. `disabled`) |                               |
 
-Note - as an alternative to `<Item title="edit" show={Item.SHOW_NEVER} onPress={...} />` you can also use `<HiddenItem title="edit" onPress={...} />`
+`Item` also accepts other props that you'll typically not need to pass because `HeaderButtonComponent` already knows them.
 
-`HeaderButton` accepts:
+| additional props and type                | description                                                                  | note |
+| ---------------------------------------- | ---------------------------------------------------------------------------- | ---- |
+| IconComponent?: React.ComponentType<any> | component to use for the icons, for example from `react-native-vector-icons` |      |
+| iconSize?: number                        | iconSize                                                                     |      |
+| color?: string                           | color of icons and buttons                                                   |      |
 
-| prop and type                           | description                                                                  | note |
-| --------------------------------------- | ---------------------------------------------------------------------------- | ---- |
-| IconComponent?: React.ComponentType<\*> | component to use for the icons, for example from `react-native-vector-icons` |      |
-| iconSize?: number                       | iconSize                                                                     |      |
-| color?: string                          | color of icons and buttons                                                   |      |
+#### `OverflowMenu`
 
-You may also pass other props that will be passed to the underlying `react-native-platform-touchable`. For example, pass [`background`](https://github.com/react-community/react-native-platform-touchable#additional-props-used-by-touchablenativefeedback--default-android) prop for different ripple effects.
+Is a place to define the behavior for overflow button (if there is one). Please note you can render `OverflowMenu` just by itself too, you do no need to wrap it in `HeaderButtons`.
+The most interesting prop is `onOverflowMenuPress` which handles what kind of overflow menu we should show.
 
-Please note that `HeaderButton` also requires other props to function correctly. Some of these props are passed from `<Item .. />` (such as `iconName`) and also `<HeaderButtons ... />`. When wrapping `HeaderButton` it is thus important to not forget to pass down all props the wrapping component receives (this is easy using the spread operator), as documented in the [quick example](#quick-example).
+The package exports common handlers you can use, but you can provide your own too:
+
+| exported handler                       | description                                                                                                                                                                                                                                                                                        |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `overflowMenuPressHandlerActionSheet`  | This is iOS-only: it displays overflow items in an `ActionSheetIOS`                                                                                                                                                                                                                                |
+| `overflowMenuPressHandlerPopupMenu`    | This is Android-only: it displays overflow items using `UIManager.showPopupMenu`                                                                                                                                                                                                                   |
+| `overflowMenuPressHandlerDropdownMenu` | Can be used in iOS, Android and Web. Displays overflow items in a material popup adapted from [react-native-paper](https://callstack.github.io/react-native-paper/menu.html), credit for amazing job goes to them. This `Menu` is bundled in this library (no dependency on `react-native-paper`). |
+| `defaultOnOverflowMenuPress`           | The default. Uses `overflowMenuPressHandlerActionSheet` on iOS, and `overflowMenuPressHandlerDropdownMenu` otherwise.                                                                                                                                                                              |
+
+`OverflowMenu` accepts:
+
+| prop and type                                                                                        | description                                                 | note                                                                                                             |
+| ---------------------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| OverflowIcon?: React.Element<any>                                                                    | React element for the overflow icon                         | you need to provide this only if you need an overflow icon                                                       |
+| style?: ViewStyleProp                                                                                | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.js`                                                |
+| onOverflowMenuPress?: ({ hiddenButtons: Array<React.Element<any>>, overflowButtonRef: View }) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more below. |
+| testID?: string                                                                                      | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`   |
+| accessibilityLabel?: string                                                                          |                                                             | 'More options' by default                                                                                        |
+| left?: boolean                                                                                       | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. Don't pass this if you passed it to `HeaderButtons`                |
+| children: React.Node                                                                                 | the overflow items                                          | typically `HiddenItem`, please read the note below                                                               |
+
+**important note**
+
+Children passed to `OverflowMenu` should be `HiddenItem`s or plain function components without hooks that return `HiddenItem`, as seen in the example above. Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` or `overflowMenuPressHandlerPopupMenu`.
+Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements. This limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
+
+#### `HiddenItem`
+
+`HiddenItem` accepts:
+
+| prop and type              | description                                                 | note |
+| -------------------------- | ----------------------------------------------------------- | ---- |
+| title: string              | title for the button, required                              |      |
+| style?: ViewStyleProp      | style to apply to the touchable element that wraps the text |      |
+| titleStyle?: ViewStyleProp | style to apply to the text                                  |      |
+| onPress: ?() => any        | function to call on press                                   |      |
+| testID?: string            | testID to locate view in e2e tests                          |      |
+
+#### `HeaderButton`
+
+You will typically not use `HeaderButton` directly. `HeaderButton` is where all the onPress, title and Icon-related props meet to render actual result.
+See the source if you want to customize it.
+
+### Recipes
 
 #### Customizing the overflow menu
 
@@ -78,15 +174,8 @@ const MaterialHeaderButton = (props) => (
 );
 
 export const MaterialHeaderButtons = (props) => {
-  return (
-    <HeaderButtons
-      HeaderButtonComponent={MaterialHeaderButton}
-      OverflowIcon={<MaterialIcons name="more-vert" size={23} color="white" />}
-      {...props}
-    />
-  );
+  return <HeaderButtons HeaderButtonComponent={MaterialHeaderButton} {...props} />;
 };
-export { Item } from 'react-navigation-header-buttons';
 ```
 
 2 . Import header buttons from the file defined previously.
@@ -98,7 +187,7 @@ import { MaterialHeaderButtons, Item } from './MyHeaderButtons'
 static navigationOptions = {
   title: 'Screen with header buttons',
   // use MaterialHeaderButtons with consistent styling across your app
-  headerRight: (
+  headerRight: () => (
     <MaterialHeaderButtons>
       <Item title="add" iconName="search" onPress={() => console.warn('add')} />
       <Item title="edit" onPress={() => console.warn('edit')} />
