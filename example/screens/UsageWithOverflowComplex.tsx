@@ -19,7 +19,9 @@ const handlers = [
   overflowMenuPressHandlerActionSheet,
   overflowMenuPressHandlerPopupMenu,
   overflowMenuPressHandlerDropdownMenu,
-  console.warn,
+  function custom(obj) {
+    console.warn(Object.keys(obj));
+  },
 ];
 
 export function UsageWithOverflowComplex({ navigation }) {
@@ -32,7 +34,6 @@ export function UsageWithOverflowComplex({ navigation }) {
           OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
           onPress={handlers[index]}
         >
-          <View style={{ height: 10, width: 10, backgroundColor: 'orange' }} />
           <HiddenItem
             icon={<MaterialIcons name="search" size={23} />}
             title="search"
@@ -43,6 +44,11 @@ export function UsageWithOverflowComplex({ navigation }) {
           <Divider />
           {/*Arrays as children also work*/}
           {[<HiddenItem key="hidden4" title="hidden4" onPress={() => alert('hidden4')} />]}
+          <View style={{ backgroundColor: 'orange', maxWidth: 200 }}>
+            <Text>
+              custom view that will only be considered for overflowMenuPressHandlerDropdownMenu
+            </Text>
+          </View>
         </OverflowMenu>
       ),
     });

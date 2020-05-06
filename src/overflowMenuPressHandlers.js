@@ -3,6 +3,7 @@ import * as React from 'react';
 import { Platform, ActionSheetIOS, UIManager, findNodeHandle, type View } from 'react-native';
 import { HiddenItem } from './HeaderItems';
 import invariant from 'invariant';
+import type { ToggleMenuParam } from './overflowMenu/OverflowMenuContext';
 
 type OverflowButtonDescriptors = $ReadOnlyArray<{|
   title: string,
@@ -41,7 +42,7 @@ const extract = (element: React.Element<any>) => {
 
 export type OnOverflowMenuPressParams = {|
   hiddenButtons: OverflowButtonDescriptors,
-  _private_toggleMenu: ({ elements: React.ChildrenArray<any>, x: number, y: number }) => void,
+  _private_toggleMenu: (ToggleMenuParam) => void,
   overflowButtonRef: null | View,
   cancelButtonLabel?: string,
   children: React.Node,
@@ -98,7 +99,7 @@ export const overflowMenuPressHandlerDropdownMenu = ({
 }: OnOverflowMenuPressParams) => {
   if (overflowButtonRef) {
     overflowButtonRef.measureInWindow((x, y, width, height) => {
-      _private_toggleMenu({ elements: children, x: x + width, y: y + 24 });
+      _private_toggleMenu({ elements: children, x: x + width, y });
     });
   } else {
     // TODO ignore or show?

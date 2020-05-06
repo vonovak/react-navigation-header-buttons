@@ -27,7 +27,7 @@ describe('OverflowMenuProvider renders', () => {
       return (
         <Text
           onPress={() => {
-            toggleMenu({ elements: [<Text key="1">{menuItemLabel}</Text>] });
+            toggleMenu({ elements: <Text key="1">{menuItemLabel}</Text>, x: 0, y: 0 });
           }}
         >
           {showMenuLabel}

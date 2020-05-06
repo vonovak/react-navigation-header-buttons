@@ -4,24 +4,17 @@ import { Platform, StyleSheet, View } from 'react-native';
 
 type Props = {|
   left: boolean | null,
-  collapsable?: boolean,
   children: React.Node,
 |};
 
-export const ButtonsWrapper = React.forwardRef<Props, View>(
-  ({ left, children, collapsable }: Props, ref) => {
-    const extraSideMargin = getMargin(left);
-    return (
-      <View
-        ref={ref}
-        style={StyleSheet.compose(styles.row, extraSideMargin)}
-        collapsable={collapsable}
-      >
-        {children}
-      </View>
-    );
-  }
-);
+export const ButtonsWrapper = ({ left, children }: Props) => {
+  const extraSideMargin = getMargin(left);
+  return (
+    <View style={StyleSheet.compose(styles.row, extraSideMargin)}>
+      {children}
+    </View>
+  );
+};
 
 const getMargin = (left) => {
   if (left === null) {

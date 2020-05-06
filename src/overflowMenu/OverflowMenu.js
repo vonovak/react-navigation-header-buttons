@@ -6,7 +6,7 @@ import {
   defaultOnOverflowMenuPress,
   type OnOverflowMenuPressParams,
 } from '../overflowMenuPressHandlers';
-import { OverflowMenuContext } from './OverflowMenuContext';
+import { OVERFLOW_TOP, OverflowMenuContext } from './OverflowMenuContext';
 import { View, StyleSheet, Platform } from 'react-native';
 import { HeaderButton } from '../HeaderButton';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
@@ -52,7 +52,8 @@ export const OverflowMenu = ({
   }, [children, onPress, toggleMenu]);
 
   return (
-    <ButtonsWrapper ref={btnRef} collapsable={false} left={left}>
+    <ButtonsWrapper left={left}>
+      <View ref={btnRef} collapsable={false} style={styles.overflowMenuView} />
       <HeaderButton
         title="overflow menu"
         renderButtonElement={renderButtonElement}
@@ -81,5 +82,15 @@ const styles = StyleSheet.create({
         marginLeft: 7,
       },
     }),
+  },
+  overflowMenuView: {
+    // these are really just needed bcs of the native android popup menu
+    position: 'absolute',
+    top: -OVERFLOW_TOP,
+    // TODO android actually has a little gap on the right of the menu
+    right: 0,
+    backgroundColor: 'transparent',
+    width: 1,
+    height: 1,
   },
 });

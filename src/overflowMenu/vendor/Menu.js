@@ -16,6 +16,8 @@ import {
 
 import type { ViewStyleProp as ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
 type LayoutRectangle = {| x: number, y: number, width: number, height: number |};
+
+// NOTE this is ignored in our case bcs of this.isAnchorCoord() condition
 const APPROX_STATUSBAR_HEIGHT = 25;
 
 type Props = {|

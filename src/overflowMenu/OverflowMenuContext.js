@@ -1,14 +1,21 @@
+// @flow
 import * as React from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import { Menu } from './vendor/Menu';
 
-export const OverflowMenuContext = React.createContext();
-
-type ToggleMenuParam = ?{|
-  elements: Array<React.Element<any>>,
+export type ToggleMenuParam = ?{|
+  elements: React.ChildrenArray<any>,
   x: number,
   y: number,
 |};
+
+export const OVERFLOW_TOP = 15;
+
+const noop = () => {
+  // this is here just to satisfy Flow, the noop value will be replaced
+  // by a Provider
+};
+export const OverflowMenuContext = React.createContext<(ToggleMenuParam) => void>(noop);
 
 type Props = {|
   children: React.Element<any>,
@@ -17,7 +24,7 @@ type Props = {|
 export const OverflowMenuProvider = ({ children }: Props) => {
   const [visible, setVisible] = React.useState(false);
   const [position, setPosition] = React.useState({ x: Dimensions.get('window').width - 10, y: 40 });
-  const [elements, setElements] = React.useState([]);
+  const [elements, setElements] = React.useState(null);
 
   const hideMenu = React.useCallback(() => {
     setVisible(false);
@@ -27,7 +34,13 @@ export const OverflowMenuProvider = ({ children }: Props) => {
     setVisible((prevVisible) => !prevVisible);
     setElements(params?.elements || []);
     if (params) {
-      setPosition({ x: params.x, y: params.y });
+      const { x, y } = params;
+      const approxAndroidStatusBarHeight = 25;
+      const extraDelta = Platform.select({
+        android: OVERFLOW_TOP + approxAndroidStatusBarHeight,
+        default: OVERFLOW_TOP,
+      });
+      setPosition({ x, y: y + extraDelta });
     }
   }, []);
 
