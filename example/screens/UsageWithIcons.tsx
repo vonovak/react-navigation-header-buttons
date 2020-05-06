@@ -40,5 +40,5 @@ export function UsageWithIcons({ navigation }) {
     });
   }, [navigation]);
 
-  return <Text style={{ flex: 1 }}>body</Text>;
+  return <Text style={{ flex: 1, margin: 20 }}>demo!</Text>;
 }
