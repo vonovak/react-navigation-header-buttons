@@ -14,6 +14,7 @@ export const extractOverflowButtonData = (
   hiddenButtons: React.Node,
   detectedElementTypes: Array<React.StatelessFunctionalComponent<any>> = [HiddenItem]
 ): OverflowButtonDescriptors => {
+  // TODO add error boundary
   // don't do this at home - this is not how React is meant to be used!
   const ret = React.Children.toArray(hiddenButtons).map((button) => {
     const { props, type } = button;

@@ -127,8 +127,17 @@ The package exports common handlers you can use, but you can provide your own to
 
 **important note**
 
-Children passed to `OverflowMenu` should be `HiddenItem`s or plain function components without hooks that return `HiddenItem`, as seen in the example above. Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` or `overflowMenuPressHandlerPopupMenu`.
-Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, such as `<Divider />` which is exported. This limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
+Children passed to `OverflowMenu` should be
+
+- either `HiddenItem`s
+- or plain function components without hooks that return `HiddenItem`, as seen in the example above.
+
+Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` or `overflowMenuPressHandlerPopupMenu`.
+Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, such as `<Divider />` (which is exported) or your custom ones.
+
+This limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
+
+
 
 #### `HiddenItem`
 
