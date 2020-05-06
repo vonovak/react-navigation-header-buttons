@@ -197,3 +197,11 @@ static navigationOptions = {
   ),
 };
 ```
+
+### Known issues
+
+- TS typings need improvement, plus I'd like to check their validity via the example project which is using TS. Please get in touch if you wanna help.
+- missing styling support for material dropdown menu
+- item margins need to be reviewed and polished
+- RTL is not tested
+- ripple effect on Android is not always the same size, this should be fixable in RN 63 [PR](https://github.com/facebook/react-native/pull/28009)
