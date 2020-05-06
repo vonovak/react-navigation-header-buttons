@@ -109,7 +109,6 @@ declare class OverflowMenu extends Component<{
 
 declare class OverflowMenuProvider extends Component<{
   children: ReactChild;
-  //children: JSX.Element;
 }> {}
 
 export function defaultOnOverflowMenuPress(parameter: onOverflowMenuPressParams): void;
