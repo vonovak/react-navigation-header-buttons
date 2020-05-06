@@ -82,7 +82,7 @@ In particular, it allows setting their icon component, color, and size once so t
 
 #### `Item`
 
-Simply renders text, or icon, and has an `onPress` handler. Take a look at the example to see how to use it.
+Renders text, or icon, and has an `onPress` handler. Take a look at the example to see how to use it.
 
 `Item` accepts:
 
@@ -128,7 +128,7 @@ The package exports common handlers you can use, but you can provide your own to
 | testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`   |
 | accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                        |
 | left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. Don't pass this if you passed it to `HeaderButtons`                |
-| children: React.Node                         | the overflow items                                          | typically `HiddenItem`, please read the note below                                                               |
+| children: React.Node                         | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                              |
 
 ##### Important note
 
@@ -137,22 +137,25 @@ Children passed to `OverflowMenu` should be
 - either `HiddenItem`s
 - or plain function components without hooks that return `HiddenItem`, as seen in the example above.
 
-Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` or `overflowMenuPressHandlerPopupMenu`.
+Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` and `overflowMenuPressHandlerPopupMenu`.
 Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, such as `<Divider />` (which is exported) or your custom ones.
 
-This limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`). It's possible there's some nicer way without these limitations - let me know ;)
+This limitation may look weird but exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
+It's possible there's some nicer way without these limitations - let me know ;)
 
 <details><summary>examples</summary>
 <p>
-  
-these will NOT work with `overflowMenuPressHandlerActionSheet` or `overflowMenuPressHandlerPopupMenu`:
 
-// WRONG! no hooks are allowed!
+Please see `UsageWithOverflowComplex.tsx` for valid examples!
+
+These will NOT work with `overflowMenuPressHandlerActionSheet` and `overflowMenuPressHandlerPopupMenu`:
+
+1) WRONG! no hooks are allowed!
 
 ```js
-function MyComponent({ title, onPress }) {
+function MyComponent({ title }) {
   const [titleFromState, setTitle] = React.useState('from state hook');
-  return <HiddenItem title={titleFromState + title} onPress={onPress} />;
+  return <HiddenItem title={titleFromState + title} onPress={() => alert('fail')} />;
 }
 
 <OverflowMenu OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}>
@@ -160,7 +163,7 @@ function MyComponent({ title, onPress }) {
 </OverflowMenu>;
 ```
 
-// WRONG! you can nest `HiddenItem` only once, not twice
+2) WRONG! you can nest `HiddenItem` only once, not twice
 
 ```js
 const HiddenItemWrapped = () => <HiddenItem title="hidden2" onPress={() => alert('hidden2')} />;
