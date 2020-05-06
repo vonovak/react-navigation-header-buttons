@@ -9,11 +9,7 @@ type Props = {|
 
 export const ButtonsWrapper = ({ left, children }: Props) => {
   const extraSideMargin = getMargin(left);
-  return (
-    <View style={StyleSheet.compose(styles.row, extraSideMargin)}>
-      {children}
-    </View>
-  );
+  return <View style={StyleSheet.compose(styles.row, extraSideMargin)}>{children}</View>;
 };
 
 const getMargin = (left) => {

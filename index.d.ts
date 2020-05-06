@@ -21,7 +21,7 @@ export interface CommonHeaderButtonProps {
   /**
    * Style to apply to the touchable element that wraps the button.
    */
-  buttonWrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   /**
    * ID to locate the view in e2e tests.
    */
@@ -102,7 +102,7 @@ declare class OverflowMenu extends Component<{
   children: ReactChild | Array<ReactNode>;
   onPress?: (OnOverflowMenuPressParams) => any;
   OverflowIcon: ReactNode;
-  buttonWrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   testID?: string;
   accessibilityLabel?: string;
 }> {}

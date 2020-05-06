@@ -16,7 +16,7 @@ import { ButtonsWrapper } from '../ButtonsWrapper';
 export type OverflowMenuProps = {|
   children: React.Node,
   OverflowIcon: React.Element<any>,
-  buttonWrapperStyle?: ViewStyleProp,
+  style?: ViewStyleProp,
   testID: string,
   accessibilityLabel: string,
   onPress: (OnOverflowMenuPressParams) => any,
@@ -32,7 +32,7 @@ export const OverflowMenu = ({
   OverflowIcon,
   accessibilityLabel,
   testID,
-  buttonWrapperStyle,
+  style,
   onPress,
   left,
 }: OverflowMenuProps) => {
@@ -57,7 +57,7 @@ export const OverflowMenu = ({
       <HeaderButton
         title="overflow menu"
         renderButtonElement={renderButtonElement}
-        buttonWrapperStyle={[styles.icon, buttonWrapperStyle]}
+        style={[styles.icon, style]}
         onPress={usedOnPress}
         accessibilityLabel={accessibilityLabel}
         testID={testID}

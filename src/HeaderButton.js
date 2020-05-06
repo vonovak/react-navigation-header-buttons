@@ -25,7 +25,7 @@ export type ItemProps = {|
   ...ViewProps,
   ...VisibleButtonProps,
   onPress: ?() => any,
-  buttonWrapperStyle?: ViewStyleProp,
+  style?: ViewStyleProp,
 |};
 
 export type HiddenItemProps = MenuItemProps;
@@ -51,7 +51,7 @@ const useForeground = Platform.OS === 'android' && Platform.Version >= ANDROID_V
 export function HeaderButton(props: HeaderButtonProps) {
   const {
     onPress,
-    buttonWrapperStyle,
+    style,
     renderButtonElement,
     background,
     iconName,
@@ -77,7 +77,7 @@ export function HeaderButton(props: HeaderButtonProps) {
       foreground={useForeground ? background : undefined}
       onPress={onPress}
       hitSlop={BUTTON_HIT_SLOP}
-      style={[styles.buttonContainer, buttonWrapperStyle]}
+      style={StyleSheet.compose(styles.buttonContainer, style)}
       {...other}
     >
       <View>{ButtonElement}</View>
