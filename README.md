@@ -1,10 +1,15 @@
 ## react-navigation-header-buttons
 
-This package will help you render buttons in the navigation bar and handle the styling so you don't have to. It tries to mimic the appearance of native navbar buttons and attempts to offer simple and flexible interface for you to interact with. Typed with Flow and ships with TS typings.
+This package will help you render buttons in the navigation bar and handle the styling so you don't have to. It tries to mimic the appearance of native navbar buttons and attempts to offer simple and flexible interface for you to interact with. Typed with Flow and ships with TS typings. Supports iOS and Android, web support is experimental.
 
 #### Demo App
 
 Contains many examples and is [available via expo](https://expo.io/@vonovak/navbar-buttons-demo). Sources are in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example). I highly recommend you check out both links to get a better idea of the api.
+
+<span>
+<img src="img/android.gif" height="450" />
+<img src="img/ios.gif" height="450" />
+</span>
 
 #### Install
 
@@ -125,7 +130,7 @@ The package exports common handlers you can use, but you can provide your own to
 | left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. Don't pass this if you passed it to `HeaderButtons`                |
 | children: React.Node                         | the overflow items                                          | typically `HiddenItem`, please read the note below                                                               |
 
-**important note**
+##### Important note
 
 Children passed to `OverflowMenu` should be
 
@@ -135,9 +140,39 @@ Children passed to `OverflowMenu` should be
 Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` or `overflowMenuPressHandlerPopupMenu`.
 Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, such as `<Divider />` (which is exported) or your custom ones.
 
-This limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
+This limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`). It's possible there's some nicer way without these limitations - let me know ;)
 
+<details><summary>examples</summary>
+<p>
+  
+these will NOT work with `overflowMenuPressHandlerActionSheet` or `overflowMenuPressHandlerPopupMenu`:
 
+// WRONG! no hooks are allowed!
+
+```js
+function MyComponent({ title, onPress }) {
+  const [titleFromState, setTitle] = React.useState('from state hook');
+  return <HiddenItem title={titleFromState + title} onPress={onPress} />;
+}
+
+<OverflowMenu OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}>
+  <MyComponent />
+</OverflowMenu>;
+```
+
+// WRONG! you can nest `HiddenItem` only once, not twice
+
+```js
+const HiddenItemWrapped = () => <HiddenItem title="hidden2" onPress={() => alert('hidden2')} />;
+const HiddenItemWrappedTwice = ()=> <HiddenItemWrapped />
+
+<OverflowMenu OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}>
+  <HiddenItemWrappedTwice />
+</OverflowMenu>;
+```
+
+</p>
+</details>
 
 #### `HiddenItem`
 
@@ -211,6 +246,6 @@ static navigationOptions = {
 
 - TS typings need improvement, plus I'd like to check their validity via the example project which is using TS. Please get in touch if you wanna help.
 - missing styling support for material dropdown menu
-- item margins need to be reviewed and polished
+- item margins need to be reviewed and polished; don't hesitate to contribute [this](https://github.com/infinitered/reactotron/blob/master/docs/plugin-overlay.md) should help
 - RTL is not tested
 - ripple effect on Android is not always the same size, this should be fixable in RN 63 [PR](https://github.com/facebook/react-native/pull/28009)
