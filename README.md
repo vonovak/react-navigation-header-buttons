@@ -4,7 +4,7 @@ This package will help you render buttons in the navigation bar and handle the s
 
 #### Demo App
 
-Contains many examples and is [available via expo](https://expo.io/@vonovak/navbar-buttons-demo). Sources are in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example).
+Contains many examples and is [available via expo](https://expo.io/@vonovak/navbar-buttons-demo). Sources are in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example). I highly recommend you check out both links to get a better idea of the api.
 
 #### Install
 
@@ -12,31 +12,7 @@ Contains many examples and is [available via expo](https://expo.io/@vonovak/navb
 
 #### Quick Example
 
-Please see also [how to integrate in your project](#how-to-integrate-in-your-project).
-
-```js
-import Icon from 'react-native-vector-icons/Ionicons';
-import { HeaderButtons, HeaderButton, Item, HiddenItem } from 'react-navigation-header-buttons';
-
-const IoniconsHeaderButton = props => (
-  // it is important to pass `props` to `HeaderButton`
-  // then you may add some information like icon size or color (if you use icons)
-  <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
-);
-
-static navigationOptions = {
-  title: 'Vector Icons',
-  headerRight: (
-    <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-      <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-      <Item title="select" onPress={() => alert('select')} />
-      <HiddenItems>
-        <HiddenItem title="hidden in overflow menu" onPress={() => alert('hidden in overflow')} />
-      </HiddenItems>
-    </HeaderButtons>
-  ),
-};
-```
+<script src="https://gist.github.com/vonovak/9cff3c4eac029a0d10b252a75922fec5.js"></script>
 
 ### Props
 
@@ -44,7 +20,7 @@ static navigationOptions = {
 
 | prop and type                                                                                        | description                                                   | note                                                                                                                                                                                                                                 |
 | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| left: boolean                                                                                        | whether the `HeaderButtons` are on the left from header title | false by default                                                                                                                                                                                                                     |
+| left: boolean                                                                                        | whether the `HeaderButtons` are on the left from header title | false by default, it just infulences styling                                                                                                                                                                                         |
 | HeaderButtonComponent: React.ComponentType<any>                                                      | component that renders the buttons                            | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). However, you're free to use your own component (see `HeaderButton` for reference). |
 | OverflowIcon?: React.Element<any>                                                                    | React element for the overflow icon                           | you need to provide this only if you need an overflow icon                                                                                                                                                                           |
 | overflowButtonWrapperStyle?: ViewStyleProp                                                           | optional styles for overflow button                           | there are some default styles set, as seen in `OverflowButton.js`                                                                                                                                                                    |
@@ -97,11 +73,11 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { HeaderButtons, HeaderButton } from 'react-navigation-header-buttons';
 
 // define IconComponent, color, sizes and OverflowIcon in one place
-const MaterialHeaderButton = props => (
+const MaterialHeaderButton = (props) => (
   <HeaderButton {...props} IconComponent={MaterialIcons} iconSize={23} color="blue" />
 );
 
-export const MaterialHeaderButtons = props => {
+export const MaterialHeaderButtons = (props) => {
   return (
     <HeaderButtons
       HeaderButtonComponent={MaterialHeaderButton}
