@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OverflowMenuProvider renders the child and the menu, when it is displayed by calling toggleMenu() provided by OverflowMenuContext 1`] = `
+Array [
+  <Text
+    onPress={[Function]}
+  >
+    show menu
+  </Text>,
+  <View
+    collapsable={false}
+    style={
+      Object {
+        "bottom": 0,
+        "left": 0,
+        "position": "absolute",
+        "right": 0,
+        "top": 0,
+      }
+    }
+  >
+    <View
+      accessible={true}
+      focusable={true}
+      onClick={[Function]}
+      onResponderGrant={[Function]}
+      onResponderMove={[Function]}
+      onResponderRelease={[Function]}
+      onResponderTerminate={[Function]}
+      onResponderTerminationRequest={[Function]}
+      onStartShouldSetResponder={[Function]}
+      style={
+        Object {
+          "bottom": 0,
+          "left": 0,
+          "position": "absolute",
+          "right": 0,
+          "top": 0,
+        }
+      }
+    />
+    <View
+      accessibilityViewIsModal={true}
+      collapsable={false}
+      pointerEvents="box-none"
+      style={
+        Array [
+          Object {
+            "position": "absolute",
+          },
+          Object {
+            "left": 8,
+            "top": 8,
+          },
+          undefined,
+        ]
+      }
+    >
+      <View
+        style={
+          Object {
+            "transform": Array [
+              Object {
+                "translateX": -0,
+              },
+              Object {
+                "translateY": -0,
+              },
+            ],
+          }
+        }
+      >
+        <View
+          style={
+            Object {
+              "backgroundColor": "white",
+              "borderRadius": 5,
+              "opacity": 0,
+              "paddingVertical": 8,
+              "shadowColor": "black",
+              "shadowOffset": Object {
+                "height": 7,
+                "width": 0,
+              },
+              "shadowOpacity": 0.24,
+              "shadowRadius": 8,
+              "transform": Array [
+                Object {
+                  "scaleX": 0,
+                },
+                Object {
+                  "scaleY": 0,
+                },
+              ],
+            }
+          }
+        >
+          <Text>
+            menu item
+          </Text>
+        </View>
+      </View>
+    </View>
+  </View>,
+]
+`;

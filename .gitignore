@@ -1,0 +1,18 @@
+# VSCode
+.vscode/
+jsconfig.json
+
+# IntelliJ/Webstorm
+.idea
+
+# NodeJS
+npm-debug.log
+node_modules
+dist
+yarn-error.log
+
+# OS X
+.DS_Store
+
+# Jest
+coverage

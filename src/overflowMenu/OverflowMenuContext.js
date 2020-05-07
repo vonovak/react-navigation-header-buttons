@@ -1,0 +1,55 @@
+// @flow
+import * as React from 'react';
+import { Dimensions, Platform } from 'react-native';
+import { Menu } from './vendor/Menu';
+
+export type ToggleMenuParam = ?{|
+  elements: React.ChildrenArray<any>,
+  x: number,
+  y: number,
+|};
+
+export const OVERFLOW_TOP = 15;
+
+const noop = () => {
+  // this is here just to satisfy Flow, the noop value will be replaced
+  // by a Provider
+};
+export const OverflowMenuContext = React.createContext<(ToggleMenuParam) => void>(noop);
+
+type Props = {|
+  children: React.Element<any>,
+|};
+
+export const OverflowMenuProvider = ({ children }: Props) => {
+  const [visible, setVisible] = React.useState(false);
+  const [position, setPosition] = React.useState({ x: Dimensions.get('window').width - 10, y: 40 });
+  const [elements, setElements] = React.useState(null);
+
+  const hideMenu = React.useCallback(() => {
+    setVisible(false);
+  }, []);
+
+  const toggleMenu = React.useCallback((params: ToggleMenuParam) => {
+    setVisible((prevVisible) => !prevVisible);
+    setElements(params?.elements || []);
+    if (params) {
+      const { x, y } = params;
+      const approxAndroidStatusBarHeight = 25;
+      const extraDelta = Platform.select({
+        android: OVERFLOW_TOP + approxAndroidStatusBarHeight,
+        default: OVERFLOW_TOP,
+      });
+      setPosition({ x, y: y + extraDelta });
+    }
+  }, []);
+
+  return (
+    <OverflowMenuContext.Provider value={toggleMenu}>
+      {React.Children.only(children)}
+      <Menu visible={visible} onDismiss={hideMenu} anchor={position}>
+        {elements}
+      </Menu>
+    </OverflowMenuContext.Provider>
+  );
+};

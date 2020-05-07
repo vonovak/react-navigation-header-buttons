@@ -1,23 +1,15 @@
-import { Component, ComponentType, ReactNode } from 'react';
+import { Component, ComponentType, ReactNode, ReactChild } from 'react';
 import { TextStyle, ViewStyle, View, StyleProp } from 'react-native';
 
 export interface CommonHeaderButtonProps {
   /**
    * Function to call on press.
-   *
-   * If this is a falsy value, the button won't react to touches.
    */
   onPress?: () => void;
   /**
    * Title for the button.
    */
   title: string;
-  /**
-   * Optional React element to show as button. Use this for completely custom buttons.
-   *
-   * If neither `IconComponent` nor this is defined, will render text with the `title`.
-   */
-  ButtonElement?: ReactNode;
   /**
    * Icon name, used together with the `IconComponent` property.
    */
@@ -29,15 +21,18 @@ export interface CommonHeaderButtonProps {
   /**
    * Style to apply to the touchable element that wraps the button.
    */
-  buttonWrapperStyle?: StyleProp<ViewStyle>;
+  style?: StyleProp<ViewStyle>;
   /**
    * ID to locate the view in e2e tests.
    */
   testID?: string;
+  disabled?: boolean;
   /**
    * Support additional properties, but loses type checking.
    */
-  [prop: string]: any;
+  // NOTE @vonovak disabled this for v4 because he's not sure this is right
+  // please open an issue if this is a problem
+  // [prop: string]: any;
 }
 
 // From HeaderButton.js
@@ -45,7 +40,7 @@ export interface HeaderButtonProps extends CommonHeaderButtonProps {
   /**
    * Component to use for the icons, for example from `react-native-vector-icons`.
    */
-  IconComponent?: ReactNode;
+  IconComponent?: ComponentType<any>;
   /**
    * Icon size.
    */
@@ -62,21 +57,6 @@ export interface HeaderButtonProps extends CommonHeaderButtonProps {
 
 export class HeaderButton extends Component<HeaderButtonProps> {}
 
-// From HeaderButtons.js as ItemProps
-export interface HeaderItemProps extends CommonHeaderButtonProps {
-  /**
-   * String specifying if the icon should be shown or hidden in overflow menu.
-   * @default "always"
-   */
-  show?: 'always' | 'never';
-}
-
-export interface onOverflowMenuPressParams {
-  hiddenButtons: Array<ReactNode>;
-  overflowButtonRef?: View;
-  cancelButtonLabel?: string;
-}
-
 export interface HeaderButtonsProps {
   /**
    * Whether the `HeaderButtons` are on the left from header title.
@@ -91,39 +71,49 @@ export interface HeaderButtonsProps {
    * However, you're free to use your own component (see `HeaderButton` for reference).
    */
   HeaderButtonComponent?: ComponentType<any>;
-  /**
-   * React element for the overflow icon.
-   *
-   * You need to provide this only if you need an overflow icon.
-   */
-  OverflowIcon?: ReactNode;
-  /**
-   * Optional styles for overflow button.
-   *
-   * There are some default styles set, as seen in `OverflowButton.js`
-   */
-  overflowButtonWrapperStyle?: StyleProp<ViewStyle>;
-  /**
-   * Function that is called when overflow menu is pressed.
-   *
-   * This will override the default handler.
-   */
-  onOverflowMenuPress?: (options: onOverflowMenuPressParams) => any;
-
-  /**
-   * ID to locate the overflow button in e2e tests.
-   *
-   * default `testID` of the overflow button is exported from `e2e.js`.
-   */
-  overflowButtonTestID?: string;
 }
 
-declare class HeaderButtons extends Component<HeaderButtonsProps> {
-  static Item: ComponentType<HeaderItemProps>;
-}
+declare class HeaderButtons extends Component<HeaderButtonsProps> {}
+
+// From HeaderButtons.js as ItemProps
+export interface HeaderItemProps extends HeaderButtonProps {}
 
 declare class Item extends Component<HeaderItemProps> {}
 
-declare class HiddenItem extends Component<HeaderItemProps> {}
+declare class HiddenItem extends Component<{
+  title: string;
+  icon?: ReactNode;
+  disabled?: boolean;
+  onPress?: () => void;
+  style?: StyleProp<ViewStyle>;
+  titleStyle?: StyleProp<TextStyle>;
+}> {}
 
-export function defaultOnOverflowMenuPress(parameter: onOverflowMenuPressParams): void;
+declare class Divider extends Component<{
+  inset?: boolean;
+  style?: StyleProp<ViewStyle>;
+}> {}
+
+declare class OverflowMenuProvider extends Component<{
+  children: ReactChild;
+}> {}
+
+export interface OnOverflowMenuPressParams {
+  hiddenButtons: Array<ReactNode>;
+  overflowButtonRef?: View;
+  cancelButtonLabel?: string;
+}
+
+declare class OverflowMenu extends Component<{
+  children: ReactChild | Array<ReactNode>;
+  onPress?: (OnOverflowMenuPressParams) => any;
+  OverflowIcon: ReactNode;
+  style?: StyleProp<ViewStyle>;
+  testID?: string;
+  accessibilityLabel?: string;
+}> {}
+
+export function defaultOnOverflowMenuPress(parameter: OnOverflowMenuPressParams): void;
+export function overflowMenuPressHandlerActionSheet(parameter: OnOverflowMenuPressParams): void;
+export function overflowMenuPressHandlerPopupMenu(parameter: OnOverflowMenuPressParams): void;
+export function overflowMenuPressHandlerDropdownMenu(parameter: OnOverflowMenuPressParams): void;

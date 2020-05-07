@@ -1,11 +1,10 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { View } from 'react-native';
-import ScreenProps from './index';
 import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
 import Touchable from 'react-native-platform-touchable';
 
-const DisableableHeaderButton = props => (
+const CustomRipple = (props) => (
   <HeaderButton
     {...props}
     background={Touchable.Ripple('red', true)}
@@ -15,18 +14,17 @@ const DisableableHeaderButton = props => (
   />
 );
 
-export class UsageCustomRipple extends React.Component<ScreenProps> {
-  static navigationOptions = {
-    title: 'Ripple',
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
-        <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-        <Item title="select" onPress={() => alert('select')} />
-      </HeaderButtons>
-    ),
-  };
+export function UsageCustomRipple({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={CustomRipple}>
+          <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+          <Item title="select" onPress={() => alert('select')} />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
 
-  render() {
-    return <View />;
-  }
+  return <View style={{ flex: 1 }}></View>;
 }

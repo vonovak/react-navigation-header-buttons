@@ -1,13 +1,13 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
 import { View } from 'react-native';
-import ScreenProps from './index';
 import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
 
-const DisableableHeaderButton = props => (
+const DisableableHeaderButton = (props) => (
   <HeaderButton
     {...props}
-    onPress={props.disabled ? undefined : props.onPress}
+    onPress={props.onPress}
+    disabled={props.disabled}
     buttonStyle={props.disabled ? { color: 'grey' } : undefined}
     IconComponent={Ionicons}
     iconSize={23}
@@ -15,18 +15,17 @@ const DisableableHeaderButton = props => (
   />
 );
 
-export class UsageDisabled extends React.Component<ScreenProps> {
-  static navigationOptions = {
-    title: 'Disableable',
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
-        <Item title="search" iconName="ios-search" onPress={() => alert('search')} disabled />
-        <Item title="select" onPress={() => alert('select')} />
-      </HeaderButtons>
-    ),
-  };
+export function UsageDisabled({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
+          <Item title="search" iconName="ios-search" onPress={() => alert('search')} disabled />
+          <Item title="select" onPress={() => alert('select')} />
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
 
-  render() {
-    return <View />;
-  }
+  return <View style={{ flex: 1 }}></View>;
 }

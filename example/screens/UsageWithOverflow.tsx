@@ -1,43 +1,48 @@
 import React from 'react';
 import { MaterialIcons } from '@expo/vector-icons';
-import { View } from 'react-native';
-import ScreenProps from './index';
+import { View, Text } from 'react-native';
 import {
   HeaderButtons,
   HeaderButton,
   Item,
   HiddenItem,
+  OverflowMenu,
   defaultOnOverflowMenuPress,
 } from 'react-navigation-header-buttons';
 
-const MaterialHeaderButton = props => (
+const MaterialHeaderButton = (props) => (
   <HeaderButton {...props} IconComponent={MaterialIcons} iconSize={23} color="blue" />
 );
 
-export class UsageWithOverflow extends React.Component<ScreenProps> {
-  static navigationOptions = {
-    title: 'Usage With Overflow',
-    headerRight: () => (
-      <HeaderButtons
-        HeaderButtonComponent={MaterialHeaderButton}
-        OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
-        onOverflowMenuPress={({ overflowButtonRef, hiddenButtons }) =>
-          defaultOnOverflowMenuPress({
-            overflowButtonRef,
-            hiddenButtons,
-            cancelButtonLabel: 'cancel - custom iOS label!',
-          })
-        }
-      >
-        <Item title="person" iconName="person" onPress={() => alert('person')} />
-        <Item title="edit" show="never" onPress={() => alert('edit')} />
-        {/* HiddenItem is the same as  show="never" for Item */}
-        <HiddenItem title="hidden" onPress={() => alert('hidden shortcut')} />
-      </HeaderButtons>
-    ),
-  };
+const RightHeader = () => (
+  <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+    <Item title="person" iconName="person" onPress={() => alert('person')} />
+    <Item title="edit" onPress={() => alert('edit')} />
+    <OverflowMenu
+      OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
+      onPress={(params) => {
+        defaultOnOverflowMenuPress({
+          ...params,
+          cancelButtonLabel: 'cancel - custom iOS label!',
+        });
+      }}
+    >
+      <HiddenItem title="hidden" onPress={() => alert('hidden shortcut')} />
+    </OverflowMenu>
+  </HeaderButtons>
+);
 
-  render() {
-    return <View />;
-  }
+export function UsageWithOverflow({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: RightHeader,
+      // title: 'sfhdskjfh kjsahfkjsahf skjfh askjfhaskjhf sakfhask ',
+    });
+  }, [navigation]);
+
+  return (
+    <View style={{ flex: 1 }}>
+      <Text>default overflow menu handler with custom cancel label</Text>
+    </View>
+  );
 }

@@ -1,40 +1,44 @@
 import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { View } from 'react-native';
-import ScreenProps from './index';
-import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
+import { Text } from 'react-native';
+import {
+  HeaderButtons,
+  HeaderButton,
+  Item,
+  HiddenItem,
+  OverflowMenu,
+} from 'react-navigation-header-buttons';
 
-const IoniconsHeaderButton = props => (
-  // the `props` here come from <Item .../>
+const IoniconsHeaderButton = (props) => (
+  // the `props` here come from <Item ... />
   // you may access them and pass something else to `HeaderButton` if you like
   <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
 );
 
-export class UsageWithIcons extends React.Component<ScreenProps> {
-  static navigationOptions = {
-    title: 'Vector Icons',
-    headerRight: () => (
-      <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-        {/* use Item or HeaderButtons.Item */}
-        <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-        <HeaderButtons.Item title="select" onPress={() => alert('select')} />
-      </HeaderButtons>
-    ),
-  };
+const ReusableSelectItem = () => <Item title="Edit" onPress={() => alert('Edit')} />;
 
-  render() {
-    return (
-      <View>
-        {/* <Icon.ToolbarAndroid
-          style={{ height: 56, backgroundColor: 'grey' }}
-          actions={[
-            // { title: 'One', show: 'always' },
-            { title: 'edit', show: 'always' },
-            { title: 'add', show: 'always', iconName: 'ios-add' },
-            // { title: 'Two', show: 'never',  },
-          ]}
-        /> */}
-      </View>
-    );
-  }
+const ReusableHiddenItem = () => <HiddenItem title="hidden2" onPress={() => alert('hidden2')} />;
+
+export function UsageWithIcons({ navigation }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({
+      // in your app, extract the arrow function into a separate component
+      // to avoid creating a new one every time
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+          <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+          <ReusableSelectItem />
+          <OverflowMenu
+            style={{ marginHorizontal: 10 }}
+            OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
+          >
+            <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
+            <ReusableHiddenItem />
+          </OverflowMenu>
+        </HeaderButtons>
+      ),
+    });
+  }, [navigation]);
+
+  return <Text style={{ flex: 1, margin: 20 }}>demo!</Text>;
 }
