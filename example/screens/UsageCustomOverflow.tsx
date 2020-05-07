@@ -33,7 +33,7 @@ function RightHeaderButtons(props) {
   return (
     <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
       <Item title="person" iconName="person" onPress={() => alert('person')} />
-      <Item title="edit" show="never" onPress={() => alert('edit')} />
+      <Item title="edit" onPress={() => alert('edit')} />
       <OverflowMenu
         OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
         onPress={_onOpenActionSheet}

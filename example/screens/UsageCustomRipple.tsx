@@ -4,7 +4,7 @@ import { View } from 'react-native';
 import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
 import Touchable from 'react-native-platform-touchable';
 
-const DisableableHeaderButton = (props) => (
+const CustomRipple = (props) => (
   <HeaderButton
     {...props}
     background={Touchable.Ripple('red', true)}
@@ -18,7 +18,7 @@ export function UsageCustomRipple({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
+        <HeaderButtons HeaderButtonComponent={CustomRipple}>
           <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
           <Item title="select" onPress={() => alert('select')} />
         </HeaderButtons>

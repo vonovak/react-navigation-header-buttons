@@ -30,7 +30,9 @@ export interface CommonHeaderButtonProps {
   /**
    * Support additional properties, but loses type checking.
    */
-  [prop: string]: any;
+  // NOTE @vonovak disabled this for v4 because he's not sure this is right
+  // please open an issue if this is a problem
+  // [prop: string]: any;
 }
 
 // From HeaderButton.js
@@ -38,7 +40,7 @@ export interface HeaderButtonProps extends CommonHeaderButtonProps {
   /**
    * Component to use for the icons, for example from `react-native-vector-icons`.
    */
-  IconComponent?: ReactNode;
+  IconComponent?: ComponentType<any>;
   /**
    * Icon size.
    */
@@ -54,15 +56,6 @@ export interface HeaderButtonProps extends CommonHeaderButtonProps {
 }
 
 export class HeaderButton extends Component<HeaderButtonProps> {}
-
-// From HeaderButtons.js as ItemProps
-export interface HeaderItemProps extends CommonHeaderButtonProps {}
-
-export interface onOverflowMenuPressParams {
-  hiddenButtons: Array<ReactNode>;
-  overflowButtonRef?: View;
-  cancelButtonLabel?: string;
-}
 
 export interface HeaderButtonsProps {
   /**
@@ -82,6 +75,9 @@ export interface HeaderButtonsProps {
 
 declare class HeaderButtons extends Component<HeaderButtonsProps> {}
 
+// From HeaderButtons.js as ItemProps
+export interface HeaderItemProps extends HeaderButtonProps {}
+
 declare class Item extends Component<HeaderItemProps> {}
 
 declare class HiddenItem extends Component<{
@@ -98,6 +94,16 @@ declare class Divider extends Component<{
   style?: StyleProp<ViewStyle>;
 }> {}
 
+declare class OverflowMenuProvider extends Component<{
+  children: ReactChild;
+}> {}
+
+export interface OnOverflowMenuPressParams {
+  hiddenButtons: Array<ReactNode>;
+  overflowButtonRef?: View;
+  cancelButtonLabel?: string;
+}
+
 declare class OverflowMenu extends Component<{
   children: ReactChild | Array<ReactNode>;
   onPress?: (OnOverflowMenuPressParams) => any;
@@ -107,11 +113,7 @@ declare class OverflowMenu extends Component<{
   accessibilityLabel?: string;
 }> {}
 
-declare class OverflowMenuProvider extends Component<{
-  children: ReactChild;
-}> {}
-
-export function defaultOnOverflowMenuPress(parameter: onOverflowMenuPressParams): void;
-export function overflowMenuPressHandlerActionSheet(parameter: onOverflowMenuPressParams): void;
-export function overflowMenuPressHandlerPopupMenu(parameter: onOverflowMenuPressParams): void;
-export function overflowMenuPressHandlerDropdownMenu(parameter: onOverflowMenuPressParams): void;
+export function defaultOnOverflowMenuPress(parameter: OnOverflowMenuPressParams): void;
+export function overflowMenuPressHandlerActionSheet(parameter: OnOverflowMenuPressParams): void;
+export function overflowMenuPressHandlerPopupMenu(parameter: OnOverflowMenuPressParams): void;
+export function overflowMenuPressHandlerDropdownMenu(parameter: OnOverflowMenuPressParams): void;

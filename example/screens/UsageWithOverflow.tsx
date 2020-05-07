@@ -17,7 +17,7 @@ const MaterialHeaderButton = (props) => (
 const RightHeader = () => (
   <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
     <Item title="person" iconName="person" onPress={() => alert('person')} />
-    <Item title="edit" show="never" onPress={() => alert('edit')} />
+    <Item title="edit" onPress={() => alert('edit')} />
     <OverflowMenu
       OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
       onPress={(params) => {

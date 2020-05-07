@@ -3,9 +3,9 @@ import { Ionicons, MaterialIcons } from '@expo/vector-icons';
 import { View } from 'react-native';
 import { HeaderButtons, HeaderButton, Item } from 'react-navigation-header-buttons';
 
-const MultiFontFamilyHeaderButton = (props) => (
-  <HeaderButton {...props} IconComponent={props.MyIconComponent} iconSize={23} color="blue" />
-);
+const MultiFontFamilyHeaderButton = (props) => {
+  return <HeaderButton {...props} iconSize={23} color="blue" />;
+};
 
 export function UsageDifferentFontFamilies({ navigation }) {
   React.useLayoutEffect(() => {
@@ -14,13 +14,13 @@ export function UsageDifferentFontFamilies({ navigation }) {
         <HeaderButtons HeaderButtonComponent={MultiFontFamilyHeaderButton}>
           <Item
             title="settings-ion"
-            MyIconComponent={Ionicons}
+            IconComponent={Ionicons}
             iconName="ios-settings"
             onPress={() => alert('ionicons settings')}
           />
           <Item
             title="settings-mat"
-            MyIconComponent={MaterialIcons}
+            IconComponent={MaterialIcons}
             iconName="settings"
             onPress={() => alert('material settings')}
           />
