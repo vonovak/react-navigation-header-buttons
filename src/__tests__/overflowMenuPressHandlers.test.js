@@ -2,6 +2,7 @@
 
 /* eslint-env jest */
 import React from 'react';
+import { View } from 'react-native';
 import {
   extractOverflowButtonData,
   overflowMenuPressHandlerActionSheet,
@@ -13,10 +14,12 @@ import { Divider } from '../overflowMenu/vendor/Divider';
 
 describe('overflowMenuPressHandlers', () => {
   describe('extractOverflowButtonData', () => {
-    describe('extracts titles, onPresses and element types when given an array of', () => {
-      it('HiddenItem or custom function components that render HiddenItem', () => {
+    it(
+      'extracts titles and onPresses when given an array of ' +
+        'HiddenItem or custom function components that render HiddenItem',
+      () => {
         const prefix = 'customized_';
-        const MyComponent = ({ title, onPress }) => (
+        const WrappedHiddenItem = ({ title, onPress }) => (
           <HiddenItem title={prefix + title} onPress={onPress} />
         );
 
@@ -26,7 +29,7 @@ describe('overflowMenuPressHandlers', () => {
         ];
         const items = [
           ...propsArray.map((props) => <HiddenItem {...props} />),
-          ...propsArray.map((props) => <MyComponent {...props} />),
+          ...propsArray.map((props) => <WrappedHiddenItem {...props} />),
         ];
         const titlesAndOnPresses = extractOverflowButtonData(items);
 
@@ -36,32 +39,10 @@ describe('overflowMenuPressHandlers', () => {
           { title: prefix + propsArray[0].title, onPress: propsArray[0].onPress },
           { title: prefix + propsArray[1].title, onPress: propsArray[1].onPress },
         ]);
-      });
-
-      it('ItemDivider or custom function components that render ItemDivider', () => {
-        const NestedComponent = () => <Divider />;
-        const NullNestedComponent = () => null;
-        const items = [<Divider />, <NestedComponent />, <NullNestedComponent />];
-
-        const titlesAndOnPresses = extractOverflowButtonData(items);
-
-        expect(titlesAndOnPresses).toStrictEqual([]);
-      });
-    });
-
-    const NestedHiddenItem = () => (
-      <HiddenItem title="disabled-nested" onPress={jest.fn()} disabled />
+      }
     );
-    it.each([
-      [null],
-      [undefined],
-      [[<HiddenItem title="disabled" onPress={jest.fn()} disabled />]],
-      [[<NestedHiddenItem />]],
-    ])('extractOverflowButtonData works for case %#', (input) => {
-      expect(extractOverflowButtonData(input)).toEqual([]);
-    });
 
-    it('fails when hook is used in the hidden component', () => {
+    it('fails when hook / class component is used in the provided elements', () => {
       function MyComponent({ title, onPress }) {
         const [titleFromState, setTitle] = React.useState('from state hook');
         return <HiddenItem title={titleFromState + title} onPress={onPress} />;
@@ -75,8 +56,48 @@ describe('overflowMenuPressHandlers', () => {
       // would be nice if this worked but we can only call Hooks from React function components.
       // https://reactjs.org/docs/hooks-rules.html
       expect(() => extractOverflowButtonData(items)).toThrow(
-        'There was an error extracting overflow button data from children of OverflowMenu.'
+        'There was an error extracting overflow button data from children of OverflowMenu.\n' +
+          "      It's possible you didn't follow the limitation rules documented in readme.\n" +
+          '      The nested error is: Invalid hook call. Hooks can only be called inside of the body of a function component.'
       );
+
+      class Component extends React.Component<{}> {
+        render() {
+          return <View style={{ height: 20, width: 20 }} />;
+        }
+      }
+      expect(() => extractOverflowButtonData(<Component />)).toThrow(
+        'There was an error extracting overflow button data from children of OverflowMenu.\n' +
+          "      It's possible you didn't follow the limitation rules documented in readme.\n" +
+          '      The nested error is: Cannot call a class as a function'
+      );
+    });
+
+    it('ignores custom components', () => {
+      const SomeCustomComponent = () => <View style={{ height: 20, width: 20 }} />;
+      const NestedComponent = () => <Divider />;
+      const items = [<Divider />, <NestedComponent />, <SomeCustomComponent />];
+
+      const titlesAndOnPresses = extractOverflowButtonData(items);
+
+      expect(titlesAndOnPresses).toStrictEqual([]);
+    });
+
+    describe('corner cases', () => {
+      const NestedHiddenItem = () => (
+        <HiddenItem title="disabled-nested" onPress={jest.fn()} disabled />
+      );
+      const NullNestedComponent = () => null;
+
+      it.each([
+        [null],
+        [undefined],
+        [[<HiddenItem title="disabled" onPress={jest.fn()} disabled />]],
+        [[<NestedHiddenItem />]],
+        [[<NullNestedComponent />]],
+      ])('extractOverflowButtonData works for case %#', (input) => {
+        expect(extractOverflowButtonData(input)).toEqual([]);
+      });
     });
 
     it('ignores invalid / non-element values', () => {
