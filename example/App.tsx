@@ -42,14 +42,8 @@ const Body = () => {
   // console.warn('render');
   return (
     <Stack.Navigator>
-      {Object.values(screens).map((screen) => {
-        return (
-          <Stack.Screen
-            name={screen.name}
-            key={screen.name}
-            component={screen}
-          />
-        );
+      {Object.keys(screens).map((screenName) => {
+        return <Stack.Screen name={screenName} key={screenName} component={screens[screenName]} />;
       })}
     </Stack.Navigator>
   );

@@ -15,14 +15,14 @@ const ReusableItem = ({ title, disabled = false }) => {
   return <HiddenItem title={title} disabled={disabled} onPress={() => alert(title)} />;
 };
 
-const handlers = [
+const handlers = {
   overflowMenuPressHandlerActionSheet,
   overflowMenuPressHandlerPopupMenu,
   overflowMenuPressHandlerDropdownMenu,
-  function custom(obj) {
-    console.warn(Object.keys(obj));
+  custom: function custom(obj) {
+    alert('you custom function will receive:' + Object.keys(obj));
   },
-];
+};
 
 export function UsageWithOverflowComplex({ navigation }) {
   const [index, setIndex] = React.useState(0);
@@ -32,7 +32,7 @@ export function UsageWithOverflowComplex({ navigation }) {
       headerRight: () => (
         <OverflowMenu
           OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
-          onPress={handlers[index]}
+          onPress={Object.values(handlers)[index]}
         >
           <HiddenItem
             icon={<MaterialIcons name="search" size={23} />}
@@ -57,10 +57,10 @@ export function UsageWithOverflowComplex({ navigation }) {
   return (
     <View style={{ flex: 1 }}>
       <Text>behavior is platform-dependent</Text>
-      <Text>current mode: {handlers[index].name}</Text>
+      <Text>current mode: {Object.keys(handlers)[index]}</Text>
       <Button
         onPress={() => {
-          setIndex((index + 1) % handlers.length);
+          setIndex((index + 1) % Object.keys(handlers).length);
         }}
         title="next overflow mode"
       />
