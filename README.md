@@ -143,8 +143,9 @@ Children passed to `OverflowMenu` should be
 Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` and `overflowMenuPressHandlerPopupMenu`.
 Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, such as `<Divider />` (which is exported) or your custom ones.
 
-This limitation may look weird but exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
-It's possible there's some nicer way without these limitations - let me know ;)
+This limitation may look weird but it should not really limit you in any way: if you need to have state in your items, just lift it up.
+The limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
+If this is a problem for you for somme reason, please raise an issue and we'll see what can be done about it.
 
 <details><summary>examples</summary>
 <p>
