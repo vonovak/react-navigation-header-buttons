@@ -64,7 +64,6 @@ export function UsageWithIcons({ navigation }) {
 
   return <Text style={{ flex: 1, margin: 20 }}>demo!</Text>;
 }
-
 ```
 
 ### Usage
@@ -77,11 +76,11 @@ In particular, it allows setting their icon component, color, and size once so t
 
 `HeaderButtons` accepts:
 
-| prop and type                                   | description                                                   | note                                                                                                                                                                                                                                    |
-| ----------------------------------------------- | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| HeaderButtonComponent: React.ComponentType<any> | component that renders the buttons                            | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). However, you're free to use your own component (see `HeaderButton.js` for reference). |
-| children: React.Node                            | whatever you want to render inside                            | typically `Item` or your component that renders `Item`, but it can be anything.                                                                                                                                                         |
-| left?: boolean                                  | whether the `HeaderButtons` are on the left from header title | false by default, it just influences styling in a subtle way                                                                                                                                                                            |
+| prop and type                                    | description                                                   | note                                                                                                                                                                                                                                    |
+| ------------------------------------------------ | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| HeaderButtonComponent?: React.ComponentType<any> | component that renders the buttons, `HeaderButton` by default | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). However, you're free to use your own component (see `HeaderButton.js` for reference). |
+| children: React.Node                             | whatever you want to render inside                            | typically `Item` or your component that renders `Item`, but it can be anything.                                                                                                                                                         |
+| left?: boolean                                   | whether the `HeaderButtons` are on the left from header title | false by default, it just influences styling in a subtle way                                                                                                                                                                            |
 
 #### `Item`
 
