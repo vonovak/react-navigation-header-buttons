@@ -74,7 +74,9 @@ describe('overflowMenuPressHandlers', () => {
 
       // would be nice if this worked but we can only call Hooks from React function components.
       // https://reactjs.org/docs/hooks-rules.html
-      expect(() => extractOverflowButtonData(items)).toThrow();
+      expect(() => extractOverflowButtonData(items)).toThrow(
+        'There was an error extracting overflow button data from children of OverflowMenu.'
+      );
     });
 
     it('ignores invalid / non-element values', () => {

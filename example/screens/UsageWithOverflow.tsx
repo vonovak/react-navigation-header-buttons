@@ -14,7 +14,7 @@ const MaterialHeaderButton = (props) => (
   <HeaderButton {...props} IconComponent={MaterialIcons} iconSize={23} color="blue" />
 );
 
-const El = (
+const RightHeader = () => (
   <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
     <Item title="person" iconName="person" onPress={() => alert('person')} />
     <Item title="edit" show="never" onPress={() => alert('edit')} />
@@ -35,7 +35,7 @@ const El = (
 export function UsageWithOverflow({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => El,
+      headerRight: RightHeader,
       // title: 'sfhdskjfh kjsahfkjsahf skjfh askjfhaskjhf sakfhask ',
     });
   }, [navigation]);

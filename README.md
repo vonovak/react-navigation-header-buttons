@@ -4,7 +4,7 @@ This package will help you render buttons in the navigation bar and handle the s
 
 #### Demo App
 
-Contains many examples and is [available via expo](https://expo.io/@vonovak/navbar-buttons-demo). Sources are in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example). I highly recommend you check out both links to get a better idea of the api.
+Contains many examples and is [available via expo](https://expo.io/@vonovak/navbar-buttons-demo). Sources are in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/screens). I highly recommend you check out both links to get a better idea of the api.
 
 <span>
 <img src="img/android.gif" height="450" />
@@ -127,7 +127,7 @@ The package exports common handlers you can use, but you can provide your own to
 | onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more below. |
 | testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`   |
 | accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                        |
-| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. Don't pass this if you passed it to `HeaderButtons`                |
+| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you passed it to `HeaderButtons`           |
 | children: React.Node                         | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                              |
 
 ##### Important note
@@ -150,7 +150,7 @@ Please see `UsageWithOverflowComplex.tsx` for valid examples!
 
 These will NOT work with `overflowMenuPressHandlerActionSheet` and `overflowMenuPressHandlerPopupMenu`:
 
-1) WRONG! no hooks are allowed!
+1. WRONG! no hooks are allowed!
 
 ```js
 function MyComponent({ title }) {
@@ -163,7 +163,7 @@ function MyComponent({ title }) {
 </OverflowMenu>;
 ```
 
-2) WRONG! you can nest `HiddenItem` only once, not twice
+2. WRONG! you can nest `HiddenItem` only once, not twice
 
 ```js
 const HiddenItemWrapped = () => <HiddenItem title="hidden2" onPress={() => alert('hidden2')} />;
@@ -247,8 +247,9 @@ static navigationOptions = {
 
 ### Known issues
 
+- it appears that when screen title is long, it might interfere with buttons (does not happen when using native stack). This is more probably a react-navigation error, but needs investigation.
 - TS typings need improvement, plus I'd like to check their validity via the example project which is using TS. Please get in touch if you wanna help.
 - missing styling support for material dropdown menu
-- item margins need to be reviewed and polished; don't hesitate to contribute [this](https://github.com/infinitered/reactotron/blob/master/docs/plugin-overlay.md) should help
+- item margins need to be reviewed and polished; don't hesitate to contribute - [this](https://github.com/infinitered/reactotron/blob/master/docs/plugin-overlay.md) should help
 - RTL is not tested
 - ripple effect on Android is not always the same size, this should be fixable in RN 63 [PR](https://github.com/facebook/react-native/pull/28009)

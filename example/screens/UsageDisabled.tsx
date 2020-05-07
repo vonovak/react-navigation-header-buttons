@@ -15,17 +15,15 @@ const DisableableHeaderButton = (props) => (
   />
 );
 
-const El = (
-  <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
-    <Item title="search" iconName="ios-search" onPress={() => alert('search')} disabled />
-    <Item title="select" onPress={() => alert('select')} />
-  </HeaderButtons>
-);
-
 export function UsageDisabled({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => El,
+      headerRight: () => (
+        <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
+          <Item title="search" iconName="ios-search" onPress={() => alert('search')} disabled />
+          <Item title="select" onPress={() => alert('select')} />
+        </HeaderButtons>
+      ),
     });
   }, [navigation]);
 

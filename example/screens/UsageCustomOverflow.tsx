@@ -45,12 +45,12 @@ function RightHeaderButtons(props) {
   );
 }
 
-const Connected = connectActionSheet(RightHeaderButtons);
+const ConnectedButtons = connectActionSheet(RightHeaderButtons);
 
 export function UsageWithCustomOverflow({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      headerRight: () => <Connected />,
+      headerRight: () => <ConnectedButtons />,
     });
   }, [navigation]);
 

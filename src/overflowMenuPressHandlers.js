@@ -14,9 +14,23 @@ export const extractOverflowButtonData = (
   hiddenButtons: React.Node,
   detectedElementTypes: Array<React.StatelessFunctionalComponent<any>> = [HiddenItem]
 ): OverflowButtonDescriptors => {
-  // TODO add error boundary
+  try {
+    return doExtractOverflowButtonData(hiddenButtons, detectedElementTypes);
+  } catch (err) {
+    throw new Error(
+      `There was an error extracting overflow button data from children of OverflowMenu.
+      It's possible you didn't follow the limitation rules documented in readme.
+      The nested error is: ${err.message}`
+    );
+  }
+};
+
+function doExtractOverflowButtonData(
+  hiddenButtons,
+  detectedElementTypes
+): OverflowButtonDescriptors {
   // don't do this at home - this is not how React is meant to be used!
-  const ret = React.Children.toArray(hiddenButtons).map((button) => {
+  const btnsData = React.Children.toArray(hiddenButtons).map((button) => {
     const { props, type } = button;
     if (detectedElementTypes.includes(type)) {
       return extract(button);
@@ -31,8 +45,8 @@ export const extractOverflowButtonData = (
     return false;
   });
   // $FlowFixMe
-  return ret.filter(Boolean);
-};
+  return btnsData.filter(Boolean);
+}
 
 const extract = (element: React.Element<any>) => {
   const {
