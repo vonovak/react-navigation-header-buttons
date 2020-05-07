@@ -6,16 +6,18 @@ This package will help you render buttons in the navigation bar and handle the s
 
 Contains many examples and is [available via expo](https://expo.io/@vonovak/navbar-buttons-demo). Sources are in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/screens). I highly recommend you check out both links to get a better idea of the api.
 
-<span>
-<img src="img/android.gif" height="450" />
-<img src="img/ios.gif" height="450" />
-</span>
-
 #### Install
 
 `yarn add react-navigation-header-buttons`
 
 #### Quick Example
+
+<span>
+<img src="img/android.gif" height="450" />
+<img src="img/ios.gif" height="450" />
+</span>
+
+The corresponding code:
 
 ```js
 import React from 'react';
@@ -35,7 +37,7 @@ const IoniconsHeaderButton = (props) => (
   <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
 );
 
-const ReusableEditItem = () => <Item title="Edit" onPress={() => alert('Edit')} />;
+const ReusableSelectItem = () => <Item title="Edit" onPress={() => alert('Edit')} />;
 
 const ReusableHiddenItem = () => <HiddenItem title="hidden2" onPress={() => alert('hidden2')} />;
 
@@ -47,7 +49,7 @@ export function UsageWithIcons({ navigation }) {
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
           <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-          <ReusableEditItem />
+          <ReusableSelectItem />
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
             OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
@@ -60,8 +62,9 @@ export function UsageWithIcons({ navigation }) {
     });
   }, [navigation]);
 
-  return <Text style={{ flex: 1 }}>body</Text>;
+  return <Text style={{ flex: 1, margin: 20 }}>demo!</Text>;
 }
+
 ```
 
 ### Usage
