@@ -145,7 +145,7 @@ Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, 
 
 This limitation may look weird but it should not really limit you in any way: if you need to have state in your items, just lift it up.
 The limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
-If this is a problem for you for somme reason, please raise an issue and we'll see what can be done about it.
+If this is a problem for you for some reason, please raise an issue and we'll see what can be done about it.
 
 <details><summary>examples</summary>
 <p>
