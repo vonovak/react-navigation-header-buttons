@@ -8,6 +8,11 @@
     "lint": "eslint ./src",
     "flow": "flow check"
   },
+  "files": [
+    "index.js",
+    "index.d.ts",
+    "src"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vonovak/react-navigation-header-buttons.git"
