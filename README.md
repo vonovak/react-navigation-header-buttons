@@ -8,7 +8,9 @@ Contains many examples and is [available via expo](https://expo.io/@vonovak/navb
 
 #### Install
 
-`yarn add react-navigation-header-buttons`
+1) `yarn add react-navigation-header-buttons`
+
+2) Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx)
 
 #### Quick Example
 
@@ -192,6 +194,11 @@ const HiddenItemWrappedTwice = ()=> <HiddenItemWrapped />
 | onPress: ?() => any        | function to call on press                                   |      |
 | testID?: string            | testID to locate view in e2e tests                          |      |
 | disabled?: boolean         |                                                             |      |
+
+#### `OverflowMenuProvider`
+
+This is a React context provider needed for `overflowMenuPressHandlerDropdownMenu` to work. If you're not using `overflowMenuPressHandlerDropdownMenu` then you don't need it.
+By default, you need to wrap your root component with it.
 
 #### `HeaderButton`
 
