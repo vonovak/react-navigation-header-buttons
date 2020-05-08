@@ -11,11 +11,16 @@ export type ToggleMenuParam = ?{|
 
 export const OVERFLOW_TOP = 15;
 
-const noop = () => {
+const warn = () => {
   // this is here just to satisfy Flow, the noop value will be replaced
-  // by a Provider
+  // by OverflowMenuProvider rendered in app root
+  console.warn(
+    'It seems like you tried to open the overflow menu using the overflowMenuPressHandlerDropdownMenu' +
+      ' - which is the default handler on android - but you forgot to wrap your root component in <OverflowMenuProvider />.' +
+      'Please check the installation instructions in the react-navigation-header-buttons readme!'
+  );
 };
-export const OverflowMenuContext = React.createContext<(ToggleMenuParam) => void>(noop);
+export const OverflowMenuContext = React.createContext<(ToggleMenuParam) => void>(warn);
 
 type Props = {|
   children: React.Element<any>,
