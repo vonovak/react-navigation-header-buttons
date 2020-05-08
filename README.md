@@ -10,7 +10,7 @@ Contains many examples and is [available via expo](https://expo.io/@vonovak/navb
 
 1) `yarn add react-navigation-header-buttons`
 
-2) Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx]((https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx))
+2) Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx)
 
 #### Quick Example
 
