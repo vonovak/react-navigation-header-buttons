@@ -15,9 +15,9 @@ const IoniconsHeaderButton = (props) => (
   <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
 );
 
-const ReusableSelectItem = () => <Item title="Edit" onPress={() => alert('Edit')} />;
+const ReusableSelectItem = ({ onPress }) => <Item title="Edit" onPress={onPress} />;
 
-const ReusableHiddenItem = () => <HiddenItem title="hidden2" onPress={() => alert('hidden2')} />;
+const ReusableHiddenItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} />;
 
 export function UsageWithIcons({ navigation }) {
   React.useLayoutEffect(() => {
@@ -27,13 +27,13 @@ export function UsageWithIcons({ navigation }) {
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
           <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-          <ReusableSelectItem />
+          <ReusableSelectItem onPress={() => alert('Edit')} />
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
             OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
           >
             <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
-            <ReusableHiddenItem />
+            <ReusableHiddenItem onPress={() => alert('hidden2')} />
           </OverflowMenu>
         </HeaderButtons>
       ),
