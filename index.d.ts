@@ -5,7 +5,7 @@ export interface CommonHeaderButtonProps {
   /**
    * Function to call on press.
    */
-  onPress?: () => void;
+  onPress?: () => any;
   /**
    * Title for the button.
    */
@@ -84,7 +84,7 @@ declare class HiddenItem extends Component<{
   title: string;
   icon?: ReactNode;
   disabled?: boolean;
-  onPress?: () => void;
+  onPress?: () => any;
   style?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
 }> {}

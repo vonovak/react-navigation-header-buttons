@@ -20,11 +20,7 @@ export type OverflowMenuProps = {|
   testID: string,
   accessibilityLabel: string,
   onPress: (OnOverflowMenuPressParams) => any,
-  // boolean can be passed by user when OverflowMenu is rendered by itself
-  // and will render extra margins on the chosen side
-  // null is passed when OverflowMenu is rendered inside of HeaderButtons and means no extra margin
-  // this might be more complicated than needed but it's 1 am now :)
-  left: boolean | null,
+  left: boolean,
 |};
 
 export const OverflowMenu = ({
@@ -71,7 +67,7 @@ OverflowMenu.defaultProps = {
   OverflowIcon: <View />,
   onPress: defaultOnOverflowMenuPress,
   testID: OVERFLOW_BUTTON_TEST_ID,
-  left: false, // this is needed for when OverflowMenu is rendered without HeaderButtons
+  left: false, // this is needed only when OverflowMenu is rendered without HeaderButtons
 };
 
 const styles = StyleSheet.create({
