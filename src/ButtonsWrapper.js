@@ -2,14 +2,31 @@
 import * as React from 'react';
 import { Platform, StyleSheet, View } from 'react-native';
 
+/*
+ * the `left` prop can be provided to HeaderButtons as well as OverflowMenu
+ * this will render some extra margins on the corresponding side
+ * but must be considered only once which is the job of this Context
+ * */
+
+const ButtonsExtraMarginContext = React.createContext<
+  'toBeHandledByOverflowMenu' | 'alreadyHandledByHeaderButtons'
+>('toBeHandledByOverflowMenu');
+
 type Props = {|
-  left: boolean | null,
+  left: boolean,
   children: React.Node,
 |};
 
 export const ButtonsWrapper = ({ left, children }: Props) => {
-  const extraSideMargin = getMargin(left);
-  return <View style={StyleSheet.compose(styles.row, extraSideMargin)}>{children}</View>;
+  const marginStatus = React.useContext(ButtonsExtraMarginContext);
+  const valueOfLeft = marginStatus === 'alreadyHandledByHeaderButtons' ? null : left;
+  const extraSideMargin = getMargin(valueOfLeft);
+
+  return (
+    <ButtonsExtraMarginContext.Provider value="alreadyHandledByHeaderButtons">
+      <View style={StyleSheet.compose(styles.row, extraSideMargin)}>{children}</View>
+    </ButtonsExtraMarginContext.Provider>
+  );
 };
 
 const getMargin = (left) => {

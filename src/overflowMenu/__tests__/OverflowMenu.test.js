@@ -6,6 +6,8 @@ import React from 'react';
 import { OverflowMenu } from '../OverflowMenu';
 import { overflowMenuPressHandlerDropdownMenu } from '../../overflowMenuPressHandlers';
 import { OverflowMenuProvider } from '../OverflowMenuContext';
+import { HeaderButtons } from '../../HeaderButtons';
+import { ButtonsWrapper } from '../../ButtonsWrapper';
 
 describe('overflowMenu', () => {
   it('onPress is given correct params when HiddenItem is a direct or indirect child', () => {
@@ -61,4 +63,40 @@ describe('overflowMenu', () => {
     expect(queryAllByText('search2')).toHaveLength(1);
     expect(queryAllByText('delete')).toHaveLength(1);
   });
+
+  it(
+    'OverflowMenu, when rendered inside HeaderButtons which has left=false/true (false by default)' +
+      'will not render extra margin which was already rendered by HeaderButtons',
+    () => {
+      const ReusableOverflowMenu = ({ children }) => {
+        return (
+          <OverflowMenu
+            OverflowIcon={<Text>+</Text>}
+            onPress={overflowMenuPressHandlerDropdownMenu}
+          >
+            {children}
+          </OverflowMenu>
+        );
+      };
+      const { UNSAFE_getAllByType } = render(
+        <HeaderButtons>
+          <ReusableOverflowMenu>
+            <HiddenItem title="search2" onPress={() => jest.fn()} />
+          </ReusableOverflowMenu>
+        </HeaderButtons>
+      );
+      const buttonWrappers = UNSAFE_getAllByType(ButtonsWrapper);
+      expect(buttonWrappers[0].children[0].props.style).toStrictEqual([
+        {
+          flexDirection: 'row',
+          justifyContent: 'center',
+        },
+        { marginRight: 5 },
+      ]);
+      expect(buttonWrappers[1].children[0].props.style).toStrictEqual({
+        flexDirection: 'row',
+        justifyContent: 'center',
+      });
+    }
+  );
 });

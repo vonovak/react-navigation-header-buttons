@@ -16,3 +16,7 @@ yarn-error.log
 
 # Jest
 coverage
+
+# expo
+.expo/packager-info.json
+.expo/*

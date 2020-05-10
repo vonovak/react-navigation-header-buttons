@@ -20,7 +20,7 @@ export type Props = {|
   /**
    * Function to execute on press.
    */
-  onPress: ?() => void,
+  onPress: ?() => any,
   /**
    * @optional
    */
