@@ -5456,9 +5456,9 @@ prettier-linter-helpers@^1.0.0:
     fast-diff "^1.1.2"
 
 prettier@^2.0.2:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.4.tgz#2d1bae173e355996ee355ec9830a7a1ee05457ef"
-  integrity sha512-SVJIQ51spzFDvh4fIbCLvciiDMCrRhlN3mbZvv/+ycjvmF5E73bKdGfU8QDLNmjYJf+lsGnDBC4UUnvTe5OO0w==
+  version "2.0.5"
+  resolved "https://registry.yarnpkg.com/prettier/-/prettier-2.0.5.tgz#d6d56282455243f2f92cc1716692c08aa31522d4"
+  integrity sha512-7PtVymN48hGcO4fGjybyBSIWDsLU4H4XlvOHfq91pz9kkGlonzwTfYkaIEwiRg/dAJF9YlbsduBAgtYLi+8cFg==
 
 pretty-format@^24.0.0, pretty-format@^24.7.0, pretty-format@^24.9.0:
   version "24.9.0"
@@ -5586,9 +5586,9 @@ react-native-platform-touchable@^1.1.1:
   integrity sha1-/eSsxl7qWF0osWTQw3FqQhKaaOQ=
 
 react-native-testing-library@^1.12.0:
-  version "1.13.0"
-  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.13.0.tgz#5cefff5fde2f3aba6efd6c6dc47bed97e7dc9019"
-  integrity sha512-SL9BTZH65CRsB4zZPcvaymLgegLJ/hXlPEbrzt+xWxT4PwGTmZtVpnyw9LnMzWACe+VTBs3h8lIVvqUIabuLZA==
+  version "1.13.2"
+  resolved "https://registry.yarnpkg.com/react-native-testing-library/-/react-native-testing-library-1.13.2.tgz#0d56e72cb38a9ceb065402607449deb5eb328b47"
+  integrity sha512-ljUo4U5cCoMudNh11/TXN74Fy/uVKcF4sWaTM1xgNDCU6hWdnud87BZo3a4FArkTuF3kFaiILj666JnIkr1VMQ==
   dependencies:
     pretty-format "^24.0.0"
 
