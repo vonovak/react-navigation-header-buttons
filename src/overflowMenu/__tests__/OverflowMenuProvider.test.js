@@ -18,7 +18,7 @@ describe('OverflowMenuProvider renders', () => {
     `);
   });
 
-  it('the child and the menu, when it is displayed by calling toggleMenu() provided by OverflowMenuContext', async () => {
+  it('the child and the menu item, when it is displayed by calling toggleMenu() provided by OverflowMenuContext', async () => {
     const menuItemLabel = 'menu item';
     const showMenuLabel = 'show menu';
 
