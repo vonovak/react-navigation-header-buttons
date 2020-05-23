@@ -1,7 +1,7 @@
 // @flow
 import { OverflowMenuProvider, OverflowMenuContext } from '../OverflowMenuContext';
 import { Text } from 'react-native';
-import { render, fireEvent, flushMicrotasksQueue } from 'react-native-testing-library';
+import { render, fireEvent } from 'react-native-testing-library';
 import React from 'react';
 
 describe('OverflowMenuProvider renders', () => {
@@ -19,7 +19,7 @@ describe('OverflowMenuProvider renders', () => {
   });
 
   it('the child and the menu item, when it is displayed by calling toggleMenu() provided by OverflowMenuContext', async () => {
-    const menuItemLabel = 'menu item';
+    const menuItemLabel = 'overflow menu item';
     const showMenuLabel = 'show menu';
 
     const ButtonThatShowsMenu = () => {
@@ -34,7 +34,7 @@ describe('OverflowMenuProvider renders', () => {
         </Text>
       );
     };
-    const { toJSON, getByText } = render(
+    const { toJSON, getByText, findByText } = render(
       <OverflowMenuProvider>
         <ButtonThatShowsMenu />
       </OverflowMenuProvider>
@@ -45,7 +45,11 @@ describe('OverflowMenuProvider renders', () => {
     expect(toJSON()).toMatchSnapshot();
     getByText(menuItemLabel);
     fireEvent.press(getByText(showMenuLabel));
-    await flushMicrotasksQueue();
+
+    const waitForMenuToHide = async () => {
+      await expect(findByText(menuItemLabel, { timeout: 500 })).rejects.toBeTruthy();
+    };
+    await waitForMenuToHide();
 
     const afterHidden = toJSON();
     expect(afterHidden).toStrictEqual(beforeShown);

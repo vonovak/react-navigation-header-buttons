@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OverflowMenuProvider renders the child and the menu, when it is displayed by calling toggleMenu() provided by OverflowMenuContext 1`] = `
+exports[`OverflowMenuProvider renders the child and the menu item, when it is displayed by calling toggleMenu() provided by OverflowMenuContext 1`] = `
 Array [
   <Text
     onPress={[Function]}
@@ -96,7 +96,7 @@ Array [
           }
         >
           <Text>
-            menu item
+            overflow menu item
           </Text>
         </View>
       </View>
