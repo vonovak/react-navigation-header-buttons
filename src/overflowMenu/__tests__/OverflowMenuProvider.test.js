@@ -45,7 +45,11 @@ describe('OverflowMenuProvider renders', () => {
     expect(toJSON()).toMatchSnapshot();
     getByText(menuItemLabel);
     fireEvent.press(getByText(showMenuLabel));
-    await expect(findByText(menuItemLabel, { timeout: 100 })).rejects.toBeTruthy();
+
+    const waitForMenuToHide = async () => {
+      await expect(findByText(menuItemLabel, { timeout: 500 })).rejects.toBeTruthy();
+    };
+    await waitForMenuToHide();
 
     const afterHidden = toJSON();
     expect(afterHidden).toStrictEqual(beforeShown);
