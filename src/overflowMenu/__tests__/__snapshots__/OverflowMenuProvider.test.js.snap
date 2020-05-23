@@ -96,7 +96,7 @@ Array [
           }
         >
           <Text>
-            menu item
+            overflow menu item
           </Text>
         </View>
       </View>
