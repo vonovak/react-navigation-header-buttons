@@ -74,7 +74,7 @@ export const overflowMenuPressHandlerActionSheet = ({
 }: OnOverflowMenuPressParams) => {
   checkParams(hiddenButtons);
   let actionTitles = hiddenButtons.map((btn) => btn.title);
-  let destructiveActions = hiddenButtons.reduce((acc, btn, index) => {
+  const destructiveActions: Array<number> = hiddenButtons.reduce((acc, btn, index) => {
     if (btn.destructive) {
       acc.push(index + 1);
     }
