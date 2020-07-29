@@ -51,7 +51,7 @@ export const OverflowMenu = ({
     });
   }, [children, onPress, toggleMenu]);
 
-  if (!children || Array.isArray(children) && children.every(it => !it)) {
+  if (!children || (Array.isArray(children) && children.every((it) => !it))) {
     return null;
   }
 
