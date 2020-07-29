@@ -37,6 +37,10 @@ export const OverflowMenu = ({
   const renderButtonElement = React.useCallback(() => OverflowIcon, [OverflowIcon]);
 
   const usedOnPress = React.useCallback(() => {
+    if (!children) {
+      return;
+    }
+
     const titlesAndOnPresses =
       onPress === overflowMenuPressHandlerDropdownMenu ? [] : extractOverflowButtonData(children);
     onPress({
