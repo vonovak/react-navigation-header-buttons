@@ -99,4 +99,14 @@ describe('overflowMenu', () => {
       });
     }
   );
+
+  it('should not render overflow button when no item is specified', () => {
+    const onPress = jest.fn();
+
+    const { queryByA11yLabel } = render(
+      <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={onPress} />
+    );
+
+    expect(queryByA11yLabel('More options')).toBeNull();
+  });
 });

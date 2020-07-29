@@ -14,7 +14,7 @@ import { OVERFLOW_BUTTON_TEST_ID } from '../e2e';
 import { ButtonsWrapper } from '../ButtonsWrapper';
 
 export type OverflowMenuProps = {|
-  children: React.Node,
+  children?: React.Node,
   OverflowIcon: React.Element<any>,
   style?: ViewStyleProp,
   testID: string,
@@ -46,6 +46,10 @@ export const OverflowMenu = ({
       _private_toggleMenu: toggleMenu,
     });
   }, [children, onPress, toggleMenu]);
+
+  if (!children) {
+    return null;
+  }
 
   return (
     <ButtonsWrapper left={left}>
