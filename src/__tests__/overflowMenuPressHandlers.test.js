@@ -59,7 +59,7 @@ describe('overflowMenuPressHandlers', () => {
 
     it('fails when hook / class component is used in the provided elements', () => {
       function MyComponent({ title, onPress }) {
-        const [titleFromState, setTitle] = React.useState('from state hook');
+        const [titleFromState] = React.useState('from state hook');
         return <HiddenItem title={titleFromState + title} onPress={onPress} />;
       }
       const propsArray = [
@@ -153,13 +153,13 @@ describe('overflowMenuPressHandlers', () => {
     });
 
     it('overflowMenuPressHandlerActionSheet should call ActionSheet with correct destructiveButtonIndex param', () => {
-      const hiddenButtons = [
+      const hiddenButtonsWithDestructive = [
         { title: 'one', onPress: jest.fn() },
         { title: 'two', onPress: jest.fn(), destructive: true },
         { title: 'three', onPress: jest.fn(), destructive: true },
       ];
       overflowMenuPressHandlerActionSheet({
-        hiddenButtons,
+        hiddenButtons: hiddenButtonsWithDestructive,
         overflowButtonRef: null,
         children: null,
         _private_toggleMenu: jest.fn(),

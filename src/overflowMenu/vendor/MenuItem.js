@@ -33,7 +33,7 @@ export type Props = {|
   /**
    * Whether the 'item' is destructive action. Destructive items are formatted differently on iOS.
    */
-  destructive?: boolean
+  destructive?: boolean,
 |};
 
 /**
