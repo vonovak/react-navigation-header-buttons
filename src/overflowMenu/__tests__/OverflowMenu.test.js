@@ -100,11 +100,36 @@ describe('overflowMenu', () => {
     }
   );
 
-  it('should not render overflow button when no item is specified', () => {
+  it('should not render overflow button when no child element is specified', () => {
     const onPress = jest.fn();
 
     const { queryByA11yLabel } = render(
       <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={onPress} />
+    );
+
+    expect(queryByA11yLabel('More options')).toBeNull();
+  });
+
+  it('should not render overflow button when only single falsy child is specified', () => {
+    const onPress = jest.fn();
+
+    const { queryByA11yLabel } = render(
+      <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={onPress}>
+        {null}
+      </OverflowMenu>
+    );
+
+    expect(queryByA11yLabel('More options')).toBeNull();
+  });
+
+  it('should not render overflow button when only falsy children are specified', () => {
+    const onPress = jest.fn();
+
+    const { queryByA11yLabel } = render(
+      <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={onPress}>
+        {false}
+        {null}
+      </OverflowMenu>
     );
 
     expect(queryByA11yLabel('More options')).toBeNull();
