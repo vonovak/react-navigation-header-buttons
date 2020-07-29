@@ -157,8 +157,8 @@ export class Menu extends React.Component<Props, State> {
     this.removeListeners();
   }
 
-  anchor: View | null = null;
-  menu: View | null = null;
+  anchor: React.ElementRef<typeof View> | null = null;
+  menu: React.ElementRef<typeof View> | null = null;
 
   isAnchorCoord = () => !React.isValidElement(this.props.anchor);
 
@@ -201,7 +201,7 @@ export class Menu extends React.Component<Props, State> {
 
   isBrowser = () => Platform.OS === 'web' && 'document' in global;
 
-  focusFirstDOMNode = (el: View | null | typeof undefined) => {
+  focusFirstDOMNode = (el: React.ElementRef<typeof View> | null | typeof undefined) => {
     if (el && this.isBrowser()) {
       // When in the browser, we want to focus the first focusable item on toggle
       // For example, when menu is shown, focus the first item in the menu
@@ -336,16 +336,7 @@ export class Menu extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      visible,
-      anchor,
-      contentStyle,
-      style,
-      children,
-      statusBarHeight,
-      onDismiss,
-    } = this.props;
-
+    const { visible, contentStyle, style, children, statusBarHeight, onDismiss } = this.props;
     const { rendered, menuLayout, anchorLayout, opacityAnimation, scaleAnimation } = this.state;
 
     let { left, top } = this.state;

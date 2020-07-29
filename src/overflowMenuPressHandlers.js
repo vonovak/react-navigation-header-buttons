@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Platform, ActionSheetIOS, UIManager, findNodeHandle, type View } from 'react-native';
+import { Platform, ActionSheetIOS, UIManager, findNodeHandle, View } from 'react-native';
 import { HiddenItem } from './HeaderItems';
 import invariant from 'invariant';
 import type { ToggleMenuParam } from './overflowMenu/OverflowMenuContext';
@@ -12,7 +12,7 @@ type OverflowButtonDescriptors = $ReadOnlyArray<{|
 |}>;
 
 export const extractOverflowButtonData = (
-  hiddenButtons: React.Node,
+  hiddenButtons: ?React.Node,
   detectedElementTypes: Array<React.StatelessFunctionalComponent<any>> = [HiddenItem]
 ): OverflowButtonDescriptors => {
   try {
@@ -59,7 +59,7 @@ const extract = (element: React.Element<any>) => {
 export type OnOverflowMenuPressParams = {|
   hiddenButtons: OverflowButtonDescriptors,
   _private_toggleMenu: (ToggleMenuParam) => void,
-  overflowButtonRef: null | View,
+  overflowButtonRef: null | React.ElementRef<typeof View>,
   cancelButtonLabel?: string,
   children: React.Node,
 |};
@@ -121,7 +121,7 @@ export const overflowMenuPressHandlerDropdownMenu = ({
   _private_toggleMenu,
 }: OnOverflowMenuPressParams) => {
   if (overflowButtonRef) {
-    overflowButtonRef.measureInWindow((x, y, width, height) => {
+    overflowButtonRef.measureInWindow((x, y, width) => {
       _private_toggleMenu({ elements: children, x: x + width, y });
     });
   } else {

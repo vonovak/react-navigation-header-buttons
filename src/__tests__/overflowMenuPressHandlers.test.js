@@ -197,6 +197,7 @@ describe('overflowMenuPressHandlers', () => {
       'native handlers throw on invalid params, user needs to filter them before provided; case %#',
       (handler) => {
         expect(() =>
+          // $FlowExpectedError
           handler({
             hiddenButtons: null,
             overflowButtonRef: null,
