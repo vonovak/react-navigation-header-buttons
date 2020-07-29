@@ -30,6 +30,10 @@ export type Props = {|
    * TestID used for testing purposes
    */
   testID?: string,
+  /**
+   * Whether the 'item' is destructive action. Destructive items are formatted differently on iOS.
+   */
+  destructive?: boolean
 |};
 
 /**

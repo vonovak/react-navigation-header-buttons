@@ -8,6 +8,7 @@ import type { ToggleMenuParam } from './overflowMenu/OverflowMenuContext';
 type OverflowButtonDescriptors = $ReadOnlyArray<{|
   title: string,
   onPress: () => void | Promise<void>,
+  destructive?: boolean,
 |}>;
 
 export const extractOverflowButtonData = (
@@ -50,9 +51,9 @@ function doExtractOverflowButtonData(
 
 const extract = (element: React.Element<any>) => {
   const {
-    props: { title, onPress, disabled },
+    props: { title, onPress, disabled, destructive },
   } = element;
-  return disabled === true ? false : { title, onPress };
+  return disabled === true ? false : { title, onPress, destructive };
 };
 
 export type OnOverflowMenuPressParams = {|
@@ -73,12 +74,19 @@ export const overflowMenuPressHandlerActionSheet = ({
 }: OnOverflowMenuPressParams) => {
   checkParams(hiddenButtons);
   let actionTitles = hiddenButtons.map((btn) => btn.title);
+  let destructiveActions = hiddenButtons.reduce((acc, btn, index) => {
+    if (btn.destructive) {
+      acc.push(index + 1);
+    }
+    return acc;
+  }, []);
   actionTitles.unshift(cancelButtonLabel);
 
   ActionSheetIOS.showActionSheetWithOptions(
     {
       options: actionTitles,
       cancelButtonIndex: 0,
+      destructiveButtonIndex: destructiveActions,
     },
     (buttonIndex: number) => {
       if (buttonIndex > 0) {

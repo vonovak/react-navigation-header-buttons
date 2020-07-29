@@ -131,7 +131,7 @@ The package exports common handlers you can use, but you can provide your own to
 | onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more below. |
 | testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`   |
 | accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                        |
-| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you passed it to `HeaderButtons`           |
+| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you passed it to `HeaderButtons`           |   
 | children: React.Node                         | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                              |
 
 ##### Important note
@@ -186,14 +186,15 @@ const HiddenItemWrappedTwice = ()=> <HiddenItemWrapped />
 
 `HiddenItem` accepts:
 
-| prop and type              | description                                                 | note |
-| -------------------------- | ----------------------------------------------------------- | ---- |
-| title: string              | title for the button, required                              |      |
-| style?: ViewStyleProp      | style to apply to the touchable element that wraps the text |      |
-| titleStyle?: ViewStyleProp | style to apply to the text                                  |      |
-| onPress: ?() => any        | function to call on press                                   |      |
-| testID?: string            | testID to locate view in e2e tests                          |      |
-| disabled?: boolean         |                                                             |      |
+| prop and type              | description                                                        | note     |
+| -------------------------- | ------------------------------------------------------------------ | -------- |
+| title: string              | title for the button, required                                     |          |
+| style?: ViewStyleProp      | style to apply to the touchable element that wraps the text        |          |
+| titleStyle?: ViewStyleProp | style to apply to the text                                         |          |
+| onPress: ?() => any        | function to call on press                                          |          |
+| testID?: string            | testID to locate view in e2e tests                                 |          |
+| disabled?: boolean         | disabled 'item' is greyed out and `onPress` is not called on touch |          |
+| destructive?: boolean      | flag specifying whether this item is destructive                   | iOS only |
 
 #### `OverflowMenuProvider`
 
