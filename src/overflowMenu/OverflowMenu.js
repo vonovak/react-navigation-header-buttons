@@ -47,6 +47,11 @@ export const OverflowMenu = ({
     });
   }, [children, onPress, toggleMenu]);
 
+  const validChildren = React.Children.toArray(children).filter(React.isValidElement);
+  if (validChildren.length === 0) {
+    return null;
+  }
+
   return (
     <ButtonsWrapper left={left}>
       <View ref={btnRef} collapsable={false} style={styles.overflowMenuView} />

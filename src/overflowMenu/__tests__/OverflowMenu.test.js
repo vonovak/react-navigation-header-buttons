@@ -99,4 +99,31 @@ describe('overflowMenu', () => {
       });
     }
   );
+
+  describe('should not render overflow button when', () => {
+    it('only single falsy child is specified', () => {
+      const onPress = jest.fn();
+
+      const { toJSON } = render(
+        <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={onPress}>
+          {null}
+        </OverflowMenu>
+      );
+
+      expect(toJSON()).toBeNull();
+    });
+
+    it('only falsy children are specified', () => {
+      const onPress = jest.fn();
+
+      const { toJSON } = render(
+        <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={onPress}>
+          {false}
+          {null}
+        </OverflowMenu>
+      );
+
+      expect(toJSON()).toBeNull();
+    });
+  });
 });
