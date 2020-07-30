@@ -1,24 +1,29 @@
 // @flow
 import * as React from 'react';
 import { type ItemProps, type VisibleButtonProps } from './HeaderButton';
-import { type Props as HiddenItemProps } from './overflowMenu/vendor/MenuItem';
+import { type Props as MenuItemProps } from './overflowMenu/vendor/MenuItem';
 import { HeaderButtonsContext } from './HeaderButtonsContext';
 import { Text, StyleSheet, Platform } from 'react-native';
 import { OverflowMenuContext } from './overflowMenu/OverflowMenuContext';
 import { MenuItem } from './overflowMenu/vendor/MenuItem';
 
-export function HiddenItem(props: HiddenItemProps) {
+type HiddenItemProps = {|
+  ...MenuItemProps,
+  destructive?: boolean,
+|};
+
+export function HiddenItem({ destructive, onPress, ...otherProps }: HiddenItemProps) {
   const toggleMenu = React.useContext(OverflowMenuContext);
 
-  // when rendering dropdown menu (eg android default) the return value is actually rendered
+  // when rendering dropdown menu (e.g. android default) the return value is actually rendered
   // when we show action sheet, we do not render the returned value,
-  // but just extract title and onPress passed to HiddenItem. HiddenItem() is not called
-  const onPress = () => {
+  // but just extract title, onPress and destructive passed to HiddenItem. HiddenItem() is not called
+  const onMenuItemPress = () => {
     toggleMenu();
-    props.onPress && props.onPress();
+    onPress && onPress();
   };
 
-  return <MenuItem {...props} onPress={onPress} />;
+  return <MenuItem {...otherProps} onPress={onMenuItemPress} />;
 }
 
 // TODO check RTL

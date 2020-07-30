@@ -15,17 +15,18 @@ import { Divider } from '../overflowMenu/vendor/Divider';
 describe('overflowMenuPressHandlers', () => {
   describe('extractOverflowButtonData', () => {
     it(
-      'extracts titles and onPresses when given an array of ' +
+      'extracts titles, onPresses and destructive flags when given an array of ' +
         'HiddenItem or custom function components that render HiddenItem',
       () => {
         const prefix = 'customized_';
-        const WrappedHiddenItem = ({ title, onPress }) => (
-          <HiddenItem title={prefix + title} onPress={onPress} />
+        const WrappedHiddenItem = ({ title, ...otherProps }) => (
+          <HiddenItem title={prefix + title} {...otherProps} />
         );
 
         const propsArray = [
           { title: 'one', onPress: jest.fn() },
           { title: 'two', onPress: jest.fn() },
+          { title: 'three', onPress: jest.fn(), destructive: true },
         ];
         const items = [
           ...propsArray.map((props) => <HiddenItem {...props} />),
@@ -34,17 +35,31 @@ describe('overflowMenuPressHandlers', () => {
         const titlesAndOnPresses = extractOverflowButtonData(items);
 
         expect(titlesAndOnPresses).toStrictEqual([
-          { title: propsArray[0].title, onPress: propsArray[0].onPress },
-          { title: propsArray[1].title, onPress: propsArray[1].onPress },
-          { title: prefix + propsArray[0].title, onPress: propsArray[0].onPress },
-          { title: prefix + propsArray[1].title, onPress: propsArray[1].onPress },
+          { title: propsArray[0].title, onPress: propsArray[0].onPress, destructive: undefined },
+          { title: propsArray[1].title, onPress: propsArray[1].onPress, destructive: undefined },
+          { title: propsArray[2].title, onPress: propsArray[2].onPress, destructive: true },
+          {
+            title: prefix + propsArray[0].title,
+            onPress: propsArray[0].onPress,
+            destructive: undefined,
+          },
+          {
+            title: prefix + propsArray[1].title,
+            onPress: propsArray[1].onPress,
+            destructive: undefined,
+          },
+          {
+            title: prefix + propsArray[2].title,
+            onPress: propsArray[2].onPress,
+            destructive: true,
+          },
         ]);
       }
     );
 
     it('fails when hook / class component is used in the provided elements', () => {
       function MyComponent({ title, onPress }) {
-        const [titleFromState, setTitle] = React.useState('from state hook');
+        const [titleFromState] = React.useState('from state hook');
         return <HiddenItem title={titleFromState + title} onPress={onPress} />;
       }
       const propsArray = [
@@ -130,7 +145,30 @@ describe('overflowMenuPressHandlers', () => {
       expect(ActionSheetIOS.showActionSheetWithOptions).toHaveBeenCalledWith(
         {
           cancelButtonIndex: 0,
+          destructiveButtonIndex: [],
           options: ['Cancel', 'one'],
+        },
+        expect.any(Function) // press callback
+      );
+    });
+
+    it('overflowMenuPressHandlerActionSheet should call ActionSheet with correct destructiveButtonIndex param', () => {
+      const hiddenButtonsWithDestructive = [
+        { title: 'one', onPress: jest.fn() },
+        { title: 'two', onPress: jest.fn(), destructive: true },
+        { title: 'three', onPress: jest.fn(), destructive: true },
+      ];
+      overflowMenuPressHandlerActionSheet({
+        hiddenButtons: hiddenButtonsWithDestructive,
+        overflowButtonRef: null,
+        children: null,
+        _private_toggleMenu: jest.fn(),
+      });
+      expect(ActionSheetIOS.showActionSheetWithOptions).toHaveBeenCalledWith(
+        {
+          cancelButtonIndex: 0,
+          destructiveButtonIndex: [2, 3],
+          options: ['Cancel', 'one', 'two', 'three'],
         },
         expect.any(Function) // press callback
       );

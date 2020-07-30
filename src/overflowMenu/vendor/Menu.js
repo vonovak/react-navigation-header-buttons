@@ -336,16 +336,7 @@ export class Menu extends React.Component<Props, State> {
   };
 
   render() {
-    const {
-      visible,
-      anchor,
-      contentStyle,
-      style,
-      children,
-      statusBarHeight,
-      onDismiss,
-    } = this.props;
-
+    const { visible, contentStyle, style, children, statusBarHeight, onDismiss } = this.props;
     const { rendered, menuLayout, anchorLayout, opacityAnimation, scaleAnimation } = this.state;
 
     let { left, top } = this.state;
