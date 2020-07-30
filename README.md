@@ -8,9 +8,9 @@ Contains many examples and is [available via expo](https://expo.io/@vonovak/navb
 
 #### Install
 
-1) `yarn add react-navigation-header-buttons`
+1. `yarn add react-navigation-header-buttons`
 
-2) Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx)
+2. Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx)
 
 #### Quick Example
 
@@ -72,7 +72,7 @@ export function UsageWithIcons({ navigation }) {
 
 #### `HeaderButtons`
 
-Is just a wrapper over all the visible header buttons (those can be text-buttons, icon-button, or any custom react elements).
+Is a wrapper over all the visible header buttons (those can be text-buttons, icon-button, or any custom react elements).
 The only really interesting prop is `HeaderButtonComponent` that defines how all icons rendered in children will look.
 In particular, it allows setting their icon component, color, and size once so that you don't need to repeat it for each icon-button - but you can easily override those for each `Item` if you like.
 
@@ -82,7 +82,7 @@ In particular, it allows setting their icon component, color, and size once so t
 | ------------------------------------------------ | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | HeaderButtonComponent?: React.ComponentType<any> | component that renders the buttons, `HeaderButton` by default | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). However, you're free to use your own component (see `HeaderButton.js` for reference). |
 | children: React.Node                             | whatever you want to render inside                            | typically `Item` or your component that renders `Item`, but it can be anything.                                                                                                                                                         |
-| left?: boolean                                   | whether the `HeaderButtons` are on the left from header title | false by default, it just influences styling in a subtle way                                                                                                                                                                            |
+| left?: boolean                                   | whether the `HeaderButtons` are on the left from header title | false by default, it only influences styling in a subtle way                                                                                                                                                                            |
 
 #### `Item`
 
@@ -110,7 +110,7 @@ Renders text, or icon, and has an `onPress` handler. Take a look at the example 
 
 #### `OverflowMenu`
 
-Is the place to define the behavior for overflow button (if there is one). Please note you can render `OverflowMenu` just by itself too, you do no need to wrap it in `HeaderButtons`.
+Is the place to define the behavior for overflow button (if there is one). Please note you can render `OverflowMenu` only by itself too, you do no need to wrap it in `HeaderButtons`.
 The most interesting prop is `onPress` which handles what kind of overflow menu we should show.
 
 The package exports common handlers you can use, but you can provide your own too:
@@ -131,7 +131,7 @@ The package exports common handlers you can use, but you can provide your own to
 | onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more below. |
 | testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`   |
 | accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                        |
-| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you passed it to `HeaderButtons`           |   
+| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you passed it to `HeaderButtons`           |
 | children: React.Node                         | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                              |
 
 ##### Important note
@@ -144,7 +144,7 @@ Children passed to `OverflowMenu` should be
 Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` and `overflowMenuPressHandlerPopupMenu`.
 Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, such as `<Divider />` (which is exported) or your custom ones.
 
-This limitation may look weird but it should not really limit you in any way: if you need to have state in your items, just lift it up.
+This limitation may look weird but it should not really limit you in any way: if you need to have state in your items, lift the state up.
 The limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
 If this is a problem for you for some reason, please raise an issue and we'll see what can be done about it.
 
@@ -188,15 +188,15 @@ const HiddenItemWrappedTwice = ()=> <HiddenItemWrapped />
 
 `HiddenItem` accepts:
 
-| prop and type              | description                                                        | note     |
-| -------------------------- | ------------------------------------------------------------------ | -------- |
-| title: string              | title for the button, required                                     |          |
-| style?: ViewStyleProp      | style to apply to the touchable element that wraps the text        |          |
-| titleStyle?: ViewStyleProp | style to apply to the text                                         |          |
-| onPress: ?() => any        | function to call on press                                          |          |
-| testID?: string            | testID to locate view in e2e tests                                 |          |
-| disabled?: boolean         | disabled 'item' is greyed out and `onPress` is not called on touch |          |
-| destructive?: boolean      | flag specifying whether this item is destructive                   | iOS only |
+| prop and type              | description                                                        | note                                                                   |
+| -------------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
+| title: string              | title for the button, required                                     |                                                                        |
+| style?: ViewStyleProp      | style to apply to the touchable element that wraps the text        |                                                                        |
+| titleStyle?: ViewStyleProp | style to apply to the text                                         |                                                                        |
+| onPress: ?() => any        | function to call on press                                          |                                                                        |
+| testID?: string            | testID to locate view in e2e tests                                 |                                                                        |
+| disabled?: boolean         | disabled 'item' is greyed out and `onPress` is not called on touch |                                                                        |
+| destructive?: boolean      | flag specifying whether this item is destructive                   | only applies to items shown with `overflowMenuPressHandlerActionSheet` |
 
 #### `OverflowMenuProvider`
 
