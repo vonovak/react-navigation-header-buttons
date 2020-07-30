@@ -9,10 +9,10 @@ import { MenuItem } from './overflowMenu/vendor/MenuItem';
 
 type HiddenItemProps = {|
   ...MenuItemProps,
-  destructive?: boolean
-|}
+  destructive?: boolean,
+|};
 
-export function HiddenItem({destructive, onPress, ...otherProps}: HiddenItemProps) {
+export function HiddenItem({ destructive, onPress, ...otherProps }: HiddenItemProps) {
   const toggleMenu = React.useContext(OverflowMenuContext);
 
   // when rendering dropdown menu (e.g. android default) the return value is actually rendered
