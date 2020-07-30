@@ -47,7 +47,7 @@ export const OverflowMenu = ({
     });
   }, [children, onPress, toggleMenu]);
 
-  const validChildren = React.Children.toArray(children).filter(React.isValidElement)
+  const validChildren = React.Children.toArray(children).filter(React.isValidElement);
   if (validChildren.length === 0) {
     return null;
   }
