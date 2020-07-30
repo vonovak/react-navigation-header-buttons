@@ -14,7 +14,7 @@ import { OVERFLOW_BUTTON_TEST_ID } from '../e2e';
 import { ButtonsWrapper } from '../ButtonsWrapper';
 
 export type OverflowMenuProps = {|
-  children?: React.Node,
+  children: React.Node,
   OverflowIcon: React.Element<any>,
   style?: ViewStyleProp,
   testID: string,
@@ -37,10 +37,6 @@ export const OverflowMenu = ({
   const renderButtonElement = React.useCallback(() => OverflowIcon, [OverflowIcon]);
 
   const usedOnPress = React.useCallback(() => {
-    if (!children) {
-      return;
-    }
-
     const titlesAndOnPresses =
       onPress === overflowMenuPressHandlerDropdownMenu ? [] : extractOverflowButtonData(children);
     onPress({
@@ -51,7 +47,8 @@ export const OverflowMenu = ({
     });
   }, [children, onPress, toggleMenu]);
 
-  if (!children || (Array.isArray(children) && children.every((it) => !it))) {
+  const validChildren = React.Children.toArray(children).filter(React.isValidElement)
+  if (validChildren.length === 0) {
     return null;
   }
 

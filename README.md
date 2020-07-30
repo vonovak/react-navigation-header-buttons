@@ -148,7 +148,7 @@ This limitation may look weird but it should not really limit you in any way: if
 The limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
 If this is a problem for you for some reason, please raise an issue and we'll see what can be done about it.
 
-If `OverflowMenu` contains no child elements, nothing will be rendered at all. (No `OverflowIcon`, no wrapper.)
+If `OverflowMenu` contains no valid child elements, nothing will be rendered at all. (No `OverflowIcon`, no wrapper.)
 
 <details><summary>examples</summary>
 <p>
