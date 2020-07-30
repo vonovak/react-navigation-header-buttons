@@ -105,7 +105,7 @@ export interface OnOverflowMenuPressParams {
 }
 
 declare class OverflowMenu extends Component<{
-  children?: ReactChild | Array<ReactNode>;
+  children: ReactChild | Array<ReactNode>;
   onPress?: (OnOverflowMenuPressParams) => any;
   OverflowIcon: ReactNode;
   style?: StyleProp<ViewStyle>;
