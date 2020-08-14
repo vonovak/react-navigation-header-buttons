@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { Dimensions, Platform } from 'react-native';
 import { Menu } from './vendor/Menu';
+import { getSpaceAboveMenu } from './statusBarUtils';
 
 export type ToggleMenuParam = ?{|
   elements: React.ChildrenArray<any>,
@@ -12,8 +13,7 @@ export type ToggleMenuParam = ?{|
 export const OVERFLOW_TOP = 15;
 
 const warn = () => {
-  // this is here just to satisfy Flow, the noop value will be replaced
-  // by OverflowMenuProvider rendered in app root
+  // the noop value will be replaced by OverflowMenuProvider rendered in app root
   console.warn(
     'It seems like you tried to open the overflow menu using the overflowMenuPressHandlerDropdownMenu' +
       ' - which is the default handler on android - but you forgot to wrap your root component in <OverflowMenuProvider />.' +
@@ -40,9 +40,9 @@ export const OverflowMenuProvider = ({ children }: Props) => {
     setElements(params?.elements || []);
     if (params) {
       const { x, y } = params;
-      const approxAndroidStatusBarHeight = 25;
+      const heightApprox = getSpaceAboveMenu();
       const extraDelta = Platform.select({
-        android: OVERFLOW_TOP + approxAndroidStatusBarHeight,
+        android: heightApprox,
         default: OVERFLOW_TOP,
       });
       setPosition({ x, y: y + extraDelta });
