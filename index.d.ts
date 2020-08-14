@@ -87,6 +87,7 @@ declare class HiddenItem extends Component<{
   onPress?: () => any;
   style?: StyleProp<ViewStyle>;
   titleStyle?: StyleProp<TextStyle>;
+  testID?: string;
   destructive?: boolean;
 }> {}
 
