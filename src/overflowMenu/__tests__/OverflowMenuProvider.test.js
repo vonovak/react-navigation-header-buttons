@@ -50,7 +50,7 @@ describe('OverflowMenuProvider renders', () => {
 
     const waitForMenuToHide = async () => {
       await waitForElementToBeRemoved(() => getByText(menuItemLabel), {
-        timeout: 500,
+        timeout: 800,
       });
     };
     await waitForMenuToHide();
