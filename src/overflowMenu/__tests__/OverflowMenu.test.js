@@ -1,6 +1,6 @@
 // @flow
 import { HiddenItem } from '../../HeaderItems';
-import { fireEvent, render } from 'react-native-testing-library';
+import { fireEvent, render } from '@testing-library/react-native';
 import { Text } from 'react-native';
 import React from 'react';
 import { OverflowMenu } from '../OverflowMenu';

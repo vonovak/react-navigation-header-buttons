@@ -1,7 +1,7 @@
 // @flow
 import { OverflowMenuProvider, OverflowMenuContext } from '../OverflowMenuContext';
 import { Text } from 'react-native';
-import { render, fireEvent } from 'react-native-testing-library';
+import { render, fireEvent, waitForElementToBeRemoved } from '@testing-library/react-native';
 import React from 'react';
 
 describe('OverflowMenuProvider renders', () => {
@@ -18,7 +18,7 @@ describe('OverflowMenuProvider renders', () => {
     `);
   });
 
-  it('the child and the menu item, when it is displayed by calling toggleMenu() provided by OverflowMenuContext', async () => {
+  it('the child and the menu item, when it is displayed by calling toggleMenu() that is provided by OverflowMenuContext', async () => {
     const menuItemLabel = 'overflow menu item';
     const showMenuLabel = 'show menu';
 
@@ -34,20 +34,24 @@ describe('OverflowMenuProvider renders', () => {
         </Text>
       );
     };
-    const { toJSON, getByText, findByText } = render(
+    const { toJSON, getByText } = render(
       <OverflowMenuProvider>
         <ButtonThatShowsMenu />
       </OverflowMenuProvider>
     );
 
+    const toggleMenuShown = () => fireEvent.press(getByText(showMenuLabel));
+
     const beforeShown = toJSON();
-    fireEvent.press(getByText(showMenuLabel));
+    toggleMenuShown();
     expect(toJSON()).toMatchSnapshot();
     getByText(menuItemLabel);
-    fireEvent.press(getByText(showMenuLabel));
+    toggleMenuShown();
 
     const waitForMenuToHide = async () => {
-      await expect(findByText(menuItemLabel, { timeout: 500 })).rejects.toBeTruthy();
+      await waitForElementToBeRemoved(() => getByText(menuItemLabel), {
+        timeout: 500,
+      });
     };
     await waitForMenuToHide();
 
