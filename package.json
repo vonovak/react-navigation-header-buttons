@@ -21,6 +21,10 @@
     "invariant": ">=2",
     "react-native-platform-touchable": "^1.1.1"
   },
+  "peerDependencies": {
+	"react": ">=16.11.0",
+	"react-native": ">=0.62.0"
+  },
   "keywords": [
     "react-navigation",
     "header",
