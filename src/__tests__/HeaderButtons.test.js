@@ -4,7 +4,7 @@
 import { Item } from '../HeaderItems';
 import { HeaderButtons } from '../HeaderButtons';
 import { HeaderButton } from '../HeaderButton';
-import { render, fireEvent } from 'react-native-testing-library';
+import { render, fireEvent } from '@testing-library/react-native';
 import { Text } from 'react-native';
 import React from 'react';
 

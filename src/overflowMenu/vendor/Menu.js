@@ -41,6 +41,10 @@ type Props = {|
    */
   onDismiss: () => void,
   /**
+   * Accessibility label for the overlay. This is read by the screen reader when the user taps outside the menu.
+   */
+  overlayAccessibilityLabel?: string,
+  /**
    * Content of the `Menu`.
    */
   children: React.Node,
@@ -127,6 +131,7 @@ export class Menu extends React.Component<Props, State> {
 
   static defaultProps = {
     statusBarHeight: APPROX_STATUSBAR_HEIGHT,
+    overlayAccessibilityLabel: 'Close menu',
   };
 
   static getDerivedStateFromProps(nextProps: Props, prevState: State) {
@@ -336,7 +341,15 @@ export class Menu extends React.Component<Props, State> {
   };
 
   render() {
-    const { visible, contentStyle, style, children, statusBarHeight, onDismiss } = this.props;
+    const {
+      visible,
+      contentStyle,
+      style,
+      children,
+      statusBarHeight,
+      onDismiss,
+      overlayAccessibilityLabel,
+    } = this.props;
     const { rendered, menuLayout, anchorLayout, opacityAnimation, scaleAnimation } = this.state;
 
     let { left, top } = this.state;
@@ -483,7 +496,11 @@ export class Menu extends React.Component<Props, State> {
     };
     return rendered ? (
       <View style={StyleSheet.absoluteFill} collapsable={false}>
-        <TouchableWithoutFeedback onPress={onDismiss}>
+        <TouchableWithoutFeedback
+          accessibilityLabel={overlayAccessibilityLabel}
+          accessibilityRole="button"
+          onPress={onDismiss}
+        >
           <View style={StyleSheet.absoluteFill} />
         </TouchableWithoutFeedback>
         <View
@@ -494,6 +511,7 @@ export class Menu extends React.Component<Props, State> {
           accessibilityViewIsModal={visible}
           style={[styles.wrapper, positionStyle, style]}
           pointerEvents={visible ? 'box-none' : 'none'}
+          onAccessibilityEscape={onDismiss}
         >
           <Animated.View style={{ transform: positionTransforms }}>
             <Animated.View

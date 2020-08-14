@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OverflowMenuProvider renders the child and the menu item, when it is displayed by calling toggleMenu() provided by OverflowMenuContext 1`] = `
+exports[`OverflowMenuProvider renders the child and the menu item, when it is displayed by calling toggleMenu() that is provided by OverflowMenuContext 1`] = `
 Array [
   <Text
     onPress={[Function]}
