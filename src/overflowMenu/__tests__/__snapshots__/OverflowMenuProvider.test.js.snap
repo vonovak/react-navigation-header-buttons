@@ -20,6 +20,8 @@ Array [
     }
   >
     <View
+      accessibilityLabel="Close menu"
+      accessibilityRole="button"
       accessible={true}
       focusable={true}
       onClick={[Function]}
@@ -42,6 +44,7 @@ Array [
     <View
       accessibilityViewIsModal={true}
       collapsable={false}
+      onAccessibilityEscape={[Function]}
       pointerEvents="box-none"
       style={
         Array [
