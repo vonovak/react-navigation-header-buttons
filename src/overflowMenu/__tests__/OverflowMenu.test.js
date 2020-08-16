@@ -28,13 +28,15 @@ describe('overflowMenu', () => {
     fireEvent.press(getByA11yLabel('More options'));
     expect(onPress).toHaveBeenCalledWith({
       hiddenButtons: [
-        { title: 'search', onPress: searchOnPress },
-        { title: 'delete', onPress: deleteOnPress },
+        { title: 'search', onPress: searchOnPress, destructive: false, disabled: false },
+        { title: 'search2', onPress: searchOnPress, destructive: false, disabled: true },
+        { title: 'delete', onPress: deleteOnPress, destructive: false, disabled: false },
       ],
       overflowButtonRef: expect.any(Object),
       children: expect.any(Array),
       _private_toggleMenu: expect.any(Function),
     });
+    expect(onPress).toHaveBeenCalled();
   });
 
   it('renders dropdown material menu correctly', () => {
