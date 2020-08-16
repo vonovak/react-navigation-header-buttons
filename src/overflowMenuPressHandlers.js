@@ -9,6 +9,7 @@ type OverflowButtonDescriptors = $ReadOnlyArray<{|
   title: string,
   onPress: () => void | Promise<void>,
   destructive?: boolean,
+  disabled?: boolean,
 |}>;
 
 export const extractOverflowButtonData = (
@@ -53,7 +54,7 @@ const extract = (element: React.Element<any>) => {
   const {
     props: { title, onPress, disabled, destructive },
   } = element;
-  return disabled === true ? false : { title, onPress, destructive };
+  return { title, onPress, destructive: destructive === true, disabled: disabled === true };
 };
 
 export type OnOverflowMenuPressParams = {|
@@ -73,14 +74,15 @@ export const overflowMenuPressHandlerActionSheet = ({
   cancelButtonLabel = 'Cancel',
 }: OnOverflowMenuPressParams) => {
   checkParams(hiddenButtons);
-  let actionTitles = hiddenButtons.map((btn) => btn.title);
-  const destructiveActions: Array<number> = hiddenButtons.reduce((acc, btn, index) => {
+  const enabledButtons = hiddenButtons.filter((it) => it.disabled !== true);
+  let actionTitles = enabledButtons.map((btn) => btn.title);
+  actionTitles.unshift(cancelButtonLabel);
+  const destructiveActions: Array<number> = enabledButtons.reduce((acc, btn, index) => {
     if (btn.destructive) {
       acc.push(index + 1);
     }
     return acc;
   }, []);
-  actionTitles.unshift(cancelButtonLabel);
 
   ActionSheetIOS.showActionSheetWithOptions(
     {
@@ -102,16 +104,17 @@ export const overflowMenuPressHandlerPopupMenu = ({
   overflowButtonRef,
 }: OnOverflowMenuPressParams) => {
   checkParams(hiddenButtons);
+  const enabledButtons = hiddenButtons.filter((it) => it.disabled !== true);
 
   UIManager.showPopupMenu(
     findNodeHandle(overflowButtonRef),
-    hiddenButtons.map((btn) => btn.title),
+    enabledButtons.map((btn) => btn.title),
     (err) => console.debug('overflowBtn error', err),
     (eventName: string, index?: number) => {
       if (eventName !== 'itemSelected' || typeof index !== 'number') {
         return;
       }
-      hiddenButtons[index].onPress();
+      enabledButtons[index].onPress();
     }
   );
 };

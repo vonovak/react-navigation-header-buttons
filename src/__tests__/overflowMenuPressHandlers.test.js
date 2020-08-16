@@ -15,7 +15,7 @@ import { Divider } from '../overflowMenu/vendor/Divider';
 describe('overflowMenuPressHandlers', () => {
   describe('extractOverflowButtonData', () => {
     it(
-      'extracts titles, onPresses and destructive flags when given an array of ' +
+      'extracts titles, onPresses and destructive+disabled flags when given an array of ' +
         'HiddenItem or custom function components that render HiddenItem',
       () => {
         const prefix = 'customized_';
@@ -25,33 +25,50 @@ describe('overflowMenuPressHandlers', () => {
 
         const propsArray = [
           { title: 'one', onPress: jest.fn() },
-          { title: 'two', onPress: jest.fn() },
+          { title: 'two', onPress: jest.fn(), disabled: true },
           { title: 'three', onPress: jest.fn(), destructive: true },
         ];
-        const items = [
+        const titlesAndOnPresses = extractOverflowButtonData([
           ...propsArray.map((props) => <HiddenItem {...props} />),
           ...propsArray.map((props) => <WrappedHiddenItem {...props} />),
-        ];
-        const titlesAndOnPresses = extractOverflowButtonData(items);
+        ]);
 
         expect(titlesAndOnPresses).toStrictEqual([
-          { title: propsArray[0].title, onPress: propsArray[0].onPress, destructive: undefined },
-          { title: propsArray[1].title, onPress: propsArray[1].onPress, destructive: undefined },
-          { title: propsArray[2].title, onPress: propsArray[2].onPress, destructive: true },
+          {
+            title: propsArray[0].title,
+            onPress: propsArray[0].onPress,
+            destructive: false,
+            disabled: false,
+          },
+          {
+            title: propsArray[1].title,
+            onPress: propsArray[1].onPress,
+            destructive: false,
+            disabled: true,
+          },
+          {
+            title: propsArray[2].title,
+            onPress: propsArray[2].onPress,
+            destructive: true,
+            disabled: false,
+          },
           {
             title: prefix + propsArray[0].title,
             onPress: propsArray[0].onPress,
-            destructive: undefined,
+            destructive: false,
+            disabled: false,
           },
           {
             title: prefix + propsArray[1].title,
             onPress: propsArray[1].onPress,
-            destructive: undefined,
+            destructive: false,
+            disabled: true,
           },
           {
             title: prefix + propsArray[2].title,
             onPress: propsArray[2].onPress,
             destructive: true,
+            disabled: false,
           },
         ]);
       }
@@ -99,20 +116,14 @@ describe('overflowMenuPressHandlers', () => {
     });
 
     describe('corner cases', () => {
-      const NestedHiddenItem = () => (
-        <HiddenItem title="disabled-nested" onPress={jest.fn()} disabled />
-      );
       const NullNestedComponent = () => null;
 
-      it.each([
-        [null],
-        [undefined],
-        [[<HiddenItem title="disabled" onPress={jest.fn()} disabled />]],
-        [[<NestedHiddenItem />]],
-        [[<NullNestedComponent />]],
-      ])('extractOverflowButtonData works for case %#', (input) => {
-        expect(extractOverflowButtonData(input)).toEqual([]);
-      });
+      it.each([[null], [undefined], [[<NullNestedComponent />]]])(
+        'extractOverflowButtonData works for case %#',
+        (input) => {
+          expect(extractOverflowButtonData(input)).toEqual([]);
+        }
+      );
     });
 
     it('ignores invalid / non-element values', () => {
@@ -122,13 +133,19 @@ describe('overflowMenuPressHandlers', () => {
 
     it('works for single child element', () => {
       const props = { title: 'one', onPress: jest.fn() };
-      expect(extractOverflowButtonData(<HiddenItem {...props} />)).toEqual([props]);
+      expect(extractOverflowButtonData(<HiddenItem {...props} />)).toEqual([
+        { ...props, disabled: false, destructive: false },
+      ]);
       expect(extractOverflowButtonData(null)).toEqual([]);
     });
   });
 
   describe('overflow button press handlers: given an array of {title, onPress}', () => {
-    const hiddenButtons = [{ title: 'one', onPress: jest.fn() }];
+    const hiddenButtons = [
+      { title: 'one', onPress: jest.fn() },
+      { title: 'two', onPress: jest.fn(), disabled: true },
+      { title: 'three', onPress: jest.fn(), destructive: true },
+    ];
     beforeEach(() => {
       ActionSheetIOS.showActionSheetWithOptions = jest.fn();
       // $FlowExpectedError
@@ -145,30 +162,9 @@ describe('overflowMenuPressHandlers', () => {
       expect(ActionSheetIOS.showActionSheetWithOptions).toHaveBeenCalledWith(
         {
           cancelButtonIndex: 0,
-          destructiveButtonIndex: [],
-          options: ['Cancel', 'one'],
-        },
-        expect.any(Function) // press callback
-      );
-    });
-
-    it('overflowMenuPressHandlerActionSheet should call ActionSheet with correct destructiveButtonIndex param', () => {
-      const hiddenButtonsWithDestructive = [
-        { title: 'one', onPress: jest.fn() },
-        { title: 'two', onPress: jest.fn(), destructive: true },
-        { title: 'three', onPress: jest.fn(), destructive: true },
-      ];
-      overflowMenuPressHandlerActionSheet({
-        hiddenButtons: hiddenButtonsWithDestructive,
-        overflowButtonRef: null,
-        children: null,
-        _private_toggleMenu: jest.fn(),
-      });
-      expect(ActionSheetIOS.showActionSheetWithOptions).toHaveBeenCalledWith(
-        {
-          cancelButtonIndex: 0,
-          destructiveButtonIndex: [2, 3],
-          options: ['Cancel', 'one', 'two', 'three'],
+          // disabledButtonsIndices: [1],
+          destructiveButtonIndex: [2],
+          options: ['Cancel', 'one', 'three'],
         },
         expect.any(Function) // press callback
       );
@@ -183,7 +179,7 @@ describe('overflowMenuPressHandlers', () => {
       });
       expect(UIManager.showPopupMenu).toHaveBeenCalledWith(
         null,
-        ['one'],
+        ['one', 'three'],
         expect.any(Function), // error callback
         expect.any(Function) // press callback
       );
