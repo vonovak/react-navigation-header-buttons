@@ -36,7 +36,6 @@ describe('overflowMenu', () => {
       children: expect.any(Array),
       _private_toggleMenu: expect.any(Function),
     });
-    expect(onPress).toHaveBeenCalled();
   });
 
   it('renders dropdown material menu correctly', () => {
