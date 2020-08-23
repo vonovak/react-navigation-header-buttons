@@ -36,7 +36,7 @@ import {
 const IoniconsHeaderButton = (props) => (
   // the `props` here come from <Item ... />
   // you may access them and pass something else to `HeaderButton` if you like
-  <HeaderButton {...props} IconComponent={Ionicons} iconSize={23} color="blue" />
+  <HeaderButton IconComponent={Ionicons} iconSize={23} color="blue" {...props} />
 );
 
 const ReusableSelectItem = ({ onPress }) => <Item title="Edit" onPress={onPress} />;
