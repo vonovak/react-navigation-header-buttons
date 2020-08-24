@@ -265,4 +265,4 @@ static navigationOptions = {
 - missing styling support for material dropdown menu
 - item margins need to be reviewed and polished; don't hesitate to contribute - [this](https://github.com/infinitered/reactotron/blob/master/docs/plugin-overlay.md) should help
 - RTL is not tested
-- touchables need updte, and ripple effect on Android is not always the same size, this will be fixable in RN 63 / Expo 39 [PR](https://github.com/facebook/react-native/pull/28009) / [PR](https://github.com/software-mansion/react-native-gesture-handler/pull/1069/files)
+- touchables need an update, and ripple effect on Android is not always the same size, this will be fixable in RN 63 / Expo 39 [PR](https://github.com/facebook/react-native/pull/28009) / [PR](https://github.com/software-mansion/react-native-gesture-handler/pull/1069/files)
