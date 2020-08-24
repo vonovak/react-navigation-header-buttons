@@ -6,12 +6,6 @@ This package will help you render buttons in the navigation bar and handle the s
 
 Contains many examples and is [available via expo](https://expo.io/@vonovak/navbar-buttons-demo). Sources are in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/screens). I highly recommend you check out both links to get a better idea of the api.
 
-#### Install
-
-1. `yarn add react-navigation-header-buttons`
-
-2. Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx)
-
 #### Quick Example
 
 <span>
@@ -39,7 +33,7 @@ const IoniconsHeaderButton = (props) => (
   <HeaderButton IconComponent={Ionicons} iconSize={23} color="blue" {...props} />
 );
 
-const ReusableSelectItem = ({ onPress }) => <Item title="Edit" onPress={onPress} />;
+const ReusableItem = ({ onPress }) => <Item title="Edit" onPress={onPress} />;
 
 const ReusableHiddenItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} />;
 
@@ -51,7 +45,7 @@ export function UsageWithIcons({ navigation }) {
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
           <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-          <ReusableSelectItem onPress={() => alert('Edit')} />
+          <ReusableItem onPress={() => alert('Edit')} />
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
             OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
@@ -68,12 +62,18 @@ export function UsageWithIcons({ navigation }) {
 }
 ```
 
+#### Setup
+
+1. `yarn add react-navigation-header-buttons`
+
+2. Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx)
+
 ### Usage
 
 #### `HeaderButtons`
 
 Is a wrapper over all the visible header buttons (those can be text-buttons, icon-button, or any custom react elements).
-The only really interesting prop is `HeaderButtonComponent` that defines how all icons rendered in children will look.
+The most important prop is `HeaderButtonComponent` that defines how all icons rendered in children will look.
 In particular, it allows setting their icon component, color, and size once so that you don't need to repeat it for each icon-button - but you can easily override those for each `Item` if you like.
 
 `HeaderButtons` accepts:
@@ -111,9 +111,9 @@ Renders text, or icon, and has an `onPress` handler. Take a look at the example 
 #### `OverflowMenu`
 
 Is the place to define the behavior for overflow button (if there is one). Please note you can render `OverflowMenu` only by itself too, you do no need to wrap it in `HeaderButtons`.
-The most interesting prop is `onPress` which handles what kind of overflow menu we should show.
+The most interesting prop is `onPress` which defines what kind of overflow menu we should show.
 
-The package exports common handlers you can use, but you can provide your own too:
+The package exports common handlers you can use, but you can provide your own too (via `onPress` prop):
 
 | exported handler                       | description                                                                                                                                                                                                                                                                                        |
 | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -124,15 +124,15 @@ The package exports common handlers you can use, but you can provide your own to
 
 `OverflowMenu` accepts:
 
-| prop and type                                | description                                                 | note                                                                                                             |
-| -------------------------------------------- | ----------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| OverflowIcon?: React.Element<any>            | React element for the overflow icon                         | you need to provide this only if you need an overflow icon                                                       |
-| style?: ViewStyleProp                        | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.js`                                                |
-| onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more below. |
-| testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`   |
-| accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                        |
-| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you passed it to `HeaderButtons`           |
-| children: React.Node                         | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                              |
+| prop and type                                | description                                                 | note                                                                                                                    |
+| -------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| OverflowIcon?: React.Element<any>            | React element for the overflow icon                         | you need to provide this only if you need an overflow icon                                                              |
+| style?: ViewStyleProp                        | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.js`                                                       |
+| onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more in "Recipes". |
+| testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`          |
+| accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                               |
+| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you passed it to `HeaderButtons`                  |
+| children: React.Node                         | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                                     |
 
 ##### Important note
 
@@ -144,7 +144,7 @@ Children passed to `OverflowMenu` should be
 Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` and `overflowMenuPressHandlerPopupMenu`.
 Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, such as `<Divider />` (which is exported) or your custom ones.
 
-This limitation may look weird but it should not really limit you in any way: if you need to have state in your items, lift the state up.
+This limitation may look weird but it should not really bother you in any way: if you need to have state in your items, lift the state up.
 The limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
 If this is a problem for you for some reason, please raise an issue and we'll see what can be done about it.
 
@@ -214,7 +214,7 @@ See the source if you want to customize it.
 
 The default handler for overflow menu on iOS is `overflowMenuPressHandlerActionSheet`.
 
-One of the usual things you may want to do is override the cancel button label on iOS, or providing a `destructiveButtonIndex` - see [example](example/screens/UsageWithOverflow.tsx).
+One of the usual things you may want to do is override the cancel button label on iOS - see [example](example/screens/UsageWithOverflow.tsx).
 
 #### How to integrate in your project
 
@@ -265,4 +265,4 @@ static navigationOptions = {
 - missing styling support for material dropdown menu
 - item margins need to be reviewed and polished; don't hesitate to contribute - [this](https://github.com/infinitered/reactotron/blob/master/docs/plugin-overlay.md) should help
 - RTL is not tested
-- ripple effect on Android is not always the same size, this should be fixable in RN 63 [PR](https://github.com/facebook/react-native/pull/28009)
+- touchables need updte, and ripple effect on Android is not always the same size, this will be fixable in RN 63 / Expo 39 [PR](https://github.com/facebook/react-native/pull/28009) / [PR](https://github.com/software-mansion/react-native-gesture-handler/pull/1069/files)
