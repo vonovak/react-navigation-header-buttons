@@ -17,7 +17,7 @@ const IoniconsHeaderButton = (props) => (
 
 const ReusableSelectItem = ({ onPress }) => <Item title="Edit" onPress={onPress} />;
 
-const ReusableHiddenItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} />;
+const ReusableItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} />;
 
 export function UsageWithIcons({ navigation }) {
   React.useLayoutEffect(() => {
@@ -33,7 +33,7 @@ export function UsageWithIcons({ navigation }) {
             OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
           >
             <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
-            <ReusableHiddenItem onPress={() => alert('hidden2')} />
+            <ReusableItem onPress={() => alert('hidden2')} />
           </OverflowMenu>
         </HeaderButtons>
       ),
