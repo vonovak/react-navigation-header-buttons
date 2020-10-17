@@ -36,7 +36,7 @@
     "@types/react-native": "^0.60.22",
     "babel-preset-expo": "^8.1.0",
     "relative-deps": "^1.0.0",
-    "typescript": "^3.8.3"
+    "typescript": "^4.0.3"
   },
   "private": true
 }
