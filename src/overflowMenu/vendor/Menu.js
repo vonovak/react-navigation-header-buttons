@@ -162,14 +162,15 @@ export class Menu extends React.Component<Props, State> {
     this.removeListeners();
   }
 
-  anchor: View | null = null;
-  menu: View | null = null;
+  anchor: typeof View | null = null;
+  menu: typeof View | null = null;
 
   isAnchorCoord = () => !React.isValidElement(this.props.anchor);
 
   measureMenuLayout = () =>
     new Promise<LayoutRectangle>((resolve) => {
       if (this.menu) {
+        // $FlowFixMe
         this.menu.measureInWindow((x, y, width, height) => {
           resolve({ x, y, width, height });
         });
@@ -186,6 +187,7 @@ export class Menu extends React.Component<Props, State> {
       }
 
       if (this.anchor) {
+        // $FlowFixMe
         this.anchor.measureInWindow((x, y, width, height) => {
           resolve({ x, y, width, height });
         });
@@ -206,7 +208,7 @@ export class Menu extends React.Component<Props, State> {
 
   isBrowser = () => Platform.OS === 'web' && 'document' in global;
 
-  focusFirstDOMNode = (el: View | null | typeof undefined) => {
+  focusFirstDOMNode = (el: typeof View | null | typeof undefined) => {
     if (el && this.isBrowser()) {
       // When in the browser, we want to focus the first focusable item on toggle
       // For example, when menu is shown, focus the first item in the menu
@@ -364,12 +366,14 @@ export class Menu extends React.Component<Props, State> {
       {
         scaleX: scaleAnimation.x.interpolate({
           inputRange: [0, menuLayout.width],
+          // $FlowFixMe
           outputRange: [0, 1],
         }),
       },
       {
         scaleY: scaleAnimation.y.interpolate({
           inputRange: [0, menuLayout.height],
+          // $FlowFixMe
           outputRange: [0, 1],
         }),
       },
@@ -385,6 +389,7 @@ export class Menu extends React.Component<Props, State> {
       positionTransforms.push({
         translateX: scaleAnimation.x.interpolate({
           inputRange: [0, menuLayout.width],
+          // $FlowFixMe
           outputRange: [-(menuLayout.width / 2), 0],
         }),
       });
@@ -397,6 +402,7 @@ export class Menu extends React.Component<Props, State> {
       positionTransforms.push({
         translateX: scaleAnimation.x.interpolate({
           inputRange: [0, menuLayout.width],
+          // $FlowFixMe
           outputRange: [menuLayout.width / 2, 0],
         }),
       });
@@ -454,6 +460,7 @@ export class Menu extends React.Component<Props, State> {
       positionTransforms.push({
         translateY: scaleAnimation.y.interpolate({
           inputRange: [0, menuLayout.height],
+          // $FlowFixMe
           outputRange: [-((scrollableMenuHeight || menuLayout.height) / 2), 0],
         }),
       });
@@ -466,6 +473,7 @@ export class Menu extends React.Component<Props, State> {
       positionTransforms.push({
         translateY: scaleAnimation.y.interpolate({
           inputRange: [0, menuLayout.height],
+          // $FlowFixMe
           outputRange: [(scrollableMenuHeight || menuLayout.height) / 2, 0],
         }),
       });

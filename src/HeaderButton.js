@@ -2,8 +2,8 @@
  * @flow
  */
 import * as React from 'react';
-import { StyleSheet, View, Platform, TouchableWithoutFeedback } from 'react-native';
-import Touchable from 'react-native-platform-touchable';
+import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import TouchableItem from './TouchableItem';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 
 const BUTTON_HIT_SLOP = Object.freeze({ top: 5, bottom: 5, left: 5, right: 5 });
@@ -37,11 +37,6 @@ export type HeaderButtonProps = {|
   ...OtherProps,
 |};
 
-// A workaround for ripple on Android P is to use useForeground + overflow: 'hidden'
-// https://github.com/facebook/react-native/issues/6480
-const useForeground = Platform.OS === 'android' && Platform.Version >= 28;
-// this is where all the onPress, title and Icon props meet to render actual result
-
 export function HeaderButton(props: HeaderButtonProps) {
   const {
     onPress,
@@ -66,22 +61,18 @@ export function HeaderButton(props: HeaderButtonProps) {
     color,
   });
   return (
-    <Touchable
-      background={useForeground ? undefined : background}
-      foreground={useForeground ? background : undefined}
+    <TouchableItem
+      borderless
       onPress={onPress}
       hitSlop={BUTTON_HIT_SLOP}
+      rippleRadius={20}
       style={StyleSheet.compose(styles.buttonContainer, style)}
       {...other}
     >
       <View>{ButtonElement}</View>
-    </Touchable>
+    </TouchableItem>
   );
 }
-
-HeaderButton.defaultProps = {
-  background: Touchable.Ripple('rgba(0, 0, 0, .32)', true),
-};
 
 const styles = StyleSheet.create({
   buttonContainer: {

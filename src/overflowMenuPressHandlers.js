@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Platform, ActionSheetIOS, UIManager, findNodeHandle, type View } from 'react-native';
+import { Platform, ActionSheetIOS, UIManager, findNodeHandle, typeof View } from 'react-native';
 import { HiddenItem } from './HeaderItems';
 import invariant from 'invariant';
 import type { ToggleMenuParam } from './overflowMenu/OverflowMenuContext';
@@ -125,6 +125,7 @@ export const overflowMenuPressHandlerDropdownMenu = ({
   _private_toggleMenu,
 }: OnOverflowMenuPressParams) => {
   if (overflowButtonRef) {
+    // $FlowFixMe
     overflowButtonRef.measureInWindow((x, y, width) => {
       _private_toggleMenu({ elements: children, x: x + width, y });
     });

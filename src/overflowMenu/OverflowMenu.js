@@ -33,7 +33,7 @@ export const OverflowMenu = ({
   left,
 }: OverflowMenuProps) => {
   const toggleMenu = React.useContext(OverflowMenuContext);
-  const btnRef = React.useRef<View | null>(null);
+  const btnRef = React.useRef<typeof View | null>(null);
   const renderButtonElement = React.useCallback(() => OverflowIcon, [OverflowIcon]);
 
   const usedOnPress = React.useCallback(() => {

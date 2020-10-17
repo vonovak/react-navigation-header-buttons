@@ -121,6 +121,7 @@ describe('overflowMenuPressHandlers', () => {
       it.each([[null], [undefined], [[<NullNestedComponent />]]])(
         'extractOverflowButtonData works for case %#',
         (input) => {
+          // $FlowExpectedError
           expect(extractOverflowButtonData(input)).toEqual([]);
         }
       );
@@ -194,7 +195,9 @@ describe('overflowMenuPressHandlers', () => {
       (handler) => {
         expect(() =>
           handler({
+            // $FlowExpectedError
             hiddenButtons: null,
+            children: null,
             overflowButtonRef: null,
             _private_toggleMenu: jest.fn(),
           })

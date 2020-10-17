@@ -2,7 +2,7 @@
 import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
-import Touchable from 'react-native-platform-touchable';
+import TouchableItem from '../../TouchableItem';
 
 export type Props = {|
   /**
@@ -35,7 +35,6 @@ export type Props = {|
 /**
  * A component to show a single list item inside a Menu.
  */
-const rippleConfig = Touchable.Ripple('rgba(0, 0, 0, .32)', false);
 
 export class MenuItem extends React.Component<Props> {
   render() {
@@ -44,8 +43,7 @@ export class MenuItem extends React.Component<Props> {
     const titleColor = disabled ? styles.disabledColor : styles.normalColor;
 
     return (
-      <Touchable
-        background={rippleConfig}
+      <TouchableItem
         style={[styles.container, style]}
         onPress={onPress}
         disabled={disabled}
@@ -66,7 +64,7 @@ export class MenuItem extends React.Component<Props> {
             </Text>
           </View>
         </View>
-      </Touchable>
+      </TouchableItem>
     );
   }
 }
