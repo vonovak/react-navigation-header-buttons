@@ -1,5 +1,11 @@
 import * as React from 'react';
-import { Platform, TouchableNativeFeedback, TouchableOpacity, View } from 'react-native';
+import {
+  Platform,
+  TouchableNativeFeedback,
+  TouchableOpacity,
+  View,
+  type ViewProps,
+} from 'react-native';
 
 type Props = {|
   ...ViewProps,
