@@ -4,4 +4,5 @@ module.exports = {
   transform: {
     '^.+\\.js|.tsx$': require.resolve('react-native/jest/preprocessor.js'),
   },
+  setupFiles: ['./node_modules/react-native-gesture-handler/jestSetup.js'],
 };

@@ -44,7 +44,7 @@ describe('overflowMenu', () => {
 
     const WrappedItem = () => <HiddenItem title="delete" onPress={deleteOnPress} />;
 
-    const { queryAllByText, getByA11yLabel, UNSAFE_getByProps } = render(
+    const { queryAllByText, getByA11yLabel, UNSAFE_queryAllByProps } = render(
       <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={overflowMenuPressHandlerDropdownMenu}>
         <HiddenItem icon={<Text>O</Text>} title="search" onPress={searchOnPress} />
         <HiddenItem title="search2" onPress={searchOnPress} disabled />
@@ -54,7 +54,7 @@ describe('overflowMenu', () => {
     );
     expect(queryAllByText('Search')).toHaveLength(0);
 
-    const menuAnchor = UNSAFE_getByProps({ collapsable: false });
+    const menuAnchor = UNSAFE_queryAllByProps({ collapsable: false })[0];
     menuAnchor.instance.measureInWindow = (callback) => {
       callback(0, 0, 100);
     };
