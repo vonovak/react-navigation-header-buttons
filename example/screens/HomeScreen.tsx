@@ -27,10 +27,6 @@ export function HomeScreen({ navigation }) {
           title="Overflow menu - all handlers"
         />
         <Button
-          onPress={() => _navigateTo('UsageCustomRipple')}
-          title="Custom ripple (android only)"
-        />
-        <Button
           onPress={() => _navigateTo('UsageDifferentFontFamilies')}
           title="Different font families in one menu"
         />

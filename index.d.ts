@@ -49,10 +49,6 @@ export interface HeaderButtonProps extends CommonHeaderButtonProps {
    * Color of icons and buttons.
    */
   color?: string;
-  /**
-   * Property for different ripple effects.
-   */
-  background?: any;
 }
 
 export class HeaderButton extends Component<HeaderButtonProps> {}
