@@ -93,6 +93,7 @@ Renders text, or icon, and has an `onPress` handler. Take a look at the example 
 | prop and type               | description                                                                 | note                          |
 | --------------------------- | --------------------------------------------------------------------------- | ----------------------------- |
 | title: string               | title for the button, required                                              |                               |
+| transformText: boolean      | if text should transform (iOS Captialized, Android UPPERCASE), default true |                               |
 | onPress: ?() => any         | function to call on press                                                   |                               |
 | iconName?: string           | icon name, used together with the `IconComponent` prop                      |                               |
 | style?: ViewStyleProp       | style to apply to the touchable element that wraps the button               |                               |
