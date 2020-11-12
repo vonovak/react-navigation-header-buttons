@@ -35,7 +35,15 @@ export function Item(props: ItemProps) {
 }
 
 export function renderVisibleButton(visibleButtonProps: VisibleButtonProps): React.Element<any> {
-  const { IconComponent, iconSize, color, iconName, title, buttonStyle, transformText=true } = visibleButtonProps;
+  const {
+    IconComponent,
+    iconSize,
+    color,
+    iconName,
+    title,
+    buttonStyle,
+    transformText = true,
+  } = visibleButtonProps;
 
   return IconComponent && iconName ? (
     <IconComponent
@@ -45,7 +53,9 @@ export function renderVisibleButton(visibleButtonProps: VisibleButtonProps): Rea
       style={StyleSheet.compose(styles.button, buttonStyle)}
     />
   ) : (
-    <Text style={[styles.text, { color }, buttonStyle]}>{transformText ? textTransformer(title) : title}</Text>
+    <Text style={[styles.text, { color }, buttonStyle]}>
+      {transformText ? textTransformer(title) : title}
+    </Text>
   );
 }
 
