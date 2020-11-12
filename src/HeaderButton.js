@@ -16,6 +16,7 @@ export type VisibleButtonProps = {|
   iconName?: string,
   title: string,
   buttonStyle?: ViewStyleProp,
+  transformText?: Boolean,
 |};
 
 // from <Item />
@@ -45,6 +46,7 @@ export function HeaderButton(props: HeaderButtonProps) {
     background,
     iconName,
     title,
+    transformText,
     buttonStyle,
     IconComponent,
     iconSize,
@@ -55,6 +57,7 @@ export function HeaderButton(props: HeaderButtonProps) {
   const ButtonElement = renderButtonElement({
     iconName,
     title,
+    transformText,
     buttonStyle,
     IconComponent,
     iconSize,
