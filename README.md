@@ -126,7 +126,7 @@ The package exports common handlers you can use, but you can provide your own to
 
 | prop and type                                | description                                                 | note                                                                                                                    |
 | -------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| OverflowIcon?: React.Element<any>            | React element for the overflow icon                         | you need to provide this only if you need an overflow icon                                                              |
+| OverflowIcon: React.Element<any>             | React element for the overflow icon                         |                                                                                                                         |
 | style?: ViewStyleProp                        | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.js`                                                       |
 | onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more in "Recipes". |
 | testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`          |
