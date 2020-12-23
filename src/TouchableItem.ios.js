@@ -48,6 +48,9 @@ export default class TouchableItem extends React.Component<Props> {
       <AnimatedBaseButton
         {...rest}
         enabled={enabled}
+        // the component is controlled by "enabled" prop
+        // but should probably accept "disabled" (a bug?) so we're passing it as well for future compatibility
+        disabled={disabled}
         onActiveStateChange={this.handleActiveStateChange}
         style={[style, enabled && { opacity: this.opacity }]}
       >
