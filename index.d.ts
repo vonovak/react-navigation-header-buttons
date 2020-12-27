@@ -67,7 +67,7 @@ export interface HeaderButtonsProps {
    * However, you're free to use your own component (see `HeaderButton` for reference).
    */
   HeaderButtonComponent?: ComponentType<any>;
-  children: ReactChild | Array<ReactNode>;
+  children: ReactNode;
 }
 
 declare class HeaderButtons extends Component<HeaderButtonsProps> {}
