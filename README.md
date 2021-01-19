@@ -237,14 +237,14 @@ const MaterialHeaderButton = (props) => (
 export const MaterialHeaderButtons = (props) => {
   return <HeaderButtons HeaderButtonComponent={MaterialHeaderButton} {...props} />;
 };
-export { Item } from 'react-navigation-header-buttons';
 ```
 
 2 . Import header buttons from the file defined previously.
 
 ```js
 // SomeScreen.js
-import { MaterialHeaderButtons, Item } from './MyHeaderButtons'
+import { MaterialHeaderButtons } from './MyHeaderButtons'
+import { Item } from 'react-navigation-header-buttons';
 
 static navigationOptions = {
   title: 'Screen with header buttons',
