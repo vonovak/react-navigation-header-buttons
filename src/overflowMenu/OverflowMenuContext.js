@@ -48,7 +48,7 @@ export const OverflowMenuProvider = ({ children, spaceAboveMenu }: Props) => {
       });
       setPosition({ x, y: y + extraDelta });
     }
-  }, []);
+  }, [spaceAboveMenu]);
 
   return (
     <OverflowMenuContext.Provider value={toggleMenu}>
