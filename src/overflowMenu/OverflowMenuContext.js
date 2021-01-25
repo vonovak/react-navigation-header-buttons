@@ -1,13 +1,14 @@
 // @flow
 import * as React from 'react';
 import { Dimensions, Platform } from 'react-native';
+import { spaceAboveMenu } from './statusBarUtils';
 import { Menu } from './vendor/Menu';
-import { getSpaceAboveMenu } from './statusBarUtils';
 
 export type ToggleMenuParam = ?{|
   elements: React.ChildrenArray<any>,
   x: number,
   y: number,
+  extraSpaceAboveMenu?: number,
 |};
 
 export const OVERFLOW_TOP = 15;
@@ -30,6 +31,7 @@ export const OverflowMenuProvider = ({ children }: Props) => {
   const [visible, setVisible] = React.useState(false);
   const [position, setPosition] = React.useState({ x: Dimensions.get('window').width - 10, y: 40 });
   const [elements, setElements] = React.useState(null);
+  const [spaceAboveMenu, setSpaceAboveMenu] = React.useState(0)
 
   const hideMenu = React.useCallback(() => {
     setVisible(false);
@@ -38,9 +40,10 @@ export const OverflowMenuProvider = ({ children }: Props) => {
   const toggleMenu = React.useCallback((params: ToggleMenuParam) => {
     setVisible((prevVisible) => !prevVisible);
     setElements(params?.elements || []);
+    setSpaceAboveMenu(extraSpaceAboveMenu ? extraSpaceAboveMenu : 0)
     if (params) {
       const { x, y } = params;
-      const heightApprox = getSpaceAboveMenu();
+      const heightApprox = spaceAboveMenu;
       const extraDelta = Platform.select({
         android: heightApprox,
         default: OVERFLOW_TOP,
