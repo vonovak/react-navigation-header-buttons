@@ -41,7 +41,7 @@ export const OverflowMenuProvider = ({ children, spaceAboveMenu }: Props) => {
     setElements(params?.elements || []);
     if (params) {
       const { x, y } = params;
-      const heightApprox = spaceAboveMenu ?? getDefaultSpaceAboveMenu() ;
+      const heightApprox = spaceAboveMenu ?? getDefaultSpaceAboveMenu();
       const extraDelta = Platform.select({
         android: heightApprox,
         default: OVERFLOW_TOP,
