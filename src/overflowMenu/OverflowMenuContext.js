@@ -36,19 +36,22 @@ export const OverflowMenuProvider = ({ children, spaceAboveMenu }: Props) => {
     setVisible(false);
   }, []);
 
-  const toggleMenu = React.useCallback((params: ToggleMenuParam) => {
-    setVisible((prevVisible) => !prevVisible);
-    setElements(params?.elements || []);
-    if (params) {
-      const { x, y } = params;
-      const heightApprox = spaceAboveMenu ?? getDefaultSpaceAboveMenu();
-      const extraDelta = Platform.select({
-        android: heightApprox,
-        default: OVERFLOW_TOP,
-      });
-      setPosition({ x, y: y + extraDelta });
-    }
-  }, [spaceAboveMenu]);
+  const toggleMenu = React.useCallback(
+    (params: ToggleMenuParam) => {
+      setVisible((prevVisible) => !prevVisible);
+      setElements(params?.elements || []);
+      if (params) {
+        const { x, y } = params;
+        const heightApprox = spaceAboveMenu ?? getDefaultSpaceAboveMenu();
+        const extraDelta = Platform.select({
+          android: heightApprox,
+          default: OVERFLOW_TOP,
+        });
+        setPosition({ x, y: y + extraDelta });
+      }
+    },
+    [spaceAboveMenu]
+  );
 
   return (
     <OverflowMenuContext.Provider value={toggleMenu}>
