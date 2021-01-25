@@ -1,3 +1,9 @@
+var spaceAboveMenu = 0
+
 export const getSpaceAboveMenu = () => {
-  return 0;
+  return spaceAboveMenu;
 };
+
+export const setSpaceAboveMenu = (desiredSpaceAboveMenu) => {
+  spaceAboveMenu = desiredSpaceAboveMenu
+}
