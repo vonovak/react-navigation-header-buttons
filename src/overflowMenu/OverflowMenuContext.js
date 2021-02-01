@@ -1,8 +1,8 @@
 // @flow
 import * as React from 'react';
 import { Dimensions, Platform } from 'react-native';
+import { getDefaultSpaceAboveMenu } from './statusBarUtils';
 import { Menu } from './vendor/Menu';
-import { getSpaceAboveMenu } from './statusBarUtils';
 
 export type ToggleMenuParam = ?{|
   elements: React.ChildrenArray<any>,
@@ -24,9 +24,10 @@ export const OverflowMenuContext = React.createContext<(ToggleMenuParam) => void
 
 type Props = {|
   children: React.Element<any>,
+  spaceAboveMenu?: number,
 |};
 
-export const OverflowMenuProvider = ({ children }: Props) => {
+export const OverflowMenuProvider = ({ children, spaceAboveMenu }: Props) => {
   const [visible, setVisible] = React.useState(false);
   const [position, setPosition] = React.useState({ x: Dimensions.get('window').width - 10, y: 40 });
   const [elements, setElements] = React.useState(null);
@@ -35,19 +36,22 @@ export const OverflowMenuProvider = ({ children }: Props) => {
     setVisible(false);
   }, []);
 
-  const toggleMenu = React.useCallback((params: ToggleMenuParam) => {
-    setVisible((prevVisible) => !prevVisible);
-    setElements(params?.elements || []);
-    if (params) {
-      const { x, y } = params;
-      const heightApprox = getSpaceAboveMenu();
-      const extraDelta = Platform.select({
-        android: heightApprox,
-        default: OVERFLOW_TOP,
-      });
-      setPosition({ x, y: y + extraDelta });
-    }
-  }, []);
+  const toggleMenu = React.useCallback(
+    (params: ToggleMenuParam) => {
+      setVisible((prevVisible) => !prevVisible);
+      setElements(params?.elements || []);
+      if (params) {
+        const { x, y } = params;
+        const heightApprox = spaceAboveMenu ?? getDefaultSpaceAboveMenu();
+        const extraDelta = Platform.select({
+          android: heightApprox,
+          default: OVERFLOW_TOP,
+        });
+        setPosition({ x, y: y + extraDelta });
+      }
+    },
+    [spaceAboveMenu]
+  );
 
   return (
     <OverflowMenuContext.Provider value={toggleMenu}>

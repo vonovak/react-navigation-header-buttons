@@ -1,3 +1,3 @@
-export const getSpaceAboveMenu = () => {
+export const getDefaultSpaceAboveMenu = () => {
   return 0;
 };

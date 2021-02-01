@@ -95,6 +95,7 @@ declare class Divider extends Component<{
 
 declare class OverflowMenuProvider extends Component<{
   children: ReactChild;
+  spaceAboveMenu?: number;
 }> {}
 
 export interface OnOverflowMenuPressParams {
