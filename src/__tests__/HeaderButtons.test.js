@@ -12,10 +12,10 @@ describe('HeaderButtons', () => {
   it('renders button with pressable labels when Item is a direct or indirect child', () => {
     const searchOnPress = jest.fn();
     const deleteOnPress = jest.fn();
-    const WrappedItem = () => <Item title="delete" onPress={deleteOnPress} />;
+    const WrappedItem = () => <Item title="Delete" onPress={deleteOnPress} />;
     const { getByText } = render(
       <HeaderButtons>
-        <Item title="search" onPress={searchOnPress} />
+        <Item title="Search" onPress={searchOnPress} />
         <WrappedItem />
       </HeaderButtons>
     );
