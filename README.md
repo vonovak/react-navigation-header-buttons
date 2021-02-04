@@ -218,6 +218,10 @@ The default handler for overflow menu on iOS is `overflowMenuPressHandlerActionS
 
 One of the usual things you may want to do is override the cancel button label on iOS - see [example](example/screens/UsageWithOverflow.tsx).
 
+#### Using custom text transforms
+
+Use the `buttonStyle` prop to set [`textTransform`](https://reactnative.dev/docs/text-style-props#texttransform) styles for button titles.
+
 #### How to integrate in your project
 
 This sections covers how you should use the library in your project. Please note that there are numerous [example screens](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/screens).

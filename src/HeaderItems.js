@@ -45,12 +45,9 @@ export function renderVisibleButton(visibleButtonProps: VisibleButtonProps): Rea
       style={StyleSheet.compose(styles.button, buttonStyle)}
     />
   ) : (
-    <Text style={[styles.text, { color }, buttonStyle]}>{textTransformer(title)}</Text>
+    <Text style={[styles.text, { color }, buttonStyle]}>{title}</Text>
   );
 }
-
-const textTransformer = (label: string) =>
-  Platform.OS === 'ios' ? label.charAt(0).toUpperCase() + label.substr(1) : label.toUpperCase();
 
 const styles = StyleSheet.create({
   text: {
@@ -59,10 +56,12 @@ const styles = StyleSheet.create({
         fontFamily: 'sans-serif-medium',
         fontSize: 14,
         marginHorizontal: 11,
+        textTransform: 'uppercase',
       },
       default: {
         fontSize: 17,
         marginHorizontal: 10,
+        textTransform: 'capitalize',
       },
     }),
   },

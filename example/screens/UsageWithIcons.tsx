@@ -15,7 +15,9 @@ const IoniconsHeaderButton = (props) => (
   <HeaderButton IconComponent={Ionicons} iconSize={23} color="blue" {...props} />
 );
 
-const ReusableSelectItem = ({ onPress }) => <Item title="Edit" onPress={onPress} />;
+const ReusableCapitalizedEditItem = ({ onPress }) => (
+  <Item title="edit" onPress={onPress} buttonStyle={{ textTransform: 'capitalize' }} />
+);
 
 const ReusableItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} />;
 
@@ -27,7 +29,7 @@ export function UsageWithIcons({ navigation }) {
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
           <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
-          <ReusableSelectItem onPress={() => alert('Edit')} />
+          <ReusableCapitalizedEditItem onPress={() => alert('Edit')} />
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
             OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
