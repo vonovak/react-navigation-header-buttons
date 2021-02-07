@@ -6,6 +6,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint ./src",
+    "typescript": "tsc --noEmit --strict index.d.ts",
     "flow": "flow check"
   },
   "files": [
