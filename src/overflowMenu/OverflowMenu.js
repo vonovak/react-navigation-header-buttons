@@ -38,6 +38,7 @@ export const OverflowMenu = ({
   const btnRef = React.useRef<typeof View | null>(null);
   const renderButtonElement = React.useCallback(
     ({ color }) => {
+      // $FlowIssue
       return React.isValidElement(OverflowIcon) ? OverflowIcon : <OverflowIcon color={color} />;
     },
     [OverflowIcon]

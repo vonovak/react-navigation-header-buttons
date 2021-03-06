@@ -22,9 +22,9 @@
     "invariant": ">=2"
   },
   "peerDependencies": {
+    "@react-navigation/native": ">=5",
     "react": ">=16.11.0",
-    "react-native": ">=0.62.0",
-    "@react-navigation/native": ">=5"
+    "react-native": ">=0.62.0"
   },
   "keywords": [
     "react-navigation",
@@ -40,6 +40,7 @@
   "homepage": "https://github.com/vonovak/react-navigation-header-buttons#readme",
   "devDependencies": {
     "@react-native-community/eslint-config": "^2.0.0",
+    "@react-navigation/native": "^5.9.3",
     "@testing-library/react-native": "^7.2.0",
     "eslint": "^7.11.0",
     "eslint-plugin-prettier": "^3.1.2",

@@ -30,6 +30,7 @@ export type ItemProps = {
 type OtherProps = {
   background?: any,
   foreground?: any,
+  pressColor?: any,
   renderButtonElement: (VisibleButtonProps) => React.Element<any>,
   ...
 };
