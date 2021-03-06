@@ -74,14 +74,14 @@ export function UsageWithIcons({ navigation }) {
 
 Is a wrapper over all the visible header buttons (those can be text-buttons, icon-button, or any custom react elements).
 The most important prop is `HeaderButtonComponent` that defines how all icons rendered in children will look.
-In particular, it allows setting their icon component, color, and size once so that you don't need to repeat it for each icon-button - but you can easily override those for each `Item` if you like.
+In particular, it allows setting their `IconComponent`, `color`, and `size` once so that you don't need to repeat it for each icon-button - but you can override those for each `Item` if you like.
 
 `HeaderButtons` accepts:
 
 | prop and type                                    | description                                                   | note                                                                                                                                                                                                                                    |
 | ------------------------------------------------ | ------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | HeaderButtonComponent?: React.ComponentType<any> | component that renders the buttons, `HeaderButton` by default | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). However, you're free to use your own component (see `HeaderButton.js` for reference). |
-| children: React.Node                             | whatever you want to render inside                            | typically `Item` or your component that renders `Item`, but it can be anything.                                                                                                                                                         |
+| children: React.Node                             | whatever you want to render inside                            | Typically, `Item` or your component that renders `Item`, but it can be any React element.                                                                                                                                               |
 | left?: boolean                                   | whether the `HeaderButtons` are on the left from header title | false by default, it only influences styling in a subtle way                                                                                                                                                                            |
 
 #### `Item`
@@ -111,9 +111,9 @@ Renders text, or icon, and has an `onPress` handler. Take a look at the example 
 #### `OverflowMenu`
 
 Is the place to define the behavior for overflow button (if there is one). Please note you can render `OverflowMenu` only by itself too, you do no need to wrap it in `HeaderButtons`.
-The most interesting prop is `onPress` which defines what kind of overflow menu we should show.
+The most important prop is `onPress` which defines what kind of overflow menu we should show.
 
-The package exports common handlers you can use, but you can provide your own too (via `onPress` prop):
+The package exports common handlers you can use, but you can provide your own too (via the `onPress` prop):
 
 | exported handler                       | description                                                                                                                                                                                                                                                                                        |
 | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -131,9 +131,9 @@ The package exports common handlers you can use, but you can provide your own to
 | onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more in "Recipes". |
 | testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`          |
 | accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                               |
-| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you passed it to `HeaderButtons`                  |
+| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you already passed it to `HeaderButtons`.         |
 | children: React.Node                         | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                                     |
-| other props                                  | props passed to the nested Touchable                        | pass eg. `pressColor` to control ripple color on Android                                                                |
+| ...TouchableProps                            | props passed to the nested Touchable                        | pass eg. `pressColor` to control ripple color on Android                                                                |
 
 ##### Important note
 
