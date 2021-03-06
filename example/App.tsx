@@ -14,7 +14,7 @@ import {
   UsageWithOverflowComplex,
 } from './screens';
 import React from 'react';
-import { NavigationContainer, DarkTheme } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { OverflowMenuProvider } from 'react-navigation-header-buttons';
 // just for custom overflow menu onPress action
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
@@ -54,7 +54,7 @@ const Body = () => {
 
 export default function App() {
   return (
-    <NavigationContainer theme={DarkTheme}>
+    <NavigationContainer>
       <ActionSheetProvider>
         <OverflowMenuProvider>
           <Body />
