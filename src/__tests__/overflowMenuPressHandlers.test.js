@@ -85,7 +85,7 @@ describe('overflowMenuPressHandlers', () => {
       ];
       const items = propsArray.map((props) => <MyComponent {...props} />);
 
-      // would be nice if this worked but we can only call Hooks from React function components.
+      // does not throw even if we use hooks and violate the rules
       // https://reactjs.org/docs/hooks-rules.html
       expect(extractOverflowButtonData(items)).toStrictEqual([]);
 
