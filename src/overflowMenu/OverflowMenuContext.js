@@ -3,7 +3,7 @@ import * as React from 'react';
 import { Dimensions, Platform } from 'react-native';
 import { getDefaultSpaceAboveMenu } from './statusBarUtils';
 import { Menu } from './vendor/Menu';
-// import { useTheme } from '@react-navigation/native';
+import { useTheme } from '@react-navigation/native';
 
 export type ToggleMenuParam = ?{
   elements: React.ChildrenArray<any>,
@@ -35,10 +35,9 @@ export const OverflowMenuProvider = ({
   const [visible, setVisible] = React.useState(false);
   const [position, setPosition] = React.useState({ x: Dimensions.get('window').width - 10, y: 40 });
   const [elements, setElements] = React.useState(null);
-  // TODO support react nav theme
-  // const {
-  //   colors: { backgroundColor },
-  // } = useTheme();
+  const {
+    colors: { card },
+  } = useTheme();
 
   const hideMenu = React.useCallback(() => {
     setVisible(false);
@@ -64,7 +63,12 @@ export const OverflowMenuProvider = ({
   return (
     <OverflowMenuContext.Provider value={toggleMenu}>
       {React.Children.only(children)}
-      <Menu visible={visible} onDismiss={hideMenu} anchor={position}>
+      <Menu
+        visible={visible}
+        onDismiss={hideMenu}
+        anchor={position}
+        contentStyle={{ backgroundColor: card }}
+      >
         {elements}
       </Menu>
     </OverflowMenuContext.Provider>

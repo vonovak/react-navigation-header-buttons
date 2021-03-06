@@ -30,7 +30,7 @@ const ReusableCapitalizedEditItem = ({ onPress }) => {
   return <Item title="edit" onPress={onPress} buttonStyle={{ textTransform: 'capitalize' }} />;
 };
 
-const ReusableItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} />;
+const ReusableItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} disabled />;
 
 export function UsageWithIcons({ navigation }) {
   React.useLayoutEffect(() => {

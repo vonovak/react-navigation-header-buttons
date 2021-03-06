@@ -3,6 +3,7 @@ import * as React from 'react';
 import { View, StyleSheet, Text } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import TouchableItem from '../../TouchableItem';
+import { useTheme } from '@react-navigation/native';
 
 export type Props = {
   /**
@@ -36,11 +37,31 @@ export type Props = {
  * A component to show a single list item inside a Menu.
  */
 
-export class MenuItem extends React.Component<Props> {
-  render(): React.Element<typeof MenuItem> {
-    const { icon, title, disabled, onPress, style, titleStyle, testID } = this.props;
+export const MenuItem = (props: Props): React.Element<typeof _MenuItem> => {
+  const {
+    dark,
+    colors: { text },
+  } = useTheme();
+  return <_MenuItem {...props} dark={dark} textColor={text} />;
+};
 
-    const titleColor = disabled ? styles.disabledColor : styles.normalColor;
+class _MenuItem extends React.Component<{ ...Props, dark: boolean, textColor: string }> {
+  render(): React.Element<typeof MenuItem> {
+    const {
+      icon,
+      title,
+      disabled,
+      onPress,
+      style,
+      titleStyle,
+      testID,
+      textColor,
+      dark,
+    } = this.props;
+
+    const disabledColor = dark ? styles.darkDisabled : styles.lightDisabled;
+    const titleColor = disabled ? disabledColor : { color: textColor };
+    const themePressColorAndroid = dark ? 'rgba(255, 255, 255, .32)' : 'rgba(0, 0, 0, .32)';
 
     return (
       <TouchableItem
@@ -48,6 +69,7 @@ export class MenuItem extends React.Component<Props> {
         onPress={onPress}
         disabled={disabled}
         testID={testID}
+        pressColor={themePressColorAndroid}
       >
         <View style={styles.row}>
           {React.isValidElement(icon) && (
@@ -105,10 +127,10 @@ const styles = StyleSheet.create({
   widthWithIcon: {
     maxWidth: maxWidth - (iconWidth + 48),
   },
-  disabledColor: {
+  lightDisabled: {
     color: 'rgba(0, 0, 0, 0.32)',
   },
-  normalColor: {
-    color: 'rgba(0, 0, 0, 0.87)',
+  darkDisabled: {
+    color: 'rgba(255, 255, 255, 0.32)',
   },
 });

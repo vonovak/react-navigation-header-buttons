@@ -66,7 +66,7 @@ export function UsageWithIcons({ navigation }) {
 
 1. `yarn add react-navigation-header-buttons`
 
-2. Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx)
+2. Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx). **IMPORTANT** `OverflowMenuProvider` must be placed so that it is a child of `NavigationContainer`, otherwise this library may not receive the correct theme from Reacr Navigation.
 
 ### Usage
 
