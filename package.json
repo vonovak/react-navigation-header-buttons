@@ -39,7 +39,7 @@
   "homepage": "https://github.com/vonovak/react-navigation-header-buttons#readme",
   "devDependencies": {
     "@react-native-community/eslint-config": "^2.0.0",
-    "@testing-library/react-native": "^7.0.1",
+    "@testing-library/react-native": "^7.2.0",
     "eslint": "^7.11.0",
     "eslint-plugin-prettier": "^3.1.2",
     "flow-bin": "^0.137.0",

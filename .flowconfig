@@ -2,6 +2,7 @@
 ; We fork some components by platform
 .*/*[.]android.js
 
+
 ; Ignore "BUCK" generated dirs
 <PROJECT_ROOT>/\.buckd/
 
@@ -17,8 +18,9 @@ node_modules/warning/.*
 
 [untyped]
 .*/node_modules/@react-native-community/cli/.*/.*
-.*/node_modules/@testing-library/react-native/build/.*
-.*/node_modules/react-native-testing-library/.*
+
+; menu has a bunch of errors but we want to keep flow syntax in there
+.*/src/overflowMenu/vendor/Menu.js
 
 [include]
 

@@ -1,3 +1,6 @@
+// @flow
+// menu has a bunch of errors so typecheck is ignored but we want to keep flow syntax in here
+
 import * as React from 'react';
 import {
   Platform,
@@ -167,9 +170,7 @@ export class Menu extends React.Component<Props, State> {
   isAnchorCoord = () => !React.isValidElement(this.props.anchor);
 
   measureMenuLayout = () =>
-    new Promise() <
-    LayoutRectangle >
-    ((resolve) => {
+    new Promise<LayoutRectangle>((resolve) => {
       if (this.menu) {
         // $FlowFixMe
         this.menu.measureInWindow((x, y, width, height) => {
@@ -179,9 +180,7 @@ export class Menu extends React.Component<Props, State> {
     });
 
   measureAnchorLayout = () =>
-    new Promise() <
-    LayoutRectangle >
-    ((resolve) => {
+    new Promise<LayoutRectangle>((resolve) => {
       const { anchor } = this.props;
       if (this.isAnchorCoord()) {
         // $FlowFixMe
