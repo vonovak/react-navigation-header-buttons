@@ -59,7 +59,11 @@ export class MenuItem extends React.Component<Props> {
             style={[styles.item, styles.content, icon != null ? styles.widthWithIcon : undefined]}
             pointerEvents="none"
           >
-            <Text numberOfLines={1} style={[styles.title, titleColor, titleStyle]}>
+            <Text
+              selectable={false}
+              numberOfLines={1}
+              style={[styles.title, titleColor, titleStyle]}
+            >
               {title}
             </Text>
           </View>

@@ -7,23 +7,30 @@ import {
   Item,
   HiddenItem,
   OverflowMenu,
+  Divider,
 } from 'react-navigation-header-buttons';
 
-const IoniconsHeaderButton = (props) => (
+const IoniconsHeaderButton = (props) => {
   // the `props` here come from <Item ... />
   // you may access them and pass something else to `HeaderButton` if you like
-  <HeaderButton IconComponent={Ionicons} iconSize={23} color="blue" {...props} />
-);
+  return (
+    <HeaderButton
+      IconComponent={Ionicons}
+      iconSize={23}
+      // you can customize the colors, by default colors from react navigation theme will be used
+      // color="red"
+      // pressColor="blue"
+      {...props}
+    />
+  );
+};
 
-const ReusableCapitalizedEditItem = ({ onPress }) => (
-  <Item title="edit" onPress={onPress} buttonStyle={{ textTransform: 'capitalize' }} />
-);
+// normally, on android, text is UPPERCASED
+const ReusableCapitalizedEditItem = ({ onPress }) => {
+  return <Item title="edit" onPress={onPress} buttonStyle={{ textTransform: 'capitalize' }} />;
+};
 
 const ReusableItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} />;
-
-const rippleColorAndroidProps = {
-  pressColor: 'red',
-};
 
 export function UsageWithIcons({ navigation }) {
   React.useLayoutEffect(() => {
@@ -36,15 +43,16 @@ export function UsageWithIcons({ navigation }) {
             title="search"
             iconName="ios-search"
             onPress={() => alert('search')}
-            {...rippleColorAndroidProps}
+            pressColor="blue"
           />
           <ReusableCapitalizedEditItem onPress={() => alert('Edit')} />
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
-            OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
-            {...rippleColorAndroidProps}
+            OverflowIcon={({ color }) => <Ionicons name="ios-more" size={23} color={color} />}
+            color="red"
           >
             <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
+            <Divider />
             <ReusableItem onPress={() => alert('hidden2')} />
           </OverflowMenu>
         </HeaderButtons>
