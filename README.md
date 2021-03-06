@@ -254,19 +254,21 @@ export const MaterialHeaderButtons = (props) => {
 
 ```js
 // SomeScreen.js
-import { MaterialHeaderButtons } from './MyHeaderButtons'
+import { MaterialHeaderButtons } from './MyHeaderButtons';
 import { Item } from 'react-navigation-header-buttons';
 
-static navigationOptions = {
-  title: 'Screen with header buttons',
-  // use MaterialHeaderButtons with consistent styling across your app
-  headerRight: () => (
-    <MaterialHeaderButtons>
-      <Item title="add" iconName="search" onPress={() => console.warn('add')} />
-      <Item title="edit" onPress={() => console.warn('edit')} />
-    </MaterialHeaderButtons>
-  ),
-};
+React.useLayoutEffect(() => {
+  navigation.setOptions({
+    title: 'Demo',
+    // use MaterialHeaderButtons with consistent styling across your app
+    headerRight: () => (
+      <MaterialHeaderButtons>
+        <Item title="add" iconName="search" onPress={() => console.warn('add')} />
+        <Item title="edit" onPress={() => console.warn('edit')} />
+      </MaterialHeaderButtons>
+    ),
+  });
+}, [navigation]);
 ```
 
 ### Known issues
