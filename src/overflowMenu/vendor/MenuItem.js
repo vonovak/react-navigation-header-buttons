@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import TouchableItem from '../../TouchableItem';
 import { useTheme } from '@react-navigation/native';
@@ -36,63 +36,43 @@ export type Props = {
 /**
  * A component to show a single list item inside a Menu.
  */
+export function MenuItem(props: Props): React.Element<typeof MenuItem> {
+  const { icon, title, disabled, onPress, style, titleStyle, testID } = props;
 
-export const MenuItem = (props: Props): React.Element<typeof _MenuItem> => {
   const {
     dark,
     colors: { text },
   } = useTheme();
-  return <_MenuItem {...props} dark={dark} textColor={text} />;
-};
 
-class _MenuItem extends React.Component<{ ...Props, dark: boolean, textColor: string }> {
-  render(): React.Element<typeof MenuItem> {
-    const {
-      icon,
-      title,
-      disabled,
-      onPress,
-      style,
-      titleStyle,
-      testID,
-      textColor,
-      dark,
-    } = this.props;
+  const disabledColor = dark ? styles.darkDisabled : styles.lightDisabled;
+  const titleColor = disabled ? disabledColor : { color: text };
+  const themePressColorAndroid = dark ? 'rgba(255, 255, 255, .32)' : 'rgba(0, 0, 0, .32)';
 
-    const disabledColor = dark ? styles.darkDisabled : styles.lightDisabled;
-    const titleColor = disabled ? disabledColor : { color: textColor };
-    const themePressColorAndroid = dark ? 'rgba(255, 255, 255, .32)' : 'rgba(0, 0, 0, .32)';
-
-    return (
-      <TouchableItem
-        style={[styles.container, style]}
-        onPress={onPress}
-        disabled={disabled}
-        testID={testID}
-        pressColor={themePressColorAndroid}
-      >
-        <View style={styles.row}>
-          {React.isValidElement(icon) && (
-            <View style={[styles.item, styles.icon]} pointerEvents="box-none">
-              {icon}
-            </View>
-          )}
-          <View
-            style={[styles.item, styles.content, icon != null ? styles.widthWithIcon : undefined]}
-            pointerEvents="none"
-          >
-            <Text
-              selectable={false}
-              numberOfLines={1}
-              style={[styles.title, titleColor, titleStyle]}
-            >
-              {title}
-            </Text>
+  return (
+    <TouchableItem
+      style={[styles.container, style]}
+      onPress={onPress}
+      disabled={disabled}
+      testID={testID}
+      pressColor={themePressColorAndroid}
+    >
+      <View style={styles.row}>
+        {React.isValidElement(icon) && (
+          <View style={[styles.item, styles.icon]} pointerEvents="box-none">
+            {icon}
           </View>
+        )}
+        <View
+          style={[styles.item, styles.content, icon != null ? styles.widthWithIcon : undefined]}
+          pointerEvents="none"
+        >
+          <Text selectable={false} numberOfLines={1} style={[styles.title, titleColor, titleStyle]}>
+            {title}
+          </Text>
         </View>
-      </TouchableItem>
-    );
-  }
+      </View>
+    </TouchableItem>
+  );
 }
 
 const minWidth = 112;
