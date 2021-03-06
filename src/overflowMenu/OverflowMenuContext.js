@@ -4,11 +4,11 @@ import { Dimensions, Platform } from 'react-native';
 import { getDefaultSpaceAboveMenu } from './statusBarUtils';
 import { Menu } from './vendor/Menu';
 
-export type ToggleMenuParam = ?{|
+export type ToggleMenuParam = ?{
   elements: React.ChildrenArray<any>,
   x: number,
   y: number,
-|};
+};
 
 export const OVERFLOW_TOP = 15;
 
@@ -20,14 +20,17 @@ const warn = () => {
       'Please check the installation instructions in the react-navigation-header-buttons readme!'
   );
 };
-export const OverflowMenuContext = React.createContext<(ToggleMenuParam) => void>(warn);
+export const OverflowMenuContext: any = React.createContext<(ToggleMenuParam) => void>(warn);
 
-type Props = {|
+type Props = {
   children: React.Element<any>,
   spaceAboveMenu?: number,
-|};
+};
 
-export const OverflowMenuProvider = ({ children, spaceAboveMenu }: Props) => {
+export const OverflowMenuProvider = ({
+  children,
+  spaceAboveMenu,
+}: Props): React.Element<typeof OverflowMenuProvider> => {
   const [visible, setVisible] = React.useState(false);
   const [position, setPosition] = React.useState({ x: Dimensions.get('window').width - 10, y: 40 });
   const [elements, setElements] = React.useState(null);

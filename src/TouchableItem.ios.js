@@ -4,15 +4,15 @@ import { BaseButton } from 'react-native-gesture-handler';
 
 const AnimatedBaseButton = Animated.createAnimatedComponent(BaseButton);
 
-type Props = {|
+export type Props = {
   ...ViewProps,
   disabled?: boolean,
   delayPressIn?: number,
   onPress?: () => void,
   children: React.Node,
-
   activeOpacity: number,
-|};
+  ...
+};
 
 const useNativeDriver = Platform.OS !== 'web';
 

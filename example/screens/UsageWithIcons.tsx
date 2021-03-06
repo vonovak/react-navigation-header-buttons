@@ -21,6 +21,10 @@ const ReusableCapitalizedEditItem = ({ onPress }) => (
 
 const ReusableItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} />;
 
+const rippleColorAndroidProps = {
+  pressColor: 'red',
+};
+
 export function UsageWithIcons({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
@@ -28,11 +32,17 @@ export function UsageWithIcons({ navigation }) {
       // to avoid creating a new one every time
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-          <Item title="search" iconName="ios-search" onPress={() => alert('search')} />
+          <Item
+            title="search"
+            iconName="ios-search"
+            onPress={() => alert('search')}
+            {...rippleColorAndroidProps}
+          />
           <ReusableCapitalizedEditItem onPress={() => alert('Edit')} />
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
             OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
+            {...rippleColorAndroidProps}
           >
             <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
             <ReusableItem onPress={() => alert('hidden2')} />

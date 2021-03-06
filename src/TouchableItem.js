@@ -7,7 +7,7 @@ import {
   type ViewProps,
 } from 'react-native';
 
-type Props = {|
+type Props = {
   ...ViewProps,
   pressColor?: string,
   disabled?: boolean,
@@ -15,7 +15,7 @@ type Props = {|
   delayPressIn?: number,
   onPress?: () => void,
   children: React.Node,
-|};
+};
 
 const ANDROID_VERSION_LOLLIPOP = 21;
 

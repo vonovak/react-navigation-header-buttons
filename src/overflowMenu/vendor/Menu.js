@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react';
 import {
   Platform,
@@ -15,12 +14,12 @@ import {
 } from 'react-native';
 
 import type { ViewStyleProp as ViewStyle } from 'react-native/Libraries/StyleSheet/StyleSheet';
-type LayoutRectangle = {| x: number, y: number, width: number, height: number |};
+type LayoutRectangle = { x: number, y: number, width: number, height: number };
 
 // NOTE this is ignored in our case bcs of this.isAnchorCoord() condition
 const APPROX_STATUSBAR_HEIGHT = 25;
 
-type Props = {|
+type Props = {
   /**
    * Whether the Menu is currently visible.
    */
@@ -53,11 +52,11 @@ type Props = {|
    */
   contentStyle?: ViewStyle,
   style?: ViewStyle,
-|};
+};
 
 type Layout = { width: number, height: number };
 
-type State = {|
+type State = {
   rendered: boolean,
   top: number,
   left: number,
@@ -65,7 +64,7 @@ type State = {|
   anchorLayout: Layout,
   opacityAnimation: Animated.Value,
   scaleAnimation: Animated.ValueXY,
-|};
+};
 
 // Minimum padding between the edge of the screen and the menu
 const SCREEN_INDENT = 8;
@@ -168,7 +167,9 @@ export class Menu extends React.Component<Props, State> {
   isAnchorCoord = () => !React.isValidElement(this.props.anchor);
 
   measureMenuLayout = () =>
-    new Promise<LayoutRectangle>((resolve) => {
+    new Promise() <
+    LayoutRectangle >
+    ((resolve) => {
       if (this.menu) {
         // $FlowFixMe
         this.menu.measureInWindow((x, y, width, height) => {
@@ -178,7 +179,9 @@ export class Menu extends React.Component<Props, State> {
     });
 
   measureAnchorLayout = () =>
-    new Promise<LayoutRectangle>((resolve) => {
+    new Promise() <
+    LayoutRectangle >
+    ((resolve) => {
       const { anchor } = this.props;
       if (this.isAnchorCoord()) {
         // $FlowFixMe

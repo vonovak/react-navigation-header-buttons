@@ -7,12 +7,15 @@ import { Text, StyleSheet, Platform } from 'react-native';
 import { OverflowMenuContext } from './overflowMenu/OverflowMenuContext';
 import { MenuItem } from './overflowMenu/vendor/MenuItem';
 
-type HiddenItemProps = {|
+type HiddenItemProps = {
   ...MenuItemProps,
   destructive?: boolean,
-|};
+};
 
-export function HiddenItem({ destructive, onPress, ...otherProps }: HiddenItemProps) {
+export function HiddenItem({
+  onPress,
+  ...otherProps
+}: HiddenItemProps): React.Element<typeof HiddenItem> {
   const toggleMenu = React.useContext(OverflowMenuContext);
 
   // when rendering dropdown menu (e.g. android default) the return value is actually rendered
@@ -23,14 +26,15 @@ export function HiddenItem({ destructive, onPress, ...otherProps }: HiddenItemPr
     onPress && onPress();
   };
 
+  // $FlowFixMeProps
   return <MenuItem {...otherProps} onPress={onMenuItemPress} />;
 }
 
 // TODO check RTL
-export function Item(props: ItemProps) {
+export function Item(props: ItemProps): React.Element<typeof Item> {
   const HeaderButtonComponent = React.useContext(HeaderButtonsContext);
-  // HeaderButtonComponent knows iconSize, icon color and etc.
-  // Item itself will likely only have title and onPress
+  // HeaderButtonComponent already knows iconSize, icon color and etc.
+  // Item itself will likely only have title and onPress but can override iconSize, icon color and etc. if needed
   return <HeaderButtonComponent {...props} renderButtonElement={renderVisibleButton} />;
 }
 
