@@ -133,6 +133,7 @@ The package exports common handlers you can use, but you can provide your own to
 | accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                               |
 | left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you passed it to `HeaderButtons`                  |
 | children: React.Node                         | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                                     |
+| other props                                  | props passed to the nested Touchable                        | pass eg. `pressColor` to control ripple color on Android                                                                |
 
 ##### Important note
 
@@ -207,7 +208,7 @@ On Android, `OverflowMenuProvider` accepts an optional `spaceAboveMenu` prop, wh
 
 #### `HeaderButton`
 
-You will typically not use `HeaderButton` directly. `HeaderButton` is where all the `onPress`, `title` and Icon-related props meet to render actual button.
+You will typically not use `HeaderButton` directly. `HeaderButton` is where all the `onPress`, `title` and Icon-related props (color, size) meet to render actual button.
 See the source if you want to customize it.
 
 ### Recipes

@@ -13,25 +13,27 @@ import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet
 import { OVERFLOW_BUTTON_TEST_ID } from '../e2e';
 import { ButtonsWrapper } from '../ButtonsWrapper';
 
-export type OverflowMenuProps = {|
+export type OverflowMenuProps = {
   children: React.Node,
   OverflowIcon: React.Element<any>,
   style?: ViewStyleProp,
-  testID: string,
-  accessibilityLabel: string,
+  testID?: string,
+  accessibilityLabel?: string,
   onPress: (OnOverflowMenuPressParams) => any,
-  left: boolean,
-|};
+  left?: boolean,
+  ...
+};
 
 export const OverflowMenu = ({
   children,
-  OverflowIcon,
-  accessibilityLabel,
-  testID,
   style,
-  onPress,
-  left,
-}: OverflowMenuProps) => {
+  OverflowIcon = <View />,
+  accessibilityLabel = 'More options',
+  testID = OVERFLOW_BUTTON_TEST_ID,
+  onPress = defaultOnOverflowMenuPress,
+  left = false, // this is needed only when OverflowMenu is rendered without HeaderButtons,
+  ...other
+}: OverflowMenuProps): React.Node => {
   const toggleMenu = React.useContext(OverflowMenuContext);
   const btnRef = React.useRef<typeof View | null>(null);
   const renderButtonElement = React.useCallback(() => OverflowIcon, [OverflowIcon]);
@@ -55,6 +57,7 @@ export const OverflowMenu = ({
   return (
     <ButtonsWrapper left={left}>
       <View ref={btnRef} collapsable={false} style={styles.overflowMenuView} />
+      {/* $FlowFixMeProps yeaah, this is boring :/ */}
       <HeaderButton
         title="overflow menu"
         renderButtonElement={renderButtonElement}
@@ -62,17 +65,10 @@ export const OverflowMenu = ({
         onPress={usedOnPress}
         accessibilityLabel={accessibilityLabel}
         testID={testID}
+        {...other}
       />
     </ButtonsWrapper>
   );
-};
-
-OverflowMenu.defaultProps = {
-  accessibilityLabel: 'More options',
-  OverflowIcon: <View />,
-  onPress: defaultOnOverflowMenuPress,
-  testID: OVERFLOW_BUTTON_TEST_ID,
-  left: false, // this is needed only when OverflowMenu is rendered without HeaderButtons
 };
 
 const styles = StyleSheet.create({

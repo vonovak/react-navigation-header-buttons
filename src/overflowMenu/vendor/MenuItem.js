@@ -4,7 +4,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import TouchableItem from '../../TouchableItem';
 
-export type Props = {|
+export type Props = {
   /**
    * Title text for the `MenuItem`.
    */
@@ -30,14 +30,14 @@ export type Props = {|
    * TestID used for testing purposes
    */
   testID?: string,
-|};
+};
 
 /**
  * A component to show a single list item inside a Menu.
  */
 
 export class MenuItem extends React.Component<Props> {
-  render() {
+  render(): React.Element<typeof MenuItem> {
     const { icon, title, disabled, onPress, style, titleStyle, testID } = this.props;
 
     const titleColor = disabled ? styles.disabledColor : styles.normalColor;

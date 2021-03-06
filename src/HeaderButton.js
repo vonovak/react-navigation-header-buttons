@@ -9,35 +9,33 @@ import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet
 const BUTTON_HIT_SLOP = Object.freeze({ top: 5, bottom: 5, left: 5, right: 5 });
 
 // for renderVisibleButton() function
-export type VisibleButtonProps = {|
+export type VisibleButtonProps = {
   IconComponent?: React.ComponentType<any>,
   iconSize?: number,
   color?: string,
   iconName?: string,
   title: string,
   buttonStyle?: ViewStyleProp,
-|};
+};
 
 // from <Item />
-export type ItemProps = {|
+export type ItemProps = {
   ...$Exact<React.ElementConfig<typeof TouchableWithoutFeedback>>,
   ...VisibleButtonProps,
   onPress: ?() => any,
   style?: ViewStyleProp,
-|};
+};
 
-type OtherProps = {|
+type OtherProps = {
   background?: any,
   foreground?: any,
   renderButtonElement: (VisibleButtonProps) => React.Element<any>,
-|};
+  ...
+};
 
-export type HeaderButtonProps = {|
-  ...ItemProps,
-  ...OtherProps,
-|};
+export type HeaderButtonProps = ItemProps & OtherProps;
 
-export function HeaderButton(props: HeaderButtonProps) {
+export function HeaderButton(props: HeaderButtonProps): React.Node {
   const {
     onPress,
     style,

@@ -148,6 +148,7 @@ describe('overflowMenuPressHandlers', () => {
       { title: 'three', onPress: jest.fn(), destructive: true },
     ];
     beforeEach(() => {
+      // $FlowExpectedError
       ActionSheetIOS.showActionSheetWithOptions = jest.fn();
       // $FlowExpectedError
       UIManager.showPopupMenu = jest.fn();

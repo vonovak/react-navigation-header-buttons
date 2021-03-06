@@ -12,12 +12,12 @@ const ButtonsExtraMarginContext = React.createContext<
   'toBeHandledByOverflowMenu' | 'alreadyHandledByHeaderButtons'
 >('toBeHandledByOverflowMenu');
 
-type Props = {|
+type Props = {
   left: boolean,
   children: React.Node,
-|};
+};
 
-export const ButtonsWrapper = ({ left, children }: Props) => {
+export const ButtonsWrapper = ({ left, children }: Props): any => {
   const marginStatus = React.useContext(ButtonsExtraMarginContext);
   const valueOfLeft = marginStatus === 'alreadyHandledByHeaderButtons' ? null : left;
   const extraSideMargin = getMargin(valueOfLeft);

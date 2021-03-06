@@ -5,12 +5,12 @@ import { HiddenItem } from './HeaderItems';
 import invariant from 'invariant';
 import type { ToggleMenuParam } from './overflowMenu/OverflowMenuContext';
 
-type OverflowButtonDescriptors = $ReadOnlyArray<{|
+type OverflowButtonDescriptors = $ReadOnlyArray<{
   title: string,
   onPress: () => void | Promise<void>,
   destructive?: boolean,
   disabled?: boolean,
-|}>;
+}>;
 
 export const extractOverflowButtonData = (
   hiddenButtons: React.Node,
@@ -57,13 +57,13 @@ const extract = (element: React.Element<any>) => {
   return { title, onPress, destructive: destructive === true, disabled: disabled === true };
 };
 
-export type OnOverflowMenuPressParams = {|
+export type OnOverflowMenuPressParams = {
   hiddenButtons: OverflowButtonDescriptors,
   _private_toggleMenu: (ToggleMenuParam) => void,
   overflowButtonRef: null | View,
   cancelButtonLabel?: string,
   children: React.Node,
-|};
+};
 
 const checkParams = (hiddenButtons) => {
   invariant(Array.isArray(hiddenButtons), 'hiddenButtons must be an array');
@@ -134,7 +134,7 @@ export const overflowMenuPressHandlerDropdownMenu = ({
   }
 };
 
-export const defaultOnOverflowMenuPress = Platform.select({
+export const defaultOnOverflowMenuPress: (OnOverflowMenuPressParams) => void = Platform.select({
   ios: overflowMenuPressHandlerActionSheet,
   default: overflowMenuPressHandlerDropdownMenu,
 });

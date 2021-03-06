@@ -3,10 +3,10 @@ import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
 
-type Props = {|
+type Props = {
   ...ViewProps,
   inset?: boolean,
-|};
+};
 
 /**
  * A divider is a thin, lightweight separator that groups content in lists and page layouts.
@@ -28,7 +28,7 @@ type Props = {|
  *
  * ```
  */
-export function Divider(props: Props) {
+export function Divider(props: Props): React.Element<typeof View> {
   const { inset, style, ...rest } = props;
   return <View {...rest} style={[styles.light, inset && styles.inset, style]} />;
 }
