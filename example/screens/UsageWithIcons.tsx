@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Text } from 'react-native';
 import {
   HeaderButtons,
@@ -10,12 +10,12 @@ import {
   Divider,
 } from 'react-navigation-header-buttons';
 
-const IoniconsHeaderButton = (props) => {
+const MaterialHeaderButton = (props) => {
   // the `props` here come from <Item ... />
   // you may access them and pass something else to `HeaderButton` if you like
   return (
     <HeaderButton
-      IconComponent={Ionicons}
+      IconComponent={MaterialIcons}
       iconSize={23}
       // you can customize the colors, by default colors from react navigation theme will be used
       // color="red"
@@ -38,18 +38,14 @@ export function UsageWithIcons({ navigation }) {
       // in your app, extract the arrow function into a separate component
       // to avoid creating a new one every time
       headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-          <Item
-            title="search"
-            iconName="ios-search"
-            onPress={() => alert('search')}
-            pressColor="blue"
-          />
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <Item title="search" iconName="search" onPress={() => alert('search')} />
           <ReusableCapitalizedEditItem onPress={() => alert('Edit')} />
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
-            OverflowIcon={({ color }) => <Ionicons name="ios-more" size={23} color={color} />}
-            color="red"
+            OverflowIcon={({ color }) => (
+              <MaterialIcons name="more-horiz" size={23} color={color} />
+            )}
           >
             <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
             <Divider />

@@ -1,5 +1,5 @@
 import React from 'react';
-import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { View, Text } from 'react-native';
 import {
   HeaderButtons,
@@ -35,7 +35,7 @@ function RightHeaderButtons(props) {
       <Item title="person" iconName="person" onPress={() => alert('person')} />
       <Item title="edit" onPress={() => alert('edit')} />
       <OverflowMenu
-        OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
+        OverflowIcon={<MaterialIcons name="more-horiz" size={23} color="blue" />}
         onPress={_onOpenActionSheet}
       >
         <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />

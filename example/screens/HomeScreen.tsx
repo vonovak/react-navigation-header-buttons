@@ -1,6 +1,7 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Text, View, ScrollView } from 'react-native';
 import { Button } from './PaddedButton';
+import { ThemeContext } from '../ThemeProvider';
 
 export function HomeScreen({ navigation }) {
   React.useLayoutEffect(() => {
@@ -12,6 +13,8 @@ export function HomeScreen({ navigation }) {
   const _navigateTo = (destinationScreen: string) => {
     navigation.navigate(destinationScreen);
   };
+  const { toggleTheme } = useContext(ThemeContext);
+
   return (
     <View style={{ flex: 1 }}>
       <ScrollView>
@@ -33,6 +36,7 @@ export function HomeScreen({ navigation }) {
         <Button onPress={() => _navigateTo('UsageDisabled')} title="Disabled state" />
         <Button onPress={() => _navigateTo('UsageLeft')} title="On the left side of header" />
         <Button onPress={() => _navigateTo('UsageCustom')} title="Custom elements" />
+        <Button onPress={toggleTheme} title="Toggle Theme (ripple, text and icon color changes)" />
       </ScrollView>
     </View>
   );

@@ -20,6 +20,7 @@ const RightHeader = () => (
     <Item title="edit" onPress={() => alert('edit')} />
     <OverflowMenu
       OverflowIcon={<MaterialIcons name="more-vert" size={23} color="blue" />}
+      pressColor="blue"
       onPress={(params) => {
         defaultOnOverflowMenuPress({
           ...params,
