@@ -30,7 +30,7 @@ import {
 const IoniconsHeaderButton = (props) => (
   // the `props` here come from <Item ... />
   // you may access them and pass something else to `HeaderButton` if you like
-  <HeaderButton IconComponent={Ionicons} iconSize={23} color="blue" {...props} />
+  <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
 );
 
 const ReusableItem = ({ onPress }) => <Item title="Edit" onPress={onPress} />;
@@ -48,7 +48,7 @@ export function UsageWithIcons({ navigation }) {
           <ReusableItem onPress={() => alert('Edit')} />
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
-            OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
+            OverflowIcon={({ color }) => <Ionicons name="ios-more" size={23} color={color} />}
           >
             <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
             <ReusableHiddenItem onPress={() => alert('hidden2')} />
@@ -66,7 +66,11 @@ export function UsageWithIcons({ navigation }) {
 
 1. `yarn add react-navigation-header-buttons`
 
-2. Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx)
+2. Wrap your root component in `OverflowMenuProvider`, as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx). **IMPORTANT** `OverflowMenuProvider` must be placed so that it is a child of `NavigationContainer`, otherwise this library may not receive the correct theme from React Navigation.
+
+#### Note on theming
+
+Version 7 gets colors for Android ripple effect, text and icons from [React Navigation's theme](https://reactnavigation.org/docs/themes/), so you will not need to work with colors, with the exception of `OverflowIcon` as seen above. You can always override colors of text&icons (using `color` prop) or of the ripple effect on Android (using `pressColor` prop) as documented below.
 
 ### Usage
 
@@ -74,7 +78,7 @@ export function UsageWithIcons({ navigation }) {
 
 Is a wrapper over all the visible header buttons (those can be text-buttons, icon-button, or any custom react elements).
 The most important prop is `HeaderButtonComponent` that defines how all icons rendered in children will look.
-In particular, it allows setting their `IconComponent`, `color`, and `size` once so that you don't need to repeat it for each icon-button - but you can override those for each `Item` if you like.
+In particular, it allows setting their `IconComponent`, `size` and `color` once so that you don't need to repeat it for each icon-button - but you can override those for each `Item` if you like.
 
 `HeaderButtons` accepts:
 
@@ -100,7 +104,7 @@ Renders text, or icon, and has an `onPress` handler. Take a look at the example 
 | testID?: string             | testID to locate view in e2e tests                                          |                               |
 | ...TouchableProps           | whatever else you want to pass to the underlying touchable (eg. `disabled`) |                               |
 
-`Item` also accepts other props that you'll typically not need to pass because `HeaderButtonComponent` already knows them.
+`Item` also accepts other props that you'll typically not need to pass because `HeaderButtonComponent` already knows them (eg. `iconSize`) or because they are pulled from the React Navigation's theme object (`color`).
 
 | additional props and type                | description                                                                  | note |
 | ---------------------------------------- | ---------------------------------------------------------------------------- | ---- |
@@ -124,16 +128,16 @@ The package exports common handlers you can use, but you can provide your own to
 
 `OverflowMenu` accepts:
 
-| prop and type                                | description                                                 | note                                                                                                                    |
-| -------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| OverflowIcon: React.Element<any>             | React element for the overflow icon                         |                                                                                                                         |
-| style?: ViewStyleProp                        | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.js`                                                       |
-| onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more in "Recipes". |
-| testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`          |
-| accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                               |
-| left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you already passed it to `HeaderButtons`.         |
-| children: React.Node                         | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                                     |
-| ...TouchableProps                            | props passed to the nested Touchable                        | pass eg. `pressColor` to control ripple color on Android                                                                |
+| prop and type                                           | description                                                 | note                                                                                                                    |
+| ------------------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| OverflowIcon: React.Element<any> \| React.ComponentType | React element or component for the overflow icon            | if you provide a component, it will receive `color` prop as seen in example above                                       |
+| style?: ViewStyleProp                                   | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.js`                                                       |
+| onPress?: (OnOverflowMenuPressParams) => any            | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more in "Recipes". |
+| testID?: string                                         | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`          |
+| accessibilityLabel?: string                             |                                                             | 'More options' by default                                                                                               |
+| left?: boolean                                          | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you already passed it to `HeaderButtons`.         |
+| children: React.Node                                    | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                                     |
+| ...TouchableProps                                       | props passed to the nested Touchable                        | pass eg. `pressColor` to control ripple color on Android                                                                |
 
 ##### Important note
 
@@ -142,10 +146,10 @@ Children passed to `OverflowMenu` should be
 - either `HiddenItem`s
 - or plain function components (no class components) without hooks that return `HiddenItem`, as seen in the example above.
 
-Anything else will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` and `overflowMenuPressHandlerPopupMenu`.
+Anything else will be ignored and will not appear in the overflow menus shown by `overflowMenuPressHandlerActionSheet` and `overflowMenuPressHandlerPopupMenu`.
 Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, such as `<Divider />` (which is exported) or your custom ones.
 
-This limitation may look weird but it should not really bother you in any way: if you need to have state in your items, lift the state up.
+This limitation may look weird, but it should not really bother you in any way: if you need to have state in your items, lift the state up.
 The limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
 If this is a problem for you for some reason, please raise an issue and we'll see what can be done about it.
 
@@ -250,19 +254,21 @@ export const MaterialHeaderButtons = (props) => {
 
 ```js
 // SomeScreen.js
-import { MaterialHeaderButtons } from './MyHeaderButtons'
+import { MaterialHeaderButtons } from './MyHeaderButtons';
 import { Item } from 'react-navigation-header-buttons';
 
-static navigationOptions = {
-  title: 'Screen with header buttons',
-  // use MaterialHeaderButtons with consistent styling across your app
-  headerRight: () => (
-    <MaterialHeaderButtons>
-      <Item title="add" iconName="search" onPress={() => console.warn('add')} />
-      <Item title="edit" onPress={() => console.warn('edit')} />
-    </MaterialHeaderButtons>
-  ),
-};
+React.useLayoutEffect(() => {
+  navigation.setOptions({
+    title: 'Demo',
+    // use MaterialHeaderButtons with consistent styling across your app
+    headerRight: () => (
+      <MaterialHeaderButtons>
+        <Item title="add" iconName="search" onPress={() => console.warn('add')} />
+        <Item title="edit" onPress={() => console.warn('edit')} />
+      </MaterialHeaderButtons>
+    ),
+  });
+}, [navigation]);
 ```
 
 ### Known issues

@@ -74,7 +74,7 @@ describe('overflowMenuPressHandlers', () => {
       }
     );
 
-    it('fails when hook / class component is used in the provided elements', () => {
+    it('ignores when hook / class component is used in the provided elements', () => {
       function MyComponent({ title, onPress }) {
         const [titleFromState] = React.useState('from state hook');
         return <HiddenItem title={titleFromState + title} onPress={onPress} />;
@@ -85,24 +85,16 @@ describe('overflowMenuPressHandlers', () => {
       ];
       const items = propsArray.map((props) => <MyComponent {...props} />);
 
-      // would be nice if this worked but we can only call Hooks from React function components.
+      // does not throw even if we use hooks and violate the rules
       // https://reactjs.org/docs/hooks-rules.html
-      expect(() => extractOverflowButtonData(items)).toThrow(
-        'There was an error extracting overflow button data from children of OverflowMenu.\n' +
-          "      It's possible you didn't follow the limitation rules documented in readme.\n" +
-          '      The nested error is: Invalid hook call. Hooks can only be called inside of the body of a function component.'
-      );
+      expect(extractOverflowButtonData(items)).toStrictEqual([]);
 
       class Component extends React.Component<{}> {
         render() {
           return <View style={{ height: 20, width: 20 }} />;
         }
       }
-      expect(() => extractOverflowButtonData(<Component />)).toThrow(
-        'There was an error extracting overflow button data from children of OverflowMenu.\n' +
-          "      It's possible you didn't follow the limitation rules documented in readme.\n" +
-          '      The nested error is: Cannot call a class as a function'
-      );
+      expect(extractOverflowButtonData(<Component />)).toStrictEqual([]);
     });
 
     it('ignores custom components', () => {
@@ -122,14 +114,14 @@ describe('overflowMenuPressHandlers', () => {
         'extractOverflowButtonData works for case %#',
         (input) => {
           // $FlowExpectedError
-          expect(extractOverflowButtonData(input)).toEqual([]);
+          expect(extractOverflowButtonData(input)).toStrictEqual([]);
         }
       );
     });
 
     it('ignores invalid / non-element values', () => {
       const titlesAndOnPresses = extractOverflowButtonData([null, false, 'hello', 123]);
-      expect(titlesAndOnPresses).toHaveLength(0);
+      expect(titlesAndOnPresses).toStrictEqual([]);
     });
 
     it('works for single child element', () => {
@@ -137,7 +129,7 @@ describe('overflowMenuPressHandlers', () => {
       expect(extractOverflowButtonData(<HiddenItem {...props} />)).toEqual([
         { ...props, disabled: false, destructive: false },
       ]);
-      expect(extractOverflowButtonData(null)).toEqual([]);
+      expect(extractOverflowButtonData(null)).toStrictEqual([]);
     });
   });
 

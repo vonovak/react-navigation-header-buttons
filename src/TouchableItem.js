@@ -27,6 +27,9 @@ export default function TouchableItem({
   children,
   ...rest
 }: Props) {
+  const background = React.useMemo(() => {
+    return TouchableNativeFeedback.Ripple(pressColor, borderless, rippleRadius);
+  }, [pressColor, borderless, rippleRadius]);
   /*
    * TouchableNativeFeedback.Ripple causes a crash on old Android versions,
    * therefore only enable it on Android Lollipop and above.
@@ -40,7 +43,7 @@ export default function TouchableItem({
       <TouchableNativeFeedback
         {...rest}
         useForeground={TouchableNativeFeedback.canUseNativeForeground()}
-        background={TouchableNativeFeedback.Ripple(pressColor, borderless, rippleRadius)}
+        background={background}
       >
         <View style={style}>{React.Children.only(children)}</View>
       </TouchableNativeFeedback>

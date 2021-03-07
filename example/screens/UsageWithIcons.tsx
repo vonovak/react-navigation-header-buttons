@@ -1,5 +1,5 @@
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import { MaterialIcons } from '@expo/vector-icons';
 import { Text } from 'react-native';
 import {
   HeaderButtons,
@@ -7,23 +7,30 @@ import {
   Item,
   HiddenItem,
   OverflowMenu,
+  Divider,
 } from 'react-navigation-header-buttons';
 
-const IoniconsHeaderButton = (props) => (
+const MaterialHeaderButton = (props) => {
   // the `props` here come from <Item ... />
   // you may access them and pass something else to `HeaderButton` if you like
-  <HeaderButton IconComponent={Ionicons} iconSize={23} color="blue" {...props} />
-);
-
-const ReusableCapitalizedEditItem = ({ onPress }) => (
-  <Item title="edit" onPress={onPress} buttonStyle={{ textTransform: 'capitalize' }} />
-);
-
-const ReusableItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} />;
-
-const rippleColorAndroidProps = {
-  pressColor: 'red',
+  return (
+    <HeaderButton
+      IconComponent={MaterialIcons}
+      iconSize={23}
+      // you can customize the colors, by default colors from react navigation theme will be used
+      // color="red"
+      // pressColor="blue"
+      {...props}
+    />
+  );
 };
+
+// normally, on android, text is UPPERCASED
+const ReusableCapitalizedEditItem = ({ onPress }) => {
+  return <Item title="edit" onPress={onPress} buttonStyle={{ textTransform: 'capitalize' }} />;
+};
+
+const ReusableItem = ({ onPress }) => <HiddenItem title="hidden2" onPress={onPress} disabled />;
 
 export function UsageWithIcons({ navigation }) {
   React.useLayoutEffect(() => {
@@ -31,20 +38,17 @@ export function UsageWithIcons({ navigation }) {
       // in your app, extract the arrow function into a separate component
       // to avoid creating a new one every time
       headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
-          <Item
-            title="search"
-            iconName="ios-search"
-            onPress={() => alert('search')}
-            {...rippleColorAndroidProps}
-          />
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <Item title="search" iconName="search" onPress={() => alert('search')} />
           <ReusableCapitalizedEditItem onPress={() => alert('Edit')} />
           <OverflowMenu
             style={{ marginHorizontal: 10 }}
-            OverflowIcon={<Ionicons name="ios-more" size={23} color="blue" />}
-            {...rippleColorAndroidProps}
+            OverflowIcon={({ color }) => (
+              <MaterialIcons name="more-horiz" size={23} color={color} />
+            )}
           >
             <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
+            <Divider />
             <ReusableItem onPress={() => alert('hidden2')} />
           </OverflowMenu>
         </HeaderButtons>

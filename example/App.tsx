@@ -13,13 +13,14 @@ import {
   UsageWithCustomOverflow,
   UsageWithOverflowComplex,
 } from './screens';
-import React from 'react';
+import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { OverflowMenuProvider } from 'react-navigation-header-buttons';
 // just for custom overflow menu onPress action
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { StatusBar } from 'expo-status-bar';
 import { createStackNavigator } from '@react-navigation/stack';
+import { ThemeContext, ThemeProvider } from './ThemeProvider';
 // import { createNativeStackNavigator as createStackNavigator } from 'react-native-screens/native-stack';
 
 const screens = {
@@ -40,7 +41,7 @@ const Body = () => {
   // console.warn('render');
   return (
     <>
-      <StatusBar barStyle="light-content" backgroundColor="lightgreen" />
+      <StatusBar style="light" backgroundColor="lightgreen" />
       <Stack.Navigator>
         {Object.keys(screens).map((screenName) => {
           return (
@@ -52,14 +53,23 @@ const Body = () => {
   );
 };
 
-export default function App() {
+const ThemedApp = () => {
+  const { theme } = useContext(ThemeContext);
   return (
-    <NavigationContainer>
+    <NavigationContainer theme={theme}>
       <ActionSheetProvider>
         <OverflowMenuProvider>
           <Body />
         </OverflowMenuProvider>
       </ActionSheetProvider>
     </NavigationContainer>
+  );
+};
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <ThemedApp />
+    </ThemeProvider>
   );
 }

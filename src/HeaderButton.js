@@ -2,9 +2,10 @@
  * @flow
  */
 import * as React from 'react';
-import { StyleSheet, View, TouchableWithoutFeedback } from 'react-native';
+import { StyleSheet, View, TouchableWithoutFeedback, Platform } from 'react-native';
 import TouchableItem from './TouchableItem';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
+import { useTheme } from '@react-navigation/native';
 
 const BUTTON_HIT_SLOP = Object.freeze({ top: 5, bottom: 5, left: 5, right: 5 });
 
@@ -29,6 +30,7 @@ export type ItemProps = {
 type OtherProps = {
   background?: any,
   foreground?: any,
+  pressColor?: any,
   renderButtonElement: (VisibleButtonProps) => React.Element<any>,
   ...
 };
@@ -36,6 +38,13 @@ type OtherProps = {
 export type HeaderButtonProps = ItemProps & OtherProps;
 
 export function HeaderButton(props: HeaderButtonProps): React.Node {
+  const { colors, dark } = useTheme();
+  const themeColor = Platform.select({
+    ios: colors.primary,
+    default: colors.text,
+  });
+  const themePressColorAndroid = dark ? 'rgba(255, 255, 255, .32)' : 'rgba(0, 0, 0, .32)';
+
   const {
     onPress,
     style,
@@ -47,8 +56,12 @@ export function HeaderButton(props: HeaderButtonProps): React.Node {
     IconComponent,
     iconSize,
     color,
+    pressColor,
     ...other
   } = props;
+
+  const usedColor = color || themeColor;
+  const usedPressColor = pressColor || themePressColorAndroid;
 
   const ButtonElement = renderButtonElement({
     iconName,
@@ -56,7 +69,7 @@ export function HeaderButton(props: HeaderButtonProps): React.Node {
     buttonStyle,
     IconComponent,
     iconSize,
-    color,
+    color: usedColor,
   });
   return (
     <TouchableItem
@@ -65,6 +78,7 @@ export function HeaderButton(props: HeaderButtonProps): React.Node {
       hitSlop={BUTTON_HIT_SLOP}
       rippleRadius={20}
       style={StyleSheet.compose(styles.buttonContainer, style)}
+      pressColor={usedPressColor}
       {...other}
     >
       <View>{ButtonElement}</View>

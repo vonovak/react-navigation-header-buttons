@@ -15,7 +15,7 @@ import { ButtonsWrapper } from '../ButtonsWrapper';
 
 export type OverflowMenuProps = {
   children: React.Node,
-  OverflowIcon: React.Element<any>,
+  OverflowIcon: React.Element<any> | React.ComponentType<any>,
   style?: ViewStyleProp,
   testID?: string,
   accessibilityLabel?: string,
@@ -36,7 +36,13 @@ export const OverflowMenu = ({
 }: OverflowMenuProps): React.Node => {
   const toggleMenu = React.useContext(OverflowMenuContext);
   const btnRef = React.useRef<typeof View | null>(null);
-  const renderButtonElement = React.useCallback(() => OverflowIcon, [OverflowIcon]);
+  const renderButtonElement = React.useCallback(
+    ({ color }) => {
+      // $FlowIssue
+      return React.isValidElement(OverflowIcon) ? OverflowIcon : <OverflowIcon color={color} />;
+    },
+    [OverflowIcon]
+  );
 
   const usedOnPress = React.useCallback(() => {
     const titlesAndOnPresses =

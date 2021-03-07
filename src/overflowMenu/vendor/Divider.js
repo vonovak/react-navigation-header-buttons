@@ -2,6 +2,7 @@
 import * as React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { ViewProps } from 'react-native/Libraries/Components/View/ViewPropTypes';
+import { useTheme } from '@react-navigation/native';
 
 type Props = {
   ...ViewProps,
@@ -29,13 +30,19 @@ type Props = {
  * ```
  */
 export function Divider(props: Props): React.Element<typeof View> {
+  const { dark } = useTheme();
   const { inset, style, ...rest } = props;
-  return <View {...rest} style={[styles.light, inset && styles.inset, style]} />;
+  const textStyle = dark ? styles.dark : styles.light;
+  return <View {...rest} style={[textStyle, inset && styles.inset, style]} />;
 }
 
 const styles = StyleSheet.create({
   light: {
     backgroundColor: 'rgba(0, 0, 0, 0.12)',
+    height: StyleSheet.hairlineWidth,
+  },
+  dark: {
+    backgroundColor: 'rgba(255, 255, 255, 0.12)',
     height: StyleSheet.hairlineWidth,
   },
   inset: {

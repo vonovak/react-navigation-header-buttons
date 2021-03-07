@@ -1,8 +1,9 @@
 // @flow
 import * as React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { StyleSheet, Text, View } from 'react-native';
 import type { ViewStyleProp } from 'react-native/Libraries/StyleSheet/StyleSheet';
 import TouchableItem from '../../TouchableItem';
+import { useTheme } from '@react-navigation/native';
 
 export type Props = {
   /**
@@ -35,38 +36,43 @@ export type Props = {
 /**
  * A component to show a single list item inside a Menu.
  */
+export function MenuItem(props: Props): React.Element<typeof MenuItem> {
+  const { icon, title, disabled, onPress, style, titleStyle, testID } = props;
 
-export class MenuItem extends React.Component<Props> {
-  render(): React.Element<typeof MenuItem> {
-    const { icon, title, disabled, onPress, style, titleStyle, testID } = this.props;
+  const {
+    dark,
+    colors: { text },
+  } = useTheme();
 
-    const titleColor = disabled ? styles.disabledColor : styles.normalColor;
+  const disabledColor = dark ? styles.darkDisabled : styles.lightDisabled;
+  const titleColor = disabled ? disabledColor : { color: text };
+  const themePressColorAndroid = dark ? 'rgba(255, 255, 255, .32)' : 'rgba(0, 0, 0, .32)';
 
-    return (
-      <TouchableItem
-        style={[styles.container, style]}
-        onPress={onPress}
-        disabled={disabled}
-        testID={testID}
-      >
-        <View style={styles.row}>
-          {React.isValidElement(icon) && (
-            <View style={[styles.item, styles.icon]} pointerEvents="box-none">
-              {icon}
-            </View>
-          )}
-          <View
-            style={[styles.item, styles.content, icon != null ? styles.widthWithIcon : undefined]}
-            pointerEvents="none"
-          >
-            <Text numberOfLines={1} style={[styles.title, titleColor, titleStyle]}>
-              {title}
-            </Text>
+  return (
+    <TouchableItem
+      style={[styles.container, style]}
+      onPress={onPress}
+      disabled={disabled}
+      testID={testID}
+      pressColor={themePressColorAndroid}
+    >
+      <View style={styles.row}>
+        {React.isValidElement(icon) && (
+          <View style={[styles.item, styles.icon]} pointerEvents="box-none">
+            {icon}
           </View>
+        )}
+        <View
+          style={[styles.item, styles.content, icon != null ? styles.widthWithIcon : undefined]}
+          pointerEvents="none"
+        >
+          <Text selectable={false} numberOfLines={1} style={[styles.title, titleColor, titleStyle]}>
+            {title}
+          </Text>
         </View>
-      </TouchableItem>
-    );
-  }
+      </View>
+    </TouchableItem>
+  );
 }
 
 const minWidth = 112;
@@ -101,10 +107,10 @@ const styles = StyleSheet.create({
   widthWithIcon: {
     maxWidth: maxWidth - (iconWidth + 48),
   },
-  disabledColor: {
+  lightDisabled: {
     color: 'rgba(0, 0, 0, 0.32)',
   },
-  normalColor: {
-    color: 'rgba(0, 0, 0, 0.87)',
+  darkDisabled: {
+    color: 'rgba(255, 255, 255, 0.32)',
   },
 });
