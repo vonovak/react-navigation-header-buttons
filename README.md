@@ -40,7 +40,7 @@ const ReusableHiddenItem = ({ onPress }) => <HiddenItem title="hidden2" onPress=
 export function UsageWithIcons({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
-      // in your app, extract the arrow function into a separate component
+      // in your app, you can extract the arrow function into a separate component
       // to avoid creating a new one every time you update the options
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
