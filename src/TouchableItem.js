@@ -18,6 +18,7 @@ type Props = {
 };
 
 const ANDROID_VERSION_LOLLIPOP = 21;
+const CAN_USE_RIPLLE = Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP;
 
 export default function TouchableItem({
   borderless = false,
@@ -28,7 +29,9 @@ export default function TouchableItem({
   ...rest
 }: Props) {
   const background = React.useMemo(() => {
-    return TouchableNativeFeedback.Ripple(pressColor, borderless, rippleRadius);
+    return CAN_USE_RIPLLE
+      ? TouchableNativeFeedback.Ripple(pressColor, borderless, rippleRadius)
+      : undefined;
   }, [pressColor, borderless, rippleRadius]);
   /*
    * TouchableNativeFeedback.Ripple causes a crash on old Android versions,
@@ -38,7 +41,7 @@ export default function TouchableItem({
    * platform design guidelines.
    * We need to pass the background prop to specify a borderless ripple effect.
    */
-  if (Platform.OS === 'android' && Platform.Version >= ANDROID_VERSION_LOLLIPOP) {
+  if (CAN_USE_RIPLLE) {
     return (
       <TouchableNativeFeedback
         {...rest}
