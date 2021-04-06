@@ -102,7 +102,7 @@ Renders text, or icon, and has an `onPress` handler. Take a look at the example 
 | style?: ViewStyleProp       | style to apply to the touchable element that wraps the button               |                               |
 | buttonStyle?: ViewStyleProp | style to apply to the text / icon                                           | applies to both icon and text |
 | testID?: string             | testID to locate view in e2e tests                                          |                               |
-| ...TouchableProps           | whatever else you want to pass to the underlying touchable (eg. `disabled`) |                               |
+| other props                 | whatever else you want to pass to the underlying touchable (eg. `disabled`) |                               |
 
 `Item` also accepts other props that you'll typically not need to pass because `HeaderButtonComponent` already knows them (eg. `iconSize`) or because they are pulled from the React Navigation's theme object (`color`).
 
