@@ -86,7 +86,7 @@ export const overflowMenuPressHandlerActionSheet = ({
     },
     (buttonIndex: number) => {
       if (buttonIndex > 0) {
-        hiddenButtons[buttonIndex - 1].onPress();
+        enabledButtons[buttonIndex - 1].onPress();
       }
     }
   );

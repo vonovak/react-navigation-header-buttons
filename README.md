@@ -137,7 +137,7 @@ The package exports common handlers you can use, but you can provide your own to
 | accessibilityLabel?: string                             |                                                             | 'More options' by default                                                                                               |
 | left?: boolean                                          | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you already passed it to `HeaderButtons`.         |
 | children: React.Node                                    | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                                     |
-| ...TouchableProps                                       | props passed to the nested Touchable                        | pass eg. `pressColor` to control ripple color on Android                                                                |
+| other props                                             | props passed to the nested Touchable                        | pass eg. `pressColor` to control ripple color on Android                                                                |
 
 ##### Important note
 
