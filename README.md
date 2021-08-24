@@ -208,7 +208,7 @@ const HiddenItemWrappedTwice = ()=> <HiddenItemWrapped />
 This is a React context provider needed for `overflowMenuPressHandlerDropdownMenu` to work. If you're not using `overflowMenuPressHandlerDropdownMenu` then you don't need it.
 By default, you need to wrap your root component with it.
 
-On Android, `OverflowMenuProvider` accepts an optional `spaceAboveMenu` prop, which can be used to set the distance between the top of the screen and the top of the overflow menu.
+`OverflowMenuProvider` accepts an optional `spaceAboveMenu` prop, which can be used to set the distance between the top of the screen and the top of the overflow menu.
 
 #### `HeaderButton`
 

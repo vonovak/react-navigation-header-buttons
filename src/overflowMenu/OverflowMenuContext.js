@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 import { getDefaultSpaceAboveMenu } from './statusBarUtils';
 import { Menu } from './vendor/Menu';
 import { useTheme } from '@react-navigation/native';
@@ -45,17 +45,13 @@ export const OverflowMenuProvider = ({
 
   const toggleMenu = React.useCallback(
     (params: ToggleMenuParam) => {
-      setVisible((prevVisible) => !prevVisible);
       setElements(params?.elements || []);
       if (params) {
         const { x, y } = params;
-        const heightApprox = spaceAboveMenu ?? getDefaultSpaceAboveMenu();
-        const extraDelta = Platform.select({
-          android: heightApprox,
-          default: OVERFLOW_TOP,
-        });
+        const extraDelta = spaceAboveMenu ?? getDefaultSpaceAboveMenu();
         setPosition({ x, y: y + extraDelta });
       }
+      setVisible((prevVisible) => !prevVisible);
     },
     [spaceAboveMenu]
   );
