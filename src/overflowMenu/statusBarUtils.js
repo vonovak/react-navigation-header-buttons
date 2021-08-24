@@ -10,6 +10,7 @@ export const getDefaultSpaceAboveMenu = () => {
   const spaceAboveDropdownMenu = Platform.select({
     android: estimatedStatusBarHeight,
     ios: -4,
+    default: 0,
   });
   return spaceAboveDropdownMenu;
 };
