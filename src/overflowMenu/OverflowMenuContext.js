@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { Dimensions, Platform } from 'react-native';
+import { Dimensions } from 'react-native';
 import { getDefaultSpaceAboveMenu } from './statusBarUtils';
 import { Menu } from './vendor/Menu';
 import { useTheme } from '@react-navigation/native';
