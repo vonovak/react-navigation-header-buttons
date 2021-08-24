@@ -67,26 +67,40 @@ export const overflowMenuPressHandlerActionSheet = ({
   cancelButtonLabel = 'Cancel',
 }: OnOverflowMenuPressParams) => {
   checkParams(hiddenButtons);
-  const enabledButtons = hiddenButtons.filter((it) => it.disabled !== true);
-  let actionTitles = enabledButtons.map((btn) => btn.title);
+  let actionTitles = hiddenButtons.map((btn) => btn.title);
   actionTitles.unshift(cancelButtonLabel);
-  const destructiveActions: Array<number> = enabledButtons.reduce((acc, btn, index) => {
-    if (btn.destructive) {
-      acc.push(index + 1);
-    }
-    return acc;
-  }, []);
+
+  const disabledButtonsIndices: Array<number> = (() => {
+    let result = [];
+    hiddenButtons.forEach((it, index) => {
+      if (it.disabled === true) {
+        result.push(index + 1);
+      }
+    });
+    return result;
+  })();
+
+  const destructiveButtonIndex: Array<number> = (() => {
+    let result = [];
+    hiddenButtons.forEach((it, index) => {
+      if (it.destructive === true) {
+        result.push(index + 1);
+      }
+    });
+    return result;
+  })();
 
   ActionSheetIOS.showActionSheetWithOptions(
+    // $FlowFixMe - typings are old
     {
       options: actionTitles,
       cancelButtonIndex: 0,
-      // $FlowFixMe
-      destructiveButtonIndex: destructiveActions,
+      disabledButtonsIndices,
+      destructiveButtonIndex,
     },
     (buttonIndex: number) => {
       if (buttonIndex > 0) {
-        enabledButtons[buttonIndex - 1].onPress();
+        hiddenButtons[buttonIndex - 1].onPress();
       }
     }
   );

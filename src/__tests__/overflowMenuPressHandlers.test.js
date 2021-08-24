@@ -156,9 +156,9 @@ describe('overflowMenuPressHandlers', () => {
       expect(ActionSheetIOS.showActionSheetWithOptions).toHaveBeenCalledWith(
         {
           cancelButtonIndex: 0,
-          // disabledButtonsIndices: [1],
-          destructiveButtonIndex: [2],
-          options: ['Cancel', 'one', 'three'],
+          disabledButtonsIndices: [2],
+          destructiveButtonIndex: [3],
+          options: ['Cancel', 'one', 'two', 'three'],
         },
         expect.any(Function) // press callback
       );
