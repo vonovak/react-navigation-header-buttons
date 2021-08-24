@@ -16,9 +16,9 @@ const ReusableItem = ({ title, disabled = false }) => {
 };
 
 const handlers = {
+  overflowMenuPressHandlerDropdownMenu,
   overflowMenuPressHandlerActionSheet,
   overflowMenuPressHandlerPopupMenu,
-  overflowMenuPressHandlerDropdownMenu,
   custom: function custom(obj) {
     alert('you custom function will receive:' + Object.keys(obj));
   },
