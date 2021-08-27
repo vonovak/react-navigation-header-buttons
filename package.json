@@ -1,6 +1,6 @@
 {
   "name": "react-navigation-header-buttons",
-  "version": "8.0.0",
+  "version": "9.0.0",
   "description": "Easily render header buttons for react-navigation.",
   "main": "index.js",
   "scripts": {
@@ -23,7 +23,7 @@
   },
   "peerDependencies": {
     "@react-navigation/native": ">=5",
-	"react-native": ">=0.65.0"
+    "react-native": ">=0.65.0"
   },
   "keywords": [
     "react-navigation",
