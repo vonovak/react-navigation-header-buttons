@@ -22,7 +22,8 @@
     "invariant": ">=2"
   },
   "peerDependencies": {
-    "@react-navigation/native": ">=5"
+    "@react-navigation/native": ">=5",
+	"react-native": ">=0.65.0"
   },
   "keywords": [
     "react-navigation",
