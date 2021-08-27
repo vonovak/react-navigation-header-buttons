@@ -70,7 +70,7 @@ export const overflowMenuPressHandlerActionSheet = ({
   let actionTitles = hiddenButtons.map((btn) => btn.title);
   actionTitles.unshift(cancelButtonLabel);
 
-  const disabledButtonsIndices: Array<number> = (() => {
+  const disabledButtonIndices: Array<number> = (() => {
     let result = [];
     hiddenButtons.forEach((it, index) => {
       if (it.disabled === true) {
@@ -95,7 +95,7 @@ export const overflowMenuPressHandlerActionSheet = ({
     {
       options: actionTitles,
       cancelButtonIndex: 0,
-      disabledButtonsIndices,
+      disabledButtonIndices,
       destructiveButtonIndex,
     },
     (buttonIndex: number) => {
