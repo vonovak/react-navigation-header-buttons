@@ -70,7 +70,7 @@ export function UsageWithIcons({ navigation }) {
 
 #### Note on theming
 
-Version 7 gets colors for Android ripple effect, text and icons from [React Navigation's theme](https://reactnavigation.org/docs/themes/), so you will not need to work with colors, with the exception of `OverflowIcon` as seen above. You can always override colors of text&icons (using `color` prop) or of the ripple effect on Android (using `pressColor` prop) as documented below.
+Version 7 and later gets colors for Android ripple effect, text and icons from [React Navigation's theme](https://reactnavigation.org/docs/themes/), so you will not need to work with colors, with the exception of `OverflowIcon` as seen above. You can always override colors of text&icons (using `color` prop) or of the ripple effect on Android (using `pressColor` prop) as documented below.
 
 ### Usage
 
