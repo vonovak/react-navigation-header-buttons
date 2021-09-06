@@ -94,15 +94,15 @@ Renders text, or icon, and has an `onPress` handler. Take a look at the example 
 
 `Item` accepts:
 
-| prop and type               | description                                                                 | note                          |
-| --------------------------- | --------------------------------------------------------------------------- | ----------------------------- |
-| title: string               | title for the button, required                                              |                               |
-| onPress: ?() => any         | function to call on press                                                   |                               |
-| iconName?: string           | icon name, used together with the `IconComponent` prop                      |                               |
-| style?: ViewStyleProp       | style to apply to the touchable element that wraps the button               |                               |
-| buttonStyle?: ViewStyleProp | style to apply to the text / icon                                           | applies to both icon and text |
-| testID?: string             | testID to locate view in e2e tests                                          |                               |
-| other props                 | whatever else you want to pass to the underlying touchable (eg. `disabled`) |                               |
+| prop and type               | description                                                                 |
+| --------------------------- | --------------------------------------------------------------------------- |
+| title: string               | title for the button, required                                              |
+| onPress: ?() => any         | function to call on press                                                   |
+| iconName?: string           | icon name, used together with the `IconComponent` prop                      |
+| style?: ViewStyleProp       | style to apply to the touchable element that wraps the button               |
+| buttonStyle?: ViewStyleProp | style to apply to the text / icon                                           |
+| testID?: string             | testID to locate view in e2e tests                                          |
+| other props                 | whatever else you want to pass to the underlying touchable (eg. `disabled`) |
 
 `Item` also accepts other props that you'll typically not need to pass because `HeaderButtonComponent` already knows them (eg. `iconSize`) or because they are pulled from the React Navigation's theme object (`color`).
 
@@ -114,7 +114,7 @@ Renders text, or icon, and has an `onPress` handler. Take a look at the example 
 
 #### `OverflowMenu`
 
-Is the place to define the behavior for overflow button (if there is one). Please note you can render `OverflowMenu` only by itself too, you do no need to wrap it in `HeaderButtons`.
+Is the place to define the behavior for overflow button (if there is one). Please note you can render `OverflowMenu` only by itself too, you do not need to wrap it in `HeaderButtons`.
 The most important prop is `onPress` which defines what kind of overflow menu we should show.
 
 The package exports common handlers you can use, but you can provide your own too (via the `onPress` prop):
