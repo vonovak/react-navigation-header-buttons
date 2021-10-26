@@ -8,6 +8,14 @@ import { render, fireEvent } from '@testing-library/react-native';
 import { Text } from 'react-native';
 import React from 'react';
 
+beforeEach(() => {
+  jest.spyOn(global, 'requestAnimationFrame').mockImplementation((cb) => cb());
+});
+
+afterEach(() => {
+  global.requestAnimationFrame.mockRestore();
+});
+
 describe('HeaderButtons', () => {
   it('renders button with pressable labels when Item is a direct or indirect child', () => {
     const searchOnPress = jest.fn();
