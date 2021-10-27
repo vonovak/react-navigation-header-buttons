@@ -9,6 +9,14 @@ import { OverflowMenuProvider } from '../OverflowMenuContext';
 import { HeaderButtons } from '../../HeaderButtons';
 import { ButtonsWrapper } from '../../ButtonsWrapper';
 
+beforeEach(() => {
+  jest.spyOn(global, 'requestAnimationFrame').mockImplementation((cb) => cb());
+});
+
+afterEach(() => {
+  global.requestAnimationFrame.mockRestore();
+});
+
 describe('overflowMenu', () => {
   it('onPress is given correct params when HiddenItem is a direct or indirect child', () => {
     const searchOnPress = jest.fn();

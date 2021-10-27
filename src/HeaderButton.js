@@ -71,10 +71,13 @@ export function HeaderButton(props: HeaderButtonProps): React.Node {
     iconSize,
     color: usedColor,
   });
+
+  const handlePress = () => onPress && requestAnimationFrame(onPress);
+
   return (
     <TouchableItem
       borderless
-      onPress={onPress}
+      onPress={handlePress}
       hitSlop={BUTTON_HIT_SLOP}
       rippleRadius={20}
       style={StyleSheet.compose(styles.buttonContainer, style)}
