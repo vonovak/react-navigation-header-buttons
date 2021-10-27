@@ -1,5 +1,5 @@
-import { Component, ComponentType, ReactNode, ReactChild } from 'react';
-import { TextStyle, ViewStyle, View, StyleProp } from 'react-native';
+import { Component, ComponentProps, ComponentType, ReactNode, ReactChild } from 'react';
+import { TextStyle, TouchableWithoutFeedback, ViewStyle, View, StyleProp } from 'react-native';
 
 export interface CommonHeaderButtonProps {
   /**
@@ -73,7 +73,9 @@ export interface HeaderButtonsProps {
 declare class HeaderButtons extends Component<HeaderButtonsProps> {}
 
 // From HeaderButtons.js as ItemProps
-export interface HeaderItemProps extends HeaderButtonProps {}
+export interface HeaderItemProps
+  extends HeaderButtonProps,
+    React.ComponentProps<typeof TouchableWithoutFeedback> {}
 
 declare class Item extends Component<HeaderItemProps> {}
 
