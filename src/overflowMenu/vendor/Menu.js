@@ -240,15 +240,15 @@ export class Menu extends React.Component<Props, State> {
   };
 
   attachListeners = () => {
-    BackHandler.addEventListener('hardwareBackPress', this.handleDismiss);
-    Dimensions.addEventListener('change', this.handleDismiss);
+    this.backPressListner = BackHandler.addEventListener('hardwareBackPress', this.handleDismiss);
+    this.dimenstionChangeListner = Dimensions.addEventListener('change', this.handleDismiss);
 
     this.isBrowser() && document.addEventListener('keyup', this.handleKeypress);
   };
 
   removeListeners = () => {
-    BackHandler.removeEventListener('hardwareBackPress', this.handleDismiss);
-    Dimensions.removeEventListener('change', this.handleDismiss);
+    this.backPressListner.remove();
+    this.dimenstionChangeListner.remove();
 
     this.isBrowser() && document.removeEventListener('keyup', this.handleKeypress);
   };
