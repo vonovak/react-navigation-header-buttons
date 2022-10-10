@@ -1,6 +1,6 @@
 {
   "name": "react-navigation-header-buttons",
-  "version": "9.0.1",
+  "version": "10.0.0",
   "description": "Easily render header buttons for react-navigation.",
   "main": "index.js",
   "scripts": {
