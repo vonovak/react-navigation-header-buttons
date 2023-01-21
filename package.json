@@ -2,17 +2,19 @@
   "name": "react-navigation-header-buttons",
   "version": "10.0.0",
   "description": "Easily render header buttons for react-navigation.",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint ./src",
+    "prepublish": "flow-remove-types index.js src/ -d lib/",
     "typescript": "tsc --noEmit --strict index.d.ts",
     "flow": "flow check"
   },
   "files": [
     "index.js",
     "index.d.ts",
-    "src"
+    "src",
+    "lib"
   ],
   "repository": {
     "type": "git",
@@ -44,6 +46,7 @@
     "eslint": "^7.11.0",
     "eslint-plugin-prettier": "^3.1.2",
     "flow-bin": "^0.137.0",
+    "flow-remove-types": ^2.198.0",
     "jest": "^26.5.3",
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^2.1.2",
