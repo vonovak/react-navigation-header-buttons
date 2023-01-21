@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint ./src",
-    "prepublish": "flow-remove-types index.js src/ -d lib/",
+    "prepublish": "flow-remove-types . -d dist/ --ignore \"((dist|node_modules)[\\\\/].*)|(\\..+.js)\"",
     "typescript": "tsc --noEmit --strict index.d.ts",
     "flow": "flow check"
   },
@@ -14,7 +14,7 @@
     "index.js",
     "index.d.ts",
     "src",
-    "lib"
+    "dist"
   ],
   "repository": {
     "type": "git",
@@ -46,7 +46,7 @@
     "eslint": "^7.11.0",
     "eslint-plugin-prettier": "^3.1.2",
     "flow-bin": "^0.137.0",
-    "flow-remove-types": ^2.198.0",
+    "flow-remove-types": "^2.198.0",
     "jest": "^26.5.3",
     "metro-react-native-babel-preset": "^0.59.0",
     "prettier": "^2.1.2",
