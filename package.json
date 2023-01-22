@@ -2,7 +2,7 @@
   "name": "react-navigation-header-buttons",
   "version": "10.0.0",
   "description": "Easily render header buttons for react-navigation.",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "test": "jest",
     "lint": "eslint ./src",
