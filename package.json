@@ -6,7 +6,7 @@
   "scripts": {
     "test": "jest",
     "lint": "eslint ./src",
-    "prepublish": "flow-remove-types . -d dist/ --ignore \"((dist|node_modules)[\\\\/].*)|(\\..+.js)\"",
+    "prepare": "flow-remove-types . -d dist/ --ignore \"((dist|node_modules)[\\\\/].*)|(\\..+.js)\"",
     "typescript": "tsc --noEmit --strict index.d.ts",
     "flow": "flow check"
   },
