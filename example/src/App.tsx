@@ -6,10 +6,10 @@ import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext, ThemeProvider } from './ThemeProvider';
 import { screens } from './NavTypes';
-import { createStackNavigator } from '@react-navigation/stack';
-const stackType = 'js';
-// import { createNativeStackNavigator as createStackNavigator } from '@react-navigation/native-stack';
-// const stackType = 'native';
+// import { createStackNavigator } from '@react-navigation/stack';
+// const stackType = 'js';
+import { createNativeStackNavigator as createStackNavigator } from '@react-navigation/native-stack';
+const stackType = 'native';
 
 const Stack = createStackNavigator();
 
@@ -26,6 +26,11 @@ const Body = () => {
               key={screenName}
               // @ts-ignore
               component={screens[screenName]}
+              options={
+                {
+                  // headerLargeTitle: true,
+                }
+              }
             />
           );
         })}
