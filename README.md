@@ -23,7 +23,7 @@ The corresponding code:
 
 ```tsx
 import React from 'react';
-import { Ionicons } from '@expo/vector-icons';
+import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import { Text } from 'react-native';
 import {
   HeaderButtons,
@@ -31,12 +31,13 @@ import {
   Item,
   HiddenItem,
   OverflowMenu,
+  HeaderButtonProps,
 } from 'react-navigation-header-buttons';
 
-const IoniconsHeaderButton = (props: HeaderButtonProps) => (
+const MaterialHeaderButton = (props: HeaderButtonProps) => (
   // the `props` here come from <Item ... />
   // you may access them and pass something else to `HeaderButton` if you like
-  <HeaderButton IconComponent={Ionicons} iconSize={23} {...props} />
+  <HeaderButton IconComponent={MaterialIcons} iconSize={23} {...props} />
 );
 
 const ReusableItem = ({ onPress }) => <Item title="Edit" onPress={onPress} />;
@@ -46,23 +47,24 @@ const ReusableHiddenItem = ({ onPress }) => (
 );
 
 export function UsageWithIcons({ navigation }) {
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
+      title: 'Demo',
       headerRight: () => (
-        <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
+        <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
+          <EditItem onPress={() => alert('Edit')} />
           <Item
             title="search"
-            iconName="ios-search"
+            iconName="search"
             onPress={() => alert('search')}
           />
-          <ReusableItem onPress={() => alert('Edit')} />
-
           <OverflowMenu
             OverflowIcon={({ color }) => (
-              <Ionicons name="ios-more" size={23} color={color} />
+              <MaterialIcons name="more-horiz" size={23} color={color} />
             )}
           >
             <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
+            <Divider />
             <ReusableHiddenItem onPress={() => alert('hidden2')} />
           </OverflowMenu>
         </HeaderButtons>
@@ -76,7 +78,7 @@ export function UsageWithIcons({ navigation }) {
 
 ## Setup
 
-Version >= 11 requires React Native 0.71 or newer. Use version 10 if you're on older version of RN.
+Version >= 11 requires React Native 0.71 / Expo 48 or newer. Use version 10 if you're on older version of RN / Expo.
 
 1. `yarn add react-navigation-header-buttons`
 
@@ -104,7 +106,7 @@ In particular, it allows setting `IconComponent`, `size` and `color` once so tha
 
 ### `Item`
 
-Renders text, or icon inside a [PlatformPressable](https://reactnavigation.org/docs/elements/#platformpressable), and has an `onPress` handler. Take a look at the example to see how to use it.
+Renders text, or icon inside a [PlatformPressable](https://reactnavigation.org/docs/elements/#platformpressable). Take a look at the example to see how to use it.
 
 `Item` accepts:
 

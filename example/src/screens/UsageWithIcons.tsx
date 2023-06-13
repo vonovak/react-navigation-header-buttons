@@ -13,17 +13,18 @@ import type { ScreenProps } from '../NavTypes';
 import { MaterialHeaderButton } from '../components/MaterialHeaderButton';
 import { ScreenBody } from '../components/ScreenBody';
 import { Text } from 'react-native';
-// normally, on android, text is UPPERCASED
+import { useLayoutEffect } from 'react';
+
 const EditItem = ({ onPress }: Pick<ItemProps, 'onPress'>) => {
   return <Item title="edit" onPress={onPress} />;
 };
 
-const ReusableItem = ({ onPress }: Pick<HiddenItemProps, 'onPress'>) => (
+const ReusableHiddenItem = ({ onPress }: Pick<HiddenItemProps, 'onPress'>) => (
   <HiddenItem title="hidden2" onPress={onPress} disabled />
 );
 
 export function UsageWithIcons({ navigation }: ScreenProps<'UsageWithIcons'>) {
-  React.useLayoutEffect(() => {
+  useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Demo',
       // in your app, extract the arrow function into a separate component
@@ -36,7 +37,6 @@ export function UsageWithIcons({ navigation }: ScreenProps<'UsageWithIcons'>) {
             iconName="search"
             onPress={() => alert('search')}
           />
-          {/*<View style={{ width: 20, height: 20, backgroundColor: 'red' }} />*/}
           <OverflowMenu
             OverflowIcon={({ color }) => (
               <MaterialIcons name="more-horiz" size={23} color={color} />
@@ -44,7 +44,7 @@ export function UsageWithIcons({ navigation }: ScreenProps<'UsageWithIcons'>) {
           >
             <HiddenItem title="hidden1" onPress={() => alert('hidden1')} />
             <Divider />
-            <ReusableItem onPress={() => alert('hidden2')} />
+            <ReusableHiddenItem onPress={() => alert('hidden2')} />
           </OverflowMenu>
         </HeaderButtons>
       ),
