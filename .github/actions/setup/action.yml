@@ -11,6 +11,7 @@ runs:
 
     - name: Get yarn cache directory path
       id: yarn-cache-dir-path
+      shell: bash
       run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
 
     - uses: actions/cache@v3
