@@ -2,12 +2,12 @@
 
 This package will help you render buttons in the navigation bar and handle the styling so you don't have to. It mimics the appearance of native navbar buttons and offers a simple and flexible interface for you to interact with.
 
-- DRY library api
-- Works great with icons from `@expo/vector-icons` / `react-native-vector-icons` or any other icon library
-- Supports both [JS](https://reactnavigation.org/docs/stack-navigator) and [native](https://reactnavigation.org/docs/native-stack-navigator/) stack
-- Beautiful overflow menus for items that don't fit into the navbar
-- [Recipes](#recipes) and examples included
-- Written in TS
+✅ DRY library api
+✅ Works great with icons from `@expo/vector-icons` / `react-native-vector-icons` or any other icon library
+✅ Supports both [JS](https://reactnavigation.org/docs/stack-navigator) and [native](https://reactnavigation.org/docs/native-stack-navigator/) stack
+✅ Beautiful overflow menus for items that don't fit into the navbar
+✅ [Recipes](#recipes) and examples included
+✅ Written in TS
 
 #### Demo App
 
@@ -317,3 +317,4 @@ Colors for Android ripple effect, text and icons come from [React Navigation's t
 - item margins need to be reviewed and polished; don't hesitate to contribute - [this](https://github.com/infinitered/reactotron/blob/master/docs/plugin-overlay.md) should help
 - RTL is not tested
 - web support is experimental
+- ripple may look different on the header buttons vs on the back button if your version of react navigation does not have [this PR](https://github.com/react-navigation/react-navigation/pull/11386).
