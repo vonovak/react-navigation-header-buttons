@@ -89,7 +89,7 @@ Version >= 11 requires React Native 0.71 / Expo 48 or newer. Use version 10 if y
 
 2. Wrap your root component in `HeaderButtonsProvider` and pass the `stackType` prop (`'native' | 'js'`), as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx).
 
-**IMPORTANT** `HeaderButtonsProvider` must be placed so that it is a child of `NavigationContainer`, otherwise this library may not receive the correct theme from React Navigation.
+**IMPORTANT** `HeaderButtonsProvider` must be placed as a descendant of `NavigationContainer`, otherwise this library will not receive the correct theme from React Navigation.
 
 ## Usage
 
