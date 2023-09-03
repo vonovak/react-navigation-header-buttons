@@ -16,7 +16,7 @@ This package will help you render buttons in the navigation bar and handle the s
 
 #### Demo App
 
-Contains many examples in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/screens). I highly recommend you check it out to get a better idea of the api.
+Contains many examples in the [example folder](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/src/screens). I highly recommend you check it out to get a better idea of the api.
 
 #### Quick Example
 
