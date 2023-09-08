@@ -3,6 +3,7 @@ import {
   GestureResponderEvent,
   StyleSheet,
   Text,
+  TextStyle,
   View,
   ViewStyle,
 } from 'react-native';
@@ -31,7 +32,7 @@ export type Props = {
    * @optional
    */
   style?: ViewStyle;
-  titleStyle?: ViewStyle;
+  titleStyle?: TextStyle;
   /**
    * TestID used for testing purposes
    */

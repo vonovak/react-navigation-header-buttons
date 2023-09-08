@@ -224,7 +224,7 @@ const HiddenItemWrappedTwice = ()=> <HiddenItemWrapped />
 | ---------------------- | ------------------------------------------------------------------ | ---------------------------------------------------------------------- |
 | title: string          | title for the button, required                                     |                                                                        |
 | style?: ViewStyle      | style to apply to the touchable element that wraps the text        |                                                                        |
-| titleStyle?: ViewStyle | style to apply to the text                                         |                                                                        |
+| titleStyle?: TextStyle | style to apply to the text                                         |                                                                        |
 | onPress: ?() => any    | function to call on press                                          |                                                                        |
 | testID?: string        | testID to locate view in e2e tests                                 |                                                                        |
 | disabled?: boolean     | disabled 'item' is greyed out and `onPress` is not called on touch |                                                                        |
