@@ -27,17 +27,20 @@ Contains many examples in the [example folder](https://github.com/vonovak/react-
 The corresponding code:
 
 ```tsx
-import React from 'react';
+import * as React from 'react';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { Text } from 'react-native';
 import {
   HeaderButtons,
-  HeaderButton,
   Item,
   HiddenItem,
   OverflowMenu,
+  Divider,
+  ItemProps,
+  HiddenItemProps,
   HeaderButtonProps,
+  HeaderButton,
 } from 'react-navigation-header-buttons';
+import { Text } from 'react-native';
 
 const MaterialHeaderButton = (props: HeaderButtonProps) => (
   // the `props` here come from <Item ... />
@@ -45,16 +48,20 @@ const MaterialHeaderButton = (props: HeaderButtonProps) => (
   <HeaderButton IconComponent={MaterialIcons} iconSize={23} {...props} />
 );
 
-const ReusableItem = ({ onPress }) => <Item title="Edit" onPress={onPress} />;
+const EditItem = ({ onPress }: Pick<ItemProps, 'onPress'>) => {
+  return <Item title="edit" onPress={onPress} />;
+};
 
-const ReusableHiddenItem = ({ onPress }) => (
-  <HiddenItem title="hidden2" onPress={onPress} />
+const ReusableHiddenItem = ({ onPress }: Pick<HiddenItemProps, 'onPress'>) => (
+  <HiddenItem title="hidden2" onPress={onPress} disabled />
 );
 
 export function UsageWithIcons({ navigation }) {
-  useLayoutEffect(() => {
+  React.useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Demo',
+      // in your app, extract the arrow function into a separate component
+      // to avoid creating a new one every time
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
           <EditItem onPress={() => alert('Edit')} />
@@ -77,7 +84,7 @@ export function UsageWithIcons({ navigation }) {
     });
   }, [navigation]);
 
-  return <Text style={{ flex: 1 }}>demo!</Text>;
+  return <Text>demo!</Text>;
 }
 ```
 
