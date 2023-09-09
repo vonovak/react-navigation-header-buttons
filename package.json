@@ -1,6 +1,6 @@
 {
   "name": "react-navigation-header-buttons",
-  "version": "11.0.0",
+  "version": "11.0.1",
   "description": "test",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
