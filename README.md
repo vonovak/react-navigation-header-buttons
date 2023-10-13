@@ -24,6 +24,11 @@ Contains many examples in the [example folder](https://github.com/vonovak/react-
 <img alt="demo" src="img/header_buttons.gif" height="668" />
 </span>
 
+<details><summary>more screenshots</summary>
+<img alt="nativeOverflowMenu" src="img/nativeMenu.png" height="400" />
+
+</details>
+
 The corresponding code:
 
 ```tsx
