@@ -160,9 +160,9 @@ You can also use the [react-native-menu](https://github.com/react-native-menu/me
 `OverflowMenu` accepts:
 
 | prop and type                                | description                                                 | note                                                                                                                    |
-| -------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| -------------------------------------------- | ----------------------------------------------------------- |-------------------------------------------------------------------------------------------------------------------------|
 | OverflowIcon: ReactElement \| ComponentType  | React element or component for the overflow icon            | if you provide a component, it will receive `color` prop as seen in example above                                       |
-| style?: ViewStyle                            | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.js`                                                       |
+| style?: ViewStyle                            | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.tsx`                                                      |
 | onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more in "Recipes". |
 | testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`          |
 | accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                               |
