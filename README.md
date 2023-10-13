@@ -1,6 +1,6 @@
 # react-navigation-header-buttons
 
-This package will help you render buttons in the navigation bar and handle the styling so you don't have to. It mimics the appearance of native navbar buttons and offers a simple and flexible interface for you to interact with.
+This package will help you render buttons in the navigation bar and handle the styling, so you don't have to. It mimics the appearance of native navbar buttons and offers a simple but also flexible interface for you to interact with.
 
 ✅ DRY library api
 
@@ -94,7 +94,7 @@ Version >= 11 requires React Native 0.71 / Expo 48 or newer. Use version 10 if y
 
 1. `yarn add react-navigation-header-buttons`
 
-2. Wrap your root component in `HeaderButtonsProvider` and pass the `stackType` prop (`'native' | 'js'`), as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/App.tsx).
+2. Wrap your root component in `HeaderButtonsProvider` and pass the `stackType` prop (`'native' | 'js'`), as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/blob/master/example/src/App.tsx).
 
 **IMPORTANT** `HeaderButtonsProvider` must be placed as a descendant of `NavigationContainer`, otherwise this library will not receive the correct theme from React Navigation.
 
@@ -110,11 +110,12 @@ In particular, it allows setting `IconComponent`, `size` and `color` once so tha
 
 `HeaderButtons` accepts:
 
-| prop and type                                              | description                                                   | note                                                                                                                                              |
-| ---------------------------------------------------------- | ------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| HeaderButtonComponent?: `ComponentType<HeaderButtonProps>` | component that renders the buttons, `HeaderButton` by default | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). |
-| children: ReactNode                                        | whatever you want to render inside                            | Typically, `Item` or your component that renders `Item`, but it can be any React element.                                                         |
-| left?: boolean                                             | whether the `HeaderButtons` are on the left from header title | false by default, it only influences styling in a subtle way                                                                                      |
+| prop and type                                              | description                                                                                                                                                     | note                                                                                                                                              |
+| ---------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| HeaderButtonComponent?: `ComponentType<HeaderButtonProps>` | component that renders the buttons, `HeaderButton` by default                                                                                                   | Typically, you'll want to provide a component that wraps `HeaderButton` provided by this package, as seen in the [quick example](#quick-example). |
+| children: ReactNode                                        | whatever you want to render inside                                                                                                                              | Typically, `Item` or your component that renders `Item`, but it can be any React element.                                                         |
+| left?: boolean                                             | whether the `HeaderButtons` are on the left from header title                                                                                                   | false by default, it only influences styling in a subtle way                                                                                      |
+| preset?: 'tabHeader' \| 'stackHeader'                      | headers are typically rendered in Stack Navigator, however, you can also render them in a Tab Navigator header. Pass 'tabHeader' if button margins are missing. | 'stackHeader' by default                                                                                                                          |
 
 ### `Item`
 
@@ -159,14 +160,15 @@ You can also use the [react-native-menu](https://github.com/react-native-menu/me
 `OverflowMenu` accepts:
 
 | prop and type                                | description                                                 | note                                                                                                                    |
-| -------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| -------------------------------------------- | ----------------------------------------------------------- |-------------------------------------------------------------------------------------------------------------------------|
 | OverflowIcon: ReactElement \| ComponentType  | React element or component for the overflow icon            | if you provide a component, it will receive `color` prop as seen in example above                                       |
-| style?: ViewStyle                            | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.js`                                                       |
+| style?: ViewStyle                            | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.tsx`                                                      |
 | onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more in "Recipes". |
 | testID?: string                              | testID to locate the overflow button in e2e tests           | the default is available under `import { OVERFLOW_BUTTON_TEST_ID } from 'react-navigation-header-buttons/e2e'`          |
 | accessibilityLabel?: string                  |                                                             | 'More options' by default                                                                                               |
 | left?: boolean                               | whether the `OverflowMenu` is on the left from header title | false by default, it just influences styling. No need to pass this if you already passed it to `HeaderButtons`.         |
 | children: ReactNode                          | the overflow items                                          | typically `HiddenItem`s, please read the note below                                                                     |
+| preset?: 'tabHeader' \| 'stackHeader'        |                                                             | see [props of headerbuttons](#headerbuttons)                                                                            |
 | other props                                  | props passed to the nested `PlatformPressable`              | pass eg. `pressColor` to control ripple color on Android                                                                |
 
 ##### Important note
@@ -181,7 +183,7 @@ Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, 
 
 This limitation may look weird, but it should not really bother you in any way: if you need to have state in your items, lift the state up.
 The limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
-If this is a problem for you for some reason, please raise an issue and we'll see what can be done about it.
+If this is a problem for you for some reason, please raise an issue, and we'll see what can be done about it.
 
 If `OverflowMenu` contains no valid child elements, nothing will be rendered at all. (No `OverflowIcon`, no wrapper.)
 
@@ -255,7 +257,7 @@ You can fully customize what it renders inside of the `PlatformPressable` using 
 
 The default handler for overflow menu on iOS is `overflowMenuPressHandlerActionSheet`.
 
-One of the usual things you may want to do is override the cancel button label on iOS - see [example](example/screens/UsageWithOverflow.tsx).
+One of the usual things you may want to do is override the cancel button label on iOS - see [example](example/src/screens/UsageWithOverflow.tsx).
 
 You can also use the [react-native-menu](https://github.com/react-native-menu/menu) to show the overflow menu, as seen in the example app.
 
@@ -265,7 +267,7 @@ Use the `buttonStyle` prop to set [`textTransform`](https://reactnative.dev/docs
 
 #### How to integrate in your project
 
-This sections covers how you should use the library in your project. Please note that there are numerous [example screens](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/screens).
+This sections covers how you should use the library in your project. Please note that there are numerous [example screens](https://github.com/vonovak/react-navigation-header-buttons/tree/master/example/src/screens).
 
 1 . Define one file where the styling of header buttons is taken care of.
 

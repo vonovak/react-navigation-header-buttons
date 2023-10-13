@@ -8,7 +8,7 @@ import { OVERFLOW_TOP, useOverflowMenu } from './OverflowMenuContext';
 import { View, StyleSheet, type ColorValue } from 'react-native';
 import { HeaderButton, type HeaderButtonProps } from '../HeaderButton';
 import { OVERFLOW_BUTTON_TEST_ID } from '../e2e';
-import { ButtonsWrapper } from '../ButtonsWrapper';
+import { ButtonsWrapper, ButtonsWrapperProps } from '../ButtonsWrapper';
 import {
   Children,
   ComponentType,
@@ -16,19 +16,17 @@ import {
   useCallback,
   useRef,
   type ReactElement,
-  type ReactNode,
 } from 'react';
 import * as React from 'react';
 
 export type OverflowMenuProps = Omit<
   HeaderButtonProps,
   'onPress' | 'title' | 'renderButton'
-> & {
-  children: ReactNode;
-  OverflowIcon: ReactElement | ComponentType<{ color?: ColorValue }>;
-  onPress?: (params: OnOverflowMenuPressParams) => any;
-  left?: boolean;
-};
+> &
+  Pick<ButtonsWrapperProps, 'left' | 'preset' | 'children'> & {
+    OverflowIcon: ReactElement | ComponentType<{ color?: ColorValue }>;
+    onPress?: (params: OnOverflowMenuPressParams) => any;
+  };
 
 export const OverflowMenu = ({
   children,
@@ -37,13 +35,14 @@ export const OverflowMenu = ({
   testID = OVERFLOW_BUTTON_TEST_ID,
   onPress = defaultOnOverflowMenuPress,
   left = false, // this is needed only when OverflowMenu is rendered without HeaderButtons,
+  preset,
   ...other
 }: OverflowMenuProps) => {
   const { toggleMenu } = useOverflowMenu();
 
   const btnRef = useRef<View | null>(null);
   const renderButtonElement = useCallback(
-    ({ color }: { color?: ColorValue }) => {
+    ({ color }: { color: ColorValue }) => {
       return isValidElement<any>(OverflowIcon) ? (
         OverflowIcon
       ) : (
@@ -72,7 +71,7 @@ export const OverflowMenu = ({
   }
 
   return (
-    <ButtonsWrapper left={left} style={styles.wrapper}>
+    <ButtonsWrapper left={left} style={styles.wrapper} preset={preset}>
       <View
         ref={btnRef}
         collapsable={false}

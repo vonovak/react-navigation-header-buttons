@@ -3,20 +3,22 @@ import { NavigationContainer } from '@react-navigation/native';
 import { HeaderButtonsProvider } from 'react-navigation-header-buttons';
 // just for custom overflow menu onPress action
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext, ThemeProvider } from './ThemeProvider';
 import { screens } from './NavTypes';
-// import { createStackNavigator } from '@react-navigation/stack';
-// const stackType = 'js';
+import { TabScreenWithButtons } from './screens/TabScreenWithButtons';
 import { createNativeStackNavigator as createStackNavigator } from '@react-navigation/native-stack';
 const stackType = 'native';
+// import { createStackNavigator } from '@react-navigation/stack';
+// const stackType = 'js';
 
 const Stack = createStackNavigator();
 
 const Body = () => {
   return (
     <>
-      <StatusBar style="light" backgroundColor="darkgreen" />
       {/*@ts-ignore*/}
       <Stack.Navigator>
         {Object.keys(screens).map((screenName) => {
@@ -39,13 +41,31 @@ const Body = () => {
   );
 };
 
+const Tab = createBottomTabNavigator();
+
+function TabbedApp() {
+  return (
+    //@ts-ignore
+    <Tab.Navigator screenOptions={{ headerShown: false }}>
+      <Tab.Screen name="Home" component={Body} />
+      <Tab.Screen
+        name="Settings"
+        component={TabScreenWithButtons}
+        options={{ headerShown: true }}
+      />
+    </Tab.Navigator>
+  );
+}
+
 const ThemedApp = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <NavigationContainer theme={theme}>
+      <StatusBar style="light" backgroundColor="darkgreen" />
+
       <ActionSheetProvider>
         <HeaderButtonsProvider stackType={stackType}>
-          <Body />
+          <TabbedApp />
         </HeaderButtonsProvider>
       </ActionSheetProvider>
     </NavigationContainer>
