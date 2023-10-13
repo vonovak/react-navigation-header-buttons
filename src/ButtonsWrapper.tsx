@@ -10,16 +10,26 @@ export const ButtonsExtraMarginContext = React.createContext<
   'toBeHandled' | 'alreadyHandled'
 >('toBeHandled');
 
-type Props = {
-  left: boolean;
+export type ButtonsWrapperProps = {
+  left?: boolean;
+  // when rendered as a header for a tab navigator, the margins that native stack adds are not there,
+  // so we need to add margins manually
+  preset?: 'tabHeader' | 'stackHeader';
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
 };
 
-export const ButtonsWrapper = ({ left, children, style }: Props) => {
+export const ButtonsWrapper = ({
+  left,
+  children,
+  style,
+  preset = 'stackHeader',
+}: ButtonsWrapperProps) => {
   const marginStatus = React.useContext(ButtonsExtraMarginContext);
   const extraSideMargin =
-    marginStatus === 'alreadyHandled' ? undefined : getMargin(left);
+    preset === 'tabHeader' || marginStatus === 'toBeHandled'
+      ? getHeaderMargin(left)
+      : undefined;
 
   return (
     <ButtonsExtraMarginContext.Provider value="alreadyHandled">
@@ -28,7 +38,7 @@ export const ButtonsWrapper = ({ left, children, style }: Props) => {
   );
 };
 
-const getMargin = (left: boolean) => {
+export const getHeaderMargin = (left: boolean = false) => {
   return left ? styles.extraEdgeMarginOnLeft : styles.extraEdgeMarginOnRight;
 };
 

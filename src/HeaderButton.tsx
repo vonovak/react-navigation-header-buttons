@@ -29,8 +29,12 @@ export type VisibleButtonProps = {
 
 type PlatformPressableProps = ComponentProps<typeof PlatformPressable>;
 
+export type RenderButtonCallbackParams = Omit<VisibleButtonProps, 'color'> & {
+  // color is always available, either from user or from react-navigation theme
+  color: ColorValue;
+};
 type RenderButtonType = {
-  renderButton: <T extends VisibleButtonProps>(params: T) => ReactNode;
+  renderButton: <T extends RenderButtonCallbackParams>(params: T) => ReactNode;
 };
 
 type BaseProps = Omit<PlatformPressableProps, 'children'> & VisibleButtonProps;
