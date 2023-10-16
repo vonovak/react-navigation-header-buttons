@@ -24,7 +24,7 @@ export type OverflowMenuProps = Omit<
   'onPress' | 'title' | 'renderButton'
 > &
   Pick<ButtonsWrapperProps, 'left' | 'preset' | 'children'> & {
-    OverflowIcon: ReactElement | ComponentType<{ color?: ColorValue }>;
+    OverflowIcon: ReactElement | ComponentType<{ color: ColorValue }>;
     onPress?: (params: OnOverflowMenuPressParams) => any;
   };
 
