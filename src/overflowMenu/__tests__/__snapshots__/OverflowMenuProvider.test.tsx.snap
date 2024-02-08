@@ -1,12 +1,19 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`HeaderButtonsProvider renders the child and the menu item, when it is displayed by calling toggleMenu() that is provided by OverflowMenuContext 1`] = `
+exports[`HeaderButtonsProvider renders the child and the menu item, when it is displayed by calling presentMenu() that is provided by OverflowMenuContext 1`] = `
 [
-  <Text
-    onPress={[Function]}
-  >
-    show menu
-  </Text>,
+  <View>
+    <Text
+      onPress={[Function]}
+    >
+      show menu
+    </Text>
+    <Text
+      onPress={[Function]}
+    >
+      hide menu
+    </Text>
+  </View>,
   <View
     collapsable={false}
     style={

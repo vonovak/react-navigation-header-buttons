@@ -10,6 +10,7 @@ import {
   overflowMenuPressHandlerDropdownMenu,
   HiddenItemProps,
   OnOverflowMenuPressParams,
+  useOverflowMenu,
 } from 'react-navigation-header-buttons';
 import type { ScreenProps } from '../NavTypes';
 import { Button } from '../components/PaddedButton';
@@ -30,8 +31,20 @@ const handlers = {
   overflowMenuPressHandlerActionSheet,
   overflowMenuPressHandlerPopupMenu,
   custom: function custom(obj: OnOverflowMenuPressParams) {
-    alert('you custom function will receive:' + Object.keys(obj));
+    alert('you custom function will receive:' + Object.keys(obj).join(', '));
   },
+};
+
+const CustomViewInOverflow = () => {
+  const { closeMenu } = useOverflowMenu();
+  return (
+    <View style={{ backgroundColor: 'orange', maxWidth: 200 }}>
+      <Text onPress={closeMenu}>
+        custom view that will only be considered for
+        overflowMenuPressHandlerDropdownMenu
+      </Text>
+    </View>
+  );
 };
 
 export function UsageWithOverflowComplex({
@@ -64,12 +77,7 @@ export function UsageWithOverflowComplex({
               onPress={() => alert('hidden4')}
             />,
           ]}
-          <View style={{ backgroundColor: 'orange', maxWidth: 200 }}>
-            <Text>
-              custom view that will only be considered for
-              overflowMenuPressHandlerDropdownMenu
-            </Text>
-          </View>
+          <CustomViewInOverflow />
         </OverflowMenu>
       ),
     });

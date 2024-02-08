@@ -7,7 +7,7 @@ import {
   View,
 } from 'react-native';
 import { HiddenItem, HiddenItemProps } from '../HeaderItems';
-import type { ToggleMenuParam } from './OverflowMenuContext';
+import { OverflowMenuContextType } from './OverflowMenuContext';
 import inspectElements, { type PropsExtractor } from 'react-to-imperative';
 
 type OverflowButtonDescriptors = ReadonlyArray<{
@@ -35,11 +35,10 @@ export const extractHiddenItemProps: PropsExtractor<HiddenItemProps> = ({
 
 export type OnOverflowMenuPressParams = {
   hiddenButtons: OverflowButtonDescriptors;
-  _private_toggleMenu: (params: ToggleMenuParam) => void;
   overflowButtonRef: null | View;
   cancelButtonLabel?: string;
   children: React.ReactNode;
-};
+} & OverflowMenuContextType;
 
 export const overflowMenuPressHandlerActionSheet = ({
   hiddenButtons,
@@ -111,11 +110,11 @@ export const overflowMenuPressHandlerPopupMenu = ({
 export const overflowMenuPressHandlerDropdownMenu = ({
   children,
   overflowButtonRef,
-  _private_toggleMenu,
+  presentMenu,
 }: OnOverflowMenuPressParams) => {
   if (overflowButtonRef) {
     overflowButtonRef.measureInWindow((x, y, width) => {
-      _private_toggleMenu({ elements: children, x: x + width, y });
+      presentMenu({ elements: children, x: x + width, y });
     });
   } else {
     console.error('overflowButtonRef is null, cannot show overflow menu');

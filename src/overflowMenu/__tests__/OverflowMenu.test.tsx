@@ -53,7 +53,7 @@ describe('overflowMenu', () => {
       destructive: it.destructive,
       disabled: it.disabled,
     }));
-    expect({ ...mockCall, hiddenButtons }).toEqual({
+    expect({ ...mockCall, hiddenButtons }).toStrictEqual({
       hiddenButtons: [
         {
           title: 'search',
@@ -76,7 +76,8 @@ describe('overflowMenu', () => {
       ],
       overflowButtonRef: expect.any(Object),
       children: expect.any(Array),
-      _private_toggleMenu: expect.any(Function),
+      presentMenu: expect.any(Function),
+      closeMenu: expect.any(Function),
     });
   });
 

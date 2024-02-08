@@ -258,6 +258,14 @@ You can fully customize what it renders inside of the `PlatformPressable` using 
 
 ## Recipes
 
+#### Closing the overflow menu from `overflowMenuPressHandlerDropdownMenu` manually
+
+`overflowMenuPressHandlerDropdownMenu` supports rendering custom items in the menu. In your item's onPress handler, you can call `closeMenu` to close the menu manually.
+
+```ts
+const { closeMenu } = useOverflowMenu();
+```
+
 #### Customizing the overflow menu
 
 The default handler for overflow menu on iOS is `overflowMenuPressHandlerActionSheet`.
