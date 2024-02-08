@@ -15,6 +15,7 @@ export function UsageLeft({ navigation, route }: ScreenProps<'UsageLeft'>) {
             iconName={
               route.params && route.params.showIcon ? 'arrow-back' : undefined
             }
+            style={{ backgroundColor: 'pink', marginRight: 10 }}
             onPress={() => alert('Test')}
           />
         </HeaderButtons>

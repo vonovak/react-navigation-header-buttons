@@ -56,16 +56,20 @@ const styles = StyleSheet.create({
     }),
   },
   extraEdgeMarginOnLeft: {
+    // not used in native stack
+    // only applies in JS stack or when rendered as a header for a tab navigator
     ...Platform.select({
       android: {
-        marginLeft: 5,
+        marginLeft: 15,
       },
       default: {
-        marginLeft: 4,
+        marginLeft: 14,
       },
     }),
   },
   extraEdgeMarginOnRight: {
+    // not used in native stack
+    // only applies in JS stack or when rendered as a header for a tab navigator
     ...Platform.select({
       android: {
         marginRight: 14,
