@@ -260,10 +260,10 @@ You can fully customize what it renders inside of the `PlatformPressable` using 
 
 #### Closing the overflow menu from `overflowMenuPressHandlerDropdownMenu` manually
 
-`overflowMenuPressHandlerDropdownMenu` supports rendering custom items in the menu. In your item's onPress handler, you can call `toggleMenu` to close the menu manually.
+`overflowMenuPressHandlerDropdownMenu` supports rendering custom items in the menu. In your item's onPress handler, you can call `closeMenu` to close the menu manually.
 
 ```ts
-const { toggleMenu } = useOverflowMenu();
+const { closeMenu } = useOverflowMenu();
 ```
 
 #### Customizing the overflow menu

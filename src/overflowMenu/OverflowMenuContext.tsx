@@ -15,7 +15,7 @@ import * as React from 'react';
 
 import { ButtonsExtraMarginContext } from '../ButtonsWrapper';
 
-export type ToggleMenuParam = {
+export type PresentMenuParam = {
   elements: React.ReactNode;
   x: number;
   y: number;
@@ -26,15 +26,18 @@ export const OVERFLOW_TOP = 15;
 const warn = () => {
   // the noop value will be replaced by HeaderButtonsProvider rendered in app root
   console.warn(
-    'It seems like you tried to open the overflow menu using the overflowMenuPressHandlerDropdownMenu' +
+    'It seems like you tried to open / close the overflow menu using the overflowMenuPressHandlerDropdownMenu' +
       ' - which is the default handler on android - but you forgot to wrap your root component in <HeaderButtonsProvider />.' +
       'Please check the installation instructions in the react-navigation-header-buttons readme :)'
   );
 };
-const OverflowMenuContext = createContext<{
-  toggleMenu: (params?: ToggleMenuParam) => void;
-}>({
-  toggleMenu: warn,
+export type OverflowMenuContextType = {
+  presentMenu: (params?: PresentMenuParam) => void;
+  closeMenu: () => void;
+};
+const OverflowMenuContext = createContext<OverflowMenuContextType>({
+  presentMenu: warn,
+  closeMenu: warn,
 });
 
 export const useOverflowMenu = () => useContext(OverflowMenuContext);
@@ -63,15 +66,15 @@ export const HeaderButtonsProvider = ({
     colors: { card },
   } = useTheme();
 
-  const hideMenu = useCallback(() => {
+  const closeMenu = useCallback(() => {
     setMenuState((prevState) => ({
       ...prevState,
       visible: false,
     }));
   }, []);
 
-  const toggleMenu = useCallback(
-    (params?: ToggleMenuParam) => {
+  const presentMenu = useCallback(
+    (params?: PresentMenuParam) => {
       const extraDelta = spaceAboveMenu ?? getDefaultSpaceAboveMenu();
 
       setMenuState((prevState) => {
@@ -84,7 +87,7 @@ export const HeaderButtonsProvider = ({
           ...prevState,
           position,
           elements,
-          visible: !prevState.visible,
+          visible: true,
         };
       });
     },
@@ -92,7 +95,10 @@ export const HeaderButtonsProvider = ({
   );
 
   const { visible, position, elements } = menuState;
-  const value = useMemo(() => ({ toggleMenu }), [toggleMenu]);
+  const value = useMemo(
+    () => ({ presentMenu, closeMenu }),
+    [presentMenu, closeMenu]
+  );
   const extraMarginValue =
     stackType === 'native' ? 'alreadyHandled' : 'toBeHandled';
 
@@ -102,7 +108,7 @@ export const HeaderButtonsProvider = ({
         {React.Children.only(children)}
         <Menu
           visible={visible}
-          onDismiss={hideMenu}
+          onDismiss={closeMenu}
           anchor={position}
           contentStyle={{ backgroundColor: card }}
         >

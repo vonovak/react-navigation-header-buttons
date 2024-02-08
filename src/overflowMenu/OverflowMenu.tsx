@@ -38,7 +38,7 @@ export const OverflowMenu = ({
   preset,
   ...other
 }: OverflowMenuProps) => {
-  const { toggleMenu } = useOverflowMenu();
+  const presentationCalls = useOverflowMenu();
 
   const btnRef = useRef<View | null>(null);
   const renderButtonElement = useCallback(
@@ -52,7 +52,7 @@ export const OverflowMenu = ({
     [OverflowIcon]
   );
 
-  const usedOnPress = useCallback(() => {
+  const presentOverflowMenu = useCallback(() => {
     const titlesAndOnPresses =
       onPress === overflowMenuPressHandlerDropdownMenu
         ? []
@@ -61,9 +61,9 @@ export const OverflowMenu = ({
       children,
       hiddenButtons: titlesAndOnPresses,
       overflowButtonRef: btnRef.current,
-      _private_toggleMenu: toggleMenu,
+      ...presentationCalls,
     });
-  }, [children, onPress, toggleMenu]);
+  }, [children, onPress, presentationCalls]);
 
   const validChildren = Children.toArray(children).filter(isValidElement);
   if (validChildren.length === 0) {
@@ -80,7 +80,7 @@ export const OverflowMenu = ({
       <HeaderButton
         title="overflow menu"
         renderButton={renderButtonElement}
-        onPress={usedOnPress}
+        onPress={presentOverflowMenu}
         accessibilityLabel={accessibilityLabel}
         testID={testID}
         {...other}

@@ -1,5 +1,5 @@
 import { HeaderButtonsProvider, useOverflowMenu } from '../OverflowMenuContext';
-import { Text } from 'react-native';
+import { Text, View } from 'react-native';
 import {
   render,
   fireEvent,
@@ -21,16 +21,17 @@ describe('HeaderButtonsProvider renders', () => {
     `);
   });
 
-  it('the child and the menu item, when it is displayed by calling toggleMenu() that is provided by OverflowMenuContext', async () => {
+  it('the child and the menu item, when it is displayed by calling presentMenu() that is provided by OverflowMenuContext', async () => {
     const menuItemLabel = 'overflow menu item';
     const showMenuLabel = 'show menu';
+    const hideMenuLabel = 'hide menu';
 
     const ButtonThatShowsMenu = () => {
-      const { toggleMenu } = useOverflowMenu();
+      const { presentMenu } = useOverflowMenu();
       return (
         <Text
           onPress={() => {
-            toggleMenu({
+            presentMenu({
               elements: <Text key="1">{menuItemLabel}</Text>,
               x: 0,
               y: 0,
@@ -41,19 +42,35 @@ describe('HeaderButtonsProvider renders', () => {
         </Text>
       );
     };
+    const ButtonThatHidesMenu = () => {
+      const { closeMenu } = useOverflowMenu();
+      return (
+        <Text
+          onPress={() => {
+            closeMenu();
+          }}
+        >
+          {hideMenuLabel}
+        </Text>
+      );
+    };
     const { toJSON, getByText } = render(
       <HeaderButtonsProvider stackType={'js'}>
-        <ButtonThatShowsMenu />
+        <View>
+          <ButtonThatShowsMenu />
+          <ButtonThatHidesMenu />
+        </View>
       </HeaderButtonsProvider>
     );
 
-    const toggleMenuShown = () => fireEvent.press(getByText(showMenuLabel));
+    const presentMenu = () => fireEvent.press(getByText(showMenuLabel));
+    const hideMenu = () => fireEvent.press(getByText(hideMenuLabel));
 
     const beforeShown = toJSON();
-    toggleMenuShown();
+    presentMenu();
     expect(toJSON()).toMatchSnapshot();
     getByText(menuItemLabel);
-    toggleMenuShown();
+    hideMenu();
 
     const waitForMenuToHide = async () => {
       await waitForElementToBeRemoved(() => getByText(menuItemLabel), {

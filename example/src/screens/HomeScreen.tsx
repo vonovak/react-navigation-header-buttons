@@ -33,7 +33,7 @@ export function HomeScreen({ navigation }: ScreenProps<'HomeScreen'>) {
   const { toggleTheme } = React.useContext(ThemeContext);
 
   return (
-    <ScrollView>
+    <ScrollView contentContainerStyle={{ rowGap: 10 }}>
       <Text style={{ margin: 15 }}>Explore possible usages with:</Text>
       <Button
         onPress={() => _navigateTo('UsageWithIcons')}
@@ -46,6 +46,10 @@ export function HomeScreen({ navigation }: ScreenProps<'HomeScreen'>) {
       <Button
         onPress={() => _navigateTo('UsageWithCustomOverflow')}
         title="Custom overflow menu action"
+      />
+      <Button
+        onPress={() => _navigateTo('UsageNativeMenu')}
+        title="Native menu overflow"
       />
       <Button
         onPress={() => _navigateTo('UsageWithOverflowComplex')}
@@ -67,10 +71,7 @@ export function HomeScreen({ navigation }: ScreenProps<'HomeScreen'>) {
         onPress={() => _navigateTo('UsageCustom')}
         title="Custom elements"
       />
-      <Button
-        onPress={() => _navigateTo('UsageNativeMenu')}
-        title="Native menu overflow"
-      />
+
       <Button
         onPress={toggleTheme}
         title="Toggle Theme (ripple, text and icon color changes)"
