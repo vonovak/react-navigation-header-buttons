@@ -5,9 +5,9 @@ import {
   Item,
   HiddenItem,
   OverflowMenu,
-  Divider,
   ItemProps,
   HiddenItemProps,
+  Divider,
 } from 'react-navigation-header-buttons';
 import type { ScreenProps } from '../NavTypes';
 import { MaterialHeaderButton } from '../components/MaterialHeaderButton';

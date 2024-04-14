@@ -3,7 +3,8 @@
   "compilerOptions": {
     "outDir": "build",
     "paths": {
-      "react-navigation-header-buttons": ["./src/index"]
+      "react-navigation-header-buttons": ["./src/index"],
+      "react-navigation-header-buttons/HeaderButtonsProvider": ["./src/index/HeaderButtonsProvider"]
     },
     "allowJs": true,
     "allowUnreachableCode": false,

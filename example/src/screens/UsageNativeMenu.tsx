@@ -78,7 +78,7 @@ export function UsageNativeMenu({
 
   return (
     <ScreenBody>
-      <View style={{ height: 500 }} />
+      <View style={{ height: 250 }} />
 
       <MenuView
         title="Menu Title"

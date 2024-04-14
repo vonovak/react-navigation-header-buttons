@@ -90,7 +90,9 @@ export const overflowMenuPressHandlerPopupMenu = ({
   const presenter = UIManager.showPopupMenu;
   const node = findNodeHandle(overflowButtonRef);
   if (!presenter || !node) {
-    console.warn('could not present overflow menu');
+    console.warn(
+      'could not present overflow menu using showPopupMenu(). Note this is only available on Android.'
+    );
     return;
   }
 

@@ -28,7 +28,7 @@ export function UsageDisabled({ navigation }: ScreenProps<'UsageDisabled'>) {
         <HeaderButtons HeaderButtonComponent={DisableableHeaderButton}>
           <Item
             title="search"
-            iconName="ios-search"
+            iconName="search"
             onPress={() => alert('search')}
             disabled
           />

@@ -12,7 +12,7 @@ const modules = Object.keys({
 
 const defaultConfig = getDefaultConfig(__dirname);
 
-module.exports = {
+const config = {
   ...defaultConfig,
 
   projectRoot: __dirname,
@@ -22,6 +22,28 @@ module.exports = {
   // So we block them at the root, and alias them to the versions in example's node_modules
   resolver: {
     ...defaultConfig.resolver,
+    // "exports": {
+    //   ".": {
+    //     "require": {
+    //       "default": "./lib/commonjs/index.js"
+    //     },
+    //     "import": {
+    //       "default": "./lib/module/index.js"
+    //     },
+    //     "react-native": "./src/index.ts"
+    //   },
+    //   "./menu": {
+    //     "require": {
+    //       "default": "./lib/commonjs/overflowMenu/vendor/index.js"
+    //     },
+    //     "import": {
+    //       "default": "./lib/module/overflowMenu/vendor/index.js",
+    //       "types": "./lib/typescript/overflowMenu/vendor/index.d.ts"
+    //     },
+    //     "react-native": "./src/index/menu/index.ts"
+    //   }
+    // },
+    // unstable_enablePackageExports: true,
 
     blockList: exclusionList(
       modules.map(
@@ -36,3 +58,4 @@ module.exports = {
     }, {}),
   },
 };
+module.exports = config;

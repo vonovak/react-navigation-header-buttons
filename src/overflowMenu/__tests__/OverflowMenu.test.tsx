@@ -7,9 +7,9 @@ import {
   OnOverflowMenuPressParams,
   overflowMenuPressHandlerDropdownMenu,
 } from '../overflowMenuPressHandlers';
-import { HeaderButtonsProvider } from '../OverflowMenuContext';
 import { HeaderButtons } from '../../HeaderButtons';
 import { ButtonsWrapper } from '../../ButtonsWrapper';
+import { HeaderButtonsProviderDropdownMenu } from '../HeaderButtonsProviderDropdownMenu';
 
 beforeEach(() => {
   jest.spyOn(global, 'requestAnimationFrame').mockImplementation((cb) => {
@@ -102,7 +102,7 @@ describe('overflowMenu', () => {
         <HiddenItem title="search2" onPress={searchOnPress} disabled />
         <WrappedItem />
       </OverflowMenu>,
-      { wrapper: HeaderButtonsProvider }
+      { wrapper: HeaderButtonsProviderDropdownMenu }
     );
     expect(queryAllByText('Search')).toHaveLength(0);
 

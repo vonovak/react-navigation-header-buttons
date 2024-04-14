@@ -1,7 +1,7 @@
 {
   "name": "react-navigation-header-buttons",
   "version": "11.2.1",
-  "description": "test",
+  "description": "Easily render header buttons for react-navigation",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
@@ -31,7 +31,7 @@
     "typecheck": "tsc --noEmit",
     "lint": "eslint \"**/*.{js,ts,tsx}\"",
     "prepack": "bob build",
-    "release": "release-it",
+    "release": "yarn prepack && release-it",
     "example": "yarn --cwd example",
     "bootstrap": "yarn example && yarn install"
   },

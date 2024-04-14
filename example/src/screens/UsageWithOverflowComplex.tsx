@@ -4,13 +4,13 @@ import { View, Text } from 'react-native';
 import {
   HiddenItem,
   OverflowMenu,
-  Divider,
   overflowMenuPressHandlerActionSheet,
   overflowMenuPressHandlerPopupMenu,
   overflowMenuPressHandlerDropdownMenu,
   HiddenItemProps,
   OnOverflowMenuPressParams,
   useOverflowMenu,
+  Divider,
 } from 'react-navigation-header-buttons';
 import type { ScreenProps } from '../NavTypes';
 import { Button } from '../components/PaddedButton';

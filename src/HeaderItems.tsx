@@ -1,9 +1,11 @@
 import * as React from 'react';
-import type { Props as MenuItemProps } from './overflowMenu/vendor/MenuItem';
 import { HeaderButtonComponentContext } from './HeaderButtonComponentContext';
 import { useOverflowMenu } from './overflowMenu/OverflowMenuContext';
-import { MenuItem } from './overflowMenu/vendor/MenuItem';
 import { defaultRenderVisibleButton, type ItemProps } from './HeaderButton';
+import {
+  MenuItem,
+  type Props as MenuItemProps,
+} from './overflowMenu/vendor/MenuItem';
 
 export type HiddenItemProps = MenuItemProps & {
   destructive?: boolean;
@@ -15,7 +17,7 @@ export function HiddenItem<T extends HiddenItemProps>({
 }: T) {
   const { closeMenu } = useOverflowMenu();
 
-  // when rendering dropdown menu (e.g. android default) the return value is actually rendered
+  // when rendering dropdown menu, the return value is actually rendered
   // when we show action sheet, we do not render the returned value,
   // but just extract title, onPress and destructive passed to HiddenItem. HiddenItem() is not called
   const onMenuItemPress: MenuItemProps['onPress'] = (nativeEvent) => {
