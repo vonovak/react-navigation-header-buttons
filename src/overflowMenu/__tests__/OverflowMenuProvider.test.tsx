@@ -10,7 +10,9 @@ import { HeaderButtonsProviderDropdownMenu } from '../HeaderButtonsProviderDropd
 import { HeaderButtonsProviderPlain } from '../HeaderButtonsProviderPlain';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import * as child_process from 'node:child_process';
+import { exec } from 'child_process';
+import { promisify } from 'util';
+const execAsync = promisify(exec);
 
 describe('HeaderButtonsProvider renders', () => {
   it('only the child when menu is not shown', () => {
@@ -129,15 +131,15 @@ describe('HeaderButtonsProvider renders', () => {
     console.warn = originalWarn;
   });
 
-  it('should match the expected modules snapshot', () => {
-    // TODO improve detection of the example path
+  it('should match the expected modules snapshot', async () => {
     const cwd = process.cwd();
     const examplePath = `${cwd}/example/`;
-    child_process.execSync(
-      `cd ${examplePath} && yarn requires-ios && yarn requires-android`
+    const iosPromise = execAsync(`cd ${examplePath} && yarn requires-ios`);
+    const androidPromise = execAsync(
+      `cd ${examplePath} && yarn requires-android`
     );
+    await Promise.all([iosPromise, androidPromise]);
 
-    // Read the output from the file
     const outputIos = fs.readFileSync(
       path.join(examplePath, `requires-ios.txt`),
       'utf8'
@@ -147,20 +149,14 @@ describe('HeaderButtonsProvider renders', () => {
       'utf8'
     );
 
-    const filteredIos = outputIos
-      .split('\n')
-      .filter((line) => line.includes('header-buttons/src'))
-      .map((path) => {
-        // return file name only
-        return path.split('/').pop();
-      });
-    const filteredAndroid = outputAndroid
-      .split('\n')
-      .filter((line) => line.includes('header-buttons/src'))
-      .map((path) => {
-        // return file name only
-        return path.split('/').pop();
-      });
+    const filterAndExtractFileNames = (output: string) =>
+      output
+        .split('\n')
+        .filter((line) => line.includes('header-buttons/src'))
+        .map((path) => path.split('/').pop());
+
+    const filteredIos = filterAndExtractFileNames(outputIos);
+    const filteredAndroid = filterAndExtractFileNames(outputAndroid);
 
     expect(filteredIos).not.toContain('Menu.tsx');
     expect(filteredIos).not.toContain('HeaderButtonsProviderDropdownMenu.tsx');
