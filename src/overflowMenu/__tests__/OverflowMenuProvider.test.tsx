@@ -149,14 +149,14 @@ describe('HeaderButtonsProvider renders', () => {
 
     const filteredIos = outputIos
       .split('\n')
-      .filter((line) => line.includes('/header-buttons/src'))
+      .filter((line) => line.includes('header-buttons/src'))
       .map((path) => {
         // return file name only
         return path.split('/').pop();
       });
     const filteredAndroid = outputAndroid
       .split('\n')
-      .filter((line) => line.includes('/header-buttons/src'))
+      .filter((line) => line.includes('header-buttons/src'))
       .map((path) => {
         // return file name only
         return path.split('/').pop();
