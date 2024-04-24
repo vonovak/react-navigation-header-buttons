@@ -2,11 +2,46 @@
   "name": "react-navigation-header-buttons",
   "version": "11.2.1",
   "description": "Easily render header buttons for react-navigation",
-  "main": "lib/commonjs/index",
-  "module": "lib/module/index",
-  "types": "lib/typescript/index.d.ts",
-  "react-native": "src/index",
   "source": "src/index",
+  "exports": {
+    ".": {
+      "require": "./lib/commonjs/index.js",
+      "import": "./lib/module/index.js",
+      "react-native": "./src/index.ts",
+      "types": "./lib/typescript/index.d.ts",
+      "default": "./lib/module/index.js"
+    },
+    "./HeaderButtonsProvider": {
+      "require": "./lib/commonjs/index/HeaderButtonsProvider.js",
+      "import": "./lib/module/index/HeaderButtonsProvider.js",
+      "types": "./lib/typescript/index/HeaderButtonsProvider.d.ts",
+      "react-native": "./src/index/HeaderButtonsProvider.tsx",
+      "default": "./lib/module/index/HeaderButtonsProvider.js"
+    },
+    "./HeaderButtonsProviderDropdownMenu": {
+      "require": "./lib/commonjs/index/HeaderButtonsProviderDropdownMenu.js",
+      "import": "./lib/module/index/HeaderButtonsProviderDropdownMenu.js",
+      "types": "./lib/typescript/index/HeaderButtonsProviderDropdownMenu.d.ts",
+      "react-native": "./src/index/HeaderButtonsProviderDropdownMenu.tsx",
+      "default": "./lib/module/index/HeaderButtonsProviderDropdownMenu.js"
+    },
+    "./HeaderButtonsProviderPlain": {
+      "require": "./lib/commonjs/index/HeaderButtonsProviderPlain.js",
+      "import": "./lib/module/index/HeaderButtonsProviderPlain.js",
+      "types": "./lib/typescript/index/HeaderButtonsProviderPlain.d.ts",
+      "react-native": "./src/index/HeaderButtonsProviderPlain.tsx",
+      "default": "./lib/module/index/HeaderButtonsProviderPlain.js"
+    }
+  },
+  "scripts": {
+    "test": "jest",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint \"**/*.{js,ts,tsx}\"",
+    "prepack": "bob build",
+    "release": "yarn prepack && release-it",
+    "example": "yarn --cwd example",
+    "bootstrap": "yarn example && yarn install"
+  },
   "files": [
     "src",
     "lib",
@@ -26,15 +61,6 @@
     "!**/__mocks__",
     "!**/.*"
   ],
-  "scripts": {
-    "test": "jest",
-    "typecheck": "tsc --noEmit",
-    "lint": "eslint \"**/*.{js,ts,tsx}\"",
-    "prepack": "bob build",
-    "release": "yarn prepack && release-it",
-    "example": "yarn --cwd example",
-    "bootstrap": "yarn example && yarn install"
-  },
   "keywords": [
     "react-native",
     "ios",
@@ -80,7 +106,7 @@
     "@react-navigation/elements": ">=1",
     "@react-navigation/native": ">=6",
     "react": "*",
-    "react-native": ">=0.72.0"
+    "react-native": ">=0.73.0"
   },
   "engines": {
     "node": ">= 20.0.0"

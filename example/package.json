@@ -2,7 +2,7 @@
   "name": "example",
   "version": "1.0.0",
   "scripts": {
-    "start": "expo start --dev-client -c",
+    "start": "EXPO_METRO_UNSTABLE_ERRORS=1 expo start --dev-client -c",
     "android": "expo run:android",
     "ios": "expo run:ios",
     "web": "expo start --web",

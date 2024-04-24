@@ -17,7 +17,7 @@
       "dom"
     ],
     "module": "esnext",
-    "moduleResolution": "node",
+    "moduleResolution": "nodenext",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,

@@ -10,9 +10,7 @@ import { HeaderButtonsProviderDropdownMenu } from '../HeaderButtonsProviderDropd
 import { HeaderButtonsProviderPlain } from '../HeaderButtonsProviderPlain';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
-import { exec } from 'child_process';
-import { promisify } from 'util';
-const execAsync = promisify(exec);
+import * as child_process from 'node:child_process';
 
 describe('HeaderButtonsProvider renders', () => {
   it('only the child when menu is not shown', () => {
@@ -134,11 +132,9 @@ describe('HeaderButtonsProvider renders', () => {
   it('should match the expected modules snapshot', async () => {
     const cwd = process.cwd();
     const examplePath = `${cwd}/example/`;
-    const iosPromise = execAsync(`cd ${examplePath} && yarn requires-ios`);
-    const androidPromise = execAsync(
-      `cd ${examplePath} && yarn requires-android`
+    child_process.execSync(
+      `cd ${examplePath} && yarn requires-ios && yarn requires-android`
     );
-    await Promise.all([iosPromise, androidPromise]);
 
     const outputIos = fs.readFileSync(
       path.join(examplePath, `requires-ios.txt`),
