@@ -23,7 +23,7 @@ export function UsageDifferentFontFamilies({
           <Item
             title="settings-ion"
             IconComponent={Ionicons}
-            iconName="ios-settings"
+            iconName="settings"
             onPress={() => alert('ionicons settings')}
           />
           <Item

@@ -6,13 +6,21 @@ This package will help you render buttons in the navigation bar and handle the s
 
 ✅ Works great with icons from `@expo/vector-icons` / `react-native-vector-icons` or any other icon library
 
-✅ Supports both [JS](https://reactnavigation.org/docs/stack-navigator) and [native](https://reactnavigation.org/docs/native-stack-navigator/) stack
+✅ Supports Expo Router, and both [JS](https://reactnavigation.org/docs/stack-navigator) and [native](https://reactnavigation.org/docs/native-stack-navigator/) stack
 
 ✅ Beautiful overflow menus for items that don't fit into the navbar
 
 ✅ [Recipes](#recipes) and examples included
 
 ✅ Written in TS
+
+✅ Test suite included (mostly good only for the maintainer, but hey, not bad to know it's there)
+
+<!--
+#### Library status
+
+Mature: the library is stable and feature-complete. It won't be updated often not because it's abandoned, but because it doesn't need to be.
+-->
 
 #### Demo App
 
@@ -65,16 +73,14 @@ export function UsageWithIcons({ navigation }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({
       title: 'Demo',
-      // in your app, extract the arrow function into a separate component
-      // to avoid creating a new one every time
       headerRight: () => (
         <HeaderButtons HeaderButtonComponent={MaterialHeaderButton}>
-          <EditItem onPress={() => alert('Edit')} />
           <Item
             title="search"
             iconName="search"
             onPress={() => alert('search')}
           />
+          <EditItem onPress={() => alert('Edit')} />
           <OverflowMenu
             OverflowIcon={({ color }) => (
               <MaterialIcons name="more-horiz" size={23} color={color} />
@@ -93,15 +99,9 @@ export function UsageWithIcons({ navigation }) {
 }
 ```
 
-## Setup
+## Installation & Setup
 
-Version >= 11 requires React Native 0.71 / Expo 48 or newer. Use version 10 if you're on older version of RN / Expo.
-
-1. `yarn add react-navigation-header-buttons`
-
-2. Wrap your root component in `HeaderButtonsProvider` and pass the `stackType` prop (`'native' | 'js'`), as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/blob/master/example/src/App.tsx).
-
-**IMPORTANT** `HeaderButtonsProvider` must be placed as a descendant of `NavigationContainer`, otherwise this library will not receive the correct theme from React Navigation.
+See [Installation & Setup](INSTALL.md)
 
 ## Usage
 
@@ -109,9 +109,9 @@ Version >= 11 requires React Native 0.71 / Expo 48 or newer. Use version 10 if y
 
 Is a wrapper over all the visible header buttons (those can be text-buttons, icon-button, or any custom react elements).
 
-You should provide the `HeaderButtonComponent` prop that encapsulates how all buttons rendered in children will look. Typically, you'll want to provide a component that wraps [`HeaderButton`](#headerbutton) as seen in the example. However, you're free to use your own component (see `HeaderButton.tsx` for reference).
+You should provide the `HeaderButtonComponent` prop that encapsulates how all buttons rendered in children will look. Typically, you'll want to provide a component that wraps [`HeaderButton`](#headerbutton) as seen in the example above. However, you're free to use your own component (see `HeaderButton.tsx` for reference).
 
-In particular, it allows setting `IconComponent`, `size` and `color` once so that you don't need to repeat it for each icon-button - but you can override those for each `Item` if you like.
+In particular, it allows setting `IconComponent`, `size` and `color` in one place so that you don't need to repeat it for each icon-button - but you can override those for each `Item` if you like.
 
 `HeaderButtons` accepts:
 
@@ -124,7 +124,7 @@ In particular, it allows setting `IconComponent`, `size` and `color` once so tha
 
 ### `Item`
 
-Renders text, or icon inside a [PlatformPressable](https://reactnavigation.org/docs/elements/#platformpressable). Take a look at the example to see how to use it.
+Renders text, or icon inside a [PlatformPressable](https://reactnavigation.org/docs/elements/#platformpressable). Take a look at the example above to see how to use it.
 
 `Item` accepts:
 
@@ -142,30 +142,32 @@ Renders text, or icon inside a [PlatformPressable](https://reactnavigation.org/d
 | additional props and type                                | description                                                                             | note |
 | -------------------------------------------------------- | --------------------------------------------------------------------------------------- | ---- |
 | IconComponent?: ComponentType                            | component to use for the icons, for example from `react-native-vector-icons`            |      |
-| iconSize?: number                                        | iconSize                                                                                |      |
+| iconSize?: number                                        | icon size                                                                               |      |
 | color?: string                                           | color of icons and buttons                                                              |      |
 | renderButton?: (params: VisibleButtonProps) => ReactNode | renders the body of the button (text or icon), defaults to `defaultRenderVisibleButton` |      |
 
 ### `OverflowMenu`
 
-Defines the behavior for overflow button (if there is one). Please note you can render `OverflowMenu` only by itself too, you do not need to wrap it in `HeaderButtons`.
+Defines the behavior for overflow button (if there is one). You can render `OverflowMenu` only by itself too, you do not need to wrap it in `HeaderButtons`.
 The most important prop is `onPress` which defines what kind of overflow menu we should show.
+
+If `OverflowMenu` contains no valid child elements, nothing will be rendered at all. (No `OverflowIcon`, no wrapper.)
 
 The package exports common handlers you can use, but you can provide your own too (via the `onPress` prop):
 
-| exported handler                       | description                                                                                                                                                                                                                                                                                           |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `overflowMenuPressHandlerActionSheet`  | This is iOS-only: it displays overflow items in an `ActionSheetIOS`                                                                                                                                                                                                                                   |
-| `overflowMenuPressHandlerPopupMenu`    | This is Android-only: it displays overflow items using `UIManager.showPopupMenu`                                                                                                                                                                                                                      |
-| `overflowMenuPressHandlerDropdownMenu` | Can be used in iOS, Android and Web. Displays overflow items in a material popup adapted from [react-native-paper](https://callstack.github.io/react-native-paper/menu.html), credit for an amazing job goes to them. This `Menu` is bundled in this library (no dependency on `react-native-paper`). |
-| `defaultOnOverflowMenuPress`           | The default. Uses `overflowMenuPressHandlerActionSheet` on iOS, and `overflowMenuPressHandlerDropdownMenu` otherwise.                                                                                                                                                                                 |
+| exported handler                       | description                                                                                                                                                                                                                                                                                                                                                 |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `defaultOnOverflowMenuPress`           | The default. Uses `overflowMenuPressHandlerActionSheet` on iOS, and `overflowMenuPressHandlerDropdownMenu` otherwise.                                                                                                                                                                                                                                       |
+| `overflowMenuPressHandlerActionSheet`  | This is iOS-only: it displays overflow items in an `ActionSheetIOS`                                                                                                                                                                                                                                                                                         |
+| `overflowMenuPressHandlerPopupMenu`    | This is Android-only: it displays overflow items using `UIManager.showPopupMenu`                                                                                                                                                                                                                                                                            |
+| `overflowMenuPressHandlerDropdownMenu` | Can be used on iOS, Android and Web. Displays overflow items in a material popup adapted from [react-native-paper](https://callstack.github.io/react-native-paper/docs/components/Menu), credit for an amazing job goes to them. This `Menu` is bundled in this library (no dependency on `react-native-paper`) but only `require`d if you actually use it. |
 
 You can also use the [react-native-menu](https://github.com/react-native-menu/menu) to show the overflow menu, as seen in the example app.
 
 `OverflowMenu` accepts:
 
 | prop and type                                | description                                                 | note                                                                                                                    |
-| -------------------------------------------- | ----------------------------------------------------------- |-------------------------------------------------------------------------------------------------------------------------|
+| -------------------------------------------- | ----------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | OverflowIcon: ReactElement \| ComponentType  | React element or component for the overflow icon            | if you provide a component, it will receive `color` prop as seen in example above                                       |
 | style?: ViewStyle                            | optional styles for overflow button                         | there are some default styles set, as seen in `OverflowButton.tsx`                                                      |
 | onPress?: (OnOverflowMenuPressParams) => any | function that is called when overflow menu is pressed.      | This will override the default handler. Note the default handler offers (limited) customization. See more in "Recipes". |
@@ -176,7 +178,8 @@ You can also use the [react-native-menu](https://github.com/react-native-menu/me
 | preset?: 'tabHeader' \| 'stackHeader'        |                                                             | see [props of headerbuttons](#headerbuttons)                                                                            |
 | other props                                  | props passed to the nested `PlatformPressable`              | pass eg. `pressColor` to control ripple color on Android                                                                |
 
-##### Important note
+> [!NOTE]
+> There are important limitations on what can be passed as children to `OverflowMenu`:
 
 Children passed to `OverflowMenu` should be
 
@@ -190,12 +193,10 @@ This limitation may look weird, but it should not really bother you in any way: 
 The limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
 If this is a problem for you for some reason, please raise an issue, and we'll see what can be done about it.
 
-If `OverflowMenu` contains no valid child elements, nothing will be rendered at all. (No `OverflowIcon`, no wrapper.)
-
 <details><summary>examples</summary>
 <p>
 
-Please see `UsageWithOverflowComplex.tsx` for valid examples!
+Please see [`UsageWithOverflowComplex.tsx`](https://github.com/vonovak/react-navigation-header-buttons/blob/master/example/src/screens/UsageWithOverflowComplex.tsx) for valid examples!
 
 These will NOT work with `overflowMenuPressHandlerActionSheet` and `overflowMenuPressHandlerPopupMenu`:
 
@@ -244,11 +245,19 @@ const HiddenItemWrappedTwice = ()=> <HiddenItemWrapped />
 | disabled?: boolean     | disabled 'item' is greyed out and `onPress` is not called on touch |                                                                        |
 | destructive?: boolean  | flag specifying whether this item is destructive                   | only applies to items shown with `overflowMenuPressHandlerActionSheet` |
 
-### `HeaderButtonsProvider`
+### `HeaderButtonsProvider` / `HeaderButtonsProviderPlain` / `HeaderButtonsProviderDropdownMenu`
 
-You need to wrap your root component with `<HeaderButtonsProvider />`. `stackType` is a required prop, which indicates whether you're using a native or JS stack.
+You need to wrap your root component with a HeaderButtons Provider. `stackType` is a required prop, which indicates whether you're using a native or JS stack.
 
-Optional `spaceAboveMenu` prop can be used to set the distance between the top of the screen and the top of the overflow menu.
+Importing: `import { your_chosen_provider } from 'react-navigation-header-buttons/your_chosen_provider'`.
+
+There are 3 providers to choose from. You'll get an actionable warning if you don't use the right one.
+
+- `HeaderButtonsProvider` - the default, which assumes you will use `overflowMenuPressHandlerDropdownMenu` on Android but not iOS (because that's the default behavior that the library ships with).
+- `HeaderButtonsProviderPlain` - use it if you're not planning to use `overflowMenuPressHandlerDropdownMenu`. It will shave a few kB off your bundle and Hermes won't have to parse the code that would not run in the end.
+- `HeaderButtonsProviderDropdownMenu` - use it if you're planning to use `overflowMenuPressHandlerDropdownMenu` on all platforms.
+
+Optional `spaceAboveMenu` prop can be used to set the distance between the top of the screen and the top of the overflow menu when using `overflowMenuPressHandlerDropdownMenu`.
 
 ### `HeaderButton`
 
@@ -272,7 +281,7 @@ The default handler for overflow menu on iOS is `overflowMenuPressHandlerActionS
 
 One of the usual things you may want to do is override the cancel button label on iOS - see [example](example/src/screens/UsageWithOverflow.tsx).
 
-You can also use the [react-native-menu](https://github.com/react-native-menu/menu) to show the overflow menu, as seen in the example app.
+You can also use the [react-native-menu](https://github.com/react-native-menu/menu) (or similar) to show the overflow menu, as seen in the example app.
 
 #### Using custom text transforms
 
@@ -335,13 +344,12 @@ React.useLayoutEffect(() => {
 
 ### Theming
 
-Colors for Android ripple effect, text and icons come from [React Navigation's theme](https://reactnavigation.org/docs/themes/), so you do not need to work with colors, with the exception of `OverflowIcon`. You can always override colors of text&icons (using `color` prop) or of the ripple effect on Android (using `pressColor` prop) as [documented](#item).
+Colors for Android ripple effect, text and icons come from [React Navigation's theme](https://reactnavigation.org/docs/themes/), so you do not need to work with colors, except in `OverflowIcon`. You can always override colors of text&icons (using `color` prop) or of the ripple effect on Android (using `pressColor` prop) as [documented](#item).
 
-### Known issues
+### Known issues / TODOs
 
-- it appears that when screen title is long, it might interfere with buttons (does not happen when using native stack). This is more probably a react-navigation error, but needs investigation.
-- missing styling support for material dropdown menu
-- item margins need to be reviewed and polished; don't hesitate to contribute - [this](https://github.com/infinitered/reactotron/blob/master/docs/plugin-overlay.md) should help
+- styling support for material dropdown menu is missing
+- item margins should be reviewed; don't hesitate to contribute - [this](https://github.com/infinitered/reactotron/blob/master/docs/plugin-overlay.md) could help
 - RTL is not tested
-- web support is experimental
+- web support is experimental. On the web, you'll probably want to use different interaction patterns anyway.
 - ripple may look different on the header buttons vs on the back button if your version of react navigation does not have [this PR](https://github.com/react-navigation/react-navigation/pull/11386).

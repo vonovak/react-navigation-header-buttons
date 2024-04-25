@@ -3,9 +3,9 @@
   "compilerOptions": {
     "outDir": "build",
     "paths": {
-      "react-navigation-header-buttons": ["./src/index"]
+      "react-navigation-header-buttons": ["./src/index"],
+      "react-navigation-header-buttons/HeaderButtonsProvider": ["./src/providers/HeaderButtonsProvider"]
     },
-    "allowJs": true,
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,
@@ -15,8 +15,8 @@
       "esnext",
       "dom"
     ],
-    "module": "esnext",
-    "moduleResolution": "node",
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,

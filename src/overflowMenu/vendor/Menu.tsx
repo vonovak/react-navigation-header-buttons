@@ -1,5 +1,3 @@
-// menu has a bunch of errors so typecheck is ignored but we want to keep flow syntax in here
-
 import * as React from 'react';
 import {
   Platform,

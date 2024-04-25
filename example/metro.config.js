@@ -12,7 +12,7 @@ const modules = Object.keys({
 
 const defaultConfig = getDefaultConfig(__dirname);
 
-module.exports = {
+const config = {
   ...defaultConfig,
 
   projectRoot: __dirname,
@@ -22,6 +22,7 @@ module.exports = {
   // So we block them at the root, and alias them to the versions in example's node_modules
   resolver: {
     ...defaultConfig.resolver,
+    unstable_enablePackageExports: true,
 
     blockList: exclusionList(
       modules.map(
@@ -30,9 +31,15 @@ module.exports = {
       )
     ),
 
-    extraNodeModules: modules.reduce((acc, name) => {
-      acc[name] = path.join(__dirname, 'node_modules', name);
-      return acc;
-    }, {}),
+    extraNodeModules: modules.reduce(
+      (acc, name) => {
+        acc[name] = path.join(__dirname, 'node_modules', name);
+        return acc;
+      },
+      {
+        [pak.name]: root,
+      }
+    ),
   },
 };
+module.exports = config;

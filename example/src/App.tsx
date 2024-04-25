@@ -1,10 +1,9 @@
 import React, { useContext } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { HeaderButtonsProvider } from 'react-navigation-header-buttons';
+import { HeaderButtonsProvider } from 'react-navigation-header-buttons/HeaderButtonsProvider';
 // just for custom overflow menu onPress action
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext, ThemeProvider } from './ThemeProvider';
 import { screens } from './NavTypes';
@@ -46,7 +45,9 @@ const Tab = createBottomTabNavigator();
 function TabbedApp() {
   return (
     //@ts-ignore
-    <Tab.Navigator screenOptions={{ headerShown: false }}>
+    <Tab.Navigator
+      screenOptions={{ headerShown: false, tabBarIcon: () => null }}
+    >
       <Tab.Screen name="Home" component={Body} />
       <Tab.Screen
         name="Settings"
@@ -62,7 +63,6 @@ const ThemedApp = () => {
   return (
     <NavigationContainer theme={theme}>
       <StatusBar style="light" backgroundColor="darkgreen" />
-
       <ActionSheetProvider>
         <HeaderButtonsProvider stackType={stackType}>
           <TabbedApp />
