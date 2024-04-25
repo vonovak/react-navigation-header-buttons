@@ -1,1 +1,0 @@
-The reason this is called "index" is that (it seems) the transform step of metro bundler looks for the sources and if I rename this, resolution of 'react-navigation-header-buttons/HeaderButtonsProvider' fails in the example project. 

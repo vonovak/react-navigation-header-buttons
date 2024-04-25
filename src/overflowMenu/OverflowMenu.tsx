@@ -7,7 +7,6 @@ import {
 import { OVERFLOW_TOP, useOverflowMenu } from './OverflowMenuContext';
 import { View, StyleSheet, type ColorValue } from 'react-native';
 import { HeaderButton, type HeaderButtonProps } from '../HeaderButton';
-import { OVERFLOW_BUTTON_TEST_ID } from '../e2e';
 import { ButtonsWrapper, ButtonsWrapperProps } from '../ButtonsWrapper';
 import {
   Children,
@@ -18,6 +17,7 @@ import {
   type ReactElement,
 } from 'react';
 import * as React from 'react';
+import { OVERFLOW_BUTTON_TEST_ID } from '../e2e';
 
 export type OverflowMenuProps = Omit<
   HeaderButtonProps,

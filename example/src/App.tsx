@@ -4,7 +4,6 @@ import { HeaderButtonsProvider } from 'react-navigation-header-buttons/HeaderBut
 // just for custom overflow menu onPress action
 import { ActionSheetProvider } from '@expo/react-native-action-sheet';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
 import { StatusBar } from 'expo-status-bar';
 import { ThemeContext, ThemeProvider } from './ThemeProvider';
 import { screens } from './NavTypes';
@@ -64,7 +63,6 @@ const ThemedApp = () => {
   return (
     <NavigationContainer theme={theme}>
       <StatusBar style="light" backgroundColor="darkgreen" />
-
       <ActionSheetProvider>
         <HeaderButtonsProvider stackType={stackType}>
           <TabbedApp />

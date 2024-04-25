@@ -21,6 +21,4 @@ export { useOverflowMenu } from './overflowMenu/OverflowMenuContext';
 
 export { OverflowMenu } from './overflowMenu/OverflowMenu';
 export { Divider } from './overflowMenu/vendor/Divider';
-// TODO v5 - no need to export MenuItem probably
-export { MenuItem } from './overflowMenu/vendor/MenuItem';
 export { getHeaderMargin } from './ButtonsWrapper';

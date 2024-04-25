@@ -129,37 +129,45 @@ describe('HeaderButtonsProvider renders', () => {
     console.warn = originalWarn;
   });
 
-  it('should match the expected modules snapshot', async () => {
-    const cwd = process.cwd();
-    const examplePath = `${cwd}/example/`;
-    child_process.execSync(
-      `cd ${examplePath} && yarn requires-ios && yarn requires-android`
-    );
+  it(
+    'when bundling the example app, some files are (not) bundled based on the platform.' +
+      'This is controlled by the HeaderButtonsProvider and illustrates the bundle savings.',
+    async () => {
+      const cwd = process.cwd();
+      const examplePath = `${cwd}/example/`;
+      child_process.execSync(
+        `cd ${examplePath} && yarn requires-ios && yarn requires-android`
+      );
 
-    const outputIos = fs.readFileSync(
-      path.join(examplePath, `requires-ios.txt`),
-      'utf8'
-    );
-    const outputAndroid = fs.readFileSync(
-      path.join(examplePath, `requires-android.txt`),
-      'utf8'
-    );
+      const filesBundledOnIos = fs.readFileSync(
+        path.join(examplePath, `requires-ios.txt`),
+        'utf8'
+      );
+      const filesBundledOnAndroid = fs.readFileSync(
+        path.join(examplePath, `requires-android.txt`),
+        'utf8'
+      );
 
-    const filterAndExtractFileNames = (output: string) =>
-      output
-        .split('\n')
-        .filter((line) => line.includes('header-buttons/src'))
-        .map((path) => path.split('/').pop());
+      const filterAndExtractFileNames = (output: string) =>
+        output
+          .split('\n')
+          .filter((line) => line.includes('header-buttons/src'))
+          .map((path) => path.split('/').pop());
 
-    const filteredIos = filterAndExtractFileNames(outputIos);
-    const filteredAndroid = filterAndExtractFileNames(outputAndroid);
+      const filteredIos = filterAndExtractFileNames(filesBundledOnIos);
+      const filteredAndroid = filterAndExtractFileNames(filesBundledOnAndroid);
 
-    expect(filteredIos).not.toContain('Menu.tsx');
-    expect(filteredIos).not.toContain('HeaderButtonsProviderDropdownMenu.tsx');
-    expect(filteredAndroid).toContain('HeaderButtonsProviderDropdownMenu.tsx');
-    expect(filteredAndroid).toContain('Menu.tsx');
+      expect(filteredIos).not.toContain('Menu.tsx');
+      expect(filteredIos).not.toContain(
+        'HeaderButtonsProviderDropdownMenu.tsx'
+      );
+      expect(filteredAndroid).toContain(
+        'HeaderButtonsProviderDropdownMenu.tsx'
+      );
+      expect(filteredAndroid).toContain('Menu.tsx');
 
-    expect(filteredIos).toMatchInlineSnapshot(`
+      // OverflowMenu imports the e2e file which is why it's here
+      expect(filteredIos).toMatchInlineSnapshot(`
       [
         "HeaderButtonsProvider.tsx",
         "HeaderButtonsProvider.ios.tsx",
@@ -174,9 +182,11 @@ describe('HeaderButtonsProvider renders', () => {
         "OverflowMenuContext.tsx",
         "MenuItem.tsx",
         "OverflowMenu.tsx",
-        "e2e.js",
+        "e2e.ts",
         "Divider.tsx",
       ]
     `);
-  }, 20000);
+    },
+    20000
+  );
 });
