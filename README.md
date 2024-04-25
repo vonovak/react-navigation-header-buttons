@@ -251,11 +251,7 @@ You need to wrap your root component with a HeaderButtons Provider. `stackType` 
 
 Importing: `import { your_chosen_provider } from 'react-navigation-header-buttons/your_chosen_provider'`.
 
-There are 3 providers to choose from. You'll get an actionable warning if you don't use the right one.
-
-- `HeaderButtonsProvider` - the default, which assumes you will use `overflowMenuPressHandlerDropdownMenu` on Android but not iOS (because that's the default behavior that the library ships with).
-- `HeaderButtonsProviderPlain` - use it if you're not planning to use `overflowMenuPressHandlerDropdownMenu`. It will shave a few kB off your bundle and Hermes won't have to parse the code that would not run in the end.
-- `HeaderButtonsProviderDropdownMenu` - use it if you're planning to use `overflowMenuPressHandlerDropdownMenu` on all platforms.
+There are 3 providers to choose from. Read more in [Installation & Setup](INSTALL.md).
 
 Optional `spaceAboveMenu` prop can be used to set the distance between the top of the screen and the top of the overflow menu when using `overflowMenuPressHandlerDropdownMenu`.
 
