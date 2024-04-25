@@ -17,7 +17,7 @@ export function HiddenItem<T extends HiddenItemProps>({
 }: T) {
   const { closeMenu } = useOverflowMenu();
 
-  // when rendering dropdown menu, the return value is actually rendered
+  // when rendering dropdown menu (e.g. android default), the return value is actually rendered
   // when we show action sheet, we do not render the returned value,
   // but just extract title, onPress and destructive passed to HiddenItem. HiddenItem() is not called
   const onMenuItemPress: MenuItemProps['onPress'] = (nativeEvent) => {
