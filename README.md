@@ -140,7 +140,7 @@ Renders text, or icon inside a [PlatformPressable](https://reactnavigation.org/d
 `Item` also accepts other props that you'll typically not need to pass because `HeaderButtonComponent` already knows them (eg. `iconSize`) or because they are pulled from the React Navigation's theme object (`color`).
 
 | additional props and type                                | description                                                                             | note |
-| -------------------------------------------------------- |-----------------------------------------------------------------------------------------| ---- |
+| -------------------------------------------------------- | --------------------------------------------------------------------------------------- | ---- |
 | IconComponent?: ComponentType                            | component to use for the icons, for example from `react-native-vector-icons`            |      |
 | iconSize?: number                                        | icon size                                                                               |      |
 | color?: string                                           | color of icons and buttons                                                              |      |
@@ -192,7 +192,6 @@ Only `overflowMenuPressHandlerDropdownMenu` supports rendering custom elements, 
 This limitation may look weird, but it should not really bother you in any way: if you need to have state in your items, lift the state up.
 The limitation exists because we need to be able to transform declarative React elements into imperative calls (`ActionSheetIOS.showActionSheetWithOptions` / `UIManager.showPopupMenu`).
 If this is a problem for you for some reason, please raise an issue, and we'll see what can be done about it.
-
 
 <details><summary>examples</summary>
 <p>
