@@ -1,6 +1,6 @@
 {
   "name": "react-navigation-header-buttons",
-  "version": "11.2.1",
+  "version": "12.0.0",
   "description": "Easily render header buttons for react-navigation",
   "exports": {
     ".": {
