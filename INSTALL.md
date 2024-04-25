@@ -4,9 +4,9 @@ Version >= 12 requires React Native 0.73 / Expo 50 or newer (because of `unstabl
 
 Version >= 11 requires React Native 0.71 / Expo 48 or newer. Use version 10 if you're on older version of RN / Expo.
 
-0. In your `tsconfig.json`, make sure you have [`"moduleResolution": "NodeNext"`](https://www.typescriptlang.org/tsconfig#moduleResolution) set. This is required for TS to see the typings exported via [package.json `exports`](https://reactnative.dev/blog/2023/06/21/package-exports-support).
+1. In your `tsconfig.json`, make sure you have [`"moduleResolution": "NodeNext"`](https://www.typescriptlang.org/tsconfig#moduleResolution) set. This is required for TS to see the typings exported via [package.json `exports`](https://reactnative.dev/blog/2023/06/21/package-exports-support).
 
-1. add [`unstable_enablePackageExports`](https://metrobundler.dev/docs/configuration/#unstable_enablepackageexports-experimental) to your metro config (in `metro.config.js`). This field will default to `true` in a future version of RN so don't need to worry about it. This allows us to do some bundle size savings.
+2. add [`unstable_enablePackageExports`](https://metrobundler.dev/docs/configuration/#unstable_enablepackageexports-experimental) to your metro config (in `metro.config.js`). This field will default to `true` in a future version of RN so don't need to worry about it. This allows us to do some bundle size savings.
 
 ```js
 // if you use Expo:
@@ -24,9 +24,9 @@ const config = {
 module.exports = mergeConfig(getDefaultConfig(__dirname), config);
 ```
 
-2. `yarn add react-navigation-header-buttons`
+3. `yarn add react-navigation-header-buttons`
 
-3. Wrap your root component in a `HeaderButtons` Provider and pass the `stackType` prop (`'native' | 'js'`), as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/blob/master/example/src/App.tsx).
+4. Wrap your root component in a `HeaderButtons` Provider and pass the `stackType` prop (`'native' | 'js'`), as seen in [example's App.tsx](https://github.com/vonovak/react-navigation-header-buttons/blob/master/example/src/App.tsx).
 
 There are 3 providers to choose from. You'll get an actionable warning if you don't use the right one. They are:
 
