@@ -18,7 +18,7 @@ export type VisibleButtonProps = {
   IconComponent?: React.ComponentType<{
     name: any; // TODO generify to support icon names
     style?: any;
-    color?: ColorValue;
+    color?: ColorValue | number;
     size?: number;
   }>;
   iconName?: string;
