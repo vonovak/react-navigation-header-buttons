@@ -71,7 +71,7 @@ describe('HeaderButtons', () => {
     const IoniconsHeaderButton = (props: HeaderButtonProps) => (
       <HeaderButton
         {...props}
-        IconComponent={({ name }) => <Text>{name}</Text>}
+        IconComponent={({ name }: { name: any }) => <Text>{name}</Text>}
         iconSize={23}
         color="blue"
       />

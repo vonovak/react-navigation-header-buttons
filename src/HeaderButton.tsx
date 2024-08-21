@@ -15,12 +15,19 @@ import type { ComponentProps, ReactNode } from 'react';
 export type VisibleButtonProps = {
   title: string;
 
-  IconComponent?: React.ComponentType<{
-    name: any; // TODO generify to support icon names
-    style?: any;
-    color?: ColorValue;
-    size?: number;
-  }>;
+  IconComponent?:
+    | React.ComponentType<{
+        name: any; // TODO generify to support icon names
+        style?: any;
+        size?: number;
+        color?: ColorValue;
+      }>
+    | React.ComponentType<{
+        name: any; // TODO generify to support icon names
+        style?: any;
+        size?: number;
+        color?: ColorValue | number;
+      }>;
   iconName?: string;
   iconSize?: number;
   color?: ColorValue;
