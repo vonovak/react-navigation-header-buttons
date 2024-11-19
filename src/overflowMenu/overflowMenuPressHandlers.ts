@@ -87,7 +87,7 @@ export const overflowMenuPressHandlerPopupMenu = ({
   overflowButtonRef,
 }: OnOverflowMenuPressParams) => {
   const enabledButtons = hiddenButtons.filter((it) => it.disabled !== true);
-  const presenter = 'showPopupMenu' in UIManager && UIManager.showPopupMenu;
+  const presenter = 'showPopupMenu' in UIManager ? UIManager.showPopupMenu : null;
   const node = findNodeHandle(overflowButtonRef);
   if (!presenter || !node) {
     console.warn(
