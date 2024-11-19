@@ -89,7 +89,7 @@ export const overflowMenuPressHandlerPopupMenu = ({
   const enabledButtons = hiddenButtons.filter((it) => it.disabled !== true);
   const presenter = UIManager.showPopupMenu;
   const node = findNodeHandle(overflowButtonRef);
-  if (!presenter || !node) {
+  if (!presenter || typeof presenter !== 'function' || !node) {
     console.warn(
       'could not present overflow menu using showPopupMenu(). Note this is only available on Android.'
     );
