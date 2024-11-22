@@ -1,4 +1,4 @@
-export { HeaderButtonsComponentType } from './HeaderButtonComponentContext';
+export { type HeaderButtonsComponentType } from './HeaderButtonComponentContext';
 export {
   HeaderButton,
   defaultRenderVisibleButton,
@@ -6,7 +6,7 @@ export {
   type HeaderButtonProps,
   type VisibleButtonProps,
 } from './HeaderButton';
-export { HeaderButtons, HeaderButtonsProps } from './HeaderButtons';
+export { HeaderButtons, type HeaderButtonsProps } from './HeaderButtons';
 export {
   defaultOnOverflowMenuPress,
   overflowMenuPressHandlerActionSheet,
@@ -14,7 +14,7 @@ export {
   overflowMenuPressHandlerDropdownMenu,
   extractOverflowButtonData,
   extractHiddenItemProps,
-  OnOverflowMenuPressParams,
+  type OnOverflowMenuPressParams,
 } from './overflowMenu/overflowMenuPressHandlers';
 export { Item, HiddenItem, type HiddenItemProps } from './HeaderItems';
 export { useOverflowMenu } from './overflowMenu/OverflowMenuContext';
