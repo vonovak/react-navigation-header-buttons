@@ -168,24 +168,24 @@ describe('HeaderButtonsProvider renders', () => {
 
       // OverflowMenu imports the e2e file which is why it's here
       expect(filteredIos).toMatchInlineSnapshot(`
-      [
-        "HeaderButtonsProvider.tsx",
-        "HeaderButtonsProvider.ios.tsx",
-        "HeaderButtonsProviderPlain.tsx",
-        "ButtonsWrapper.tsx",
-        "index.ts",
-        "HeaderButtonComponentContext.tsx",
-        "HeaderButton.tsx",
-        "HeaderButtons.tsx",
-        "overflowMenuPressHandlers.ts",
-        "HeaderItems.tsx",
-        "OverflowMenuContext.tsx",
-        "MenuItem.tsx",
-        "OverflowMenu.tsx",
-        "e2e.ts",
-        "Divider.tsx",
-      ]
-    `);
+        [
+          "HeaderButtonsProvider.tsx",
+          "HeaderButtonsProvider.ios.tsx",
+          "HeaderButtonsProviderPlain.tsx",
+          "ButtonsWrapper.tsx",
+          "index.ts",
+          "HeaderButton.tsx",
+          "HeaderButtons.tsx",
+          "HeaderButtonComponentContext.tsx",
+          "overflowMenuPressHandlers.ts",
+          "HeaderItems.tsx",
+          "OverflowMenuContext.tsx",
+          "MenuItem.tsx",
+          "OverflowMenu.tsx",
+          "e2e.ts",
+          "Divider.tsx",
+        ]
+      `);
     },
     20000
   );
