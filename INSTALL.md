@@ -1,28 +1,35 @@
 # Installation & Setup
 
-Version >= 12 requires React Native 0.73 / Expo 50 or newer (because of `unstable_enablePackageExports`). Use version 11 if you're on older version of RN / Expo.
+Version >= 12 requires React Native 0.73 / Expo 50 or newer (because of [`unstable_enablePackageExports`](https://metrobundler.dev/docs/configuration/#unstable_enablepackageexports-experimental)). Use version 11 if you're on older version of RN / Expo.
 
 Version >= 11 requires React Native 0.71 / Expo 48 or newer. Use version 10 if you're on older version of RN / Expo.
 
-1. In your `tsconfig.json`, make sure you have [`"moduleResolution": "NodeNext"`](https://www.typescriptlang.org/tsconfig#moduleResolution) set. This is required for TS to see the typings exported via [package.json `exports`](https://reactnative.dev/blog/2023/06/21/package-exports-support).
+1. In your `tsconfig.json`, make sure you set up `module` and `moduleResolution` like this:
+
+   ```
+       "module": "ESNext",
+       "moduleResolution": "Bundler",
+   ```
+
+   [source 1](https://twitter.com/mattpocockuk/status/1724462050288587123), [source 2](https://callstack.github.io/react-native-builder-bob/esm). This is required for TS to see the typings exported via [package.json `exports`](https://reactnative.dev/blog/2023/06/21/package-exports-support).
 
 2. add [`unstable_enablePackageExports`](https://metrobundler.dev/docs/configuration/#unstable_enablepackageexports-experimental) to your metro config (in `metro.config.js`). This field will default to `true` in a future version of RN so don't need to worry about it. This allows us to do some bundle size savings.
 
-```js
-// if you use Expo:
-const config = getDefaultConfig(__dirname);
-// unstable_enablePackageExports: true,
-config.resolver.unstable_enablePackageExports = true;
-module.exports = config;
+   ```js
+   // if you use Expo:
+   const config = getDefaultConfig(__dirname);
+   // unstable_enablePackageExports: true,
+   config.resolver.unstable_enablePackageExports = true;
+   module.exports = config;
 
-// if you use bare React Native:
-const config = {
-  resolver: {
-    unstable_enablePackageExports: true,
-  },
-};
-module.exports = mergeConfig(getDefaultConfig(__dirname), config);
-```
+   // if you use bare React Native:
+   const config = {
+     resolver: {
+       unstable_enablePackageExports: true,
+     },
+   };
+   module.exports = mergeConfig(getDefaultConfig(__dirname), config);
+   ```
 
 3. `yarn add react-navigation-header-buttons`
 

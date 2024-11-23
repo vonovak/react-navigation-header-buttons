@@ -4,6 +4,9 @@ module.exports = {
     '<rootDir>/example/node_modules',
     '<rootDir>/lib/',
   ],
+  testPathIgnorePatterns: [
+    '<rootDir>/(?:.+?)/__tests__/_(?:.+?)', //ignore files prepended with underscore
+  ],
   maxWorkers: 2,
   coverageProvider: 'v8',
   moduleNameMapper: {

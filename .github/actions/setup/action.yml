@@ -24,6 +24,6 @@ runs:
 
     - name: Install dependencies
       run: |
-        yarn install --cwd example --frozen-lockfile
-        yarn install --frozen-lockfile
+        yarn install --cwd example --immutable
+        yarn install --immutable
       shell: bash
