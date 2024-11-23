@@ -10448,13 +10448,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"react-native-safe-area-context@npm:^4.14.0":
-  version: 4.14.0
-  resolution: "react-native-safe-area-context@npm:4.14.0"
+"react-native-safe-area-context@npm:4.12.0":
+  version: 4.12.0
+  resolution: "react-native-safe-area-context@npm:4.12.0"
   peerDependencies:
     react: "*"
     react-native: "*"
-  checksum: 10c0/70d71c5ec301fe811a1b3ca78555fdf3e845731177bc2ef72fb5e5d01fa97e9e14259114fe8c5366d91eceb57272887e19323d9355453353b82b2452c716a624
+  checksum: 10c0/122e7e24de39371b107fcac7ecd6b62d41301a46c945c7a6b3a07c8b65d4cb9ebf58bf163bfecfd430b1bd8fdf61d4f319dac1812edd7986c00b7d2cc16da24c
   languageName: node
   linkType: hard
 
@@ -10534,7 +10534,7 @@ __metadata:
     react: "npm:18.3.1"
     react-native: "npm:0.76.3"
     react-native-builder-bob: "npm:^0.33.1"
-    react-native-safe-area-context: "npm:^4.14.0"
+    react-native-safe-area-context: "npm:4.12.0"
     react-test-renderer: "npm:^18.3.1"
     react-to-imperative: "npm:^0.2.0"
     release-it: "npm:^17.10.0"
@@ -10544,6 +10544,7 @@ __metadata:
     "@react-navigation/native": ">=6"
     react: "*"
     react-native: ">=0.73.0"
+    react-native-safe-area-context: ">=3"
   languageName: unknown
   linkType: soft
 

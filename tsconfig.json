@@ -6,6 +6,9 @@
       "react-navigation-header-buttons": ["./src/index"],
       "react-navigation-header-buttons/HeaderButtonsProvider": [
         "./src/providers/HeaderButtonsProvider"
+      ],
+      "react-navigation-header-buttons/HeaderButtonsProviderDropdownMenu": [
+        "./src/providers/HeaderButtonsProviderDropdownMenu"
       ]
     },
     "allowUnreachableCode": false,
