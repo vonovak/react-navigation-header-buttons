@@ -1,12 +1,12 @@
 import { ReactNode, useCallback, useMemo, useState } from 'react';
-import { Dimensions } from 'react-native';
+import { Dimensions, Platform } from 'react-native';
 import { useTheme } from '@react-navigation/native';
-import { getDefaultSpaceAboveMenu } from './statusBarUtils';
 import { ButtonsExtraMarginContext } from '../ButtonsWrapper';
 import * as React from 'react';
 import { OverflowMenuContext, PresentMenuParam } from './OverflowMenuContext';
 import { HeaderButtonsProviderProps } from './HeaderButtonsProviderTypes';
 import { Menu } from './vendor/Menu';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 export const HeaderButtonsProviderDropdownMenu = ({
   children,
@@ -25,6 +25,13 @@ export const HeaderButtonsProviderDropdownMenu = ({
   const {
     colors: { card },
   } = useTheme();
+  const { top } = useSafeAreaInsets();
+  const defaultSpaceAboveOverflowMenu = Platform.select({
+    ios: 0,
+    default: top,
+  });
+  const appliedSpaceAboveMenu =
+    spaceAboveMenu ?? defaultSpaceAboveOverflowMenu + 5;
 
   const closeMenu = useCallback(() => {
     setMenuState((prevState) => ({
@@ -35,11 +42,9 @@ export const HeaderButtonsProviderDropdownMenu = ({
 
   const presentMenu = useCallback(
     (params?: PresentMenuParam) => {
-      const extraDelta = spaceAboveMenu ?? getDefaultSpaceAboveMenu();
-
       setMenuState((prevState) => {
         const position = params
-          ? { x: params.x, y: params.y + extraDelta }
+          ? { x: params.x, y: params.y + appliedSpaceAboveMenu }
           : prevState.position;
         const elements = params ? params.elements : prevState.elements;
 
@@ -51,7 +56,7 @@ export const HeaderButtonsProviderDropdownMenu = ({
         };
       });
     },
-    [spaceAboveMenu]
+    [appliedSpaceAboveMenu]
   );
 
   const value = useMemo(

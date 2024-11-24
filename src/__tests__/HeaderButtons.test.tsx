@@ -3,9 +3,10 @@
 import { Item } from '../HeaderItems';
 import { HeaderButtons } from '../HeaderButtons';
 import { HeaderButton, HeaderButtonProps } from '../HeaderButton';
-import { render, fireEvent } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 import { Text, TextProps } from 'react-native';
 import React from 'react';
+import { wrappedRender } from './_wrappedRender';
 
 beforeEach(() => {
   jest.spyOn(global, 'requestAnimationFrame').mockImplementation((cb) => {
@@ -24,7 +25,7 @@ describe('HeaderButtons', () => {
     const searchOnPress = jest.fn();
     const deleteOnPress = jest.fn();
     const WrappedItem = () => <Item title="Delete" onPress={deleteOnPress} />;
-    const { getByText } = render(
+    const { getByText } = wrappedRender(
       <HeaderButtons>
         <Item title="Search" onPress={searchOnPress} />
         <WrappedItem />
@@ -41,7 +42,7 @@ describe('HeaderButtons', () => {
     const searchOnPress = jest.fn();
     const deleteOnPress = jest.fn();
     const WrappedItem = () => <Text onPress={deleteOnPress}>Delete</Text>;
-    const { getByText, UNSAFE_queryAllByType } = render(
+    const { getByText, UNSAFE_queryAllByType } = wrappedRender(
       <HeaderButtons>
         <Text onPress={searchOnPress}>Search</Text>
         <WrappedItem />
@@ -76,7 +77,7 @@ describe('HeaderButtons', () => {
         color="blue"
       />
     );
-    const { queryAllByText, getByAccessibilityHint } = render(
+    const { queryAllByText, getByAccessibilityHint } = wrappedRender(
       <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
         <Item
           iconName="ios-search"
@@ -107,7 +108,7 @@ describe('HeaderButtons', () => {
         {...props}
       />
     );
-    const { UNSAFE_getAllByType } = render(
+    const { UNSAFE_getAllByType } = wrappedRender(
       <HeaderButtons HeaderButtonComponent={IoniconsHeaderButton}>
         <Item
           iconName="1"

@@ -87,11 +87,12 @@ export const overflowMenuPressHandlerPopupMenu = ({
   overflowButtonRef,
 }: OnOverflowMenuPressParams) => {
   const enabledButtons = hiddenButtons.filter((it) => it.disabled !== true);
+  // @ts-expect-error TODO vonovak this was removed in RN 0.75
   const presenter = UIManager.showPopupMenu;
   const node = findNodeHandle(overflowButtonRef);
   if (!presenter || !node) {
     console.warn(
-      'could not present overflow menu using showPopupMenu(). Note this is only available on Android.'
+      'could not present overflow menu using showPopupMenu(). This is only available on Android with RN <= 0.75. See https://github.com/vonovak/react-navigation-header-buttons/issues/252'
     );
     return;
   }

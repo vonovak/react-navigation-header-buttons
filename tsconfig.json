@@ -4,19 +4,21 @@
     "outDir": "build",
     "paths": {
       "react-navigation-header-buttons": ["./src/index"],
-      "react-navigation-header-buttons/HeaderButtonsProvider": ["./src/providers/HeaderButtonsProvider"]
+      "react-navigation-header-buttons/HeaderButtonsProvider": [
+        "./src/providers/HeaderButtonsProvider"
+      ],
+      "react-navigation-header-buttons/HeaderButtonsProviderDropdownMenu": [
+        "./src/providers/HeaderButtonsProviderDropdownMenu"
+      ]
     },
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "jsx": "react",
-    "lib": [
-      "esnext",
-      "dom"
-    ],
-    "module": "NodeNext",
-    "moduleResolution": "NodeNext",
+    "lib": ["esnext", "dom"],
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
     "noFallthroughCasesInSwitch": true,
     "noImplicitReturns": true,
     "noImplicitUseStrict": false,

@@ -1,7 +1,6 @@
 import { useOverflowMenu } from '../OverflowMenuContext';
 import { Text, View } from 'react-native';
 import {
-  render,
   fireEvent,
   waitForElementToBeRemoved,
 } from '@testing-library/react-native';
@@ -11,10 +10,11 @@ import { HeaderButtonsProviderPlain } from '../HeaderButtonsProviderPlain';
 import * as fs from 'node:fs';
 import * as path from 'node:path';
 import * as child_process from 'node:child_process';
+import { wrappedRender } from '../../__tests__/_wrappedRender';
 
 describe('HeaderButtonsProvider renders', () => {
   it('only the child when menu is not shown', () => {
-    const { toJSON } = render(
+    const { toJSON } = wrappedRender(
       <HeaderButtonsProviderDropdownMenu stackType={'js'}>
         <Text>hello</Text>
       </HeaderButtonsProviderDropdownMenu>
@@ -59,7 +59,7 @@ describe('HeaderButtonsProvider renders', () => {
         </Text>
       );
     };
-    const { toJSON, getByText } = render(
+    const { toJSON, getByText } = wrappedRender(
       <HeaderButtonsProviderDropdownMenu stackType={'js'}>
         <View>
           <ButtonThatShowsMenu />
@@ -109,7 +109,7 @@ describe('HeaderButtonsProvider renders', () => {
       );
     };
 
-    const { getByText } = render(
+    const { getByText } = wrappedRender(
       <HeaderButtonsProviderPlain stackType={'js'}>
         <View>
           <ButtonThatShowsMenu />
@@ -130,7 +130,7 @@ describe('HeaderButtonsProvider renders', () => {
   });
 
   it(
-    'when bundling the example app, some files are (not) bundled based on the platform.' +
+    'when bundling the example app, some files are (not) bundled based on the platform. ' +
       'This is controlled by the HeaderButtonsProvider and illustrates the bundle savings.',
     async () => {
       const cwd = process.cwd();
@@ -166,7 +166,7 @@ describe('HeaderButtonsProvider renders', () => {
       );
       expect(filteredAndroid).toContain('Menu.tsx');
 
-      // OverflowMenu imports the e2e file which is why it's here
+      // OverflowMenu imports the e2e file which is why e2e.ts is here
       expect(filteredIos).toMatchInlineSnapshot(`
         [
           "HeaderButtonsProvider.tsx",

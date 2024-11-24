@@ -1,5 +1,5 @@
 import { HiddenItem } from '../../HeaderItems';
-import { fireEvent, render } from '@testing-library/react-native';
+import { fireEvent } from '@testing-library/react-native';
 import { Text } from 'react-native';
 import React from 'react';
 import { OverflowMenu } from '../OverflowMenu';
@@ -10,6 +10,7 @@ import {
 import { HeaderButtons } from '../../HeaderButtons';
 import { ButtonsWrapper } from '../../ButtonsWrapper';
 import { HeaderButtonsProviderDropdownMenu } from '../HeaderButtonsProviderDropdownMenu';
+import { wrappedRender } from '../../__tests__/_wrappedRender';
 
 beforeEach(() => {
   jest.spyOn(global, 'requestAnimationFrame').mockImplementation((cb) => {
@@ -33,7 +34,7 @@ describe('overflowMenu', () => {
       <HiddenItem title="delete" onPress={deleteOnPress} />
     );
 
-    const { queryAllByText, getByLabelText } = render(
+    const { queryAllByText, getByLabelText } = wrappedRender(
       <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={onPress}>
         <HiddenItem
           icon={<Text>O</Text>}
@@ -89,21 +90,23 @@ describe('overflowMenu', () => {
       <HiddenItem title="delete" onPress={deleteOnPress} />
     );
 
-    const { queryAllByText, getByLabelText, UNSAFE_queryAllByProps } = render(
-      <OverflowMenu
-        OverflowIcon={<Text>+</Text>}
-        onPress={overflowMenuPressHandlerDropdownMenu}
-      >
-        <HiddenItem
-          icon={<Text>O</Text>}
-          title="search"
-          onPress={searchOnPress}
-        />
-        <HiddenItem title="search2" onPress={searchOnPress} disabled />
-        <WrappedItem />
-      </OverflowMenu>,
-      { wrapper: HeaderButtonsProviderDropdownMenu }
-    );
+    const { queryAllByText, getByLabelText, UNSAFE_queryAllByProps } =
+      wrappedRender(
+        <HeaderButtonsProviderDropdownMenu stackType={'native'}>
+          <OverflowMenu
+            OverflowIcon={<Text>+</Text>}
+            onPress={overflowMenuPressHandlerDropdownMenu}
+          >
+            <HiddenItem
+              icon={<Text>O</Text>}
+              title="search"
+              onPress={searchOnPress}
+            />
+            <HiddenItem title="search2" onPress={searchOnPress} disabled />
+            <WrappedItem />
+          </OverflowMenu>
+        </HeaderButtonsProviderDropdownMenu>
+      );
     expect(queryAllByText('Search')).toHaveLength(0);
 
     const menuAnchor = UNSAFE_queryAllByProps({ collapsable: false })[0];
@@ -135,7 +138,7 @@ describe('overflowMenu', () => {
           </OverflowMenu>
         );
       };
-      const { UNSAFE_getAllByType } = render(
+      const { UNSAFE_getAllByType } = wrappedRender(
         <HeaderButtons>
           <ReusableOverflowMenu>
             <HiddenItem title="search2" onPress={() => jest.fn()} />
@@ -160,7 +163,7 @@ describe('overflowMenu', () => {
     it('only single falsy child is specified', () => {
       const onPress = jest.fn();
 
-      const { toJSON } = render(
+      const { toJSON } = wrappedRender(
         <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={onPress}>
           {null}
         </OverflowMenu>
@@ -172,7 +175,7 @@ describe('overflowMenu', () => {
     it('only falsy children are specified', () => {
       const onPress = jest.fn();
 
-      const { toJSON } = render(
+      const { toJSON } = wrappedRender(
         <OverflowMenu OverflowIcon={<Text>+</Text>} onPress={onPress}>
           {false}
           {null}
