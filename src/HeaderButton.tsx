@@ -32,6 +32,7 @@ export type VisibleButtonProps = {
   iconSize?: number;
   color?: ColorValue;
   buttonStyle?: ViewStyle | TextStyle;
+  allowFontScaling?: boolean;
 };
 
 type PlatformPressableProps = ComponentProps<typeof PlatformPressable>;
@@ -81,8 +82,15 @@ export function HeaderButton(props: HeaderButtonProps) {
 export function defaultRenderVisibleButton(
   visibleButtonProps: VisibleButtonProps
 ): React.ReactElement {
-  const { IconComponent, iconSize, color, iconName, title, buttonStyle } =
-    visibleButtonProps;
+  const {
+    IconComponent,
+    iconSize,
+    color,
+    iconName,
+    title,
+    buttonStyle,
+    allowFontScaling,
+  } = visibleButtonProps;
 
   return IconComponent && iconName ? (
     <IconComponent
@@ -92,7 +100,12 @@ export function defaultRenderVisibleButton(
       style={buttonStyle}
     />
   ) : (
-    <Text style={[styles.text, { color }, buttonStyle]}>{title}</Text>
+    <Text
+      allowFontScaling={allowFontScaling}
+      style={[styles.text, { color }, buttonStyle]}
+    >
+      {title}
+    </Text>
   );
 }
 

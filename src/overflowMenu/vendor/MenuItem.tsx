@@ -27,7 +27,9 @@ export type Props = {
   /**
    * Function to execute on press.
    */
-  onPress?: null | ((params?: GestureResponderEvent) => void) | undefined;
+  onPress?: (
+    e?: React.MouseEvent<HTMLAnchorElement, MouseEvent> | GestureResponderEvent
+  ) => void;
   /**
    * @optional
    */
